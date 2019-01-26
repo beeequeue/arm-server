@@ -1,7 +1,9 @@
-import Koa from 'koa'
+import Koa, { Context } from 'koa'
 import BodyParser from 'koa-bodyparser'
 import Router from 'koa-router'
 import { init, captureException } from '@sentry/node'
+
+import { routes } from './routes'
 
 const { NODE_ENV } = process.env
 const port = process.env.PORT || 3000
@@ -14,6 +16,20 @@ init({
 })
 
 app.use(BodyParser())
+
+router.get('/', (ctx: Context) => {
+  ctx.body = `
+Usage:
+GET /api/ids?source={anilist|anidb|myanimelist|kitsu}&id={number}
+
+Returns:
+{
+  something  
+}
+`
+})
+
+router.use(routes)
 
 app.use(router.routes())
 app.use(router.allowedMethods())
