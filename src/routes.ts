@@ -5,7 +5,7 @@ import Joi from 'joi'
 import { knex } from './db'
 import { enumToArray } from './utils'
 
-const table = () => knex('arm')
+const table = () => knex('relations')
 const router = new Router()
 
 enum Source {

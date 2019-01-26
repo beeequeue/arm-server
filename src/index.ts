@@ -1,7 +1,7 @@
 import Koa, { Context } from 'koa'
 import BodyParser from 'koa-bodyparser'
 import Router from 'koa-router'
-import { init, captureException } from '@sentry/node'
+import { captureException, init } from '@sentry/node'
 
 import { routes } from './routes'
 
@@ -39,5 +39,6 @@ app.listen(port, () => {
 })
 
 app.on('error', err => {
+  console.warn(err)
   captureException(err)
 })

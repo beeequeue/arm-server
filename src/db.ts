@@ -6,6 +6,13 @@ export const knex = Knex({
   searchPath: ['arm', 'public'],
 })
 
+export interface Relation {
+  anilist?: number
+  anidb?: string
+  myanimelist?: number
+  kitsu?: number
+}
+
 /**
  * Checks if a table exists, and creates it if it doesn't.
  * Always adds a `uuid` column.
