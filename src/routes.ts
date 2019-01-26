@@ -5,7 +5,6 @@ import Joi from 'joi'
 import { knex } from './db'
 import { enumToArray } from './utils'
 
-const table = () => knex('relations')
 const router = new Router()
 
 enum Source {
@@ -42,15 +41,17 @@ router.get('/ids', async (ctx: Context) => {
     ctx.body = {
       code: 400,
       error: 'BadRequest',
-      messages: e.details.map(({ message }: any) => message)
+      messages: e.details.map(({ message }: any) => message.replace(/"/g, "'")),
     }
 
     return
   }
 
-  table()
+  const relation = await knex
+    .where({ [query.source]: query.id })
+    .from('relations')
 
-  ctx.body = query
+  ctx.body = relation
 })
 
 export const routes = router.routes()
