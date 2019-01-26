@@ -84,7 +84,14 @@ export const updateRelations = async () => {
   console.log('Formatted data.')
 
   console.log('Updating database...')
-  await knex.delete().from('relations')
-  await knex.batchInsert('relations', formattedEntries, 250)
-  console.log('Updated database...')
+  await knex.transaction(trx =>
+    knex
+      .delete()
+      .from('relations')
+      .transacting(trx)
+      .then(() =>
+        knex.batchInsert('relations', formattedEntries, 250).transacting(trx)
+      )
+  )
+  console.log('Updated database.')
 }
