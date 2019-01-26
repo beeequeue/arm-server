@@ -4,6 +4,7 @@ import Router from 'koa-router'
 import { captureException, init } from '@sentry/node'
 
 import { routes } from './routes'
+import { updateRelations } from './updater'
 
 const { NODE_ENV } = process.env
 const port = process.env.PORT || 3000
@@ -33,6 +34,8 @@ router.use(routes)
 
 app.use(router.routes())
 app.use(router.allowedMethods())
+
+setInterval(updateRelations, 1000 * 60 * 60 * 24)
 
 app.listen(port, () => {
   console.log(`Listening on ${port}`)
