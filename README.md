@@ -8,9 +8,8 @@ This app uses data from [anime-offline-database](https://github.com/manami-proje
 
 `GET` `/api/ids?source={anilist|anidb|myanimelist|kitsu}&id={number}`
 
-Returns
-```json
-{
+```ts
+interface Response {
   anilist?: number
   anidb?: string
   myanimelist?: number
