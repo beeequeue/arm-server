@@ -21,6 +21,7 @@ const querySchema = Joi.object().keys({
     .required(),
   id: Joi.number()
     .positive()
+    .max(2147483647)
     .precision(0)
     .required(),
 })
@@ -49,7 +50,18 @@ router.get('/ids', async (ctx: Context) => {
 
   const relation = await knex
     .where({ [query.source]: query.id })
-    .from('relations')
+    .from('relations').first()
+
+  if (!relation) {
+    ctx.status = 404
+    ctx.body= {
+      code: 404,
+      error: 'NotFound',
+      messages: ['Could not find entry with that ID.']
+    }
+
+    return
+  }
 
   ctx.body = relation
 })
