@@ -93,7 +93,6 @@ export const updateRelations = async () => {
   log('Formatted data.')
 
   log('Updating database...')
-
   try {
     await knex.transaction(trx =>
       knex
@@ -105,9 +104,8 @@ export const updateRelations = async () => {
         )
     )
   } catch (e) {
-    log(e)
+    throw new Error(e)
   }
-
   log('Updated database.')
 
   log('Executing manual rules...')
