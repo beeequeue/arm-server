@@ -3,6 +3,7 @@ import { captureException } from '@sentry/node'
 import debug from 'debug'
 
 import { knex, Relation } from './db'
+import { updateBasedOnManualRules } from './manual-rules'
 import { RequestResponse, responseIsError } from './utils'
 
 const log = debug('app:updater')
@@ -108,4 +109,8 @@ export const updateRelations = async () => {
   }
 
   log('Updated database.')
+
+  log('Executing manual rules...')
+  await updateBasedOnManualRules()
+  log('Finished.')
 }
