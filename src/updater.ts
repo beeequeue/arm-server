@@ -100,7 +100,7 @@ export const updateRelations = async () => {
         .from('relations')
         .transacting(trx)
         .then(() =>
-          knex.batchInsert('relations', formattedEntries, 250).transacting(trx)
+          knex.batchInsert('relations', formattedEntries, 5000).transacting(trx)
         )
     )
   } catch (e) {
