@@ -35,8 +35,10 @@ router.use(routes)
 app.use(router.routes())
 app.use(router.allowedMethods())
 
-updateRelations()
-setInterval(updateRelations, 1000 * 60 * 60 * 24)
+if (NODE_ENV === 'production') {
+  updateRelations()
+  setInterval(updateRelations, 1000 * 60 * 60 * 24)
+}
 
 app.listen(port, () => {
   console.log(`Listening on ${port}`)
