@@ -46,9 +46,13 @@ const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
       relation.anilist = id
     }
 
-    const anidbMatch = src.match(/anidb.net\/(.+)$/)
+    const anidbMatch = src.match(/anidb.net\/a(.+)$/)
     if (anidbMatch) {
-      relation.anidb = anidbMatch[1]
+      const id = Number(anidbMatch[1])
+
+      if (isNaN(id)) throw new Error(`${src}'s ID is not a number!!`)
+
+      relation.anidb = id
     }
 
     const malMatch = src.match(/myanimelist.net\/anime\/(.+)$/)

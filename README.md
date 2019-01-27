@@ -11,7 +11,7 @@ This app uses data from [anime-offline-database](https://github.com/manami-proje
 ```ts
 interface Response {
   anilist?: number
-  anidb?: string
+  anidb?: number
   myanimelist?: number
   kitsu?: number
 }

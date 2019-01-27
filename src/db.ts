@@ -8,7 +8,7 @@ export const knex = Knex({
 
 export interface Relation {
   anilist?: number
-  anidb?: string
+  anidb?: number
   myanimelist?: number
   kitsu?: number
 }
@@ -40,7 +40,7 @@ const initialize = async () => {
   promises.push(
     createTableIfDoesNotExist('relations', table => {
       table.integer('anilist').unique()
-      table.string('anidb').unique()
+      table.integer('anidb').unique()
       table.integer('myanimelist').unique()
       table.integer('kitsu').unique()
     })
