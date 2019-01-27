@@ -1,7 +1,11 @@
 import Superagent from 'superagent'
-import { RequestResponse, responseIsError } from './utils'
 import { captureException } from '@sentry/node'
+import debug from 'debug'
+
 import { knex, Relation } from './db'
+import { RequestResponse, responseIsError } from './utils'
+
+const log = debug('app:updater')
 
 interface OfflineDatabaseSchema {
   sources: string[]
@@ -70,28 +74,34 @@ const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
 }
 
 export const updateRelations = async () => {
-  console.log('Fetching updated Database...')
+  log('Fetching updated Database...')
   const data = await fetchDatabase()
-  console.log('Fetched updated Database.')
+  log('Fetched updated Database.')
 
   if (data == null) {
-    console.log('got no data')
+    log('got no data')
     return
   }
 
-  console.log('Formatting data...')
+  log('Formatting data...')
   const formattedEntries = data.map(formatEntry)
-  console.log('Formatted data.')
+  log('Formatted data.')
 
-  console.log('Updating database...')
-  await knex.transaction(trx =>
-    knex
-      .delete()
-      .from('relations')
-      .transacting(trx)
-      .then(() =>
-        knex.batchInsert('relations', formattedEntries, 250).transacting(trx)
-      )
-  )
-  console.log('Updated database.')
+  log('Updating database...')
+
+  try {
+    await knex.transaction(trx =>
+      knex
+        .delete()
+        .from('relations')
+        .transacting(trx)
+        .then(() =>
+          knex.batchInsert('relations', formattedEntries, 250).transacting(trx)
+        )
+    )
+  } catch (e) {
+    log(e)
+  }
+
+  log('Updated database.')
 }
