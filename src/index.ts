@@ -35,16 +35,21 @@ router.use(routes)
 app.use(router.routes())
 app.use(router.allowedMethods())
 
-if (NODE_ENV === 'production') {
-  updateRelations()
-  setInterval(updateRelations, 1000 * 60 * 60 * 24)
+const listen = async () => {
+  if (NODE_ENV === 'production') {
+    await updateRelations()
+
+    setInterval(updateRelations, 1000 * 60 * 60 * 24)
+  }
+
+  app.listen(port, () => {
+    console.log(`Listening on ${port}`)
+  })
+
+  app.on('error', err => {
+    console.warn(err)
+    captureException(err)
+  })
 }
 
-app.listen(port, () => {
-  console.log(`Listening on ${port}`)
-})
-
-app.on('error', err => {
-  console.warn(err)
-  captureException(err)
-})
+listen()
