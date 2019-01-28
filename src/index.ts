@@ -26,7 +26,10 @@ GET /api/ids?source={anilist|anidb|myanimelist|kitsu}&id={number}
 
 Returns:
 {
-  something  
+  anilist?: number
+  anidb?: number
+  myanimelist?: number
+  kitsu?: number
 }
 `
 })

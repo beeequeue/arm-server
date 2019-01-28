@@ -1,6 +1,12 @@
 # arm-server
 
-This app uses data from [anime-offline-database](https://github.com/manami-project/anime-offline-database/) - fetching and updating itself every 24 hours.
+This app uses data from [`anime-offline-database`](https://github.com/manami-project/anime-offline-database/) - fetching and updating itself every 24 hours.
+
+### Missing or duplicate entries
+
+Some entries in the database are not mapped correctly due to inconsistent naming - the owner of `anime-offline-database` cannot fix them due to complexity. Therefore this service has manual rules that combines known failures. 
+
+You can help add rules by submitting a [manual rule request](https://github.com/BeeeQueue/arm-server/issues/new?template=manual-rule-request.md).
 
 ## API
 
