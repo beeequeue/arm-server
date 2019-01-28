@@ -1,4 +1,3 @@
-import debug from 'debug'
 import Koa, { Context } from 'koa'
 import BodyParser from 'koa-bodyparser'
 import Router from 'koa-router'
@@ -12,7 +11,6 @@ const { NODE_ENV } = process.env
 const port = process.env.PORT || 3000
 const app = new Koa()
 const router = new Router()
-const logScript = debug('app:updater')
 
 init({
   dsn: 'https://a1c2b4d9841046bd9d7d154c9a6be149@sentry.io/1380324',
@@ -41,13 +39,11 @@ app.use(router.allowedMethods())
 const runUpdateScript = async () => {
   const tsNode = resolve(__dirname, '..', 'node_modules', '.bin', 'ts-node')
   const script = resolve(__dirname, '..', 'bin', 'update.ts')
-  console.log(tsNode)
-  console.log(script)
 
   const { stdout, stderr } = spawn(tsNode, [script])
 
-  stdout.on('data', data => logScript(data.toString().trim()))
-  stderr.on('data', data => logScript(data.toString().trim()))
+  stdout.on('data', data => console.log(data.toString().trim()))
+  stderr.on('data', data => console.error(data.toString().trim()))
 }
 
 const listen = async () => {
