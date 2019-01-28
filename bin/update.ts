@@ -1,12 +1,15 @@
+#!../node_modules/.bin/ts-node
+
 import Superagent from 'superagent'
+import Knex from 'knex'
 import { captureException } from '@sentry/node'
-import debug from 'debug'
 
-import { knex, Relation } from './db'
-import { updateBasedOnManualRules } from './manual-rules'
-import { RequestResponse, responseIsError } from './utils'
+import { Relation } from '../src/db'
+import { updateBasedOnManualRules } from '../src/manual-rules'
+import { RequestResponse, responseIsError } from '../src/utils'
+import { dbConfig } from '../src/config'
 
-const log = debug('app:updater')
+const knex = Knex(dbConfig)
 
 interface OfflineDatabaseSchema {
   sources: string[]
@@ -78,21 +81,21 @@ const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
   return relation
 }
 
-export const updateRelations = async () => {
-  log('Fetching updated Database...')
+const updateRelations = async () => {
+  console.log('Fetching updated Database...')
   const data = await fetchDatabase()
-  log('Fetched updated Database.')
+  console.log('Fetched updated Database.')
 
   if (data == null) {
-    log('got no data')
+    console.log('got no data')
     return
   }
 
-  log('Formatting data...')
+  console.log('Formatting data...')
   const formattedEntries = data.map(formatEntry)
-  log('Formatted data.')
+  console.log('Formatted data.')
 
-  log('Updating database...')
+  console.log('Updating database...')
   try {
     await knex.transaction(trx =>
       knex
@@ -100,15 +103,17 @@ export const updateRelations = async () => {
         .from('relations')
         .transacting(trx)
         .then(() =>
-          knex.batchInsert('relations', formattedEntries, 5000).transacting(trx)
+          knex.batchInsert('relations', formattedEntries, 2500).transacting(trx)
         )
     )
   } catch (e) {
     throw new Error(e)
   }
-  log('Updated database.')
+  console.log('Updated database.')
 
-  log('Executing manual rules...')
+  console.log('Executing manual rules...')
   await updateBasedOnManualRules()
-  log('Finished.')
+  console.log('Finished.')
 }
+
+updateRelations()

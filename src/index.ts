@@ -1,15 +1,18 @@
+import debug from 'debug'
 import Koa, { Context } from 'koa'
 import BodyParser from 'koa-bodyparser'
 import Router from 'koa-router'
+import { spawn } from 'child_process'
 import { captureException, init } from '@sentry/node'
 
 import { routes } from './routes'
-import { updateRelations } from './updater'
+import { resolve } from 'path'
 
 const { NODE_ENV } = process.env
 const port = process.env.PORT || 3000
 const app = new Koa()
 const router = new Router()
+const logScript = debug('app:updater')
 
 init({
   dsn: 'https://a1c2b4d9841046bd9d7d154c9a6be149@sentry.io/1380324',
@@ -35,11 +38,23 @@ router.use(routes)
 app.use(router.routes())
 app.use(router.allowedMethods())
 
+const runUpdateScript = async () => {
+  const tsNode = resolve(__dirname, '..', 'node_modules', '.bin', 'ts-node')
+  const script = resolve(__dirname, '..', 'bin', 'update.ts')
+  console.log(tsNode)
+  console.log(script)
+
+  const { stdout, stderr } = spawn(tsNode, [script])
+
+  stdout.on('data', data => logScript(data.toString().trim()))
+  stderr.on('data', data => logScript(data.toString().trim()))
+}
+
 const listen = async () => {
   if (NODE_ENV === 'production') {
-    await updateRelations()
+    await runUpdateScript()
 
-    setInterval(updateRelations, 1000 * 60 * 60 * 24)
+    setInterval(runUpdateScript, 1000 * 60 * 60 * 24)
   }
 
   app.listen(port, () => {
