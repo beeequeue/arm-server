@@ -3,6 +3,8 @@ import { knex, Relation } from './db'
 const rules = {
   // Kaguya-sama
   'anidb:14111': 'anilist:101921',
+  // Shield Hero
+  'anidb:13246': 'anilist:99263',
 }
 
 export const updateBasedOnManualRules = async () => {
