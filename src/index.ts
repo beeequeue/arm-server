@@ -2,10 +2,10 @@ import Koa, { Context } from 'koa'
 import BodyParser from 'koa-bodyparser'
 import Router from 'koa-router'
 import { spawn } from 'child_process'
+import { resolve } from 'path'
 import { captureException, init } from '@sentry/node'
 
 import { routes } from './routes'
-import { resolve } from 'path'
 
 const { NODE_ENV } = process.env
 const port = process.env.PORT || 3000
@@ -43,7 +43,7 @@ const runUpdateScript = async () => {
   const tsNode = resolve(__dirname, '..', 'node_modules', '.bin', 'ts-node')
   const script = resolve(__dirname, '..', 'bin', 'update.ts')
 
-  const { stdout, stderr } = spawn(tsNode, [script])
+  const { stdout, stderr } = spawn(tsNode, ['-T', script])
 
   stdout.on('data', data => console.log(data.toString().trim()))
   stderr.on('data', data => console.error(data.toString().trim()))

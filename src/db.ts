@@ -1,7 +1,8 @@
 import Knex, { CreateTableBuilder } from 'knex'
-import { dbConfig } from './config'
+import config from '../knexfile'
 
-export const knex = Knex(dbConfig)
+const { NODE_ENV } = process.env
+export const knex = Knex(config[NODE_ENV as 'development' | 'production'])
 
 export interface Relation {
   anilist?: number
@@ -12,23 +13,16 @@ export interface Relation {
 
 /**
  * Checks if a table exists, and creates it if it doesn't.
- * Always adds a `uuid` column.
  */
 const createTableIfDoesNotExist = async (
   name: string,
   cb: (tableBuilder: CreateTableBuilder) => void
 ) => {
-  try {
-    await knex(name).count('anilist')
-  } catch (e) {
-    if (e.routine !== 'parserOpenTable') {
-      throw new Error(e)
-    }
+  if (await knex.schema.hasTable(name)) return
 
-    console.log(`Creating table ${name}`)
+  console.log(`Creating table ${name}`)
 
-    await knex.schema.createTable(name, cb)
-  }
+  await knex.schema.createTable(name, cb)
 }
 
 const initialize = async () => {

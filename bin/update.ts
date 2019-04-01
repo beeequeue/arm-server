@@ -7,9 +7,10 @@ import { captureException } from '@sentry/node'
 import { Relation } from '../src/db'
 import { updateBasedOnManualRules } from '../src/manual-rules'
 import { RequestResponse, responseIsError } from '../src/utils'
-import { dbConfig } from '../src/config'
+import config from '../knexfile'
 
-const knex = Knex(dbConfig)
+const { NODE_ENV } = process.env
+const knex = Knex(config[NODE_ENV as 'development' | 'production'])
 
 interface OfflineDatabaseSchema {
   sources: string[]
@@ -103,7 +104,7 @@ const updateRelations = async () => {
         .from('relations')
         .transacting(trx)
         .then(() =>
-          knex.batchInsert('relations', formattedEntries, 2500).transacting(trx)
+          knex.batchInsert('relations', formattedEntries, 100).transacting(trx)
         )
     )
   } catch (e) {
