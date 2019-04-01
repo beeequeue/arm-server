@@ -1,6 +1,31 @@
 {
-  "extends": "./node_modules/@sr-net/typescript-config/tsconfig.json",
   "compilerOptions": {
-    "noImplicitReturns": false
-  }
+    "target": "es2018",
+    "module": "commonjs",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "types": ["node"],
+    "lib": [
+      "es5",
+      "es2015",
+      "es2016",
+      "es2017",
+      "es2018",
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
+  },
+  "include": [
+    "**/*.ts",
+    "./index.d.ts"
+  ],
+  "exclude": ["node_modules"]
 }
