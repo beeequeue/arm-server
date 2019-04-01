@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2018",
+    "target": "es2017",
     "module": "commonjs",
     "strict": true,
     "noUnusedLocals": true,
@@ -9,23 +9,15 @@
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "sourceMap": true,
-    "types": ["node"],
-    "lib": [
-      "es5",
-      "es2015",
-      "es2016",
-      "es2017",
-      "es2018",
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
+    "typeRoots" : ["./node_modules/@types", "./typings"],
+    "lib": ["es5", "es2015", "es2016", "es2017", "es2018", "esnext"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
-  "include": [
-    "**/*.ts",
-    "./index.d.ts"
-  ],
+  "include": ["**/*.ts"],
   "exclude": ["node_modules"]
 }
