@@ -20,7 +20,7 @@
     "sqlite3": "4.0.6",
     "superagent": "4.1.0",
     "ts-node": "8.0.3",
-    "typescript": "3.4.1"
+    "typescript": "3.4.5"
   },
   "devDependencies": {
     "@types/joi": "14.3.2",
