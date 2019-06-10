@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@types/joi": "14.3.3",
-    "dotenv": "6.2.0",
+    "dotenv": "8.0.0",
     "prettier": "1.17.1",
     "ts-node-dev": "1.0.0-pre.32",
     "tsconfig-paths": "3.8.0"
