@@ -1,15 +1,13 @@
 {
   "name": "arm-server",
   "version": "1.0.0",
-  "main": "index.js",
   "author": "Adam <adam.lj.haglund@gmail.com>",
-  "license": "MIT",
-  "private": true,
   "dependencies": {
-    "@sentry/node": "^5.4.0",
+    "@sentry/node": "5.4.0",
+    "@types/joi": "14.3.3",
     "@types/koa": "2.0.48",
     "@types/koa-bodyparser": "4.3.0",
-    "@types/koa-router": "^7.0.40",
+    "@types/koa-router": "7.0.40",
     "@types/superagent": "4.1.1",
     "joi": "14.3.1",
     "knex": "0.17.5",
@@ -18,19 +16,27 @@
     "koa-router": "7.4.0",
     "pg": "7.11.0",
     "sqlite3": "4.0.8",
-    "superagent": "5.0.5",
+    "superagent": "5.0.6",
     "ts-node": "8.2.0",
-    "typescript": "3.4.5"
+    "typescript": "3.5.1"
   },
   "devDependencies": {
-    "@types/joi": "14.3.3",
+    "@types/jest": "24.0.13",
+    "@types/supertest": "2.0.7",
     "dotenv": "8.0.0",
-    "prettier": "1.17.1",
-    "ts-node-dev": "^1.0.0-pre.39",
+    "jest": "24.8.0",
+    "prettier": "1.18.2",
+    "supertest": "4.0.2",
+    "ts-jest": "24.0.2",
+    "ts-node-dev": "1.0.0-pre.39",
     "tsconfig-paths": "3.8.0"
   },
+  "license": "MIT",
+  "main": "index.js",
+  "private": true,
   "scripts": {
+    "dev": "ts-node-dev -r dotenv/config src/index.ts",
     "start": "ts-node src/index.ts",
-    "dev": "ts-node-dev -r dotenv/config src/index.ts"
+    "test": "NODE_ENV=test yarn jest"
   }
 }

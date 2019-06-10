@@ -7,7 +7,7 @@ import { enumToArray } from './utils'
 
 const router = new Router()
 
-enum Source {
+export enum Source {
   ANILIST = 'anilist',
   ANIDB = 'anidb',
   MAL = 'myanimelist',
