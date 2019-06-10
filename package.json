@@ -23,7 +23,7 @@
     "typescript": "3.4.5"
   },
   "devDependencies": {
-    "@types/joi": "14.3.2",
+    "@types/joi": "14.3.3",
     "dotenv": "6.2.0",
     "prettier": "1.17.1",
     "ts-node-dev": "1.0.0-pre.32",
