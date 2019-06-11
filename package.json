@@ -39,6 +39,7 @@
     "migrate": "knex migrate:latest --knexfile knexfile.ts",
     "migrate:create": "knex migrate:make --knexfile knexfile.ts -x ts",
     "prestart": "yarn run migrate",
+    "pretest": "NODE_ENV=test yarn run migrate",
     "start": "ts-node src/index.ts",
     "test": "NODE_ENV=test yarn jest"
   }

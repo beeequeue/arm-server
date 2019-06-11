@@ -10,6 +10,8 @@ afterAll(() => {
   server.close()
 })
 
+afterEach(() => knex.delete().from('relations'))
+
 test('fetches relations correctly', async () => {
   const relation = {
     myanimelist: 1337,

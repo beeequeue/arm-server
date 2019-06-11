@@ -1,3 +1,11 @@
+enum Environments {
+  DEVELOPMENT = 'development',
+  PRODUCTION = 'production',
+  TEST = 'test',
+}
+
+// This export is overridden by the module.exports at the end,
+// but is required for TS to recognize it as a module
 export const config = {
   development: {
     client: 'sqlite3',
@@ -32,6 +40,9 @@ export const config = {
     },
     useNullAsDefault: true,
   },
-} as { [key: string]: import('knex').Config }
+} as { [key in Environments]: import('knex').Config }
 
-module.exports = config
+module.exports = {
+  ...config,
+  config,
+}

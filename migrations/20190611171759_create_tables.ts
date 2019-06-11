@@ -1,6 +1,8 @@
 import Knex from 'knex'
 
 export async function up(knex: Knex): Promise<any> {
+  if (await knex.schema.hasTable('relations')) return
+
   const promises: Promise<any>[] = []
 
   promises.push(
