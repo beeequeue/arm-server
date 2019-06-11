@@ -21,6 +21,8 @@ Returns:
   myanimelist?: number
   kitsu?: number
 }
+
+Source code is available on GitHub at https://github.com/BeeeQueue/arm-server
 `
 })
 
