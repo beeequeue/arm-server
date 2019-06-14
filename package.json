@@ -10,7 +10,7 @@
     "@types/koa-router": "7.0.40",
     "@types/superagent": "4.1.1",
     "joi": "14.3.1",
-    "knex": "0.17.5",
+    "knex": "0.17.6",
     "koa": "2.7.0",
     "koa-bodyparser": "4.2.1",
     "koa-router": "7.4.0",
