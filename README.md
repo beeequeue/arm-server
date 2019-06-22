@@ -1,4 +1,6 @@
 # arm-server
+![](https://img.shields.io/travis/BeeeQueue/arm-server.svg)
+![](https://img.shields.io/uptimerobot/ratio/m781899942-e512424b17b53ca46ae043b6.svg?label=30-day%20uptime)
 
 This app uses data from [`anime-offline-database`](https://github.com/manami-project/anime-offline-database/) - fetching and updating itself every 24 hours.
 
