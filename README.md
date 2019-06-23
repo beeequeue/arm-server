@@ -26,3 +26,13 @@ interface Response {
 ```
 
 or a `404` if the it could not be found.
+
+## Development
+
+1. Clone the project
+1. Install dependencies - `yarn`
+1. Run database migrations - `yarn migrate`
+1. Download data (optional) - `yarn fetch-data`
+1. Start the server - `yarn dev`
+
+If the database connection fails double check that your `NODE_ENV` is set to `development`.

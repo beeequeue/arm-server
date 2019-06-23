@@ -1,16 +1,11 @@
 #!../node_modules/.bin/ts-node
 
 import Superagent from 'superagent'
-import Knex from 'knex'
 import { captureException } from '@sentry/node'
 
-import { Relation } from '../src/db'
+import { knex, Relation } from '../src/db'
 import { updateBasedOnManualRules } from '../src/manual-rules'
 import { RequestResponse, responseIsError } from '../src/utils'
-import config from '../knexfile'
-
-const { NODE_ENV } = process.env
-const knex = Knex(config[NODE_ENV as 'development' | 'production'])
 
 interface OfflineDatabaseSchema {
   sources: string[]
@@ -83,6 +78,8 @@ const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
 }
 
 const updateRelations = async () => {
+  console.log(`Using ${process.env.NODE_ENV} database configuration...`)
+
   console.log('Fetching updated Database...')
   const data = await fetchDatabase()
   console.log('Fetched updated Database.')
@@ -114,7 +111,8 @@ const updateRelations = async () => {
 
   console.log('Executing manual rules...')
   await updateBasedOnManualRules()
-  console.log('Finished.')
+
+  await knex.destroy()
 }
 
 updateRelations()
