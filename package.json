@@ -7,7 +7,7 @@
     "@types/joi": "14.3.3",
     "@types/koa": "2.0.48",
     "@types/koa-bodyparser": "4.3.0",
-    "@types/koa-router": "7.0.41",
+    "@types/koa-router": "7.0.42",
     "@types/superagent": "4.1.1",
     "joi": "14.3.1",
     "knex": "0.17.6",
