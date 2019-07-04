@@ -568,10 +568,10 @@
   resolved "https://registry.yarnpkg.com/@types/strip-json-comments/-/strip-json-comments-0.0.30.tgz#9aa30c04db212a9a0649d6ae6fd50accc40748a1"
   integrity sha512-7NQmHra/JILCd1QqpSzl8+mJRc8ZHz3uDm8YV1Ks9IhK0epEiTw8aIErbvH9PI+6XbqhyIQy3462nEsn7UVzjQ==
 
-"@types/superagent@*", "@types/superagent@4.1.1":
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/@types/superagent/-/superagent-4.1.1.tgz#61f0b43d7db93a3c286c124512b7c228183c32fa"
-  integrity sha512-NetXrraTWPcdGG6IwYJhJ5esUGx8AYNiozbc1ENWEsF6BsD4JmNODJczI6Rm1xFPVp6HZESds9YCfqz4zIsM6A==
+"@types/superagent@*", "@types/superagent@4.1.2":
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/@types/superagent/-/superagent-4.1.2.tgz#4dc15508734c794453650d62f0c7b7ca9404a317"
+  integrity sha512-GISrJnl+eZSzkVdsP2bXARXaroe/qKTwl/7v/d7bHP4OhlZKKIExcvQexwTDWHGtalHSLVuM78/Ri54laoOFfQ==
   dependencies:
     "@types/cookiejar" "*"
     "@types/node" "*"
