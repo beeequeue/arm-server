@@ -1,8 +1,8 @@
 import request from 'supertest'
 
-import { App } from './app'
-import { knex } from './db'
-import { Source } from './routes'
+import { App } from '@/app'
+import { knex } from '@/db'
+import { Source } from './ids'
 
 const server = App.listen()
 

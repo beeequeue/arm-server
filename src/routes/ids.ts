@@ -2,8 +2,8 @@ import { Context } from 'koa'
 import Router from 'koa-router'
 import Joi from 'joi'
 
-import { knex } from './db'
-import { enumToArray } from './utils'
+import { knex } from '@/db'
+import { enumToArray } from '@/utils'
 
 const router = new Router()
 
@@ -14,7 +14,6 @@ export enum Source {
   KITSU = 'kitsu',
 }
 
-router.prefix('/api')
 const querySchema = Joi.object().keys({
   source: Joi.string()
     .valid(enumToArray(Source))
@@ -66,4 +65,4 @@ router.get('/ids', async (ctx: Context) => {
   ctx.body = relation
 })
 
-export const routes = router.routes()
+export const singleRoutes = router.routes()
