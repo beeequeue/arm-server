@@ -24,7 +24,7 @@ const querySchema = Joi.object().keys({
     .valid(enumToArray(Source))
     .required(),
   id: Joi.number()
-    .positive()
+    .min(0)
     .max(2147483647)
     .precision(0)
     .required(),
