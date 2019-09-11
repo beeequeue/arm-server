@@ -52,19 +52,14 @@ describe('single', () => {
       .expect('Content-Type', /json/)
   })
 
-  test("returns 404 when id doesn't exist", async () =>
+  test("returns null when id doesn't exist", async () =>
     request(server)
       .get('/api/ids')
       .query({
         source: Source.KITSU,
         id: 404,
       })
-      .expect(404, {
-        code: 404,
-        error: 'NotFound',
-        messages: ['Could not find any entries with the provided filters.'],
-      })
-      .expect('Content-Type', /json/))
+      .expect(204))
 })
 
 describe('multiple', () => {

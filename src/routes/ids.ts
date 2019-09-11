@@ -74,10 +74,12 @@ router.get('/ids', async (ctx: Context) => {
     ctx.body = {
       code: 400,
       error: 'Bad Request',
-      messages: e.details.map(({ path, message }: any) => ({
-        path,
-        message: message.replace(/"/g, "'"),
-      })),
+      messages: e.details
+        .filter(({ path }: any) => path.length > 0)
+        .map(({ path, message }: any) => ({
+          path,
+          message: message.replace(/"/g, "'"),
+        })),
     }
 
     return
@@ -103,25 +105,16 @@ router.get('/ids', async (ctx: Context) => {
         null
       )
     })
+
+    ctx.body = relations
   } else {
     relation = await knex
       .where({ [query.source]: query.id })
       .from('relations')
       .first()
+
+    ctx.body = relation
   }
-
-  if (relation == null && relations.length < 1) {
-    ctx.status = 404
-    ctx.body = {
-      code: 404,
-      error: 'NotFound',
-      messages: ['Could not find any entries with the provided filters.'],
-    }
-
-    return
-  }
-
-  ctx.body = relation || relations
 })
 
 export const singleRoutes = router.routes()
