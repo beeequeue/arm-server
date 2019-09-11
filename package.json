@@ -35,13 +35,13 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "dev": "ts-node-dev -r dotenv/config src/index.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register -r dotenv/config src/index.ts",
     "fetch-data": "ts-node bin/update.ts",
     "migrate": "knex migrate:latest --knexfile knexfile.ts",
     "migrate:create": "knex migrate:make --knexfile knexfile.ts -x ts",
     "prestart": "yarn run migrate",
     "pretest": "NODE_ENV=test yarn run migrate",
-    "start": "ts-node src/index.ts",
+    "start": "ts-node -r tsconfig-paths/register src/index.ts",
     "test": "NODE_ENV=test yarn jest"
   }
 }
