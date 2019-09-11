@@ -14,29 +14,45 @@ export enum Source {
   KITSU = 'kitsu',
 }
 
+type Entry = {
+  [key in Source]: number | null
+}
+
+const sourceArray = (enumToArray(Source) as unknown) as string[]
+
 interface Schema {
   source: Source
   id: number
 }
 
-const querySchema = Joi.object().keys({
+const idSchema = Joi.number()
+  .min(0)
+  .max(2147483647)
+  .precision(0)
+  .required()
+
+const querySchema = Joi.object({
   source: Joi.string()
-    .valid(enumToArray(Source))
+    .valid(sourceArray)
     .required(),
-  id: Joi.number()
-    .min(0)
-    .max(2147483647)
-    .precision(0)
-    .required(),
+  id: idSchema,
 })
+
+const arrayItemSchema = sourceArray.reduce(
+  (obj, source) => ({
+    ...obj,
+    [source as any]: idSchema.optional(),
+  }),
+  {}
+)
 
 const arraySchema = Joi.array()
   .min(1)
   .max(100)
-  .items(querySchema)
+  .items(Joi.object(arrayItemSchema).or(...sourceArray))
   .required()
 
-type EitherSchema = Schema | Schema[]
+type EitherSchema = Schema | Entry[]
 
 const eitherSchema = Joi.alternatives(querySchema, arraySchema)
 
@@ -71,20 +87,22 @@ router.get('/ids', async (ctx: Context) => {
   let relations: Array<Relation | null> = []
 
   if (Array.isArray(query)) {
-    const items = query.map(({ source, id }) => ({ [source]: id }))
-
     // Get relations
     relations = await knex
       .where(function() {
-        items.forEach(item => this.orWhere(item))
+        ;(query as Entry[]).forEach(item => this.orWhere(item))
       })
       .from('relations')
 
     // Map them against the input, so we get results like [{item}, null, {item}]
-    relations = query.map(
-      item =>
-        relations.find(relation => relation![item.source] === item.id) || null
-    )
+    relations = query.map(item => {
+      const realItem = Object.entries(item)[0] as [Source, number]
+
+      return (
+        relations.find(relation => relation![realItem[0]] === realItem[1]) ||
+        null
+      )
+    })
   } else {
     relation = await knex
       .where({ [query.source]: query.id })

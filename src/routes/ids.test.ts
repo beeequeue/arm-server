@@ -72,9 +72,9 @@ describe('multiple', () => {
     const relations = await createRelations(4)
 
     const body = [
-      { source: Source.ANIDB, id: relations[0].anidb },
-      { source: Source.ANILIST, id: 1000 },
-      { source: Source.KITSU, id: relations[2].kitsu },
+      { [Source.ANIDB]: relations[0].anidb },
+      { [Source.ANILIST]: 1000 },
+      { [Source.KITSU]: relations[2].kitsu },
     ]
 
     const result = [relations[0], null, relations[2]]
@@ -87,10 +87,7 @@ describe('multiple', () => {
   })
 
   test('responds correctly on no finds', async () => {
-    const body = [
-      { source: Source.ANILIST, id: 1000 },
-      { source: Source.KITSU, id: 1000 },
-    ]
+    const body = [{ [Source.ANILIST]: 1000 }, { [Source.KITSU]: 1000 }]
 
     const result = [null, null]
 
@@ -98,6 +95,16 @@ describe('multiple', () => {
       .get('/api/ids')
       .send(body)
       .expect(result)
+      .expect('Content-Type', /json/)
+  })
+
+  test('requires at least one source', async () => {
+    const body = [{}]
+
+    return request(server)
+      .get('/api/ids')
+      .send(body)
+      .expect(400)
       .expect('Content-Type', /json/)
   })
 })
