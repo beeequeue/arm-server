@@ -2,8 +2,8 @@ import { Context } from 'koa'
 import Router from 'koa-router'
 import Joi from 'joi'
 
-import { knex } from '@/db'
-import { enumToArray } from '@/utils'
+import { knex, Relation } from '@/db'
+import { enumToArray, isEmpty } from '@/utils'
 
 const router = new Router()
 
@@ -12,6 +12,11 @@ export enum Source {
   ANIDB = 'anidb',
   MAL = 'myanimelist',
   KITSU = 'kitsu',
+}
+
+interface Schema {
+  source: Source
+  id: number
 }
 
 const querySchema = Joi.object().keys({
@@ -25,12 +30,24 @@ const querySchema = Joi.object().keys({
     .required(),
 })
 
+const arraySchema = Joi.array()
+  .min(1)
+  .max(100)
+  .items(querySchema)
+  .required()
+
+type EitherSchema = Schema | Schema[]
+
+const eitherSchema = Joi.alternatives(querySchema, arraySchema)
+
 router.get('/ids', async (ctx: Context) => {
-  let query
+  const input = !isEmpty(ctx.request.body) ? ctx.request.body : ctx.query
+  let query: EitherSchema
 
   try {
-    query = await Joi.validate(ctx.query, querySchema, {
+    query = await eitherSchema.validate(input, {
       stripUnknown: true,
+      abortEarly: false,
     })
   } catch (e) {
     if (e.isJoi !== true) {
@@ -40,29 +57,53 @@ router.get('/ids', async (ctx: Context) => {
     ctx.status = 400
     ctx.body = {
       code: 400,
-      error: 'BadRequest',
-      messages: e.details.map(({ message }: any) => message.replace(/"/g, "'")),
+      error: 'Bad Request',
+      messages: e.details.map(({ path, message }: any) => ({
+        path,
+        message: message.replace(/"/g, "'"),
+      })),
     }
 
     return
   }
 
-  const relation = await knex
-    .where({ [query.source]: query.id })
-    .from('relations').first()
+  let relation: Relation | null = null
+  let relations: Array<Relation | null> = []
 
-  if (!relation) {
+  if (Array.isArray(query)) {
+    const items = query.map(({ source, id }) => ({ [source]: id }))
+
+    // Get relations
+    relations = await knex
+      .where(function() {
+        items.forEach(item => this.orWhere(item))
+      })
+      .from('relations')
+
+    // Map them against the input, so we get results like [{item}, null, {item}]
+    relations = query.map(
+      item =>
+        relations.find(relation => relation![item.source] === item.id) || null
+    )
+  } else {
+    relation = await knex
+      .where({ [query.source]: query.id })
+      .from('relations')
+      .first()
+  }
+
+  if (relation == null && relations.length < 1) {
     ctx.status = 404
-    ctx.body= {
+    ctx.body = {
       code: 404,
       error: 'NotFound',
-      messages: ['Could not find entry with that ID.']
+      messages: ['Could not find any entries with the provided filters.'],
     }
 
     return
   }
 
-  ctx.body = relation
+  ctx.body = relation || relations
 })
 
 export const singleRoutes = router.routes()
