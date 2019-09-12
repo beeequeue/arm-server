@@ -56,7 +56,7 @@ type EitherSchema = Schema | Entry[]
 
 const eitherSchema = Joi.alternatives(querySchema, arraySchema)
 
-router.get('/ids', async (ctx: Context) => {
+const getIds = async (ctx: Context) => {
   const input = !isEmpty(ctx.request.body) ? ctx.request.body : ctx.query
   let query: EitherSchema
 
@@ -115,6 +115,9 @@ router.get('/ids', async (ctx: Context) => {
 
     ctx.body = relation
   }
-})
+}
+
+router.get('/ids', getIds)
+router.post('/ids', getIds)
 
 export const singleRoutes = router.routes()

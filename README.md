@@ -24,12 +24,13 @@ enum Source {
 }
 ```
 
-`GET` `/api/ids`
+### Get IDS:
+`GET/POST` `/api/ids`
 
-Either use query parameters:
+Either use GET query parameters:
 `?source={Source}&id={number}`
 
-or send the query as a JSON body:
+or send the query as a POST JSON body:
 
 `{ "anilist": 1337 }`
 

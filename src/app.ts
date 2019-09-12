@@ -12,7 +12,8 @@ App.use(BodyParser())
 router.get('/', (ctx: Context) => {
   ctx.body = `
 <pre>
-<b>GET /api/ids</b>
+<b>Get IDs:</b>
+<b>GET/POST /api/ids</b>
 
 enum Source {
   anilist,
@@ -21,10 +22,10 @@ enum Source {
   kitsu,
 }
 
-<b>Either use query parameters:</b>
+<b>Either use GET query parameters:</b>
 ?source={Source}&id={number}
 
-<b>or send the query as a JSON body:</b>
+<b>or send the query as a POST JSON body:</b>
 
 { "anilist": 1337 }
 
