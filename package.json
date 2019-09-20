@@ -28,7 +28,7 @@
     "prettier": "1.18.2",
     "supertest": "4.0.2",
     "ts-jest": "24.0.2",
-    "ts-node-dev": "1.0.0-pre.42",
+    "ts-node-dev": "1.0.0-pre.43",
     "tsconfig-paths": "3.8.0"
   },
   "license": "AGPL-3.0-only",
