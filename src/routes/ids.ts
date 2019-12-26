@@ -101,7 +101,7 @@ const getIds = async (ctx: Context) => {
       const realItem = Object.entries(item)[0] as [Source, number]
 
       return (
-        relations.find(relation => relation![realItem[0]] === realItem[1]) ||
+        relations.find(relation => relation![realItem[0]] === realItem[1]) ??
         null
       )
     })

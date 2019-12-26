@@ -5,7 +5,7 @@ import { captureException, init } from '@sentry/node'
 import { App } from './app'
 
 const { NODE_ENV } = process.env
-const port = process.env.PORT || 3000
+const port = process.env.PORT ?? 3000
 
 init({
   dsn: 'https://a1c2b4d9841046bd9d7d154c9a6be149@sentry.io/1380324',
