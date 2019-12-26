@@ -31,6 +31,9 @@
     "ts-node-dev": "1.0.0-pre.42",
     "tsconfig-paths": "3.9.0"
   },
+  "resolutions": {
+    "set-value": "2.0.1"
+  },
   "license": "AGPL-3.0-only",
   "main": "index.js",
   "private": true,
