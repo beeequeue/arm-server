@@ -4,7 +4,7 @@
   "author": "Adam <adam.lj.haglund@gmail.com>",
   "dependencies": {
     "@sentry/node": "5.10.2",
-    "@types/joi": "14.3.3",
+    "@types/joi": "14.3.4",
     "@types/koa": "2.11.0",
     "@types/koa-bodyparser": "4.3.0",
     "@types/koa-router": "7.0.42",
