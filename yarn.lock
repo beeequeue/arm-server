@@ -507,10 +507,10 @@
   resolved "https://registry.yarnpkg.com/@types/koa-compose/-/koa-compose-3.2.2.tgz#dc106e000bbf92a3ac900f756df47344887ee847"
   integrity sha1-3BBuAAu/kqOskA91bfRzRIh+6Ec=
 
-"@types/koa-router@7.0.42":
-  version "7.0.42"
-  resolved "https://registry.yarnpkg.com/@types/koa-router/-/koa-router-7.0.42.tgz#0e5c01d4d0a2873d402d432114f08372d7c50eb1"
-  integrity sha512-mggrNY7Ywwjt7QjaMAlbb1ixE+v7AFskOeyKdmZT/NvPVEAo48gYUxIcF8ILlMc3eg1bo6SxNoUcbxhTv7edrA==
+"@types/koa-router@7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@types/koa-router/-/koa-router-7.4.0.tgz#4a5f48ca4432281f7429faedd9510c20945939dc"
+  integrity sha512-CkNyhGOCJ6rpBEG0rlSQhwHsHNwMzGLE49tV3jE5f0TvMzy/SmoCAIlHWdOLs8Mro+BqtKFH6e/lDaibWkydag==
   dependencies:
     "@types/koa" "*"
 
