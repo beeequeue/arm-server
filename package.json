@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "Adam <adam.lj.haglund@gmail.com>",
   "dependencies": {
-    "@sentry/node": "5.10.2",
+    "@sentry/node": "5.13.1",
     "@types/joi": "14.3.4",
     "@types/koa": "2.11.0",
     "@types/koa-bodyparser": "4.3.0",
