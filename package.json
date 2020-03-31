@@ -27,7 +27,7 @@
     "jest": "25.1.0",
     "prettier": "1.19.1",
     "supertest": "4.0.2",
-    "ts-jest": "25.0.0",
+    "ts-jest": "25.3.0",
     "ts-node-dev": "1.0.0-pre.42",
     "tsconfig-paths": "3.9.0"
   },
