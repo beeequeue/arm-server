@@ -15,7 +15,7 @@
     "koa": "2.13.0",
     "koa-bodyparser": "4.2.1",
     "koa-connect": "2.1.0",
-    "koa-router": "7.4.0",
+    "koa-router": "9.1.0",
     "pg": "8.3.0",
     "sqlite3": "5.0.0",
     "superagent": "5.3.1",
