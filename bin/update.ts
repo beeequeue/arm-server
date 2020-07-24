@@ -37,7 +37,7 @@ const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
   const relation: Relation = {}
 
   entry.sources.forEach(src => {
-    const anilistMatch = src.match(/anilist.co\/anime\/(.+)$/)
+    const anilistMatch = src.match(/anilist.co\/anime\/(\d+)$/)
     if (anilistMatch) {
       const id = Number(anilistMatch[1])
 
@@ -46,7 +46,7 @@ const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
       relation.anilist = id
     }
 
-    const anidbMatch = src.match(/anidb.net\/a(.+)$/)
+    const anidbMatch = src.match(/anidb.net\/a(\d+)$/) ?? src.match(/anidb.net\/anime\/(\d+)$/)
     if (anidbMatch) {
       const id = Number(anidbMatch[1])
 
@@ -55,7 +55,7 @@ const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
       relation.anidb = id
     }
 
-    const malMatch = src.match(/myanimelist.net\/anime\/(.+)$/)
+    const malMatch = src.match(/myanimelist.net\/anime\/(\d+)$/)
     if (malMatch) {
       const id = Number(malMatch[1])
 
@@ -115,4 +115,4 @@ const updateRelations = async () => {
   await knex.destroy()
 }
 
-updateRelations()
+updateRelations().catch(captureException)
