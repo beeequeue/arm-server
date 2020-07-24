@@ -1,15 +1,17 @@
 import { spawn } from 'child_process'
 import { resolve } from 'path'
-import { captureException, init } from '@sentry/node'
+import { captureException, init, Integrations } from '@sentry/node'
 
 import { App } from './app'
 
-const { NODE_ENV } = process.env
+const { NODE_ENV, TRACES_SAMPLERATE, SENTRY_DSN } = process.env
 const port = process.env.PORT ?? 3000
 
 init({
-  dsn: 'https://a1c2b4d9841046bd9d7d154c9a6be149@sentry.io/1380324',
+  dsn: SENTRY_DSN,
   enabled: NODE_ENV === 'production',
+  tracesSampleRate: Number(TRACES_SAMPLERATE ?? 1),
+  integrations: [new Integrations.Http({ tracing: true })],
 })
 
 const runUpdateScript = async () => {
@@ -18,8 +20,8 @@ const runUpdateScript = async () => {
 
   const { stdout, stderr } = spawn(tsNode, ['-T', script])
 
-  stdout.on('data', data => console.log(data.toString().trim()))
-  stderr.on('data', data => console.error(data.toString().trim()))
+  stdout.on('data', (data) => console.log(data.toString().trim()))
+  stderr.on('data', (data) => console.error(data.toString().trim()))
 }
 
 const listen = async () => {
@@ -33,7 +35,7 @@ const listen = async () => {
     console.log(`Listening on ${port}`)
   })
 
-  App.on('error', err => {
+  App.on('error', (err) => {
     console.warn(err)
     captureException(err)
   })

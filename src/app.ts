@@ -1,11 +1,20 @@
 import Koa, { Context } from 'koa'
 import BodyParser from 'koa-bodyparser'
+import Connect from 'koa-connect'
 import Router from 'koa-router'
+import { Handlers } from '@sentry/node'
 
 import { routes } from './routes'
 
 export const App = new Koa()
 const router = new Router()
+
+
+// RequestHandler creates a separate execution context using domains, so that every
+// transaction/span/breadcrumb is attached to its own Hub instance
+App.use(Connect(Handlers.requestHandler()));
+// TracingHandler creates a trace for every incoming request
+App.use(Connect(Handlers.tracingHandler()));
 
 App.use(BodyParser())
 
