@@ -30,7 +30,7 @@
     "prettier": "2.0.5",
     "supertest": "4.0.2",
     "ts-jest": "26.1.3",
-    "ts-node-dev": "1.0.0-pre.55",
+    "ts-node-dev": "1.0.0-pre.56",
     "tsconfig-paths": "3.9.0"
   },
   "resolutions": {
