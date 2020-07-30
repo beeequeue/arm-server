@@ -34,7 +34,7 @@ or send the query as a POST JSON body:
 
 `{ "anilist": 1337 }`
 
-`[{ "anilist": 1337, "anilist": 69, "anidb": 420 }]`
+`[{ "anilist": 1337 }, { "anilist": 69 }, { "anidb": 420 }]`
 
 #### Response
 
