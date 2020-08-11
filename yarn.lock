@@ -726,10 +726,10 @@
   resolved "https://registry.yarnpkg.com/@types/koa-compose/-/koa-compose-3.2.2.tgz#dc106e000bbf92a3ac900f756df47344887ee847"
   integrity sha1-3BBuAAu/kqOskA91bfRzRIh+6Ec=
 
-"@types/koa-router@7.0.42":
-  version "7.0.42"
-  resolved "https://registry.yarnpkg.com/@types/koa-router/-/koa-router-7.0.42.tgz#0e5c01d4d0a2873d402d432114f08372d7c50eb1"
-  integrity sha512-mggrNY7Ywwjt7QjaMAlbb1ixE+v7AFskOeyKdmZT/NvPVEAo48gYUxIcF8ILlMc3eg1bo6SxNoUcbxhTv7edrA==
+"@types/koa-router@7.4.1":
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/@types/koa-router/-/koa-router-7.4.1.tgz#3702a4cabe4558cc4eec70d5574acc04beecff7c"
+  integrity sha512-Hg78TXz78QYfEgdq3nTeRmQFEwJKZljsXb/DhtexmyrpRDRnl59oMglh9uPj3/WgKor0woANrYTnxA8gaWGK2A==
   dependencies:
     "@types/koa" "*"
 
