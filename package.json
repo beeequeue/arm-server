@@ -4,7 +4,7 @@
   "author": "BeeeQueue <adam.lj.haglund@gmail.com>",
   "dependencies": {
     "@sentry/apm": "5.20.0",
-    "@sentry/node": "5.20.0",
+    "@sentry/node": "5.22.0",
     "@types/joi": "14.3.4",
     "@types/koa": "2.11.3",
     "@types/koa-bodyparser": "4.3.0",
