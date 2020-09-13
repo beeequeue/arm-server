@@ -1,4 +1,4 @@
-enum Environments {
+enum Environment {
   DEVELOPMENT = 'development',
   PRODUCTION = 'production',
   TEST = 'test',
@@ -6,7 +6,7 @@ enum Environments {
 
 // This export is overridden by the module.exports at the end,
 // but is required for TS to recognize it as a module
-export const config = {
+export const config: Record<Environment, import('knex').Config> = {
   development: {
     client: 'sqlite3',
     connection: {
@@ -40,7 +40,7 @@ export const config = {
     },
     useNullAsDefault: true,
   },
-} as { [key in Environments]: import('knex').Config }
+}
 
 module.exports = {
   ...config,

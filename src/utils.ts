@@ -17,7 +17,7 @@ export type RequestResponse<D extends object = any, E extends object = any> =
   | RequestError<E>
 
 export const responseIsError = (
-  res: RequestResponse | null
+  res: RequestResponse | null,
 ): res is RequestError<any> | null => res == null || !res.ok || !!res.error
 
 export const enumToArray = <E>(Enum: E): E[] => Object.values(Enum)

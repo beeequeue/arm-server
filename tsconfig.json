@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "noEmit": true,
+    "target": "es2020",
     "module": "commonjs",
     "strict": true,
     "noUnusedLocals": true,
@@ -11,8 +12,7 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "sourceMap": true,
-    "typeRoots" : ["./node_modules/@types", "./typings"],
-    "lib": ["es5", "es2015", "es2016", "es2017", "es2018", "esnext"],
+    "lib": ["esnext"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]

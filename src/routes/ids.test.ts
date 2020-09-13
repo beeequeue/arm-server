@@ -6,7 +6,7 @@ import { Source } from './ids'
 
 let id = 0
 const createRelations = async <N extends number>(
-  amount: N
+  amount: N,
 ): Promise<N extends 1 ? Relation : Relation[]> => {
   const relations: Relation[] = Array.from({ length: amount }).map(() => {
     const r = {
