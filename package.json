@@ -1,9 +1,25 @@
 {
   "name": "arm-server",
-  "version": "1.0.0",
   "author": "BeeeQueue <adam.lj.haglund@gmail.com>",
+  "version": "1.0.0",
+  "private": true,
+  "license": "AGPL-3.0-only",
   "engines": {
     "node": "^14"
+  },
+  "scripts": {
+    "dev": "ts-node-dev -r tsconfig-paths/register -r dotenv/config src/index.ts",
+    "fetch-data": "ts-node bin/update.ts",
+    "migrate": "knex migrate:latest --knexfile knexfile.ts",
+    "migrate:create": "knex migrate:make --knexfile knexfile.ts -x ts",
+    "prestart": "yarn run migrate",
+    "pretest": "cross-env NODE_ENV=test yarn run migrate",
+    "start": "ts-node -r tsconfig-paths/register src/index.ts",
+    "test": "cross-env NODE_ENV=test yarn jest"
+  },
+  "resolutions": {
+    "set-value": "2.0.1",
+    "@types/node": "14.10.1"
   },
   "dependencies": {
     "@sentry/apm": "5.20.0",
@@ -36,22 +52,5 @@
     "ts-jest": "26.1.4",
     "ts-node-dev": "1.0.0-pre.55",
     "tsconfig-paths": "3.9.0"
-  },
-  "resolutions": {
-    "set-value": "2.0.1",
-    "@types/node": "14.10.1"
-  },
-  "license": "AGPL-3.0-only",
-  "main": "index.js",
-  "private": true,
-  "scripts": {
-    "dev": "ts-node-dev -r tsconfig-paths/register -r dotenv/config src/index.ts",
-    "fetch-data": "ts-node bin/update.ts",
-    "migrate": "knex migrate:latest --knexfile knexfile.ts",
-    "migrate:create": "knex migrate:make --knexfile knexfile.ts -x ts",
-    "prestart": "yarn run migrate",
-    "pretest": "cross-env NODE_ENV=test yarn run migrate",
-    "start": "ts-node -r tsconfig-paths/register src/index.ts",
-    "test": "cross-env NODE_ENV=test yarn jest"
   }
 }
