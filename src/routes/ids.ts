@@ -25,16 +25,10 @@ interface Schema {
   id: number
 }
 
-const idSchema = Joi.number()
-  .min(0)
-  .max(2147483647)
-  .precision(0)
-  .required()
+const idSchema = Joi.number().min(0).max(2147483647).precision(0).required()
 
 const querySchema = Joi.object({
-  source: Joi.string()
-    .valid(sourceArray)
-    .required(),
+  source: Joi.string().valid(sourceArray).required(),
   id: idSchema,
 })
 
@@ -43,7 +37,7 @@ const arrayItemSchema = sourceArray.reduce(
     ...obj,
     [source as any]: idSchema.optional(),
   }),
-  {}
+  {},
 )
 
 const arraySchema = Joi.array()
@@ -91,17 +85,17 @@ const getIds = async (ctx: Context) => {
   if (Array.isArray(query)) {
     // Get relations
     relations = await knex
-      .where(function() {
-        ;(query as Entry[]).forEach(item => this.orWhere(item))
+      .where(function () {
+        ;(query as Entry[]).forEach((item) => this.orWhere(item))
       })
       .from('relations')
 
     // Map them against the input, so we get results like [{item}, null, {item}]
-    relations = query.map(item => {
+    relations = query.map((item) => {
       const realItem = Object.entries(item)[0] as [Source, number]
 
       return (
-        relations.find(relation => relation![realItem[0]] === realItem[1]) ??
+        relations.find((relation) => relation![realItem[0]] === realItem[1]) ??
         null
       )
     })
