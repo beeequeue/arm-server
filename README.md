@@ -1,6 +1,6 @@
 # arm-server
 
-[![](https://img.shields.io/travis/BeeeQueue/arm-server.svg)](https://travis-ci.org/BeeeQueue/arm-server)
+[![](https://img.shields.io/github/workflow/status/BeeeQueue/arm-server/CI)](https://github.com/BeeeQueue/arm-server/actions?query=branch%3Amaster+workflow%3ACI)
 [![](https://img.shields.io/uptimerobot/ratio/m781899942-e512424b17b53ca46ae043b6.svg?label=30-day%20uptime)](http://status.ping.apex.sh/f3d0a914-a73e-4187-bdf7-b0985fc2d588)
 
 This app uses data from [`anime-offline-database`](https://github.com/manami-project/anime-offline-database/) - fetching and updating itself every 24 hours.
