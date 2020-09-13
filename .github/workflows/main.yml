@@ -38,14 +38,15 @@ jobs:
             ${{ runner.os }}-yarn-v1-
             ${{ runner.os }}-yarn-
 
-      - name: Typecheck
+      - name: Install dependencies
         run: yarn tsc
         continue-on-error: true
-        
+
+      - name: Typecheck
+        run: yarn tsc
+
       - name: Test
         run: yarn test
-        continue-on-error: true
-        
+
       - name: Lint
         run: yarn lint
-        continue-on-error: true
