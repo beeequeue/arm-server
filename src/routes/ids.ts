@@ -28,7 +28,9 @@ interface Schema {
 const idSchema = Joi.number().min(0).max(2147483647).precision(0).required()
 
 const querySchema = Joi.object({
-  source: Joi.string().valid(sourceArray).required(),
+  source: Joi.string()
+    .valid(...sourceArray)
+    .required(),
   id: idSchema,
 })
 
@@ -54,30 +56,27 @@ const getIds = async (ctx: Context) => {
   const input = !isEmpty(ctx.request.body) ? ctx.request.body : ctx.query
   let query: EitherSchema
 
-  try {
-    query = await eitherSchema.validate(input, {
-      stripUnknown: true,
-      abortEarly: false,
-    })
-  } catch (e) {
-    if (e.isJoi !== true) {
-      throw new Error(e)
+  const result = await eitherSchema.validate(input, {
+    stripUnknown: true,
+    abortEarly: false,
+  })
+
+  if (result.error) {
+    if (!result.error.isJoi) {
+      throw result.error
     }
 
     ctx.status = 400
     ctx.body = {
       code: 400,
       error: 'Bad Request',
-      messages: e.details
-        .filter(({ path }: any) => path.length > 0)
-        .map(({ path, message }: any) => ({
-          path,
-          message: message.replace(/"/g, "'"),
-        })),
+      validation: result.error.message,
     }
 
     return
   }
+
+  query = result.value
 
   let relation: Relation | null = null
   let relations: Array<Relation | null> = []
