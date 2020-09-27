@@ -61,7 +61,7 @@
     "prettier": "2.1.1",
     "supertest": "4.0.2",
     "ts-jest": "26.3.0",
-    "ts-node-dev": "1.0.0-pre.62",
+    "ts-node-dev": "1.0.0-pre.63",
     "tsconfig-paths": "3.9.0"
   }
 }
