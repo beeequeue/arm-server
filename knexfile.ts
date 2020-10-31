@@ -33,7 +33,9 @@ export const config: Record<Environment, import('knex').Config> = {
 
   production: {
     client: 'pg',
-    connection: process.env.DATABASE_URL,
+    connection: {
+      connectionString: process.env.DATABASE_URL,
+    },
     migrations: {
       tableName: 'migrations',
       directory: 'migrations',
