@@ -1,3 +1,5 @@
+import { readFileSync } from 'fs'
+
 enum Environment {
   DEVELOPMENT = 'development',
   PRODUCTION = 'production',
@@ -35,7 +37,9 @@ export const config: Record<Environment, import('knex').Config> = {
     client: 'pg',
     connection: {
       connectionString: process.env.DATABASE_URL,
-      ssl: true,
+      ssl: {
+        ca: readFileSync(process.env.DATABASE_CERT!).toString(),
+      },
     },
     migrations: {
       tableName: 'migrations',
