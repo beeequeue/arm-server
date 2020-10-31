@@ -37,9 +37,7 @@ export const config: Record<Environment, import('knex').Config> = {
     client: 'pg',
     connection: {
       connectionString: process.env.DATABASE_URL,
-      ssl: {
-        ca: readFileSync(process.env.DATABASE_CERT!).toString(),
-      },
+      ssl: { ca: process.env.DATABASE_CERT },
     },
     migrations: {
       tableName: 'migrations',
