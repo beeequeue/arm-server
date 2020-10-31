@@ -1,5 +1,3 @@
-import { readFileSync } from 'fs'
-
 enum Environment {
   DEVELOPMENT = 'development',
   PRODUCTION = 'production',
