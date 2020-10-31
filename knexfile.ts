@@ -35,6 +35,7 @@ export const config: Record<Environment, import('knex').Config> = {
     client: 'pg',
     connection: {
       connectionString: process.env.DATABASE_URL,
+      ssl: true,
     },
     migrations: {
       tableName: 'migrations',
