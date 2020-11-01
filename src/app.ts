@@ -40,7 +40,7 @@ enum Source {
 
 { "anilist": 1337 }
 
-[{ "anilist": 1337, "anilist": 69, "anidb": 420 }]
+[{ "anilist": 1337 }, { "anilist": 69 }, { "anidb": 420 }]
 
 interface Entry {
   anilist: number | null
@@ -50,12 +50,12 @@ interface Entry {
 }
 
 { "anilist": 1337 } => Entry | null
-[{ ... }] => (Entry | null)[]
+[{ ... }] => Array<Entry | null>
 
 <b>The response code will always be 200 (OK) or 204 (No content).
 If an entry is not found null is returned instead.</b>
 
-Source code is available on GitHub at https://github.com/BeeeQueue/arm-server
+Source code is available on GitHub at <a href="https://github.com/BeeeQueue/arm-server">https://github.com/BeeeQueue/arm-server</a>
 </pre>
 `
 })
