@@ -35,7 +35,7 @@
     "@sentry/apm": "5.23.0",
     "@sentry/node": "5.23.0",
     "cross-env": "7.0.2",
-    "joi": "17.2.1",
+    "joi": "17.3.0",
     "knex": "0.21.12",
     "koa": "2.13.0",
     "koa-bodyparser": "4.3.0",
