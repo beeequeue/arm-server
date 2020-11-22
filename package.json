@@ -29,7 +29,7 @@
   },
   "resolutions": {
     "set-value": "2.0.1",
-    "@types/node": "14.10.1"
+    "@types/node": "14.14.9"
   },
   "dependencies": {
     "@sentry/apm": "5.23.0",
@@ -53,7 +53,7 @@
     "@types/koa-bodyparser": "4.3.0",
     "@types/koa-logger": "3.1.1",
     "@types/koa-router": "7.4.1",
-    "@types/node": "14.10.1",
+    "@types/node": "14.14.9",
     "@types/superagent": "4.1.10",
     "@types/supertest": "2.0.10",
     "dotenv": "8.2.0",
