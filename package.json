@@ -42,7 +42,7 @@
     "koa-connect": "2.1.0",
     "koa-logger": "3.2.1",
     "koa-router": "10.0.0",
-    "pg": "8.5.1",
+    "pg": "8.3.3",
     "sqlite3": "5.0.0",
     "superagent": "6.1.0",
     "ts-node": "9.1.1",
