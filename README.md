@@ -3,13 +3,16 @@
 [![](https://img.shields.io/github/workflow/status/BeeeQueue/arm-server/CI)](https://github.com/BeeeQueue/arm-server/actions?query=branch%3Amaster+workflow%3ACI)
 [![](https://img.shields.io/uptimerobot/ratio/m781899942-e512424b17b53ca46ae043b6.svg?label=30-day%20uptime)](http://status.ping.apex.sh/f3d0a914-a73e-4187-bdf7-b0985fc2d588)
 
-This app uses data from [`anime-offline-database`](https://github.com/manami-project/anime-offline-database/) - fetching and updating itself every 24 hours.
+This app uses data from [`anime-offline-database`](https://github.com/manami-project/anime-offline-database/) - fetching
+and updating itself every 24 hours.
 
 ### Missing or duplicate entries
 
-Some entries in the database are not mapped correctly due to inconsistent naming - the owner of `anime-offline-database` cannot fix them due to complexity. Therefore this service has manual rules that combines known failures.
+Some entries in the database are not mapped correctly due to inconsistent naming - the owner of `anime-offline-database`
+cannot fix them due to complexity. Therefore this service has manual rules that combines known failures.
 
-You can help add rules by submitting a [manual rule request](https://github.com/BeeeQueue/arm-server/issues/new?template=manual-rule-request.md).
+You can help add rules by submitting
+a [manual rule request](https://github.com/BeeeQueue/arm-server/issues/new?template=manual-rule-request.md).
 
 ## API
 
@@ -25,6 +28,7 @@ enum Source {
 ```
 
 ### Get IDS:
+
 `GET/POST` `/api/ids`
 
 Either use GET query parameters:
@@ -50,7 +54,7 @@ interface Entry {
 // [{ ... }] => Array<Entry | null>
 ```
 
-**The response code will always be 200 (OK) or 204 (No content).**
+**The response code will always be 200 (OK).**
 If an entry is not found `null` is returned instead.
 
 ## Development
