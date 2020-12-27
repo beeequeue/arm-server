@@ -15,17 +15,15 @@ const bodyItemSchema = Joi.object(
     }),
     {},
   ),
-).required()
+)
+  .min(1)
+  .required()
 
 export type BodyQuery = BodyItem | BodyItem[]
 
-const arraySchema = Joi.array()
-  .min(1)
-  .max(100)
-  .items(bodyItemSchema.or(...sourceArray))
-  .required()
+const arraySchema = Joi.array().min(1).max(100).items(bodyItemSchema).required()
 
-export const bodySchema = Joi.alternatives(bodyItemSchema, arraySchema)
+export const bodySchema = Joi.alternatives(arraySchema, bodyItemSchema)
 
 export const bodyHandler = async (
   input: BodyQuery,
@@ -33,7 +31,11 @@ export const bodyHandler = async (
   BodyQuery extends Array<undefined> ? Array<Relation | null> : Relation
 > => {
   if (!Array.isArray(input)) {
-    return knex.where(input).from('relations').first()
+    const relation = await knex.where(input).from('relations').first()
+
+    console.log(relation)
+
+    return relation ?? null
   }
 
   let relations: Array<Relation | null> = ([] = [])

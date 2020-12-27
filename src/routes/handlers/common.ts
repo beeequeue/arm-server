@@ -2,10 +2,10 @@ import { enumToArray } from '@/utils'
 import Joi from 'joi'
 
 export enum Source {
-  ANILIST = 'anilist',
-  ANIDB = 'anidb',
+  AniList = 'anilist',
+  AniDB = 'anidb',
   MAL = 'myanimelist',
-  KITSU = 'kitsu',
+  Kitsu = 'kitsu',
 }
 
 export const sourceArray = (enumToArray(Source) as unknown) as string[]

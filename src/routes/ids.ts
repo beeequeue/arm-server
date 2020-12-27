@@ -45,6 +45,12 @@ const getIds = async (ctx: Context) => {
   } else {
     ctx.body = await handleQueryParams(input as QueryParamQuery)
   }
+
+  if (ctx.body == null) {
+    ctx.response.status = 200
+    ctx.response.type = 'json'
+    ctx.body = 'null'
+  }
 }
 
 router.get('/ids', getIds)

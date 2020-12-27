@@ -1,9 +1,6 @@
 const { pathsToModuleNameMapper } = require('ts-jest/utils')
 const { compilerOptions } = require('./tsconfig')
 
-/**
- * @type InitialOptions
- */
 module.exports = {
   roots: ['<rootDir>/src'],
   preset: 'ts-jest',
@@ -11,7 +8,7 @@ module.exports = {
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: '<rootDir>/',
   }),
-
+  coveragePathIgnorePatterns: ['utils.ts'],
   collectCoverage: true,
   coverageReporters: ['text', 'text-summary'],
   coverageThreshold: {
