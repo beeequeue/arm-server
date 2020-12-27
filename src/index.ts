@@ -4,14 +4,8 @@ import Sentry from '@sentry/node'
 
 import { App } from './app'
 
-const { NODE_ENV, TRACES_SAMPLERATE, SENTRY_DSN } = process.env
+const { NODE_ENV } = process.env
 const port = process.env.PORT ?? 3000
-
-Sentry.init({
-  dsn: SENTRY_DSN,
-  enabled: NODE_ENV === 'production',
-  tracesSampleRate: Number(TRACES_SAMPLERATE ?? 1),
-})
 
 const runUpdateScript = async () => {
   const tsNode = resolve(__dirname, '..', 'node_modules', '.bin', 'ts-node')

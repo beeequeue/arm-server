@@ -1,10 +1,18 @@
 import domain from 'domain'
 import { Context, Next } from 'koa'
-import Sentry from '@sentry/node'
+import * as Sentry from '@sentry/node'
 import {
   extractTraceparentData,
   stripUrlQueryAndFragment,
 } from '@sentry/tracing'
+
+const { NODE_ENV, TRACES_SAMPLERATE, SENTRY_DSN } = process.env
+
+Sentry.init({
+  dsn: SENTRY_DSN,
+  enabled: NODE_ENV === 'production',
+  tracesSampleRate: Number(TRACES_SAMPLERATE ?? 1),
+})
 
 export const requestHandler = (ctx: Context, next: Next) =>
   new Promise<void>((resolve) => {
