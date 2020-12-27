@@ -57,6 +57,12 @@ interface Entry {
 **The response code will always be 200 (OK).**
 If an entry is not found `null` is returned instead.
 
+## Changelog
+
+#### 2020-12-27
+
+API no longer returns `204`s - now always returns `200` with a `null` JSON body.
+
 ## Development
 
 1. Clone the project
