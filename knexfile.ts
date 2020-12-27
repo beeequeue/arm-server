@@ -36,7 +36,8 @@ export const config: Record<Environment, import('knex').Config> = {
     connection: {
       connectionString: process.env.DATABASE_URL,
       ssl: {
-        cert: process.env.DATABASE_CERT,
+        ca: process.env.DATABASE_CERT,
+        rejectUnauthorized: false,
       },
     },
     migrations: {
