@@ -45,6 +45,8 @@ export const config: Record<Environment, import('knex').Config> = {
   },
 }
 
+console.log(process.env.DATABASE_CERT)
+
 module.exports = {
   ...config,
   config,
