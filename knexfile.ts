@@ -35,7 +35,9 @@ export const config: Record<Environment, import('knex').Config> = {
     client: 'pg',
     connection: {
       connectionString: process.env.DATABASE_URL,
-      ssl: { ca: process.env.DATABASE_CERT },
+      ssl: {
+        cert: process.env.DATABASE_CERT,
+      },
     },
     migrations: {
       tableName: 'migrations',
@@ -44,8 +46,6 @@ export const config: Record<Environment, import('knex').Config> = {
     useNullAsDefault: true,
   },
 }
-
-console.log(process.env.DATABASE_CERT)
 
 module.exports = {
   ...config,
