@@ -1,22 +1,24 @@
 import Koa, { Context } from 'koa'
 import BodyParser from 'koa-bodyparser'
-import Connect from 'koa-connect'
 import Router from 'koa-router'
 import Logger from 'koa-logger'
-import { Handlers } from '@sentry/node'
 
 import { routes } from './routes'
+import { requestHandler, sendErrorToSentry, tracingMiddleWare } from '@/sentry'
 
 export const App = new Koa()
 const router = new Router()
 
 App.use(Logger())
 
-// RequestHandler creates a separate execution context using domains, so that every
-// transaction/span/breadcrumb is attached to its own Hub instance
-App.use(Connect(Handlers.requestHandler()))
-// TracingHandler creates a trace for every incoming request
-App.use(Connect(Handlers.tracingHandler()))
+App.use(requestHandler)
+App.use(tracingMiddleWare)
+
+App.on('error', (err, ctx) => {
+  console.error(err)
+
+  sendErrorToSentry(err, ctx)
+})
 
 App.use(BodyParser())
 
