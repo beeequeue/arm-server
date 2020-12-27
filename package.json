@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@sentry/apm": "5.27.1",
-    "@sentry/node": "5.27.1",
+    "@sentry/node": "5.29.2",
     "cross-env": "7.0.3",
     "joi": "17.3.0",
     "knex": "0.21.15",
