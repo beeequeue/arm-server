@@ -1,6 +1,6 @@
 import { spawn } from 'child_process'
 import { resolve } from 'path'
-import Sentry from '@sentry/node'
+import { captureException } from '@sentry/node'
 
 import { App } from './app'
 
@@ -15,7 +15,7 @@ const runUpdateScript = async () => {
 
   stdout.on('data', (data) => console.log(data.toString().trim()))
   stderr.on('data', (data) => {
-    Sentry.captureException(data.toString().trim())
+    captureException(data.toString().trim())
     console.error(data.toString().trim())
   })
 }
