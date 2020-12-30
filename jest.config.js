@@ -8,7 +8,7 @@ module.exports = {
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: '<rootDir>/',
   }),
-  coveragePathIgnorePatterns: ['utils.ts'],
+  coveragePathIgnorePatterns: ['sentry.ts', 'utils.ts'],
   collectCoverage: true,
   coverageReporters: ['text', 'text-summary'],
   coverageThreshold: {
