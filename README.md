@@ -6,6 +6,8 @@
 This app uses data from [`anime-offline-database`](https://github.com/manami-project/anime-offline-database/) - fetching
 and updating itself every 24 hours.
 
+[![Deploy to DigitalOcean](https://mp-assets1.sfo2.digitaloceanspaces.com/deploy-to-do/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/BeeeQueue/arm-server/tree/master)
+
 ### Missing or duplicate entries
 
 Some entries in the database are not mapped correctly due to inconsistent naming - the owner of `anime-offline-database`

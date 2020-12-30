@@ -1,0 +1,22 @@
+spec:
+  name: arm-server
+  services:
+    - name: arm-server
+      github:
+        repo: BeeeQueue/arm-server
+        branch: master
+        deploy_on_push: true
+      dockerfile_path: ./Dockerfile
+      envs:
+        - key: NODE_ENV
+          scope: RUN_AND_BUILD_TIME
+          value: production
+        - key: DATABASE_URL
+          scope: RUN_TIME
+          value: ${db.DATABASE_URL}
+  databases:
+    - name: db
+      engine: PG
+      num_nodes: 1
+      size: db-s-dev-database
+      version: "12"
