@@ -34,9 +34,11 @@ export const config: Record<Environment, import('knex').Config> = {
   production: {
     client: 'pg',
     connection: {
-      connectionString: process.env.DATABASE_URL,
+      connectionString: process.env.DATABASE_URL?.replace(
+        '?sslmode=require',
+        '',
+      ),
       ssl: {
-        ca: process.env.DATABASE_CERT,
         rejectUnauthorized: false,
       },
     },
