@@ -7,6 +7,7 @@ spec:
         branch: master
         deploy_on_push: true
       dockerfile_path: ./Dockerfile
+      instance_size_slug: basic-xxs
       envs:
         - key: NODE_ENV
           scope: RUN_AND_BUILD_TIME
