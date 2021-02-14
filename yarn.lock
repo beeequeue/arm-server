@@ -775,10 +775,10 @@
   dependencies:
     "@types/koa" "*"
 
-"@types/koa@*", "@types/koa@2.11.6":
-  version "2.11.6"
-  resolved "https://registry.yarnpkg.com/@types/koa/-/koa-2.11.6.tgz#b7030caa6b44af801c2aea13ba77d74aff7484d5"
-  integrity sha512-BhyrMj06eQkk04C97fovEDQMpLpd2IxCB4ecitaXwOKGq78Wi2tooaDOWOFGajPk8IkQOAtMppApgSVkYe1F/A==
+"@types/koa@*", "@types/koa@2.11.8":
+  version "2.11.8"
+  resolved "https://registry.yarnpkg.com/@types/koa/-/koa-2.11.8.tgz#b3fa4bf0baa518b71cb0c14b8a354b6292bea883"
+  integrity sha512-8LJHhlEjxvEb9MR06zencOxZyxpTHG2u6pcvJbSBN9DRBc+GYQ9hFI8sSH7dvYoITKeAGWo2eVPKx1Z/zX/yKw==
   dependencies:
     "@types/accepts" "*"
     "@types/content-disposition" "*"
