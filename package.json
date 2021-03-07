@@ -36,7 +36,7 @@
     "@sentry/tracing": "5.29.2",
     "cross-env": "7.0.3",
     "joi": "17.3.0",
-    "knex": "0.21.15",
+    "knex": "0.95.1",
     "koa": "2.13.0",
     "koa-bodyparser": "4.3.0",
     "koa-connect": "2.1.0",
