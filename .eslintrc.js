@@ -5,21 +5,12 @@ module.exports = {
     node: true,
   },
   extends: [
-    'plugin:@beequeue/base',
-    'plugin:@beequeue/node',
-    'plugin:@beequeue/typescript',
-    'plugin:@beequeue/prettier',
+    "plugin:@beequeue/base",
+    "plugin:@beequeue/vue",
+    "plugin:@beequeue/typescript",
+    "plugin:@beequeue/prettier",
   ],
   rules: {
-    'prettier/prettier': 'off',
-    'import/no-named-as-default-member': 'off',
+    "@typescript-eslint/no-non-null-assertion": "off",
   },
-  overrides: [
-    {
-      files: ['!pages/**/*.tsx', '**/*.stories.tsx'],
-      rules: {
-        'import/no-default-export': 'off',
-      },
-    },
-  ],
 }
