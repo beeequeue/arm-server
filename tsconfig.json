@@ -1,0 +1,30 @@
+{
+  "extends": "@tsconfig/node16/tsconfig.json",
+  "compilerOptions": {
+    // Output
+    "noEmit": true,
+    "sourceMap": true,
+
+    // Modules
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "baseUrl": "./src",
+    "paths": {
+      "~/*": ["src/*"]
+    },
+
+    // Typechecking
+    "skipLibCheck": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // Extra types
+    "lib": ["es2020"],
+    "types": ["node"]
+  },
+
+  "include": ["api/**/*.ts"]
+}

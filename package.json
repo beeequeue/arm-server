@@ -1,0 +1,35 @@
+{
+  "name": "arm-server",
+  "version": "0.0.0",
+  "author": "BeeeQueue <adam@haglund.dev>",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": "^14"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "yarn lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue,html,json}": [
+      "prettier --write"
+    ]
+  },
+  "scripts": {
+    "dev": "dev",
+    "build": "build",
+    "lint": "eslint api",
+    "postinstall": "simple-git-hooks",
+    "typecheck": "tsc --noEmit --project tsconfig.json"
+  },
+  "devDependencies": {
+    "@beequeue/eslint-plugin": "0.1.3",
+    "@tsconfig/node16": "1.0.1",
+    "dotenv": "9.0.2",
+    "eslint": "7.26.0",
+    "lint-staged": "11.0.0",
+    "prettier": "2.3.0",
+    "simple-git-hooks": "2.4.1",
+    "typescript": "4.2.4"
+  }
+}

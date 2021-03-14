@@ -1,0 +1,6 @@
+{
+  "printWidth": 100,
+  "semi": false,
+  "htmlWhitespaceSensitivity": "ignore",
+  "trailingComma": "all"
+}
