@@ -1,13 +1,15 @@
 #!../node_modules/.bin/ts-node
 
+/* eslint-disable node/shebang */
 import Superagent from 'superagent'
+
 import { captureException } from '@sentry/node'
 
 import { knex, Relation } from '../src/db'
 import { updateBasedOnManualRules } from '../src/manual-rules'
 import { RequestResponse, responseIsError } from '../src/utils'
 
-interface OfflineDatabaseSchema {
+type OfflineDatabaseSchema = {
   sources: string[]
   type: string
   title: string
@@ -20,7 +22,7 @@ interface OfflineDatabaseSchema {
 
 const fetchDatabase = async (): Promise<OfflineDatabaseSchema[] | null> => {
   const response = (await Superagent.get(
-    'https://raw.githubusercontent.com/manami-project/anime-offline-database/master/anime-offline-database.json'
+    'https://raw.githubusercontent.com/manami-project/anime-offline-database/master/anime-offline-database.json',
   ).ok(() => true)) as RequestResponse<{ data: OfflineDatabaseSchema[] }>
 
   if (responseIsError(response)) {
@@ -33,11 +35,18 @@ const fetchDatabase = async (): Promise<OfflineDatabaseSchema[] | null> => {
   return JSON.parse(response.text).data
 }
 
+const regexes = {
+  anilist: /anilist.co\/anime\/(\d+)$/,
+  anidb: /anidb.net\/a(?:nime\/)?(\d+)$/,
+  mal: /myanimelist.net\/anime\/(\d+)$/,
+  kitsu: /kitsu.io\/anime\/(.+)$/,
+}
+
 const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
   const relation: Relation = {}
 
-  entry.sources.forEach(src => {
-    const anilistMatch = src.match(/anilist.co\/anime\/(\d+)$/)
+  entry.sources.forEach((src) => {
+    const anilistMatch = regexes.anilist.exec(src)
     if (anilistMatch) {
       const id = Number(anilistMatch[1])
 
@@ -46,7 +55,7 @@ const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
       relation.anilist = id
     }
 
-    const anidbMatch = src.match(/anidb.net\/a(\d+)$/) ?? src.match(/anidb.net\/anime\/(\d+)$/)
+    const anidbMatch = regexes.anidb.exec(src)
     if (anidbMatch) {
       const id = Number(anidbMatch[1])
 
@@ -55,7 +64,7 @@ const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
       relation.anidb = id
     }
 
-    const malMatch = src.match(/myanimelist.net\/anime\/(\d+)$/)
+    const malMatch = regexes.mal.exec(src)
     if (malMatch) {
       const id = Number(malMatch[1])
 
@@ -64,7 +73,7 @@ const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
       relation.myanimelist = id
     }
 
-    const kitsuMatch = src.match(/kitsu.io\/anime\/(.+)$/)
+    const kitsuMatch = regexes.kitsu.exec(src)
     if (kitsuMatch) {
       const id = Number(kitsuMatch[1])
 
@@ -78,7 +87,7 @@ const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
 }
 
 const updateRelations = async () => {
-  console.log(`Using ${process.env.NODE_ENV} database configuration...`)
+  console.log(`Using ${process.env.NODE_ENV!} database configuration...`)
 
   console.log('Fetching updated Database...')
   const data = await fetchDatabase()
@@ -95,14 +104,14 @@ const updateRelations = async () => {
 
   console.log('Updating database...')
   try {
-    await knex.transaction(trx =>
+    await knex.transaction((trx) =>
       knex
         .delete()
         .from('relations')
         .transacting(trx)
         .then(() =>
-          knex.batchInsert('relations', formattedEntries, 100).transacting(trx)
-        )
+          knex.batchInsert('relations', formattedEntries, 100).transacting(trx),
+        ),
     )
   } catch (e) {
     throw new Error(e)

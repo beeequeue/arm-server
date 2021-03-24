@@ -1,12 +1,12 @@
 import { Context } from 'koa'
 import Router from 'koa-router'
 
+import { bodyHandler, BodyQuery, bodySchema } from '@/routes/handlers/json-body'
 import {
   handleQueryParams,
   QueryParamQuery,
   querySchema,
 } from '@/routes/handlers/query-params'
-import { bodyHandler, BodyQuery, bodySchema } from '@/routes/handlers/json-body'
 import { isEmpty } from '@/utils'
 
 const router = new Router()
@@ -15,7 +15,7 @@ const getIds = async (ctx: Context) => {
   const isBodyQuery = isEmpty(ctx.query)
   const unvalidatedInput = isBodyQuery ? ctx.request.body : ctx.query
 
-  const result = await (isBodyQuery ? bodySchema : querySchema).validate(
+  const result = (isBodyQuery ? bodySchema : querySchema).validate(
     unvalidatedInput,
     {
       stripUnknown: true,

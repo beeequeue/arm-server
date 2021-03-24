@@ -1,7 +1,7 @@
 import Joi from 'joi'
 
-import { idSchema, Source, sourceArray } from '@/routes/handlers/common'
 import { knex } from '@/db'
+import { idSchema, Source, sourceArray } from '@/routes/handlers/common'
 
 export type QueryParamQuery = {
   source: Source

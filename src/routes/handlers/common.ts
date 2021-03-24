@@ -1,5 +1,6 @@
-import { enumToArray } from '@/utils'
 import Joi from 'joi'
+
+import { enumToArray } from '@/utils'
 
 export enum Source {
   AniList = 'anilist',

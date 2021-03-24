@@ -1,10 +1,11 @@
 import Koa, { Context } from 'koa'
 import BodyParser from 'koa-bodyparser'
-import Router from 'koa-router'
 import Logger from 'koa-logger'
+import Router from 'koa-router'
+
+import { requestHandler, sendErrorToSentry, tracingMiddleWare } from '@/sentry'
 
 import { routes } from './routes'
-import { requestHandler, sendErrorToSentry, tracingMiddleWare } from '@/sentry'
 
 export const App = new Koa()
 const router = new Router()

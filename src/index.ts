@@ -1,5 +1,6 @@
 import { spawn } from 'child_process'
 import { resolve } from 'path'
+
 import { captureException } from '@sentry/node'
 
 import { App } from './app'
@@ -7,7 +8,7 @@ import { App } from './app'
 const { NODE_ENV } = process.env
 const port = process.env.PORT ?? 3000
 
-const runUpdateScript = async () => {
+const runUpdateScript = () => {
   const tsNode = resolve(__dirname, '..', 'node_modules', '.bin', 'ts-node')
   const script = resolve(__dirname, '..', 'bin', 'update.ts')
 
@@ -20,9 +21,9 @@ const runUpdateScript = async () => {
   })
 }
 
-const listen = async () => {
+const listen = () => {
   if (NODE_ENV === 'production') {
-    await runUpdateScript()
+    runUpdateScript()
 
     setInterval(runUpdateScript, 1000 * 60 * 60 * 24)
   }

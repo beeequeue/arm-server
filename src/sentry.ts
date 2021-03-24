@@ -1,5 +1,8 @@
+// eslint-disable-next-line node/no-deprecated-api
 import domain from 'domain'
+
 import { Context, Next } from 'koa'
+
 import * as Sentry from '@sentry/node'
 import {
   extractTraceparentData,
@@ -26,7 +29,7 @@ export const requestHandler = (ctx: Context, next: Next) =>
       ctx.app.emit('error', err, ctx)
     })
 
-    local.run(async () => {
+    void local.run(async () => {
       Sentry.getCurrentHub().configureScope((scope) =>
         scope.addEventProcessor((event) =>
           Sentry.Handlers.parseRequest(event, ctx.request as any, {
@@ -64,8 +67,10 @@ export const tracingMiddleWare = async (ctx: Context, next: Next) => {
 
   // if using koa router, a nicer way to capture transaction using the matched route
   if (ctx._matchedRoute) {
-    const mountPath = ctx.mountPath || ''
-    transaction.setName(`${reqMethod} ${mountPath}${ctx._matchedRoute}`)
+    const mountPath = (ctx.mountPath as string) || ''
+    transaction.setName(
+      `${reqMethod} ${mountPath}${ctx._matchedRoute as string}`,
+    )
   }
 
   transaction.setHttpStatus(ctx.status)

@@ -1,7 +1,7 @@
 import Joi from 'joi'
 
-import { idSchema, Source, sourceArray } from '@/routes/handlers/common'
 import { knex, Relation } from '@/db'
+import { idSchema, Source, sourceArray } from '@/routes/handlers/common'
 
 type BodyItem = {
   [key in Source]?: number
@@ -11,7 +11,7 @@ const bodyItemSchema = Joi.object(
   sourceArray.reduce(
     (obj, source) => ({
       ...obj,
-      [source as any]: idSchema.optional(),
+      [source]: idSchema.optional(),
     }),
     {},
   ),
@@ -38,11 +38,12 @@ export const bodyHandler = async (
     return relation ?? null
   }
 
-  let relations: Array<Relation | null> = ([] = [])
+  let relations: Array<Relation | null> = []
 
   // Get relations
   relations = await knex
     .where(function () {
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       input.forEach((item) => this.orWhere(item))
     })
     .from('relations')
