@@ -1,8 +1,8 @@
 import Knex from 'knex'
 
-import { Logger } from '@/lib/logger'
-
 import { config } from '../knexfile'
+
+import { Logger } from './lib/logger'
 
 const { NODE_ENV } = process.env
 export const knex = Knex(
