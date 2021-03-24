@@ -119,8 +119,8 @@ const updateRelations = async () => {
   Logger.info('Executing manual rules...')
   await updateBasedOnManualRules()
 
-  await knex.destroy()
   Logger.info('Done.')
+  void knex.destroy()
 }
 
 updateRelations().catch(captureException)
