@@ -33,8 +33,6 @@ export const bodyHandler = async (
   if (!Array.isArray(input)) {
     const relation = await knex.where(input).from('relations').first()
 
-    console.log(relation)
-
     return relation ?? null
   }
 
