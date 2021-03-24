@@ -15,9 +15,3 @@ spec:
         - key: DATABASE_URL
           scope: RUN_TIME
           value: ${db.DATABASE_URL}
-  databases:
-    - name: db
-      engine: PG
-      num_nodes: 1
-      size: db-s-dev-database
-      version: "12"
