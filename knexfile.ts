@@ -1,8 +1,4 @@
-enum Environment {
-  DEVELOPMENT = 'development',
-  PRODUCTION = 'production',
-  TEST = 'test',
-}
+import type { Environment } from './src/config'
 
 const defaultConfig = {
   client: 'sqlite3',

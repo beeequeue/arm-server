@@ -32,7 +32,7 @@ export const updateBasedOnManualRules = async () => {
             knex('relations').update(fromWhere).where(toWhere).transacting(trx),
           ),
       )
-      .catch(console.error)
+      .catch(Logger.error)
   })
 
   await Promise.all(promises)

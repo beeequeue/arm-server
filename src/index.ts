@@ -4,6 +4,8 @@ import { resolve } from 'path'
 
 import { captureException } from '@sentry/node'
 
+import { Logger } from '@/lib/logger'
+
 import { App } from './app'
 
 const { NODE_ENV } = process.env
@@ -21,10 +23,10 @@ const runUpdateScript = () => {
 
   const { stdout, stderr } = spawn(tsNode, ['-T', script])
 
-  stdout.on('data', (data) => console.log(data.toString().trim()))
+  stdout.on('data', (data) => Logger.info(data.toString().trim()))
   stderr.on('data', (data) => {
     captureException(data.toString().trim())
-    console.error(data.toString().trim())
+    Logger.error(data.toString().trim())
   })
 }
 
@@ -36,7 +38,7 @@ const listen = () => {
   }
 
   App.listen(port, () => {
-    console.log(`Listening on ${port}`)
+    Logger.info(`Listening on ${port}`)
   })
 }
 

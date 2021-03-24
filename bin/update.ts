@@ -3,6 +3,7 @@ import Superagent from 'superagent'
 import { captureException } from '@sentry/node'
 
 import { knex, Relation } from '../src/db'
+import { Logger } from '../src/lib/logger'
 import { updateBasedOnManualRules } from '../src/manual-rules'
 import { RequestResponse, responseIsError } from '../src/utils'
 
@@ -23,7 +24,7 @@ const fetchDatabase = async (): Promise<OfflineDatabaseSchema[] | null> => {
   ).ok(() => true)) as RequestResponse<{ data: OfflineDatabaseSchema[] }>
 
   if (responseIsError(response)) {
-    console.error('Could not fetch updated database!!')
+    Logger.error('Could not fetch updated database!!')
     captureException(new Error('Could not fetch updated database!!'))
 
     return null
@@ -84,22 +85,22 @@ const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
 }
 
 const updateRelations = async () => {
-  console.log(`Using ${process.env.NODE_ENV!} database configuration...`)
+  Logger.info(`Using ${process.env.NODE_ENV!} database configuration...`)
 
-  console.log('Fetching updated Database...')
+  Logger.info('Fetching updated Database...')
   const data = await fetchDatabase()
-  console.log('Fetched updated Database.')
+  Logger.info('Fetched updated Database.')
 
   if (data == null) {
-    console.log('got no data')
+    Logger.info('got no data')
     return
   }
 
-  console.log('Formatting data...')
+  Logger.info('Formatting data...')
   const formattedEntries = data.map(formatEntry)
-  console.log('Formatted data.')
+  Logger.info('Formatted data.')
 
-  console.log('Updating database...')
+  Logger.info('Updating database...')
   try {
     await knex.transaction((trx) =>
       knex
@@ -113,13 +114,13 @@ const updateRelations = async () => {
   } catch (e) {
     throw new Error(e)
   }
-  console.log('Updated database.')
+  Logger.info('Updated database.')
 
-  console.log('Executing manual rules...')
+  Logger.info('Executing manual rules...')
   await updateBasedOnManualRules()
 
   await knex.destroy()
-  console.log('Done.')
+  Logger.info('Done.')
 }
 
 updateRelations().catch(captureException)
