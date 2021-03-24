@@ -1,6 +1,3 @@
-#!../node_modules/.bin/ts-node
-
-/* eslint-disable node/shebang */
 import Superagent from 'superagent'
 
 import { captureException } from '@sentry/node'
@@ -122,6 +119,7 @@ const updateRelations = async () => {
   await updateBasedOnManualRules()
 
   await knex.destroy()
+  console.log('Done.')
 }
 
 updateRelations().catch(captureException)

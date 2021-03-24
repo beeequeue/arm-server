@@ -1,4 +1,5 @@
 import { spawn } from 'child_process'
+import { platform } from 'os'
 import { resolve } from 'path'
 
 import { captureException } from '@sentry/node'
@@ -9,7 +10,13 @@ const { NODE_ENV } = process.env
 const port = process.env.PORT ?? 3000
 
 const runUpdateScript = () => {
-  const tsNode = resolve(__dirname, '..', 'node_modules', '.bin', 'ts-node')
+  const tsNode = resolve(
+    __dirname,
+    '..',
+    'node_modules',
+    '.bin',
+    platform() === 'win32' ? 'ts-node.cmd' : 'ts-node',
+  )
   const script = resolve(__dirname, '..', 'bin', 'update.ts')
 
   const { stdout, stderr } = spawn(tsNode, ['-T', script])
