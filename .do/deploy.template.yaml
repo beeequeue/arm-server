@@ -2,8 +2,8 @@ spec:
   name: arm-server
   services:
     - name: arm-server
-      git:
-        repo_clone_url: https://github.com/BeeeQueue/arm-server.git
+      github:
+        repo: BeeeQueue/arm-server.git
         branch: master
         deploy_on_push: true
       dockerfile_path: ./Dockerfile
