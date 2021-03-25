@@ -1,4 +1,5 @@
 import { knex, Relation } from './db'
+import { Logger } from './lib/logger'
 
 const rules = {
   // Kaguya-sama
