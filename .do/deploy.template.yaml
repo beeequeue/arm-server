@@ -12,6 +12,3 @@ spec:
         - key: NODE_ENV
           scope: RUN_AND_BUILD_TIME
           value: production
-        - key: DATABASE_URL
-          scope: RUN_TIME
-          value: ${db.DATABASE_URL}
