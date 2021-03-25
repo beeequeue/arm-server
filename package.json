@@ -20,6 +20,7 @@
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register -r dotenv/config src/index.ts",
     "fetch-data": "ts-node bin/update.ts",
+    "lint": "eslint src",
     "migrate": "knex migrate:latest --knexfile knexfile.ts",
     "migrate:create": "knex migrate:make --knexfile knexfile.ts -x ts",
     "prestart": "yarn run migrate",

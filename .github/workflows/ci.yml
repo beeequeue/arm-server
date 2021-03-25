@@ -25,6 +25,24 @@ jobs:
       - name: Typecheck
         run: yarn tsc
 
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v1
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+
+      - name: Lint
+        run: yarn lint
+
   test:
     runs-on: ubuntu-latest
 
