@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@sentry/node": "5.29.2",
-    "@sentry/tracing": "5.29.2",
+    "@sentry/tracing": "6.3.1",
     "cross-env": "7.0.3",
     "envsafe": "2.0.3",
     "joi": "17.3.0",
