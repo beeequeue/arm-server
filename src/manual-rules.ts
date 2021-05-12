@@ -6,6 +6,12 @@ const rules = {
   'anidb:14111': 'anilist:101921',
   // Shield Hero
   'anidb:13246': 'anilist:99263',
+  // Vivy #385
+  'anidb:15988': 'myanimelist:46095',
+  // Osananajimi #386
+  'anidb:15756': 'myanimelist:43007',
+  // Iruma-kun S2 #387
+  'anidb:15428': 'myanimelist:41402',
 }
 
 export const updateBasedOnManualRules = async () => {
