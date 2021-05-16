@@ -53,16 +53,14 @@ export const createHandler =
     await Sentry.flush(1000)
 
     if (!isBoom(response)) {
-      response.statusCode ??= 200
       const body = {
         ...response,
-        ok: true,
       }
 
       Logger.debug(
         `${req.method as string} ${name} ${res.statusCode}\n${JSON.stringify(body, null, 2)}`,
       )
-      res.status(response.statusCode).json(body)
+      res.json(body)
     } else {
       const { payload, statusCode, headers } = response.output
       const body = { ...payload, ok: false }

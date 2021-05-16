@@ -16,8 +16,6 @@
     ]
   },
   "scripts": {
-    "dev": "dev",
-    "build": "build",
     "lint": "eslint api",
     "postinstall": "simple-git-hooks",
     "typecheck": "tsc --noEmit --project tsconfig.json"
