@@ -1,10 +1,6 @@
 import Joi from "joi"
 
-import { idSchema, Source, sourceArray } from "./_common"
-
-type BodyItem = {
-  [key in Source]?: number
-}
+import { idSchema, sourceArray } from "./_common"
 
 const bodyItemSchema = Joi.object(
   sourceArray.reduce(
@@ -17,8 +13,6 @@ const bodyItemSchema = Joi.object(
 )
   .min(1)
   .required()
-
-export type BodyInput = BodyItem | BodyItem[]
 
 const arraySchema = Joi.array().min(1).max(100).items(bodyItemSchema).required()
 

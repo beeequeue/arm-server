@@ -4,10 +4,17 @@ import { captureException } from "@sentry/node"
 
 import { Logger } from "./_logger"
 import { updateBasedOnManualRules } from "./_manual-rules"
-import { Redis } from "./_redis"
-import { OfflineDatabaseData, OfflineDatabaseEntry, Relation } from "./_types"
-import { BodyInput } from "./handlers/_json-body"
-import { QueryParamInput } from "./handlers/_query-params"
+import { Supabase } from "./_supabase"
+import {
+  BodyItem,
+  OfflineDatabaseData,
+  OfflineDatabaseEntry,
+  QueryParamInput,
+  Relation,
+  Source,
+} from "./_types"
+
+const isDefined = <T>(obj: T | null | undefined): obj is T => obj != null
 
 const chunk = <T>(arr: T[], size: number) =>
   arr.reduce((all, one, i) => {
@@ -16,17 +23,15 @@ const chunk = <T>(arr: T[], size: number) =>
     return all
   }, [] as T[][])
 
-export class ARMData {
-  #regexes = {
+export class ArmData {
+  private static regexes = {
     anilist: /anilist.co\/anime\/(\d+)$/,
     anidb: /anidb.net\/a(?:nime\/)?(\d+)$/,
     mal: /myanimelist.net\/anime\/(\d+)$/,
     kitsu: /kitsu.io\/anime\/(.+)$/,
   }
 
-  private getMapKey = (source: keyof Relation, id: number) => `${source}:${id}` as const
-
-  private formatEntry = (entry: OfflineDatabaseEntry): Relation => {
+  private static formatEntry = (entry: OfflineDatabaseEntry): Relation | null => {
     const relation: Relation = {
       anilist: null,
       anidb: null,
@@ -35,7 +40,7 @@ export class ARMData {
     }
 
     entry.sources.forEach((src) => {
-      const anilistMatch = this.#regexes.anilist.exec(src)
+      const anilistMatch = ArmData.regexes.anilist.exec(src)
       if (anilistMatch) {
         const id = Number(anilistMatch[1])
 
@@ -44,7 +49,7 @@ export class ARMData {
         relation.anilist = id
       }
 
-      const anidbMatch = this.#regexes.anidb.exec(src)
+      const anidbMatch = ArmData.regexes.anidb.exec(src)
       if (anidbMatch) {
         const id = Number(anidbMatch[1])
 
@@ -53,7 +58,7 @@ export class ARMData {
         relation.anidb = id
       }
 
-      const malMatch = this.#regexes.mal.exec(src)
+      const malMatch = ArmData.regexes.mal.exec(src)
       if (malMatch) {
         const id = Number(malMatch[1])
 
@@ -62,7 +67,7 @@ export class ARMData {
         relation.myanimelist = id
       }
 
-      const kitsuMatch = this.#regexes.kitsu.exec(src)
+      const kitsuMatch = ArmData.regexes.kitsu.exec(src)
       if (kitsuMatch) {
         const id = Number(kitsuMatch[1])
 
@@ -72,27 +77,30 @@ export class ARMData {
       }
     })
 
+    if (Object.values(relation).every((v) => !v)) {
+      return null
+    }
+
     return relation
   }
 
-  private pushToRedis = async (relations: Relation[]) => {
-    const redisEntries = relations
-      .map((relation) => {
-        const relationStr = JSON.stringify(relation)
-        const entries = Object.entries(relation) as [keyof Relation, number][]
+  private static pushToSupabase = async (relations: Relation[]) => {
+    const chunks = chunk(relations, 5_000)
+    Logger.debug(`Pushing ${relations.length} relations, split into ${chunks.length} chunks...`)
 
-        return entries.map(([source, id]) => [this.getMapKey(source, id), relationStr] as const)
-      })
-      .flat()
-
-    const promises = chunk(redisEntries, 10_000).map((chunkedEntries) =>
-      Redis.mset(new Map(chunkedEntries)),
+    const promises = chunks.map((chunkedRelations) =>
+      Supabase.from<Relation>("relations").upsert(chunkedRelations),
     )
 
-    await Promise.all(promises)
+    const results = await Promise.all(promises)
+    const errors = results.filter(({ error }) => error != null)
+
+    if (errors.length > 0) {
+      Logger.error(errors)
+    }
   }
 
-  private fetchDatabase = async (): Promise<OfflineDatabaseEntry[] | null> => {
+  private static fetchDatabase = async (): Promise<OfflineDatabaseEntry[] | null> => {
     const response = await fetch(
       "https://raw.githubusercontent.com/manami-project/anime-offline-database/master/anime-offline-database.json",
     ).catch((err: Error) => err)
@@ -113,9 +121,9 @@ export class ARMData {
     return ((await response.json()) as OfflineDatabaseData).data
   }
 
-  public updateDatabase = async () => {
+  public static updateDatabase = async () => {
     Logger.info("Fetching updated Database...")
-    const data = await this.fetchDatabase()
+    const data = await ArmData.fetchDatabase()
     Logger.info("Fetched updated Database.")
 
     if (data == null) {
@@ -124,25 +132,58 @@ export class ARMData {
     }
 
     Logger.info("Formatting data...")
-    const entries = data.map(this.formatEntry)
+    const entries = data.map(ArmData.formatEntry).filter(isDefined)
     Logger.info("Formatted data.")
 
     Logger.info("Executing manual rules...")
     const fixedEntries = updateBasedOnManualRules(entries)
 
-    Logger.info("Creating entry map...")
-    await this.pushToRedis(fixedEntries)
+    Logger.info("Uploading to Supabase...")
+    await ArmData.pushToSupabase(fixedEntries)
 
     Logger.info("Done.")
   }
 
-  public getRelation = async (input: QueryParamInput) => {
-    if (false) {
-      await this.updateDatabase()
+  public static getRelation = async (input: QueryParamInput) => {
+    const { data, error } = await Supabase.from<Relation>("relations")
+      .select(Object.values(Source).join(","))
+      .eq(input.source, input.id)
+      .limit(1)
+
+    if (error) {
+      Logger.error(error)
     }
 
-    const data = await Redis.get(this.getMapKey(input.source, input.id))
+    return data?.[0] ?? null
+  }
 
-    return data != null ? JSON.parse(data) : null
+  public static getRelations = async (input: BodyItem[]) => {
+    const filter = input
+      .map((i) => {
+        const entries = (Object.entries(i) as [Source, number | undefined][]).filter(
+          ([, id]) => id != null,
+        )
+
+        return entries.map(([source, id]) => `${source}.eq.${id!.toString()}`)
+      })
+      .flat()
+      .join(",")
+
+    Logger.debug(filter)
+    const { data, error } = await Supabase.from<Relation>("relations")
+      .select(Object.values(Source).join(","))
+      .or(filter)
+
+    if (error) {
+      Logger.error(error)
+    }
+
+    if (data == null) return []
+
+    return input.map((item) => {
+      const realItem = Object.entries(item)[0] as [Source, number]
+
+      return data.find((relation) => relation[realItem[0]] === realItem[1]) ?? null
+    })
   }
 }

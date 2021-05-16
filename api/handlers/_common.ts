@@ -1,11 +1,6 @@
 import Joi from "joi"
 
-export enum Source {
-  AniList = "anilist",
-  AniDB = "anidb",
-  MAL = "myanimelist",
-  Kitsu = "kitsu",
-}
+import { Source } from "../_types"
 
 export const sourceArray = Object.values(Source)
 

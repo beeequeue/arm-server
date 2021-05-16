@@ -13,9 +13,24 @@ export type OfflineDatabaseData = {
   data: OfflineDatabaseEntry[]
 }
 
-export type Relation = {
-  anilist: number | null
-  anidb: number | null
-  myanimelist: number | null
-  kitsu: number | null
+export enum Source {
+  AniList = "anilist",
+  AniDB = "anidb",
+  MAL = "myanimelist",
+  Kitsu = "kitsu",
 }
+
+export type Relation = {
+  [key in Source]: number | null
+}
+
+export type QueryParamInput = {
+  source: Source
+  id: number
+}
+
+export type BodyItem = {
+  [key in Source]?: number
+}
+
+export type BodyInput = BodyItem | BodyItem[]

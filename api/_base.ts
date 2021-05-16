@@ -8,7 +8,7 @@ import "@sentry/tracing"
 
 type Handler = (request: VercelRequest, response: VercelResponse) => Promise<void> | void
 type CustomResponse = Record<string, unknown> & { message?: string; statusCode?: number }
-type CustomHandlerResponse = undefined | CustomResponse | Boom<null>
+type CustomHandlerResponse = CustomResponse | Boom<null> | null | undefined
 export type CustomHandler = (
   request: VercelRequest,
   response: Pick<VercelResponse, "setHeader">,
@@ -28,7 +28,7 @@ Sentry.setTag("app", "api")
 export const createHandler =
   (name: string, handler: CustomHandler): Handler =>
   async (req, res) => {
-    let response: NonNullable<CustomHandlerResponse>
+    let result: CustomHandlerResponse
 
     const trx = Sentry.startTransaction({
       name,
@@ -36,9 +36,9 @@ export const createHandler =
     })
 
     try {
-      response = (await handler(req, res)) ?? {}
+      result = (await handler(req, res)) ?? null
     } catch (error) {
-      response = internal(error.message)
+      result = internal(error.message)
 
       Sentry.setContext("response", {
         status: res.statusCode,
@@ -52,17 +52,15 @@ export const createHandler =
 
     await Sentry.flush(1000)
 
-    if (!isBoom(response)) {
-      const body = {
-        ...response,
-      }
+    if (!isBoom(result)) {
+      const body = result
 
       Logger.debug(
         `${req.method as string} ${name} ${res.statusCode}\n${JSON.stringify(body, null, 2)}`,
       )
       res.json(body)
     } else {
-      const { payload, statusCode, headers } = response.output
+      const { payload, statusCode, headers } = result.output
       const body = { ...payload, ok: false }
 
       for (const [key, value] of Object.entries(headers)) {

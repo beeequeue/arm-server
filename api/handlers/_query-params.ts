@@ -1,11 +1,6 @@
 import Joi from "joi"
 
-import { idSchema, Source, sourceArray } from "./_common"
-
-export type QueryParamInput = {
-  source: Source
-  id: number
-}
+import { idSchema, sourceArray } from "./_common"
 
 export const querySchema = Joi.object({
   source: Joi.string()
