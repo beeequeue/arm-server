@@ -1,5 +1,6 @@
 import { captureMessage } from "@sentry/node"
 
+import { Logger } from "./_logger"
 import { Relation } from "./_types"
 
 const rules = {
@@ -30,17 +31,33 @@ export const updateBasedOnManualRules = (relations: Relation[]) => {
 
     const fromIndex = relations.findIndex((relation) => relation[fromSource] === fromId)
     if (fromIndex < 0) {
-      captureMessage(`Could not find rule source for ${from} -> ${to}!`)
+      const msg = `Could not find rule source for "${from} -> ${to}"!`
+      Logger.warn(msg)
+      captureMessage(msg)
+
+      return
+    }
+
+    if (relations[fromIndex][toSource] != null) {
+      const msg = `Manual rule "${from} -> ${to}" is redundant!`
+      Logger.warn(msg)
+      captureMessage(msg)
+
+      return
     }
 
     const toIndex = relations.findIndex((relation) => relation[toSource] === toId)
+    const toRelation = relations[toIndex]
 
     // Remove the old one from the new array
     newRelations.splice(toIndex, 1)
     // Update the correct entry with the new data
-    newRelations[fromIndex] = Object.assign(newRelations[fromIndex], relations[toIndex])
-
-    console.log(relations[fromIndex], newRelations[fromIndex])
+    newRelations[fromIndex] = {
+      anilist: toRelation.anilist ?? newRelations[fromIndex].anilist,
+      anidb: toRelation.anidb ?? newRelations[fromIndex].anidb,
+      kitsu: toRelation.kitsu ?? newRelations[fromIndex].kitsu,
+      myanimelist: toRelation.myanimelist ?? newRelations[fromIndex].myanimelist,
+    }
   })
 
   return newRelations
