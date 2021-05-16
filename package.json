@@ -22,9 +22,20 @@
     "postinstall": "simple-git-hooks",
     "typecheck": "tsc --noEmit --project tsconfig.json"
   },
+  "dependencies": {
+    "@hapi/boom": "9.1.2",
+    "@sentry/node": "6.3.6",
+    "@sentry/tracing": "6.3.6",
+    "@vercel/node": "1.10.0",
+    "node-fetch": "3.0.0-beta.9",
+    "pino": "6.11.3",
+    "pino-pretty": "4.8.0"
+  },
   "devDependencies": {
     "@beequeue/eslint-plugin": "0.1.3",
     "@tsconfig/node16": "1.0.1",
+    "@types/pino": "6.3.8",
+    "@types/pino-pretty": "4.7.0",
     "dotenv": "9.0.2",
     "eslint": "7.26.0",
     "lint-staged": "11.0.0",
