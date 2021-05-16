@@ -6,6 +6,8 @@ import { Logger } from "./_logger"
 import { updateBasedOnManualRules } from "./_manual-rules"
 import { Redis } from "./_redis"
 import { OfflineDatabaseData, OfflineDatabaseEntry, Relation } from "./_types"
+import { BodyInput } from "./handlers/_json-body"
+import { QueryParamInput } from "./handlers/_query-params"
 
 const chunk = <T>(arr: T[], size: number) =>
   arr.reduce((all, one, i) => {
@@ -134,12 +136,12 @@ export class ARMData {
     Logger.info("Done.")
   }
 
-  public getRelation = async (source: keyof Relation, id: number) => {
+  public getRelation = async (input: QueryParamInput) => {
     if (false) {
       await this.updateDatabase()
     }
 
-    const data = await Redis.get(this.getMapKey(source, id))
+    const data = await Redis.get(this.getMapKey(input.source, input.id))
 
     return data != null ? JSON.parse(data) : null
   }
