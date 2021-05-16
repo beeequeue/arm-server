@@ -4,14 +4,17 @@ import { captureException } from "@sentry/node"
 
 import { Logger } from "./_logger"
 import { updateBasedOnManualRules } from "./_manual-rules"
+import { Redis } from "./_redis"
 import { OfflineDatabaseData, OfflineDatabaseEntry, Relation } from "./_types"
 
-type RelationMap = Map<`${keyof Relation}:${number}`, Relation>
+const chunk = <T>(arr: T[], size: number) =>
+  arr.reduce((all, one, i) => {
+    const ch = Math.floor(i / size)
+    all[ch] = [...(all[ch] ?? []), one]
+    return all
+  }, [] as T[][])
 
 export class ARMData {
-  #entries: Relation[] = []
-  #map: RelationMap = new Map()
-
   #regexes = {
     anilist: /anilist.co\/anime\/(\d+)$/,
     anidb: /anidb.net\/a(?:nime\/)?(\d+)$/,
@@ -70,18 +73,21 @@ export class ARMData {
     return relation
   }
 
-  private createEntryMap = (): RelationMap => {
-    const newMap: RelationMap = new Map()
+  private pushToRedis = async (relations: Relation[]) => {
+    const redisEntries = relations
+      .map((relation) => {
+        const relationStr = JSON.stringify(relation)
+        const entries = Object.entries(relation) as [keyof Relation, number][]
 
-    this.#entries.forEach((relation) => {
-      const entries = Object.entries(relation) as [keyof Relation, number][]
-
-      entries.forEach(([source, id]) => {
-        newMap.set(this.getMapKey(source, id), relation)
+        return entries.map(([source, id]) => [this.getMapKey(source, id), relationStr] as const)
       })
-    })
+      .flat()
 
-    return newMap
+    const promises = chunk(redisEntries, 10_000).map((chunkedEntries) =>
+      Redis.mset(new Map(chunkedEntries)),
+    )
+
+    await Promise.all(promises)
   }
 
   private fetchDatabase = async (): Promise<OfflineDatabaseEntry[] | null> => {
@@ -116,23 +122,25 @@ export class ARMData {
     }
 
     Logger.info("Formatting data...")
-    this.#entries = data.map(this.formatEntry)
+    const entries = data.map(this.formatEntry)
     Logger.info("Formatted data.")
 
     Logger.info("Executing manual rules...")
-    this.#entries = updateBasedOnManualRules(this.#entries)
+    const fixedEntries = updateBasedOnManualRules(entries)
 
     Logger.info("Creating entry map...")
-    this.#map = this.createEntryMap()
+    await this.pushToRedis(fixedEntries)
 
     Logger.info("Done.")
   }
 
   public getRelation = async (source: keyof Relation, id: number) => {
-    if (this.#entries.length < 1) {
+    if (false) {
       await this.updateDatabase()
     }
 
-    return this.#map.get(this.getMapKey(source, id)) ?? null
+    const data = await Redis.get(this.getMapKey(source, id))
+
+    return data != null ? JSON.parse(data) : null
   }
 }
