@@ -37,7 +37,14 @@ build/Release
 
 # Dependency directories
 node_modules/
-jspm_packages/
+
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
 
 # Optional npm cache directory
 .npm
