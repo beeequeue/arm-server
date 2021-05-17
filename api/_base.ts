@@ -1,3 +1,5 @@
+import type { JsonValue } from "type-fest"
+
 import { Boom, internal, isBoom } from "@hapi/boom"
 import * as Sentry from "@sentry/node"
 import type { VercelRequest, VercelResponse } from "@vercel/node"
@@ -7,12 +9,11 @@ import { Logger } from "./_logger"
 import "@sentry/tracing"
 
 type Handler = (request: VercelRequest, response: VercelResponse) => Promise<void> | void
-type CustomResponse = Record<string, unknown> & { message?: string; statusCode?: number }
-type CustomHandlerResponse = CustomResponse | Boom<null> | null | undefined
-export type CustomHandler = (
+type CustomHandlerResponse<Body extends JsonValue = JsonValue> = Body | Boom<null> | undefined
+export type CustomHandler<Body extends JsonValue = JsonValue> = (
   request: VercelRequest,
   response: Pick<VercelResponse, "setHeader">,
-) => Promise<CustomHandlerResponse> | CustomHandlerResponse
+) => Promise<CustomHandlerResponse<Body>> | CustomHandlerResponse<Body>
 
 Sentry.init({
   enabled: process.env.VERCEL_ENV !== "development" && !!process.env.SENTRY_DSN,
@@ -53,12 +54,12 @@ export const createHandler =
     await Sentry.flush(1000)
 
     if (!isBoom(result)) {
-      const body = result
+      const body = result ?? null
 
+      res.json(body)
       Logger.debug(
         `${req.method as string} ${name} ${res.statusCode}\n${JSON.stringify(body, null, 2)}`,
       )
-      res.json(body)
     } else {
       const { payload, statusCode, headers } = result.output
       const body = { ...payload, ok: false }
@@ -67,10 +68,10 @@ export const createHandler =
         res.setHeader(key, value!)
       }
 
+      res.status(statusCode).json(body)
       Logger.debug(
         `${req.method as string} ${name} ${res.statusCode}\n${JSON.stringify(body, null, 2)}`,
       )
-      res.status(statusCode).json(body)
     }
   }
 

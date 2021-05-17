@@ -42,6 +42,7 @@
     "lint-staged": "11.0.0",
     "prettier": "2.3.0",
     "simple-git-hooks": "2.4.1",
+    "type-fest": "1.1.1",
     "typescript": "4.2.4"
   }
 }
