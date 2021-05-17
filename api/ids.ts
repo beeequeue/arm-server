@@ -19,7 +19,7 @@ const isEmpty = <T extends Record<string, unknown> | Record<string, unknown>[]>(
 const isBodyInput = (_input: QueryParamInput | BodyInput, isBody: boolean): _input is BodyInput =>
   isBody
 
-export default createHandler("/ids", async (request) => {
+export default createHandler("/ids", async (request, response) => {
   const isBodyQuery = isEmpty(request.query)
   const unvalidatedInput = isBodyQuery ? request.body : request.query
 
@@ -45,8 +45,10 @@ export default createHandler("/ids", async (request) => {
 
     const relations = await ArmData.getRelations(bodyInput)
 
+    response.setHeader("Cache-Control", "max-age=0, s-maxage=43200, stale-while-revalidate")
     return isArrayInput ? relations : relations[0] ?? null
   }
 
+  response.setHeader("Cache-Control", "max-age=0, s-maxage=43200, stale-while-revalidate")
   return ArmData.getRelation(input)
 })
