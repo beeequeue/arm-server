@@ -45,7 +45,7 @@ export default createHandler("/ids", async (request) => {
 
     const relations = await ArmData.getRelations(bodyInput)
 
-    return isArrayInput ? relations : relations[0] ?? null
+    return isArrayInput ? relations : relations?.[0] ?? null
   }
 
   return ArmData.getRelation(input)
