@@ -24,10 +24,11 @@
     "@hapi/boom": "9.1.2",
     "@sentry/node": "6.3.6",
     "@sentry/tracing": "6.3.6",
-    "@supabase/supabase-js": "1.11.13",
     "@vercel/node": "1.10.0",
     "joi": "17.4.0",
+    "knex": "0.95.6",
     "node-fetch": "3.0.0-beta.9",
+    "pg": "8.6.0",
     "pino": "6.11.3",
     "pino-pretty": "4.8.0"
   },

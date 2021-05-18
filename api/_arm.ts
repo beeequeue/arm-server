@@ -4,7 +4,7 @@ import { captureException } from "@sentry/node"
 
 import { Logger } from "./_logger"
 import { updateBasedOnManualRules } from "./_manual-rules"
-import { Supabase } from "./_supabase"
+import { Knex } from "./_pg"
 import {
   BodyItem,
   OfflineDatabaseData,
@@ -89,14 +89,18 @@ export class ArmData {
     Logger.debug(`Pushing ${relations.length} relations, split into ${chunks.length} chunks...`)
 
     const promises = chunks.map((chunkedRelations) =>
-      Supabase.from<Relation>("relations").upsert(chunkedRelations),
+      Knex.from("relations")
+        .insert(chunkedRelations)
+        .catch((err) => err),
     )
 
-    const results = await Promise.all(promises)
-    const errors = results.filter(({ error }) => error != null)
+    const results = await Promise.allSettled(promises)
+    const rejections = results.filter(
+      (result): result is PromiseRejectedResult => result.status === "rejected",
+    )
 
-    if (errors.length > 0) {
-      Logger.error(errors)
+    if (rejections.length > 0) {
+      Logger.error(rejections.map((rejection) => rejection.reason))
     }
   }
 
@@ -145,45 +149,42 @@ export class ArmData {
   }
 
   public static getRelation = async (input: QueryParamInput) => {
-    const { data, error } = await Supabase.from<Relation>("relations")
-      .select(Object.values(Source).join(","))
-      .eq(input.source, input.id)
+    const result: Relation[] | Error = await Knex.from("relations")
+      .select(Object.values(Source))
+      .where(input.source, input.id)
       .limit(1)
+      .catch((err: Error) => err)
 
-    if (error) {
-      Logger.error(error)
+    if (result instanceof Error) {
+      Logger.error(result)
+
+      return null
     }
 
-    return data?.[0] ?? null
+    return result?.[0] ?? null
   }
 
   public static getRelations = async (input: BodyItem[]) => {
-    const filter = input
-      .map((i) => {
-        const entries = (Object.entries(i) as [Source, number | undefined][]).filter(
-          ([, id]) => id != null,
-        )
-
-        return entries.map(([source, id]) => `${source}.eq.${id!.toString()}`)
+    const result: Relation[] | Error = await Knex("relations")
+      .where(function () {
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        input.forEach((item) => this.orWhere(item))
       })
-      .flat()
-      .join(",")
-
-    Logger.debug(filter)
-    const { data, error } = await Supabase.from<Relation>("relations")
       .select(Object.values(Source).join(","))
-      .or(filter)
+      .catch((err: Error) => err)
 
-    if (error) {
-      Logger.error(error)
+    if (result instanceof Error) {
+      Logger.error(result)
+
+      return null
     }
 
-    if (data == null) return []
+    if (result == null) return []
 
     return input.map((item) => {
       const realItem = Object.entries(item)[0] as [Source, number]
 
-      return data.find((relation) => relation[realItem[0]] === realItem[1]) ?? null
+      return result.find((relation) => relation[realItem[0]] === realItem[1]) ?? null
     })
   }
 }
