@@ -15,6 +15,7 @@ import {
 } from "./_types"
 
 if (process.env.NODE_ENV === "test") {
+  // @ts-ignore: Only used in tests
   afterAll(async () => {
     await Knex.destroy()
   })
