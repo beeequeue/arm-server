@@ -10,6 +10,14 @@ module.exports = {
     "plugin:@beequeue/typescript",
     "plugin:@beequeue/prettier",
   ],
+  overrides: [
+    {
+      files: ["tests/**/*.ts"],
+      parserOptions: {
+        project: "./tsconfig.tests.json",
+      },
+    },
+  ],
   rules: {
     "@typescript-eslint/no-non-null-assertion": "off",
   },

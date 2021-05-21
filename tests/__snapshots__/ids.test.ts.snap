@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`query params returns 200 with null if not found 1`] = `
+Object {
+  "request": Object {
+    "searchParams": URLSearchParams {
+      Symbol(query): Array [
+        "source",
+        "anilist",
+        "id",
+        "1338",
+      ],
+      Symbol(context): null,
+    },
+    "url": "http://localhost/api/ids?source=anilist&id=1338",
+  },
+  "response": Object {
+    "body": null,
+    "headers": Object {
+      "connection": "close",
+      "content-length": "4",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 200,
+  },
+}
+`;
+
+exports[`query params returns 200 with relation if found 1`] = `
+Object {
+  "request": Object {
+    "searchParams": URLSearchParams {
+      Symbol(query): Array [
+        "source",
+        "anilist",
+        "id",
+        "1337",
+      ],
+      Symbol(context): null,
+    },
+    "url": "http://localhost/api/ids?source=anilist&id=1337",
+  },
+  "response": Object {
+    "body": Object {
+      "anidb": null,
+      "anilist": 1337,
+      "kitsu": null,
+      "myanimelist": null,
+    },
+    "headers": Object {
+      "connection": "close",
+      "content-length": "61",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 200,
+  },
+}
+`;

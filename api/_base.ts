@@ -53,14 +53,9 @@ export const createHandler =
 
     await Sentry.flush(1000)
 
-    if (!isBoom(result)) {
-      const body = result ?? null
+    res.setHeader("Content-Type", "application/json")
 
-      res.json(body)
-      Logger.debug(
-        `${req.method as string} ${name} ${res.statusCode}\n${JSON.stringify(body, null, 2)}`,
-      )
-    } else {
+    if (isBoom(result)) {
       const { payload, statusCode, headers } = result.output
       const body = { ...payload, ok: false }
 
@@ -72,7 +67,16 @@ export const createHandler =
       Logger.debug(
         `${req.method as string} ${name} ${res.statusCode}\n${JSON.stringify(body, null, 2)}`,
       )
+
+      return
     }
+
+    const body = result ?? "null"
+
+    res.json(body)
+    Logger.debug(
+      `${req.method as string} ${name} ${res.statusCode}\n${JSON.stringify(body, null, 2)}`,
+    )
   }
 
 export const startTask = (name: string) => {

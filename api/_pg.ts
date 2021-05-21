@@ -1,5 +1,7 @@
 import KnexBuilder, { Knex as IKnex } from "knex"
 
+import { config } from "../knexfile"
+
 import { Relation } from "./_types"
 
 declare module "knex/types/tables" {
@@ -11,7 +13,5 @@ declare module "knex/types/tables" {
   }
 }
 
-export const Knex = KnexBuilder({
-  client: "pg",
-  connection: process.env.DATABASE_URL,
-})
+const env = (process.env.NODE_ENV as keyof typeof config) || "production"
+export const Knex = KnexBuilder(config[env])
