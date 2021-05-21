@@ -1,9 +1,323 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`input errors json [[Object]] 1`] = `
+Object {
+  "request": Object {
+    "json": Array [
+      Object {},
+    ],
+    "url": "http://localhost/api/ids",
+  },
+  "response": Object {
+    "body": Object {
+      "error": "Bad Request",
+      "message": "\\"value\\" does not match any of the allowed types",
+      "ok": false,
+      "statusCode": 400,
+    },
+    "headers": Object {
+      "connection": "close",
+      "content-length": "113",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 400,
+  },
+}
+`;
+
+exports[`input errors json [[Object]] 2`] = `
+Object {
+  "request": Object {
+    "json": Array [
+      Object {
+        "aniList": 1337,
+      },
+    ],
+    "url": "http://localhost/api/ids",
+  },
+  "response": Object {
+    "body": Object {
+      "error": "Bad Request",
+      "message": "\\"value\\" does not match any of the allowed types",
+      "ok": false,
+      "statusCode": 400,
+    },
+    "headers": Object {
+      "connection": "close",
+      "content-length": "113",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 400,
+  },
+}
+`;
+
+exports[`input errors json [[Object]] 3`] = `
+Object {
+  "request": Object {
+    "json": Array [
+      Object {
+        "anilist": -1,
+      },
+    ],
+    "url": "http://localhost/api/ids",
+  },
+  "response": Object {
+    "body": Object {
+      "error": "Bad Request",
+      "message": "\\"value\\" does not match any of the allowed types",
+      "ok": false,
+      "statusCode": 400,
+    },
+    "headers": Object {
+      "connection": "close",
+      "content-length": "113",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 400,
+  },
+}
+`;
+
+exports[`input errors json [] 1`] = `
+Object {
+  "request": Object {
+    "json": Array [],
+    "url": "http://localhost/api/ids",
+  },
+  "response": Object {
+    "body": Object {
+      "error": "Bad Request",
+      "message": "\\"value\\" does not match any of the allowed types",
+      "ok": false,
+      "statusCode": 400,
+    },
+    "headers": Object {
+      "connection": "close",
+      "content-length": "113",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 400,
+  },
+}
+`;
+
+exports[`input errors json {"aniList": 1337} 1`] = `
+Object {
+  "request": Object {
+    "json": Object {
+      "aniList": 1337,
+    },
+    "url": "http://localhost/api/ids",
+  },
+  "response": Object {
+    "body": Object {
+      "error": "Bad Request",
+      "message": "\\"value\\" must contain at least one of [anilist, anidb, myanimelist, kitsu]",
+      "ok": false,
+      "statusCode": 400,
+    },
+    "headers": Object {
+      "connection": "close",
+      "content-length": "139",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 400,
+  },
+}
+`;
+
+exports[`input errors json {"anilist": -1} 1`] = `
+Object {
+  "request": Object {
+    "json": Object {
+      "anilist": -1,
+    },
+    "url": "http://localhost/api/ids",
+  },
+  "response": Object {
+    "body": Object {
+      "error": "Bad Request",
+      "message": "\\"anilist\\" must be greater than or equal to 0",
+      "ok": false,
+      "statusCode": 400,
+    },
+    "headers": Object {
+      "connection": "close",
+      "content-length": "110",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 400,
+  },
+}
+`;
+
+exports[`input errors json {"anilist": 1.5} 1`] = `
+Object {
+  "request": Object {
+    "json": Object {
+      "anilist": 1.5,
+    },
+    "url": "http://localhost/api/ids",
+  },
+  "response": Object {
+    "body": Object {
+      "error": "Bad Request",
+      "message": "\\"anilist\\" must be an integer",
+      "ok": false,
+      "statusCode": 400,
+    },
+    "headers": Object {
+      "connection": "close",
+      "content-length": "94",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 400,
+  },
+}
+`;
+
+exports[`input errors json {} 1`] = `
+Object {
+  "request": Object {
+    "json": Object {},
+    "url": "http://localhost/api/ids",
+  },
+  "response": Object {
+    "body": Object {
+      "error": "Bad Request",
+      "message": "\\"value\\" must contain at least one of [anilist, anidb, myanimelist, kitsu]",
+      "ok": false,
+      "statusCode": 400,
+    },
+    "headers": Object {
+      "connection": "close",
+      "content-length": "139",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 400,
+  },
+}
+`;
+
+exports[`input errors searchParams {"id": -1, "source": "anilist"} 1`] = `
+Object {
+  "request": Object {
+    "searchParams": Object {
+      "id": -1,
+      "source": "anilist",
+    },
+    "url": "http://localhost/api/ids?source=anilist&id=-1",
+  },
+  "response": Object {
+    "body": Object {
+      "error": "Bad Request",
+      "message": "\\"id\\" must be greater than or equal to 0",
+      "ok": false,
+      "statusCode": 400,
+    },
+    "headers": Object {
+      "connection": "close",
+      "content-length": "105",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 400,
+  },
+}
+`;
+
+exports[`input errors searchParams {"id": 1337, "source": "aniList"} 1`] = `
+Object {
+  "request": Object {
+    "searchParams": Object {
+      "id": 1337,
+      "source": "aniList",
+    },
+    "url": "http://localhost/api/ids?source=aniList&id=1337",
+  },
+  "response": Object {
+    "body": Object {
+      "error": "Bad Request",
+      "message": "\\"source\\" must be one of [anilist, anidb, myanimelist, kitsu]",
+      "ok": false,
+      "statusCode": 400,
+    },
+    "headers": Object {
+      "connection": "close",
+      "content-length": "126",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 400,
+  },
+}
+`;
+
+exports[`input errors searchParams {"id": 1337} 1`] = `
+Object {
+  "request": Object {
+    "searchParams": Object {
+      "id": 1337,
+    },
+    "url": "http://localhost/api/ids?id=1337",
+  },
+  "response": Object {
+    "body": Object {
+      "error": "Bad Request",
+      "message": "\\"source\\" is required",
+      "ok": false,
+      "statusCode": 400,
+    },
+    "headers": Object {
+      "connection": "close",
+      "content-length": "86",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 400,
+  },
+}
+`;
+
+exports[`input errors searchParams {"source": "anilist"} 1`] = `
+Object {
+  "request": Object {
+    "searchParams": Object {
+      "source": "anilist",
+    },
+    "url": "http://localhost/api/ids?source=anilist",
+  },
+  "response": Object {
+    "body": Object {
+      "error": "Bad Request",
+      "message": "\\"id\\" is required",
+      "ok": false,
+      "statusCode": 400,
+    },
+    "headers": Object {
+      "connection": "close",
+      "content-length": "82",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 400,
+  },
+}
+`;
+
 exports[`json body multiple GET returns 200 with null if not found 1`] = `
 Object {
   "request": Object {
-    "body": Array [
+    "json": Array [
       Object {
         "anilist": 1338,
       },
@@ -37,7 +351,7 @@ Object {
 exports[`json body multiple GET returns 200 with relation if found 1`] = `
 Object {
   "request": Object {
-    "body": Array [
+    "json": Array [
       Object {
         "anilist": 1337,
       },
@@ -76,7 +390,7 @@ Object {
 exports[`json body multiple POST returns 200 with null if not found 1`] = `
 Object {
   "request": Object {
-    "body": Array [
+    "json": Array [
       Object {
         "anilist": 1338,
       },
@@ -110,7 +424,7 @@ Object {
 exports[`json body multiple POST returns 200 with relation if found 1`] = `
 Object {
   "request": Object {
-    "body": Array [
+    "json": Array [
       Object {
         "anilist": 1337,
       },
@@ -149,7 +463,7 @@ Object {
 exports[`json body single GET returns 200 with null if not found 1`] = `
 Object {
   "request": Object {
-    "body": Object {
+    "json": Object {
       "anilist": 1338,
     },
     "url": "http://localhost/api/ids",
@@ -170,7 +484,7 @@ Object {
 exports[`json body single GET returns 200 with relation if found 1`] = `
 Object {
   "request": Object {
-    "body": Object {
+    "json": Object {
       "anilist": 1337,
     },
     "url": "http://localhost/api/ids",
@@ -196,7 +510,7 @@ Object {
 exports[`json body single POST returns 200 with null if not found 1`] = `
 Object {
   "request": Object {
-    "body": Object {
+    "json": Object {
       "anilist": 1338,
     },
     "url": "http://localhost/api/ids",
@@ -217,7 +531,7 @@ Object {
 exports[`json body single POST returns 200 with relation if found 1`] = `
 Object {
   "request": Object {
-    "body": Object {
+    "json": Object {
       "anilist": 1337,
     },
     "url": "http://localhost/api/ids",

@@ -7,11 +7,7 @@ import { BodyInput, BodyItem, QueryParamInput } from "./_types"
 import { bodySchema } from "./handlers/_json-body"
 import { querySchema } from "./handlers/_query-params"
 
-const isEmpty = <T extends Record<string, unknown> | Record<string, unknown>[]>(obj: T) => {
-  if (Array.isArray(obj)) {
-    return obj.length < 1
-  }
-
+const isEmpty = <T extends Record<string, unknown>>(obj: T) => {
   return Object.keys(obj).length < 1
 }
 

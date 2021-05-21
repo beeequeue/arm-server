@@ -12,11 +12,11 @@ export default <Config.InitialOptions>{
 
   collectCoverage: true,
   coverageReporters: ["text", "text-summary"],
-  coveragePathIgnorePatterns: ["_sentry.ts"],
+  coveragePathIgnorePatterns: ["_sentry.ts", "tests/utils.ts"],
   coverageThreshold: {
     global: {
       statements: 90,
-      branches: 75,
+      branches: 70,
       functions: 80,
       lines: 90,
     },

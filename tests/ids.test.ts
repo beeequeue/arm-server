@@ -3,6 +3,7 @@ import { URLSearchParams } from "url"
 
 import HttpClient, { Got, Response } from "got"
 import listen from "test-listen"
+import type { JsonValue } from "type-fest"
 import { createServer } from "vercel-node-server"
 
 import { Relation, Source } from "../api/_types"
@@ -11,7 +12,7 @@ import IdFunction from "../api/ids"
 import { cleanUpDb, insertRelations } from "./utils"
 
 const createSnapshot = (
-  input: { body?: unknown; searchParams?: URLSearchParams },
+  input: { json?: unknown; searchParams?: URLSearchParams },
   { url, method, statusCode, headers: { date, ...headers }, body }: Response,
 ) => ({
   request: {
@@ -39,6 +40,7 @@ beforeAll(async () => {
     prefixUrl: baseUrl,
     responseType: "json",
     allowGetBody: true,
+    throwHttpErrors: false,
   })
 })
 
@@ -96,33 +98,33 @@ describe("json body", () => {
     methods.forEach((method) => {
       describe(method.toUpperCase(), () => {
         test("returns 200 with null if not found", async () => {
-          const body = {
+          const json = {
             [Source.AniList]: 1338,
           }
 
           const response = await client[method]("api/ids", {
-            json: body,
+            json,
             headers: {
               accept: "application/json",
             },
           })
 
-          expect(createSnapshot({ body }, response)).toMatchSnapshot()
+          expect(createSnapshot({ json }, response)).toMatchSnapshot()
         })
 
         test("returns 200 with relation if found", async () => {
-          const body = {
+          const json = {
             [Source.AniList]: 1337,
           }
 
           const response = await client[method]("api/ids", {
-            json: body,
+            json,
             headers: {
               accept: "application/json",
             },
           })
 
-          expect(createSnapshot({ body }, response)).toMatchSnapshot()
+          expect(createSnapshot({ json }, response)).toMatchSnapshot()
         })
       })
     })
@@ -136,7 +138,7 @@ describe("json body", () => {
     methods.forEach((method) => {
       describe(method.toUpperCase(), () => {
         test("returns 200 with null if not found", async () => {
-          const body = [
+          const json = [
             {
               [Source.AniList]: 1338,
             },
@@ -146,17 +148,17 @@ describe("json body", () => {
           ]
 
           const response = await client[method]("api/ids", {
-            json: body,
+            json,
             headers: {
               accept: "application/json",
             },
           })
 
-          expect(createSnapshot({ body }, response)).toMatchSnapshot()
+          expect(createSnapshot({ json }, response)).toMatchSnapshot()
         })
 
         test("returns 200 with relation if found", async () => {
-          const body = [
+          const json = [
             {
               [Source.AniList]: 1337,
             },
@@ -166,15 +168,46 @@ describe("json body", () => {
           ]
 
           const response = await client[method]("api/ids", {
-            json: body,
+            json,
             headers: {
               accept: "application/json",
             },
           })
 
-          expect(createSnapshot({ body }, response)).toMatchSnapshot()
+          expect(createSnapshot({ json }, response)).toMatchSnapshot()
         })
       })
     })
+  })
+})
+
+describe("input errors", () => {
+  const inputs: Array<["searchParams" | "json", JsonValue]> = [
+    ["searchParams", { source: "aniList", id: 1337 }],
+    ["searchParams", { source: "anilist", id: -1 }],
+    ["searchParams", { source: "anilist" }],
+    ["searchParams", { id: 1337 }],
+    ["json", {}],
+    ["json", { aniList: 1337 }],
+    ["json", { anilist: -1 }],
+    ["json", { anilist: 1.5 }],
+    ["json", []],
+    ["json", [{}]],
+    ["json", [{ aniList: 1337 }]],
+    ["json", [{ anilist: -1 }]],
+  ]
+
+  test.each(inputs)("%s %p", async (inputType, input) => {
+    const formattedInput = inputType === "searchParams" ? new URLSearchParams(input) : input
+
+    const response = await client("api/ids", {
+      [inputType]: formattedInput,
+      headers: {
+        accept: "application/json",
+      },
+    })
+
+    expect(createSnapshot({ [inputType]: input }, response)).toMatchSnapshot()
+    expect(response.statusCode).toBe(400)
   })
 })

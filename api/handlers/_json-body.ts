@@ -11,7 +11,9 @@ const bodyItemSchema = Joi.object(
     {},
   ),
 )
+  .or(...sourceArray)
   .min(1)
+  .max(4)
   .required()
 
 const arraySchema = Joi.array().min(1).max(100).items(bodyItemSchema).required()
