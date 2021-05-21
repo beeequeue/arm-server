@@ -38,7 +38,7 @@ export const createHandler =
 
     try {
       result = (await handler(req, res)) ?? null
-    } catch (error) {
+    } catch (error) /* istanbul ignore next */ {
       result = internal(error.message)
 
       Sentry.setContext("response", {
@@ -59,6 +59,7 @@ export const createHandler =
       const { payload, statusCode, headers } = result.output
       const body = { ...payload, ok: false }
 
+      /* istanbul ignore next */
       for (const [key, value] of Object.entries(headers)) {
         res.setHeader(key, value!)
       }
@@ -78,14 +79,3 @@ export const createHandler =
       `${req.method as string} ${name} ${res.statusCode}\n${JSON.stringify(body, null, 2)}`,
     )
   }
-
-export const startTask = (name: string) => {
-  const transaction = Sentry.getCurrentHub().getScope()?.getTransaction()
-
-  if (transaction == null) throw new Error("thefuck")
-
-  return transaction.startChild({
-    op: "task",
-    description: name,
-  })
-}

@@ -25,6 +25,7 @@ export default createHandler("/ids", async (request) => {
   })
 
   if (result.error) {
+    /* istanbul ignore next */
     if (!result.error.isJoi) {
       throw result.error
     }

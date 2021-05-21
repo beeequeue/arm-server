@@ -5,7 +5,9 @@ import { config } from "../knexfile"
 
 const knex = Knex(config.test)
 
-afterAll(() => knex.destroy())
+afterAll(async () => {
+  await knex.destroy()
+})
 
 export const cleanUpDb = async () => {
   return knex.delete().from("relations")

@@ -2,9 +2,9 @@ import fetch from "node-fetch"
 
 import { captureException } from "@sentry/node"
 
+import { Knex } from "./_knex"
 import { Logger } from "./_logger"
 import { updateBasedOnManualRules } from "./_manual-rules"
-import { Knex } from "./_pg"
 import {
   BodyItem,
   OfflineDatabaseData,
@@ -14,8 +14,15 @@ import {
   Source,
 } from "./_types"
 
+if (process.env.NODE_ENV === "test") {
+  afterAll(async () => {
+    await Knex.destroy()
+  })
+}
+
 const isDefined = <T>(obj: T | null | undefined): obj is T => obj != null
 
+/* istanbul ignore next */
 const chunk = <T>(arr: T[], size: number) =>
   arr.reduce((all, one, i) => {
     const ch = Math.floor(i / size)
@@ -31,6 +38,7 @@ export class ArmData {
     kitsu: /kitsu.io\/anime\/(.+)$/,
   }
 
+  /* istanbul ignore next */
   private static formatEntry = (entry: OfflineDatabaseEntry): Relation | null => {
     const relation: Relation = {
       anilist: null,
@@ -84,6 +92,7 @@ export class ArmData {
     return relation
   }
 
+  /* istanbul ignore next */
   private static pushToSupabase = async (relations: Relation[]) => {
     const chunks = chunk(relations, 5_000)
     Logger.debug(`Pushing ${relations.length} relations, split into ${chunks.length} chunks...`)
@@ -104,6 +113,7 @@ export class ArmData {
     }
   }
 
+  /* istanbul ignore next */
   private static fetchDatabase = async (): Promise<OfflineDatabaseEntry[] | null> => {
     const response = await fetch(
       "https://raw.githubusercontent.com/manami-project/anime-offline-database/master/anime-offline-database.json",
@@ -125,6 +135,7 @@ export class ArmData {
     return ((await response.json()) as OfflineDatabaseData).data
   }
 
+  /* istanbul ignore next */
   public static updateDatabase = async () => {
     Logger.info("Fetching updated Database...")
     const data = await ArmData.fetchDatabase()
@@ -155,6 +166,7 @@ export class ArmData {
       .limit(1)
       .catch((err: Error) => err)
 
+    /* istanbul ignore next */
     if (result instanceof Error) {
       Logger.error(result)
 
@@ -173,6 +185,7 @@ export class ArmData {
       .select(Object.values(Source))
       .catch((err: Error) => err)
 
+    /* istanbul ignore next */
     if (result instanceof Error) {
       Logger.error(result)
 

@@ -12,11 +12,18 @@ export default <Config.InitialOptions>{
 
   collectCoverage: true,
   coverageReporters: ["text", "text-summary"],
-  coveragePathIgnorePatterns: ["_sentry.ts", "tests/utils.ts"],
+  coveragePathIgnorePatterns: [
+    "knexfile.ts",
+    "tests/utils.ts",
+    "_sentry.ts",
+    "_manual-rules.ts",
+    "_knex.ts",
+    "_logger.ts",
+  ],
   coverageThreshold: {
     global: {
-      statements: 90,
-      branches: 70,
+      statements: 80,
+      branches: 65,
       functions: 80,
       lines: 90,
     },
