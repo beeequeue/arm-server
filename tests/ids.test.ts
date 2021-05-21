@@ -90,38 +90,90 @@ describe("query params", () => {
 })
 
 describe("json body", () => {
+  const methods = ["get", "post"] as const
+
   describe("single", () => {
-    const methods = ["get", "post"] as const
+    methods.forEach((method) => {
+      describe(method.toUpperCase(), () => {
+        test("returns 200 with null if not found", async () => {
+          const body = {
+            [Source.AniList]: 1338,
+          }
+
+          const response = await client[method]("api/ids", {
+            json: body,
+            headers: {
+              accept: "application/json",
+            },
+          })
+
+          expect(createSnapshot({ body }, response)).toMatchSnapshot()
+        })
+
+        test("returns 200 with relation if found", async () => {
+          const body = {
+            [Source.AniList]: 1337,
+          }
+
+          const response = await client[method]("api/ids", {
+            json: body,
+            headers: {
+              accept: "application/json",
+            },
+          })
+
+          expect(createSnapshot({ body }, response)).toMatchSnapshot()
+        })
+      })
+    })
+  })
+
+  describe("multiple", () => {
+    beforeEach(async () => {
+      await insertRelations([{ anidb: 42 }])
+    })
 
     methods.forEach((method) => {
-      test(`(${method}) returns 200 with null if not found`, async () => {
-        const body = {
-          [Source.AniList]: 1338,
-        }
+      describe(method.toUpperCase(), () => {
+        test("returns 200 with null if not found", async () => {
+          const body = [
+            {
+              [Source.AniList]: 1338,
+            },
+            {
+              [Source.AniDB]: 42,
+            },
+          ]
 
-        const response = await client[method]("api/ids", {
-          json: body,
-          headers: {
-            accept: "application/json",
-          },
+          const response = await client[method]("api/ids", {
+            json: body,
+            headers: {
+              accept: "application/json",
+            },
+          })
+
+          expect(createSnapshot({ body }, response)).toMatchSnapshot()
         })
 
-        expect(createSnapshot({ body }, response)).toMatchSnapshot()
-      })
+        test("returns 200 with relation if found", async () => {
+          const body = [
+            {
+              [Source.AniList]: 1337,
+            },
+            {
+              [Source.AniDB]: 42,
+            },
+          ]
 
-      test(`(${method}) returns 200 with relation if found`, async () => {
-        const body = {
-          [Source.AniList]: 1337,
-        }
+          const response = await client[method]("api/ids", {
+            json: body,
+            headers: {
+              accept: "application/json",
+            },
+          })
 
-        const response = await client[method]("api/ids", {
-          json: body,
-          headers: {
-            accept: "application/json",
-          },
+          expect(createSnapshot({ body }, response)).toMatchSnapshot()
         })
-
-        expect(createSnapshot({ body }, response)).toMatchSnapshot()
       })
     })
   })

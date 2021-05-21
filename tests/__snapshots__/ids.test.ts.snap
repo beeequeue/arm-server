@@ -1,6 +1,152 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`json body single (get) returns 200 with null if not found 1`] = `
+exports[`json body multiple GET returns 200 with null if not found 1`] = `
+Object {
+  "request": Object {
+    "body": Array [
+      Object {
+        "anilist": 1338,
+      },
+      Object {
+        "anidb": 42,
+      },
+    ],
+    "url": "http://localhost/api/ids",
+  },
+  "response": Object {
+    "body": Array [
+      null,
+      Object {
+        "anidb": 42,
+        "anilist": null,
+        "kitsu": null,
+        "myanimelist": null,
+      },
+    ],
+    "headers": Object {
+      "connection": "close",
+      "content-length": "66",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 200,
+  },
+}
+`;
+
+exports[`json body multiple GET returns 200 with relation if found 1`] = `
+Object {
+  "request": Object {
+    "body": Array [
+      Object {
+        "anilist": 1337,
+      },
+      Object {
+        "anidb": 42,
+      },
+    ],
+    "url": "http://localhost/api/ids",
+  },
+  "response": Object {
+    "body": Array [
+      Object {
+        "anidb": null,
+        "anilist": 1337,
+        "kitsu": null,
+        "myanimelist": null,
+      },
+      Object {
+        "anidb": 42,
+        "anilist": null,
+        "kitsu": null,
+        "myanimelist": null,
+      },
+    ],
+    "headers": Object {
+      "connection": "close",
+      "content-length": "123",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 200,
+  },
+}
+`;
+
+exports[`json body multiple POST returns 200 with null if not found 1`] = `
+Object {
+  "request": Object {
+    "body": Array [
+      Object {
+        "anilist": 1338,
+      },
+      Object {
+        "anidb": 42,
+      },
+    ],
+    "url": "http://localhost/api/ids",
+  },
+  "response": Object {
+    "body": Array [
+      null,
+      Object {
+        "anidb": 42,
+        "anilist": null,
+        "kitsu": null,
+        "myanimelist": null,
+      },
+    ],
+    "headers": Object {
+      "connection": "close",
+      "content-length": "66",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 200,
+  },
+}
+`;
+
+exports[`json body multiple POST returns 200 with relation if found 1`] = `
+Object {
+  "request": Object {
+    "body": Array [
+      Object {
+        "anilist": 1337,
+      },
+      Object {
+        "anidb": 42,
+      },
+    ],
+    "url": "http://localhost/api/ids",
+  },
+  "response": Object {
+    "body": Array [
+      Object {
+        "anidb": null,
+        "anilist": 1337,
+        "kitsu": null,
+        "myanimelist": null,
+      },
+      Object {
+        "anidb": 42,
+        "anilist": null,
+        "kitsu": null,
+        "myanimelist": null,
+      },
+    ],
+    "headers": Object {
+      "connection": "close",
+      "content-length": "123",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 200,
+  },
+}
+`;
+
+exports[`json body single GET returns 200 with null if not found 1`] = `
 Object {
   "request": Object {
     "body": Object {
@@ -21,7 +167,7 @@ Object {
 }
 `;
 
-exports[`json body single (get) returns 200 with relation if found 1`] = `
+exports[`json body single GET returns 200 with relation if found 1`] = `
 Object {
   "request": Object {
     "body": Object {
@@ -47,7 +193,7 @@ Object {
 }
 `;
 
-exports[`json body single (post) returns 200 with null if not found 1`] = `
+exports[`json body single POST returns 200 with null if not found 1`] = `
 Object {
   "request": Object {
     "body": Object {
@@ -68,7 +214,7 @@ Object {
 }
 `;
 
-exports[`json body single (post) returns 200 with relation if found 1`] = `
+exports[`json body single POST returns 200 with relation if found 1`] = `
 Object {
   "request": Object {
     "body": Object {
