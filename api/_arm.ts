@@ -170,7 +170,7 @@ export class ArmData {
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         input.forEach((item) => this.orWhere(item))
       })
-      .select(Object.values(Source).join(","))
+      .select(Object.values(Source))
       .catch((err: Error) => err)
 
     if (result instanceof Error) {

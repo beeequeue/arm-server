@@ -44,6 +44,8 @@ beforeAll(async () => {
 
 beforeEach(async () => {
   await cleanUpDb()
+
+  await insertRelations([{ anilist: 1337 }])
 })
 
 afterAll(
@@ -55,8 +57,6 @@ afterAll(
 
 describe("query params", () => {
   test("returns 200 with null if not found", async () => {
-    await insertRelations([{ anilist: 1337 }])
-
     const searchParams = new URLSearchParams({
       source: Source.AniList,
       id: (1338).toString(),
@@ -76,8 +76,6 @@ describe("query params", () => {
   })
 
   test("returns 200 with relation if found", async () => {
-    await insertRelations([{ anilist: 1337 }])
-
     const searchParams = new URLSearchParams({
       source: Source.AniList,
       id: (1337).toString(),
@@ -88,5 +86,43 @@ describe("query params", () => {
     })
 
     expect(createSnapshot({ searchParams }, response)).toMatchSnapshot()
+  })
+})
+
+describe("json body", () => {
+  describe("single", () => {
+    const methods = ["get", "post"] as const
+
+    methods.forEach((method) => {
+      test(`(${method}) returns 200 with null if not found`, async () => {
+        const body = {
+          [Source.AniList]: 1338,
+        }
+
+        const response = await client[method]("api/ids", {
+          json: body,
+          headers: {
+            accept: "application/json",
+          },
+        })
+
+        expect(createSnapshot({ body }, response)).toMatchSnapshot()
+      })
+
+      test(`(${method}) returns 200 with relation if found`, async () => {
+        const body = {
+          [Source.AniList]: 1337,
+        }
+
+        const response = await client[method]("api/ids", {
+          json: body,
+          headers: {
+            accept: "application/json",
+          },
+        })
+
+        expect(createSnapshot({ body }, response)).toMatchSnapshot()
+      })
+    })
   })
 })

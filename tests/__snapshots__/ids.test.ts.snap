@@ -1,5 +1,99 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`json body single (get) returns 200 with null if not found 1`] = `
+Object {
+  "request": Object {
+    "body": Object {
+      "anilist": 1338,
+    },
+    "url": "http://localhost/api/ids",
+  },
+  "response": Object {
+    "body": null,
+    "headers": Object {
+      "connection": "close",
+      "content-length": "4",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 200,
+  },
+}
+`;
+
+exports[`json body single (get) returns 200 with relation if found 1`] = `
+Object {
+  "request": Object {
+    "body": Object {
+      "anilist": 1337,
+    },
+    "url": "http://localhost/api/ids",
+  },
+  "response": Object {
+    "body": Object {
+      "anidb": null,
+      "anilist": 1337,
+      "kitsu": null,
+      "myanimelist": null,
+    },
+    "headers": Object {
+      "connection": "close",
+      "content-length": "61",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 200,
+  },
+}
+`;
+
+exports[`json body single (post) returns 200 with null if not found 1`] = `
+Object {
+  "request": Object {
+    "body": Object {
+      "anilist": 1338,
+    },
+    "url": "http://localhost/api/ids",
+  },
+  "response": Object {
+    "body": null,
+    "headers": Object {
+      "connection": "close",
+      "content-length": "4",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 200,
+  },
+}
+`;
+
+exports[`json body single (post) returns 200 with relation if found 1`] = `
+Object {
+  "request": Object {
+    "body": Object {
+      "anilist": 1337,
+    },
+    "url": "http://localhost/api/ids",
+  },
+  "response": Object {
+    "body": Object {
+      "anidb": null,
+      "anilist": 1337,
+      "kitsu": null,
+      "myanimelist": null,
+    },
+    "headers": Object {
+      "connection": "close",
+      "content-length": "61",
+      "content-type": "application/json",
+    },
+    "method": null,
+    "statusCode": 200,
+  },
+}
+`;
+
 exports[`query params returns 200 with null if not found 1`] = `
 Object {
   "request": Object {
