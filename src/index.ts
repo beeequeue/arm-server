@@ -1,39 +1,20 @@
-import { spawn } from 'child_process'
-import { platform } from 'os'
-import { resolve } from 'path'
-
 import { captureException } from '@sentry/node'
 
 import { Logger } from '@/lib/logger'
 
 import { App } from './app'
+import { updateRelations } from './update'
 
 const { NODE_ENV } = process.env
 const port = process.env.PORT ?? 3000
 
-const runUpdateScript = () => {
-  const tsNode = resolve(
-    __dirname,
-    '..',
-    'node_modules',
-    '.bin',
-    platform() === 'win32' ? 'ts-node.cmd' : 'ts-node',
-  )
-  const script = resolve(__dirname, '..', 'bin', 'update.ts')
-
-  const { stdout, stderr } = spawn(tsNode, ['-T', script])
-
-  stdout.on('data', (data) => Logger.info(data.toString().trim()))
-  stderr.on('data', (data) => {
-    captureException(data.toString().trim())
-    Logger.error(data.toString().trim())
-  })
-}
+const runUpdateScript = () => updateRelations().catch(captureException)
 
 const listen = () => {
   if (NODE_ENV === 'production') {
-    runUpdateScript()
+    void runUpdateScript()
 
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     setInterval(runUpdateScript, 1000 * 60 * 60 * 24)
   }
 
