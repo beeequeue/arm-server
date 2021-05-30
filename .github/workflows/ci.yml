@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   typecheck:
@@ -14,13 +14,23 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v1
 
-      - name: Setup Node
-        uses: actions/setup-node@v1
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-cache-dir.outputs.dir }}
+          key: yarn-c1-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            yarn-c1-
+
+      - uses: actions/setup-node@v2
         with:
           node-version: 14
 
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: yarn install --immutable
 
       - name: Typecheck
         run: yarn tsc
@@ -32,13 +42,23 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v1
 
-      - name: Setup Node
-        uses: actions/setup-node@v1
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-cache-dir.outputs.dir }}
+          key: yarn-c1-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            yarn-c1-
+
+      - uses: actions/setup-node@v2
         with:
           node-version: 14
 
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: yarn install --immutable
 
       - name: Lint
         run: yarn lint
@@ -50,13 +70,23 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v1
 
-      - name: Setup Node
-        uses: actions/setup-node@v1
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-cache-dir.outputs.dir }}
+          key: yarn-c1-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            yarn-c1-
+
+      - uses: actions/setup-node@v2
         with:
           node-version: 14
 
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: yarn install --immutable
 
       - name: Test
         run: yarn test
