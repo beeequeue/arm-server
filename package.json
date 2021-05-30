@@ -5,7 +5,7 @@
   "private": true,
   "license": "AGPL-3.0-only",
   "engines": {
-    "node": "^14.10"
+    "node": ">=14.17"
   },
   "husky": {
     "hooks": {
@@ -24,51 +24,52 @@
     "migrate": "knex migrate:latest --knexfile knexfile.ts",
     "migrate:create": "knex migrate:make --knexfile knexfile.ts -x ts",
     "prestart": "yarn run migrate",
-    "pretest": "cross-env NODE_ENV=test yarn run migrate",
     "start": "ts-node -r tsconfig-paths/register src/index.ts",
-    "test": "cross-env NODE_ENV=test yarn jest"
+    "test": "cross-env NODE_ENV=test yarn run migrate && yarn jest"
   },
   "resolutions": {
     "set-value": "2.0.1",
     "@types/node": "14.14.16"
   },
   "dependencies": {
-    "@sentry/node": "5.29.2",
-    "@sentry/tracing": "5.29.2",
+    "@sentry/node": "6.3.6",
+    "@sentry/tracing": "6.4.1",
     "cross-env": "7.0.3",
     "envsafe": "2.0.3",
-    "joi": "17.3.0",
+    "joi": "17.4.0",
     "knex": "0.21.15",
-    "koa": "2.13.0",
+    "koa": "2.13.1",
     "koa-bodyparser": "4.3.0",
     "koa-connect": "2.1.0",
     "koa-pino-logger": "3.0.0",
     "koa-router": "10.0.0",
-    "pino": "6.11.2",
-    "pino-pretty": "4.7.1",
+    "pino": "6.11.3",
+    "pino-pretty": "4.8.0",
     "sqlite3": "5.0.2",
     "superagent": "6.1.0",
     "ts-node": "9.1.1",
-    "typescript": "4.1.3"
+    "typescript": "4.2.4"
   },
   "devDependencies": {
     "@beequeue/eslint-plugin": "0.1.3",
-    "@types/koa": "2.11.6",
+    "@tsconfig/node14": "1.0.0",
+    "@types/jest": "26.0.23",
+    "@types/koa": "2.13.1",
     "@types/koa-bodyparser": "4.3.0",
     "@types/koa-pino-logger": "3.0.0",
-    "@types/koa-router": "7.4.1",
-    "@types/node": "14.14.16",
-    "@types/superagent": "4.1.10",
-    "@types/supertest": "2.0.10",
-    "dotenv": "8.2.0",
-    "eslint": "7.22.0",
-    "husky": "4.3.6",
+    "@types/koa-router": "7.4.2",
+    "@types/node": "14.14.45",
+    "@types/superagent": "4.1.11",
+    "@types/supertest": "2.0.11",
+    "dotenv": "9.0.2",
+    "eslint": "7.26.0",
+    "husky": "4.3.8",
     "jest": "26.6.3",
-    "lint-staged": "10.5.3",
+    "lint-staged": "11.0.0",
     "prettier": "2.2.1",
-    "supertest": "6.0.1",
-    "ts-jest": "26.4.4",
-    "ts-node-dev": "1.1.1",
+    "supertest": "6.1.3",
+    "ts-jest": "26.5.6",
+    "ts-node-dev": "1.1.6",
     "tsconfig-paths": "3.9.0"
   }
 }
