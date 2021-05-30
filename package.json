@@ -32,7 +32,7 @@
     "@types/node": "14.14.16"
   },
   "dependencies": {
-    "@sentry/node": "6.3.6",
+    "@sentry/node": "6.4.1",
     "@sentry/tracing": "6.3.6",
     "cross-env": "7.0.3",
     "envsafe": "2.0.3",
