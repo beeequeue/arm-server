@@ -89,4 +89,4 @@ jobs:
         run: yarn install --immutable
 
       - name: Test
-        run: yarn test --forceExit
+        run: yarn test
