@@ -1,16 +1,15 @@
 import { captureException } from "@sentry/node"
 
-import { Logger } from "@/lib/logger"
+import { config } from "@/config"
 
-import { App } from "./app"
+import { buildApp } from "./app"
 import { updateRelations } from "./update"
 
-const { NODE_ENV, PORT } = process.env
-const port = PORT ?? 3000
+const { NODE_ENV, PORT } = config
 
 const runUpdateScript = () => updateRelations().catch(captureException)
 
-const listen = () => {
+const listen = async () => {
   if (NODE_ENV === "production") {
     void runUpdateScript()
 
@@ -18,9 +17,12 @@ const listen = () => {
     setInterval(runUpdateScript, 1000 * 60 * 60 * 24)
   }
 
-  App.listen(port, () => {
-    Logger.info(`Listening on ${port}`)
-  })
+  await (
+    await buildApp()
+  ).listen(PORT, process.env.NODE_ENV === "production" ? "0.0.0.0" : undefined)
+
+  // eslint-disable-next-line no-console
+  console.log(`Listening on ${PORT}`)
 }
 
-listen()
+void listen()

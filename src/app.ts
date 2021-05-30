@@ -1,75 +1,35 @@
-import Koa, { Context } from "koa"
-import BodyParser from "koa-bodyparser"
-import RequestLogger from "koa-pino-logger"
-import Router from "koa-router"
+import Fastify from "fastify"
+import Helmet from "fastify-helmet"
+
+import RequestLogger from "@mgcrea/fastify-request-logger"
+import prettifier from "@mgcrea/pino-pretty-compact"
 
 import { config } from "@/config"
-import { Logger } from "@/lib/logger"
-import { requestHandler, sendErrorToSentry, tracingMiddleWare } from "@/lib/sentry"
+import { sendErrorToSentry } from "@/lib/sentry"
 
-import { routes } from "./routes"
+import pkgJson from "../package.json"
 
-export const App = new Koa()
-const router = new Router()
+export const buildApp = async () => {
+  const App = Fastify({
+    disableRequestLogging: true,
+    logger: {
+      level: config.LOG_LEVEL,
+      prettifier,
+    },
+  })
 
-App.use(
-  RequestLogger({
-    prettyPrint: config.NODE_ENV === "development",
-  }),
-)
+  await App.register(RequestLogger)
+  await App.register(Helmet, {
+    hsts: config.NODE_ENV === "production",
+    crossOriginResourcePolicy: false,
+    contentSecurityPolicy: false,
+  })
 
-App.use(requestHandler)
-App.use(tracingMiddleWare)
+  App.addHook("onError", (request, _reply, error) => {
+    sendErrorToSentry(error, request as any)
+  })
 
-App.on("error", (err, ctx) => {
-  Logger.error(err)
+  App.get("/", async (_request, reply) => reply.redirect(301, pkgJson.homepage))
 
-  sendErrorToSentry(err, ctx)
-})
-
-App.use(BodyParser())
-
-router.get("/", (ctx: Context) => {
-  ctx.body = `
-<pre>
-<b>Get IDs:</b>
-<b>GET/POST /api/ids</b>
-
-enum Source {
-  anilist,
-  anidb,
-  myanimelist,
-  kitsu,
+  return App
 }
-
-<b>Either use GET query parameters:</b>
-?source={Source}&id={number}
-
-<b>or send the query as a POST JSON body:</b>
-
-{ "anilist": 1337 }
-
-[{ "anilist": 1337 }, { "anilist": 69 }, { "anidb": 420 }]
-
-interface Entry {
-  anilist: number | null
-  anidb: number | null
-  myanimelist: number | null
-  kitsu: number | null
-}
-
-{ "anilist": 1337 } => Entry | null
-[{ ... }] => Array<Entry | null>
-
-<b>The response code will always be 200 (OK).
-If an entry is not found null is returned instead.</b>
-
-Source code is available on GitHub at <a href="https://github.com/BeeeQueue/arm-server">https://github.com/BeeeQueue/arm-server</a>
-</pre>
-`
-})
-
-router.use(routes)
-
-App.use(router.routes())
-App.use(router.allowedMethods())
