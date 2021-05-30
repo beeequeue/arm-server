@@ -1069,6 +1069,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/jest@npm:26.0.23":
+  version: 26.0.23
+  resolution: "@types/jest@npm:26.0.23"
+  dependencies:
+    jest-diff: ^26.0.0
+    pretty-format: ^26.0.0
+  checksum: 69db26061e6be34de2a440c8a470b651c53ba6ee0057614a278c4f756ff00281f46cc075b24e5bd761f399f175f49d0a5758b50dd921342a8592461548dea29a
+  languageName: node
+  linkType: hard
+
 "@types/json-schema@npm:^7.0.3":
   version: 7.0.7
   resolution: "@types/json-schema@npm:7.0.7"
@@ -1656,6 +1666,7 @@ __metadata:
     "@sentry/node": 6.3.6
     "@sentry/tracing": 6.3.6
     "@tsconfig/node14": 1.0.0
+    "@types/jest": 26.0.23
     "@types/koa": 2.13.1
     "@types/koa-bodyparser": 4.3.0
     "@types/koa-pino-logger": 3.0.0
@@ -5236,7 +5247,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-diff@npm:^26.6.2":
+"jest-diff@npm:^26.0.0, jest-diff@npm:^26.6.2":
   version: 26.6.2
   resolution: "jest-diff@npm:26.6.2"
   dependencies:
@@ -7563,7 +7574,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pretty-format@npm:^26.6.2":
+"pretty-format@npm:^26.0.0, pretty-format@npm:^26.6.2":
   version: 26.6.2
   resolution: "pretty-format@npm:26.6.2"
   dependencies:
