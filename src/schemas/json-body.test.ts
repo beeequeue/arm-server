@@ -1,7 +1,7 @@
 import { TsjsonParser } from "ts-json-validator"
 import { JsonValue } from "type-fest"
 
-import { singularItemInputSchema } from "@/schemas/json-body"
+import { bodyInputSchema } from "@/schemas/json-body"
 
 type Case = [JsonValue, boolean]
 type Cases = Case[]
@@ -35,10 +35,9 @@ describe("schema", () => {
     ...mapToSingularArrayInput(badCases),
   ]
 
-  const parser = new TsjsonParser(singularItemInputSchema)
+  const parser = new TsjsonParser(bodyInputSchema)
 
   test.each(inputs)("%s = %p", (input, expected) => {
-    console.log(input)
     parser.validates(input)
 
     const errors = parser.getErrors()
