@@ -31,9 +31,10 @@ export const buildApp = async () => {
     contentSecurityPolicy: false,
   })
 
-  App.setErrorHandler((error, request, _reply) => {
-    console.log("---------------------------")
+  App.addHook("onError", (request, _reply, error, next) => {
     sendErrorToSentry(error, request as any)
+
+    next()
   })
 
   await App.register(apiPlugin, { prefix: "/api" })
