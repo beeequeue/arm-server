@@ -20,9 +20,6 @@ const listen = async () => {
   await (
     await buildApp()
   ).listen(PORT, process.env.NODE_ENV === "production" ? "0.0.0.0" : undefined)
-
-  // eslint-disable-next-line no-console
-  console.log(`Listening on ${PORT}`)
 }
 
 void listen()

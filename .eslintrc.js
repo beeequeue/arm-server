@@ -12,5 +12,6 @@ module.exports = {
   ],
   rules: {
     "import/no-named-as-default": "off",
+    "@typescript-eslint/require-await": "off",
   },
 }

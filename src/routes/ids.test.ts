@@ -2,7 +2,7 @@ import request from "supertest"
 
 import { App } from "@/app"
 import { knex, Relation } from "@/db"
-import { Source } from "@/routes/handlers/common"
+import { Source } from "@/schemas/common"
 
 let id = 0
 const createRelations = async <N extends number>(
