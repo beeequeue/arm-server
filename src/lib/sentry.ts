@@ -7,7 +7,7 @@ const { NODE_ENV, TRACES_SAMPLERATE, SENTRY_DSN } = process.env
 Sentry.init({
   dsn: SENTRY_DSN,
   enabled: NODE_ENV === "production",
-  tracesSampleRate: Number(TRACES_SAMPLERATE ?? 1),
+  tracesSampleRate: Number(TRACES_SAMPLERATE ?? 0.25),
 })
 
 export const sendErrorToSentry = (
