@@ -122,5 +122,4 @@ export const updateRelations = async () => {
   await updateBasedOnManualRules()
 
   Logger.info('Done.')
-  void knex.destroy()
 }

@@ -1,40 +1,13 @@
-import type { Environment } from './src/config'
-
-const defaultConfig = {
+export const config: import('knex').Knex.Config = {
   client: 'sqlite3',
   migrations: {
     tableName: 'migrations',
     directory: 'migrations',
   },
   useNullAsDefault: true,
-}
-
-// This export is overridden by the module.exports at the end,
-// but is required for TS to recognize it as a module
-export const config: Record<Environment, import('knex').Config> = {
-  development: {
-    ...defaultConfig,
-    connection: {
-      filename: './sqlite/dev.sqlite3',
-    },
-  },
-
-  test: {
-    ...defaultConfig,
-    connection: {
-      filename: './sqlite/tests.sqlite3',
-    },
-  },
-
-  production: {
-    ...defaultConfig,
-    connection: {
-      filename: './sqlite/prod.sqlite3',
-    },
+  connection: {
+    filename: `./sqlite/${process.env.NODE_ENV ?? 'development'}.sqlite3`,
   },
 }
 
-module.exports = {
-  ...config,
-  config,
-}
+export default config
