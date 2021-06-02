@@ -6,7 +6,7 @@
   "license": "AGPL-3.0-only",
   "homepage": "https://github.com/BeeeQueue/arm-server",
   "engines": {
-    "node": ">=14.17"
+    "node": "^14.17"
   },
   "husky": {
     "hooks": {
