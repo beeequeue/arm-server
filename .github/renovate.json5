@@ -1,0 +1,32 @@
+{
+  extends: ['config:js-app', 'helpers:disableTypesNodeMajor'],
+  prConcurrentLimit: 5,
+  branchConcurrentLimit: 5,
+  schedule: ['before 11am'],
+  labels: ['dependencies'],
+  baseBranches: ['master'],
+  automerge: false,
+  packageRules: [
+    {
+      packageNames: ['node'],
+      allowedVersions: '<13',
+      rangeStrategy: 'replace',
+    },
+    {
+      groupName: 'linters',
+      matchPackageNames: ['eslint'],
+      automerge: true,
+    },
+    {
+      groupName: 'testing packages',
+      matchPackageNames: ['jest', 'test'],
+      automerge: true,
+    },
+    {
+      groupName: '`@types` package patches',
+      matchPackagePrefixes: ['@types/'],
+      patch: true,
+      automerge: true,
+    },
+  ],
+}
