@@ -1,4 +1,5 @@
 import Fastify from "fastify"
+import Cors from "fastify-cors"
 import Helmet from "fastify-helmet"
 import { customAlphabet, urlAlphabet } from "nanoid"
 
@@ -25,9 +26,12 @@ export const buildApp = async () => {
     },
   })
 
+  await App.register(Cors, {
+    origin: true,
+  })
+
   await App.register(Helmet, {
-    hsts: isProd,
-    crossOriginResourcePolicy: false,
+    hsts: false,
     contentSecurityPolicy: false,
   })
 

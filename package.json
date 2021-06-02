@@ -36,6 +36,7 @@
     "cross-env": "7.0.3",
     "envsafe": "2.0.3",
     "fastify": "3.17.0",
+    "fastify-cors": "6.0.1",
     "fastify-helmet": "5.3.1",
     "got": "11.8.2",
     "knex": "0.95.6",

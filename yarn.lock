@@ -1470,6 +1470,7 @@ __metadata:
     envsafe: 2.0.3
     eslint: 7.27.0
     fastify: 3.17.0
+    fastify-cors: 6.0.1
     fastify-helmet: 5.3.1
     got: 11.8.2
     husky: 4.3.8
@@ -3505,6 +3506,16 @@ __metadata:
   version: 2.0.7
   resolution: "fast-safe-stringify@npm:2.0.7"
   checksum: e0055e231d1fe0f97863dcfb45f5f285d59e3d23210e1e8a31348829e4a584e04ffe49f5944a0ba2f21d753b67b0ecb6f0ffc49ecd8c7f6f531cbcd45a5f606b
+  languageName: node
+  linkType: hard
+
+"fastify-cors@npm:6.0.1":
+  version: 6.0.1
+  resolution: "fastify-cors@npm:6.0.1"
+  dependencies:
+    fastify-plugin: ^3.0.0
+    vary: ^1.1.2
+  checksum: 21f15cfb4602601f1ed1bfe56e93c433a3680e522bd3951b441e2a137028c255a4b420af30a149594f42e37de3a5147a8f2f8c6878af2392cddcee8e963f6fbf
   languageName: node
   linkType: hard
 
@@ -8989,6 +9000,13 @@ typescript@4.2.4:
     spdx-correct: ^3.0.0
     spdx-expression-parse: ^3.0.0
   checksum: 35703ac889d419cf2aceef63daeadbe4e77227c39ab6287eeb6c1b36a746b364f50ba22e88591f5d017bc54685d8137bc2d328d0a896e4d3fd22093c0f32a9ad
+  languageName: node
+  linkType: hard
+
+"vary@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "vary@npm:1.1.2"
+  checksum: ae0123222c6df65b437669d63dfa8c36cee20a504101b2fcd97b8bf76f91259c17f9f2b4d70a1e3c6bbcee7f51b28392833adb6b2770b23b01abec84e369660b
   languageName: node
   linkType: hard
 
