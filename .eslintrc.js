@@ -11,6 +11,7 @@ module.exports = {
     "plugin:@beequeue/prettier",
   ],
   rules: {
+    "no-console": "off",
     "import/no-named-as-default": "off",
     "@typescript-eslint/require-await": "off",
   },
