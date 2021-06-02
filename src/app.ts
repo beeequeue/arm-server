@@ -20,6 +20,7 @@ export const buildApp = async () => {
     onConstructorPoisoning: "remove",
     trustProxy: isProd,
     genReqId: nanoid,
+    disableRequestLogging: process.env.NODE_ENV === "test",
     logger: {
       level: config.LOG_LEVEL,
       prettyPrint: !isProd,

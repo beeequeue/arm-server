@@ -1,8 +1,8 @@
-import { TsjsonParser } from 'ts-json-validator'
-import { JsonValue } from 'type-fest'
+import { TsjsonParser } from "ts-json-validator"
+import { JsonValue } from "type-fest"
 
-import { Source } from '@/schemas/common'
-import { queryInputSchema } from '@/schemas/query-params'
+import { Source } from "@/schemas/common"
+import { queryInputSchema } from "@/schemas/query-params"
 
 type Case = [JsonValue, boolean]
 type Cases = Case[]
@@ -12,7 +12,7 @@ const okCases: Cases = [
   [{ source: Source.AniDB, id: 1337 }, true],
   [{ source: Source.MAL, id: 1337 }, true],
   [{ source: Source.Kitsu, id: 1337 }, true],
-  [{ source: Source.Kitsu, id: 133700 }, true],
+  [{ source: Source.Kitsu, id: 133_700 }, true],
 ]
 
 const badCases: Cases = [
@@ -24,12 +24,12 @@ const badCases: Cases = [
   [{ source: Source.AniList, id: 50_000_001 }, false],
 ]
 
-describe('schema', () => {
+describe("schema", () => {
   const inputs: Cases = [...okCases, ...badCases]
 
   const parser = new TsjsonParser(queryInputSchema)
 
-  test.each(inputs)('%s = %p', (input, expected) => {
+  test.each(inputs)("%s = %p", (input, expected) => {
     parser.validates(input)
 
     const errors = parser.getErrors()
