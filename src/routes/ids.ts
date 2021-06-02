@@ -41,8 +41,32 @@ const getIds = async (ctx: Context) => {
   const input = result.value as QueryParamQuery | BodyQuery
 
   if (isBodyQuery) {
+    if (ctx.request.method === 'GET' && Math.random() >= 0.33) {
+      ctx.status = 400
+      ctx.body = {
+        code: 400,
+        error: 'Deprecated request',
+        message:
+          'JSON bodies in GET requests has been deprecated. Please use POST instead.',
+      }
+
+      return
+    }
+
     ctx.body = await bodyHandler(input as BodyQuery)
   } else {
+    if (ctx.request.method === 'POST' && Math.random() >= 0.33) {
+      ctx.status = 400
+      ctx.body = {
+        code: 400,
+        error: 'Deprecated request',
+        message:
+          'Query parameters in POST requests has been deprecated. Please use GET instead.',
+      }
+
+      return
+    }
+
     ctx.body = await handleQueryParams(input as QueryParamQuery)
   }
 
