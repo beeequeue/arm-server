@@ -14,13 +14,11 @@
     },
     {
       groupName: 'linters',
-      extends: ['packages:linters'],
       matchPackageNames: ['eslint'],
       automerge: true,
     },
     {
       groupName: 'testing packages',
-      extends: ['packages:jsUnitTest'],
       matchPackageNames: ['jest', 'test'],
       automerge: true,
     },
