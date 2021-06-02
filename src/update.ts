@@ -1,11 +1,10 @@
-import Superagent from 'superagent'
+import Http from 'got'
 
 import { captureException } from '@sentry/node'
 
 import { knex, Relation } from './db'
 import { Logger } from './lib/logger'
 import { updateBasedOnManualRules } from './manual-rules'
-import { RequestResponse, responseIsError } from './utils'
 
 type OfflineDatabaseSchema = {
   sources: string[]
@@ -19,18 +18,21 @@ type OfflineDatabaseSchema = {
 }
 
 const fetchDatabase = async (): Promise<OfflineDatabaseSchema[] | null> => {
-  const response = (await Superagent.get(
+  const response = await Http.get<{ data: OfflineDatabaseSchema[] }>(
     'https://raw.githubusercontent.com/manami-project/anime-offline-database/master/anime-offline-database.json',
-  ).ok(() => true)) as RequestResponse<{ data: OfflineDatabaseSchema[] }>
+    {
+      responseType: 'json',
+    },
+  )
 
-  if (responseIsError(response)) {
+  if (response.statusCode !== 200) {
     Logger.error('Could not fetch updated database!!')
     captureException(new Error('Could not fetch updated database!!'))
 
     return null
   }
 
-  return JSON.parse(response.text).data
+  return response.body.data
 }
 
 const regexes = {
