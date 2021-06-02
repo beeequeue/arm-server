@@ -1466,7 +1466,7 @@ __metadata:
     "@types/jest": 26.0.23
     "@types/node": 14.17.2
     cross-env: 7.0.3
-    dotenv: 9.0.2
+    dotenv: 10.0.0
     envsafe: 2.0.3
     eslint: 7.27.0
     fastify: 3.17.0
@@ -1478,7 +1478,7 @@ __metadata:
     knex: 0.95.6
     lint-staged: 11.0.0
     nanoid: 3.1.23
-    pino-pretty: 5.0.1
+    pino-pretty: 5.0.2
     prettier: 2.3.0
     sqlite3: 5.0.2
     ts-jest: 26.5.6
@@ -1486,8 +1486,8 @@ __metadata:
     ts-node: 9.1.1
     ts-node-dev: 1.1.6
     tsconfig-paths: 3.9.0
-    type-fest: 1.1.3
-    typescript: 4.2.4
+    type-fest: 1.2.0
+    typescript: 4.3.2
   languageName: unknown
   linkType: soft
 
@@ -2715,10 +2715,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:9.0.2":
-  version: 9.0.2
-  resolution: "dotenv@npm:9.0.2"
-  checksum: 6b7980330a653089bc9b83362248547791151ee74f9881eb223ac2f4d641b174b708f77315d88708b551d45b4177afd3ba71bca4832f8807e003f71c2a0f83e7
+"dotenv@npm:10.0.0":
+  version: 10.0.0
+  resolution: "dotenv@npm:10.0.0"
+  checksum: f412c5fe8c24fbe313d302d2500e247ba8a1946492db405a4de4d30dd0eb186a88a43f13c958c5a7de303938949c4231c56994f97d05c4bc1f22478d631b4005
   languageName: node
   linkType: hard
 
@@ -6925,9 +6925,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pino-pretty@npm:5.0.1":
-  version: 5.0.1
-  resolution: "pino-pretty@npm:5.0.1"
+"pino-pretty@npm:5.0.2":
+  version: 5.0.2
+  resolution: "pino-pretty@npm:5.0.2"
   dependencies:
     "@hapi/bourne": ^2.0.0
     "@types/node": ^15.3.0
@@ -6944,7 +6944,7 @@ __metadata:
     strip-json-comments: ^3.1.1
   bin:
     pino-pretty: bin.js
-  checksum: dd9a9a043453a7c3f329a89ed6722ede33a34ca9a7b9a313d236db18511cb198c03e336f4cf722c7469253e0b89a96cdcda052c8115232f7b734e910fd3b19ab
+  checksum: 4d19f2ab13120a348b4cec7e786212a1ea22d6be2f7b4fa55efa35de97922cedd723dbc3340b1cc93927d503210259cf2079e0b202c58fddf76134425e1d13a4
   languageName: node
   linkType: hard
 
@@ -8811,10 +8811,10 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"type-fest@npm:1.1.3":
-  version: 1.1.3
-  resolution: "type-fest@npm:1.1.3"
-  checksum: 47f981b2d5139c7a1317d6696f81cedb208b7e9267605938609062c742fd637d19859fafba9f505f436cc035eb9d33abccea4acaa64e16d6d2b35b2cc51e9e6b
+"type-fest@npm:1.2.0":
+  version: 1.2.0
+  resolution: "type-fest@npm:1.2.0"
+  checksum: 72c7be3e8643bf7841d3474b0ddc37f4cdff65d38dd71bb91d9618d9625238a4cd010459c33f5a34afba0e77be5921a77e8eb75bda37060a936baaebd256705d
   languageName: node
   linkType: hard
 
@@ -8855,23 +8855,23 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-typescript@4.2.4:
-  version: 4.2.4
-  resolution: "typescript@npm:4.2.4"
+typescript@4.3.2:
+  version: 4.3.2
+  resolution: "typescript@npm:4.3.2"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 89c397df192f239359ad798b96d8e8d552e12c0c189ac5676cec4c20c410d6eec636b8e59a88f2aef0a56d961a9678d99c400099be9b7cae2f7b062eb4b7b171
+  checksum: c2a86fa03ce03b255adc13ccd70a55173ca6539ae12114feca59f34a4e9bb69f14fb7cd5adc6c2416e568cff05c870b89d1366768ec55fce04fbdffb429a1cee
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@4.2.4#~builtin<compat/typescript>":
-  version: 4.2.4
-  resolution: "typescript@patch:typescript@npm%3A4.2.4#~builtin<compat/typescript>::version=4.2.4&hash=34ad7d"
+"typescript@patch:typescript@4.3.2#~builtin<compat/typescript>":
+  version: 4.3.2
+  resolution: "typescript@patch:typescript@npm%3A4.3.2#~builtin<compat/typescript>::version=4.3.2&hash=34ad7d"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 083de437033ea11e57b0c66305a2c1d6d05e9383e57de2af405b0833ab68bd96d82d1f4f317fac06f3420410a006244648cf70278f58b3b4d55632dc7aeb8d4a
+  checksum: c71285d8bc17e0108ae1489a7e906ea606e951d7afc5d141c8889bbdc1c7548c0833b82716b1dd2099321c20b48604309c96c8454831cbcc939966190226d9a2
   languageName: node
   linkType: hard
 
