@@ -72,7 +72,7 @@ describe('json body', () => {
       }
 
       return request(server)
-        .get('/api/ids')
+        .post('/api/ids')
         .send(body)
         .expect(relations[0])
         .expect('Content-Type', /json/)
@@ -88,7 +88,7 @@ describe('json body', () => {
       }
 
       return request(server)
-        .get('/api/ids')
+        .post('/api/ids')
         .send({})
         .expect(400, response)
         .expect('Content-Type', /json/)
@@ -98,7 +98,7 @@ describe('json body', () => {
       await createRelations(4)
 
       return request(server)
-        .get('/api/ids')
+        .post('/api/ids')
         .send({ anidb: 100_000 })
         .expect(200, null)
         .expect('Content-Type', /json/)
@@ -118,7 +118,7 @@ describe('json body', () => {
       const result = [relations[0], null, relations[2]]
 
       return request(server)
-        .get('/api/ids')
+        .post('/api/ids')
         .send(body)
         .expect(result)
         .expect('Content-Type', /json/)
@@ -130,7 +130,7 @@ describe('json body', () => {
       const result = [null, null]
 
       return request(server)
-        .get('/api/ids')
+        .post('/api/ids')
         .send(body)
         .expect(result)
         .expect('Content-Type', /json/)
@@ -140,7 +140,7 @@ describe('json body', () => {
       const body = [{}]
 
       return request(server)
-        .get('/api/ids')
+        .post('/api/ids')
         .send(body)
         .expect(400)
         .expect('Content-Type', /json/)
