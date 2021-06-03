@@ -1,10 +1,10 @@
-import Router from 'koa-router'
+import Router from "koa-router"
 
-import { singleRoutes } from './ids'
+import { singleRoutes } from "./ids"
 
 const router = new Router()
 
-router.prefix('/api')
+router.prefix("/api")
 
 router.use(singleRoutes)
 

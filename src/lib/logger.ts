@@ -1,8 +1,8 @@
-import Pino from 'pino'
+import Pino from "pino"
 
-import { config } from '../config'
+import { config } from "../config"
 
 export const Logger = Pino({
   level: config.LOG_LEVEL,
-  prettyPrint: config.NODE_ENV !== 'production',
+  prettyPrint: config.NODE_ENV !== "production",
 })

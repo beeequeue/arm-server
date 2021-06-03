@@ -1,6 +1,6 @@
-import Knex from 'knex'
+import Knex from "knex"
 
-import { config } from '../knexfile'
+import { config } from "../knexfile"
 
 export const knex = Knex(config)
 

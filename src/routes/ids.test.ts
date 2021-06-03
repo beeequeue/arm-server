@@ -1,8 +1,8 @@
-import request from 'supertest'
+import request from "supertest"
 
-import { App } from '@/app'
-import { knex, Relation } from '@/db'
-import { Source } from '@/routes/handlers/common'
+import { App } from "@/app"
+import { knex, Relation } from "@/db"
+import { Source } from "@/routes/handlers/common"
 
 let id = 0
 const createRelations = async <N extends number>(
@@ -21,7 +21,7 @@ const createRelations = async <N extends number>(
     return r
   })
 
-  await knex.insert(relations).into('relations')
+  await knex.insert(relations).into("relations")
 
   if (amount === 1) {
     return relations[0] as any
@@ -36,25 +36,25 @@ afterAll(() => {
   server.close()
 })
 
-afterEach(() => knex.delete().from('relations'))
+afterEach(() => knex.delete().from("relations"))
 
-describe('query params', () => {
-  test('fetches relation correctly', async () => {
+describe("query params", () => {
+  test("fetches relation correctly", async () => {
     const relation = await createRelations(1)
 
     return request(server)
-      .get('/api/ids')
+      .get("/api/ids")
       .query({
         source: Source.AniList,
         id: relation.anilist,
       })
       .expect(200, relation)
-      .expect('Content-Type', /json/)
+      .expect("Content-Type", /json/)
   })
 
   test("returns null when id doesn't exist", async () =>
     request(server)
-      .get('/api/ids')
+      .get("/api/ids")
       .query({
         source: Source.Kitsu,
         id: 404,
@@ -62,9 +62,9 @@ describe('query params', () => {
       .expect(200, null))
 })
 
-describe('json body', () => {
-  describe('object input', () => {
-    test('fetches a single relation', async () => {
+describe("json body", () => {
+  describe("object input", () => {
+    test("fetches a single relation", async () => {
       const relations = await createRelations(4)
 
       const body = {
@@ -72,41 +72,41 @@ describe('json body', () => {
       }
 
       return request(server)
-        .post('/api/ids')
+        .post("/api/ids")
         .send(body)
         .expect(relations[0])
-        .expect('Content-Type', /json/)
+        .expect("Content-Type", /json/)
     })
 
-    test('errors correctly on an empty object', async () => {
+    test("errors correctly on an empty object", async () => {
       await createRelations(4)
 
       const response = {
         code: 400,
-        error: 'Bad Request',
+        error: "Bad Request",
         validation: '"value" must have at least 1 key',
       }
 
       return request(server)
-        .post('/api/ids')
+        .post("/api/ids")
         .send({})
         .expect(400, response)
-        .expect('Content-Type', /json/)
+        .expect("Content-Type", /json/)
     })
 
-    test('returns null if not found', async () => {
+    test("returns null if not found", async () => {
       await createRelations(4)
 
       return request(server)
-        .post('/api/ids')
+        .post("/api/ids")
         .send({ anidb: 100_000 })
         .expect(200, null)
-        .expect('Content-Type', /json/)
+        .expect("Content-Type", /json/)
     })
   })
 
-  describe('array input', () => {
-    test('fetches relations correctly', async () => {
+  describe("array input", () => {
+    test("fetches relations correctly", async () => {
       const relations = await createRelations(4)
 
       const body = [
@@ -118,32 +118,32 @@ describe('json body', () => {
       const result = [relations[0], null, relations[2]]
 
       return request(server)
-        .post('/api/ids')
+        .post("/api/ids")
         .send(body)
         .expect(result)
-        .expect('Content-Type', /json/)
+        .expect("Content-Type", /json/)
     })
 
-    test('responds correctly on no finds', async () => {
+    test("responds correctly on no finds", async () => {
       const body = [{ [Source.AniList]: 1000 }, { [Source.Kitsu]: 1000 }]
 
       const result = [null, null]
 
       return request(server)
-        .post('/api/ids')
+        .post("/api/ids")
         .send(body)
         .expect(result)
-        .expect('Content-Type', /json/)
+        .expect("Content-Type", /json/)
     })
 
-    test('requires at least one source', async () => {
+    test("requires at least one source", async () => {
       const body = [{}]
 
       return request(server)
-        .post('/api/ids')
+        .post("/api/ids")
         .send(body)
         .expect(400)
-        .expect('Content-Type', /json/)
+        .expect("Content-Type", /json/)
     })
   })
 })
