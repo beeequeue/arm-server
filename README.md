@@ -68,8 +68,9 @@ Invalid HTTP requests have been deprecated.
 They will have a 33% chance to respond with a `400`, with a message detailing this deprecation.
 
 i.e:
+
 - Sending JSON bodies in `GET` requests
-- Sending query parameters in `POST` requests 
+- Sending query parameters in `POST` requests
 
 #### 2020-12-27
 

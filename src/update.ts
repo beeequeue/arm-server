@@ -45,12 +45,12 @@ const regexes = {
 const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
   const relation: Relation = {}
 
-  entry.sources.forEach((src) => {
+  for (const src of entry.sources) {
     const anilistMatch = regexes.anilist.exec(src)
     if (anilistMatch) {
       const id = Number(anilistMatch[1])
 
-      if (isNaN(id)) throw new Error(`${src}'s ID is not a number!!`)
+      if (Number.isNaN(id)) throw new Error(`${src}'s ID is not a number!!`)
 
       relation.anilist = id
     }
@@ -59,7 +59,7 @@ const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
     if (anidbMatch) {
       const id = Number(anidbMatch[1])
 
-      if (isNaN(id)) throw new Error(`${src}'s ID is not a number!!`)
+      if (Number.isNaN(id)) throw new Error(`${src}'s ID is not a number!!`)
 
       relation.anidb = id
     }
@@ -68,7 +68,7 @@ const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
     if (malMatch) {
       const id = Number(malMatch[1])
 
-      if (isNaN(id)) throw new Error(`${src}'s ID is not a number!!`)
+      if (Number.isNaN(id)) throw new Error(`${src}'s ID is not a number!!`)
 
       relation.myanimelist = id
     }
@@ -77,11 +77,11 @@ const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
     if (kitsuMatch) {
       const id = Number(kitsuMatch[1])
 
-      if (isNaN(id)) throw new Error(`${src}'s ID is not a number!!`)
+      if (Number.isNaN(id)) throw new Error(`${src}'s ID is not a number!!`)
 
       relation.kitsu = id
     }
-  })
+  }
 
   return relation
 }
@@ -113,8 +113,8 @@ export const updateRelations = async () => {
           knex.batchInsert('relations', formattedEntries, 100).transacting(trx),
         ),
     )
-  } catch (e) {
-    throw new Error(e)
+  } catch (error) {
+    throw new Error(error)
   }
   Logger.info('Updated database.')
 

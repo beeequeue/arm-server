@@ -8,8 +8,8 @@ export const isEmpty = <
   obj: T,
 ) => {
   if (Array.isArray(obj)) {
-    return obj.length < 1
+    return obj.length === 0
   }
 
-  return Object.keys(obj).length < 1
+  return Object.keys(obj).length === 0
 }

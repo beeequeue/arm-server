@@ -11,15 +11,6 @@ module.exports = {
     'plugin:@beequeue/prettier',
   ],
   rules: {
-    'prettier/prettier': 'off',
-    'import/no-named-as-default-member': 'off',
+    'import/no-named-as-default': 'off',
   },
-  overrides: [
-    {
-      files: ['!pages/**/*.tsx', '**/*.stories.tsx'],
-      rules: {
-        'import/no-default-export': 'off',
-      },
-    },
-  ],
 }
