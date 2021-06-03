@@ -41,8 +41,8 @@ export const bodyHandler = async (
   // Get relations
   relations = await knex
     .where(function () {
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      input.forEach((item) => this.orWhere(item))
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      for (const item of input) this.orWhere(item)
     })
     .from('relations')
 

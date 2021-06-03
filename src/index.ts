@@ -5,8 +5,8 @@ import { Logger } from '@/lib/logger'
 import { App } from './app'
 import { updateRelations } from './update'
 
-const { NODE_ENV } = process.env
-const port = process.env.PORT ?? 3000
+const { NODE_ENV, PORT } = process.env
+const port = PORT ?? 3000
 
 const runUpdateScript = () => updateRelations().catch(captureException)
 

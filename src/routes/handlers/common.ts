@@ -13,6 +13,6 @@ export const sourceArray = (enumToArray(Source) as unknown) as string[]
 
 export const idSchema = Joi.number()
   .min(0)
-  .max(2147483647)
+  .max(2_147_483_647)
   .precision(0)
   .required()
