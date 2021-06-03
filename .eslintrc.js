@@ -5,12 +5,12 @@ module.exports = {
     node: true,
   },
   extends: [
-    'plugin:@beequeue/base',
-    'plugin:@beequeue/node',
-    'plugin:@beequeue/typescript',
-    'plugin:@beequeue/prettier',
+    "plugin:@beequeue/base",
+    "plugin:@beequeue/node",
+    "plugin:@beequeue/typescript",
+    "plugin:@beequeue/prettier",
   ],
   rules: {
-    'import/no-named-as-default': 'off',
+    "import/no-named-as-default": "off",
   },
 }

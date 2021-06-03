@@ -1,16 +1,16 @@
-const { pathsToModuleNameMapper } = require('ts-jest/utils')
-const { compilerOptions } = require('./tsconfig')
+const { pathsToModuleNameMapper } = require("ts-jest/utils")
+const { compilerOptions } = require("./tsconfig")
 
 module.exports = {
-  roots: ['<rootDir>/src'],
-  preset: 'ts-jest',
-  moduleFileExtensions: ['js', 'ts'],
+  roots: ["<rootDir>/src"],
+  preset: "ts-jest",
+  moduleFileExtensions: ["js", "ts"],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
-    prefix: '<rootDir>/',
+    prefix: "<rootDir>/",
   }),
-  coveragePathIgnorePatterns: ['sentry.ts', 'utils.ts'],
+  coveragePathIgnorePatterns: ["sentry.ts", "utils.ts"],
   collectCoverage: true,
-  coverageReporters: ['text', 'text-summary'],
+  coverageReporters: ["text", "text-summary"],
   coverageThreshold: {
     global: {
       statements: 90,

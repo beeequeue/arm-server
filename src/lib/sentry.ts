@@ -1,19 +1,16 @@
 // eslint-disable-next-line node/no-deprecated-api
-import domain from 'domain'
+import domain from "domain"
 
-import { Context, Next } from 'koa'
+import { Context, Next } from "koa"
 
-import * as Sentry from '@sentry/node'
-import {
-  extractTraceparentData,
-  stripUrlQueryAndFragment,
-} from '@sentry/tracing'
+import * as Sentry from "@sentry/node"
+import { extractTraceparentData, stripUrlQueryAndFragment } from "@sentry/tracing"
 
 const { NODE_ENV, TRACES_SAMPLERATE, SENTRY_DSN } = process.env
 
 Sentry.init({
   dsn: SENTRY_DSN,
-  enabled: NODE_ENV === 'production',
+  enabled: NODE_ENV === "production",
   tracesSampleRate: Number(TRACES_SAMPLERATE ?? 1),
 })
 
@@ -23,10 +20,10 @@ export const requestHandler = (ctx: Context, next: Next) =>
 
     local.add(ctx as any) // TODO
 
-    local.on('error', (err) => {
+    local.on("error", (err) => {
       ctx.status = err.status || 500
       ctx.body = err.message
-      ctx.app.emit('error', err, ctx)
+      ctx.app.emit("error", err, ctx)
     })
 
     void local.run(async () => {
@@ -45,19 +42,19 @@ export const requestHandler = (ctx: Context, next: Next) =>
   })
 
 export const tracingMiddleWare = async (ctx: Context, next: Next) => {
-  const reqMethod = (ctx.method || '').toUpperCase()
+  const reqMethod = (ctx.method || "").toUpperCase()
   const reqUrl = ctx.url && stripUrlQueryAndFragment(ctx.url)
 
   // connect to trace of upstream app
   let traceparentData = null
 
-  if (ctx.request.get('sentry-trace')) {
-    traceparentData = extractTraceparentData(ctx.request.get('sentry-trace'))
+  if (ctx.request.get("sentry-trace")) {
+    traceparentData = extractTraceparentData(ctx.request.get("sentry-trace"))
   }
 
   const transaction = Sentry.startTransaction({
     name: `${reqMethod} ${reqUrl}`,
-    op: 'http.server',
+    op: "http.server",
     ...traceparentData,
   })
 
@@ -67,10 +64,8 @@ export const tracingMiddleWare = async (ctx: Context, next: Next) => {
 
   // if using koa router, a nicer way to capture transaction using the matched route
   if (ctx._matchedRoute) {
-    const mountPath = (ctx.mountPath as string) || ''
-    transaction.setName(
-      `${reqMethod} ${mountPath}${ctx._matchedRoute as string}`,
-    )
+    const mountPath = (ctx.mountPath as string) || ""
+    transaction.setName(`${reqMethod} ${mountPath}${ctx._matchedRoute as string}`)
   }
 
   transaction.setHttpStatus(ctx.status)

@@ -1,31 +1,27 @@
-import Koa, { Context } from 'koa'
-import BodyParser from 'koa-bodyparser'
-import RequestLogger from 'koa-pino-logger'
-import Router from 'koa-router'
+import Koa, { Context } from "koa"
+import BodyParser from "koa-bodyparser"
+import RequestLogger from "koa-pino-logger"
+import Router from "koa-router"
 
-import { config } from '@/config'
-import { Logger } from '@/lib/logger'
-import {
-  requestHandler,
-  sendErrorToSentry,
-  tracingMiddleWare,
-} from '@/lib/sentry'
+import { config } from "@/config"
+import { Logger } from "@/lib/logger"
+import { requestHandler, sendErrorToSentry, tracingMiddleWare } from "@/lib/sentry"
 
-import { routes } from './routes'
+import { routes } from "./routes"
 
 export const App = new Koa()
 const router = new Router()
 
 App.use(
   RequestLogger({
-    prettyPrint: config.NODE_ENV === 'development',
+    prettyPrint: config.NODE_ENV === "development",
   }),
 )
 
 App.use(requestHandler)
 App.use(tracingMiddleWare)
 
-App.on('error', (err, ctx) => {
+App.on("error", (err, ctx) => {
   Logger.error(err)
 
   sendErrorToSentry(err, ctx)
@@ -33,7 +29,7 @@ App.on('error', (err, ctx) => {
 
 App.use(BodyParser())
 
-router.get('/', (ctx: Context) => {
+router.get("/", (ctx: Context) => {
   ctx.body = `
 <pre>
 <b>Get IDs:</b>

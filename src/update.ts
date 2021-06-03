@@ -1,10 +1,10 @@
-import Http from 'got'
+import Http from "got"
 
-import { captureException } from '@sentry/node'
+import { captureException } from "@sentry/node"
 
-import { knex, Relation } from './db'
-import { Logger } from './lib/logger'
-import { updateBasedOnManualRules } from './manual-rules'
+import { knex, Relation } from "./db"
+import { Logger } from "./lib/logger"
+import { updateBasedOnManualRules } from "./manual-rules"
 
 type OfflineDatabaseSchema = {
   sources: string[]
@@ -19,15 +19,15 @@ type OfflineDatabaseSchema = {
 
 const fetchDatabase = async (): Promise<OfflineDatabaseSchema[] | null> => {
   const response = await Http.get<{ data: OfflineDatabaseSchema[] }>(
-    'https://raw.githubusercontent.com/manami-project/anime-offline-database/master/anime-offline-database.json',
+    "https://raw.githubusercontent.com/manami-project/anime-offline-database/master/anime-offline-database.json",
     {
-      responseType: 'json',
+      responseType: "json",
     },
   )
 
   if (response.statusCode !== 200) {
-    Logger.error('Could not fetch updated database!!')
-    captureException(new Error('Could not fetch updated database!!'))
+    Logger.error("Could not fetch updated database!!")
+    captureException(new Error("Could not fetch updated database!!"))
 
     return null
   }
@@ -89,37 +89,37 @@ const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
 export const updateRelations = async () => {
   Logger.info(`Using ${process.env.NODE_ENV!} database configuration...`)
 
-  Logger.info('Fetching updated Database...')
+  Logger.info("Fetching updated Database...")
   const data = await fetchDatabase()
-  Logger.info('Fetched updated Database.')
+  Logger.info("Fetched updated Database.")
 
   if (data == null) {
-    Logger.info('got no data')
+    Logger.info("got no data")
     return
   }
 
-  Logger.info('Formatting data...')
+  Logger.info("Formatting data...")
   const formattedEntries = data.map(formatEntry)
-  Logger.info('Formatted data.')
+  Logger.info("Formatted data.")
 
-  Logger.info('Updating database...')
+  Logger.info("Updating database...")
   try {
     await knex.transaction((trx) =>
       knex
         .delete()
-        .from('relations')
+        .from("relations")
         .transacting(trx)
         .then(() =>
-          knex.batchInsert('relations', formattedEntries, 100).transacting(trx),
+          knex.batchInsert("relations", formattedEntries, 100).transacting(trx),
         ),
     )
   } catch (error) {
     throw new Error(error)
   }
-  Logger.info('Updated database.')
+  Logger.info("Updated database.")
 
-  Logger.info('Executing manual rules...')
+  Logger.info("Executing manual rules...")
   await updateBasedOnManualRules()
 
-  Logger.info('Done.')
+  Logger.info("Done.")
 }
