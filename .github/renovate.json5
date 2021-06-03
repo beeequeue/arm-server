@@ -9,7 +9,7 @@
   packageRules: [
     {
       packageNames: ["node"],
-      allowedVersions: "<13",
+      allowedVersions: "<=14",
       rangeStrategy: "replace",
     },
     {
