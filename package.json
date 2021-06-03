@@ -46,7 +46,7 @@
     "pino-pretty": "4.8.0",
     "sqlite3": "5.0.2",
     "ts-node": "9.1.1",
-    "typescript": "4.2.4"
+    "typescript": "4.3.2"
   },
   "devDependencies": {
     "@beequeue/eslint-plugin": "0.1.3",
