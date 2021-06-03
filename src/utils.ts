@@ -3,7 +3,7 @@
 export const enumToArray = <E>(e: E): E[] => Object.values(e)
 
 export const isEmpty = <
-  T extends Record<string, unknown> | Record<string, unknown>[]
+  T extends Record<string, unknown> | Record<string, unknown>[],
 >(
   obj: T,
 ) => {

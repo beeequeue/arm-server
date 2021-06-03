@@ -9,7 +9,7 @@ export enum Source {
   Kitsu = 'kitsu',
 }
 
-export const sourceArray = (enumToArray(Source) as unknown) as string[]
+export const sourceArray = enumToArray(Source) as unknown as string[]
 
 export const idSchema = Joi.number()
   .min(0)
