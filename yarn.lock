@@ -1727,7 +1727,7 @@ __metadata:
     "@types/node": 14.17.2
     "@types/supertest": 2.0.11
     cross-env: 7.0.3
-    dotenv: 9.0.2
+    dotenv: 10.0.0
     envsafe: 2.0.3
     eslint: 7.27.0
     got: 11.8.2
@@ -3065,10 +3065,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:9.0.2":
-  version: 9.0.2
-  resolution: "dotenv@npm:9.0.2"
-  checksum: 6b7980330a653089bc9b83362248547791151ee74f9881eb223ac2f4d641b174b708f77315d88708b551d45b4177afd3ba71bca4832f8807e003f71c2a0f83e7
+"dotenv@npm:10.0.0":
+  version: 10.0.0
+  resolution: "dotenv@npm:10.0.0"
+  checksum: f412c5fe8c24fbe313d302d2500e247ba8a1946492db405a4de4d30dd0eb186a88a43f13c958c5a7de303938949c4231c56994f97d05c4bc1f22478d631b4005
   languageName: node
   linkType: hard
 
