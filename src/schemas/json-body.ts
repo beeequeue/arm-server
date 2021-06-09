@@ -1,29 +1,32 @@
-import Joi from "joi"
+import { createSchema as S } from "ts-json-validator"
 
 import { knex, Relation } from "@/db"
-import { idSchema, Source, sourceArray } from "@/routes/handlers/common"
+import { idSchema, Source, sourceSchema } from "@/schemas/common"
 
 type BodyItem = {
   [key in Source]?: number
 }
 
-const bodyItemSchema = Joi.object(
-  sourceArray.reduce(
-    (obj, source) => ({
-      ...obj,
-      [source]: idSchema.optional(),
-    }),
-    {},
-  ),
-)
-  .min(1)
-  .required()
+export const singularItemInputSchema = S({
+  type: "object",
+  propertyNames: sourceSchema,
+  minProperties: 1,
+  maxProperties: 4,
+  additionalProperties: idSchema,
+})
 
 export type BodyQuery = BodyItem | BodyItem[]
 
-const arraySchema = Joi.array().min(1).max(100).items(bodyItemSchema).required()
+const arrayInputSchema = S({
+  type: "array",
+  minItems: 1,
+  maxItems: 100,
+  items: singularItemInputSchema,
+})
 
-export const bodySchema = Joi.alternatives(arraySchema, bodyItemSchema)
+export const bodyInputSchema = S({
+  oneOf: [singularItemInputSchema, arrayInputSchema],
+})
 
 export const bodyHandler = async (
   input: BodyQuery,

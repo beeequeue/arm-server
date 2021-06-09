@@ -1,5 +1,4 @@
 import { knex, Relation } from "./db"
-import { Logger } from "./lib/logger"
 
 const rules = {
   // Kaguya-sama
@@ -37,7 +36,7 @@ export const updateBasedOnManualRules = async () => {
             knex("relations").update(fromWhere).where(toWhere).transacting(trx),
           ),
       )
-      .catch(Logger.error)
+      .catch(console.error)
   })
 
   await Promise.all(promises)

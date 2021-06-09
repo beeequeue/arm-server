@@ -1,75 +1,50 @@
-import Koa, { Context } from "koa"
-import BodyParser from "koa-bodyparser"
-import RequestLogger from "koa-pino-logger"
-import Router from "koa-router"
+import Fastify from "fastify"
+import Cors from "fastify-cors"
+import Helmet from "fastify-helmet"
+import { customAlphabet, urlAlphabet } from "nanoid"
 
 import { config } from "@/config"
-import { Logger } from "@/lib/logger"
-import { requestHandler, sendErrorToSentry, tracingMiddleWare } from "@/lib/sentry"
+import { sendErrorToSentry } from "@/lib/sentry"
+import { apiPlugin } from "@/routes/ids"
 
-import { routes } from "./routes"
+import pkgJson from "../package.json"
 
-export const App = new Koa()
-const router = new Router()
+const isProd = config.NODE_ENV === "production"
 
-App.use(
-  RequestLogger({
-    prettyPrint: config.NODE_ENV === "development",
-  }),
-)
+const nanoid = customAlphabet(urlAlphabet, 16)
 
-App.use(requestHandler)
-App.use(tracingMiddleWare)
+export const buildApp = async () => {
+  const App = Fastify({
+    ignoreTrailingSlash: true,
+    onProtoPoisoning: "remove",
+    onConstructorPoisoning: "remove",
+    trustProxy: isProd,
+    genReqId: nanoid,
+    disableRequestLogging: process.env.NODE_ENV === "test",
+    logger: {
+      level: config.LOG_LEVEL,
+      prettyPrint: !isProd,
+    },
+  })
 
-App.on("error", (err, ctx) => {
-  Logger.error(err)
+  await App.register(Cors, {
+    origin: true,
+  })
 
-  sendErrorToSentry(err, ctx)
-})
+  await App.register(Helmet, {
+    hsts: false,
+    contentSecurityPolicy: false,
+  })
 
-App.use(BodyParser())
+  App.addHook("onError", (request, _reply, error, next) => {
+    sendErrorToSentry(error, request as any)
 
-router.get("/", (ctx: Context) => {
-  ctx.body = `
-<pre>
-<b>Get IDs:</b>
-<b>GET/POST /api/ids</b>
+    next()
+  })
 
-enum Source {
-  anilist,
-  anidb,
-  myanimelist,
-  kitsu,
+  await App.register(apiPlugin, { prefix: "/api" })
+
+  App.get("/", async (_request, reply) => reply.redirect(301, pkgJson.homepage))
+
+  return App
 }
-
-<b>Either use GET query parameters:</b>
-?source={Source}&id={number}
-
-<b>or send the query as a POST JSON body:</b>
-
-{ "anilist": 1337 }
-
-[{ "anilist": 1337 }, { "anilist": 69 }, { "anidb": 420 }]
-
-interface Entry {
-  anilist: number | null
-  anidb: number | null
-  myanimelist: number | null
-  kitsu: number | null
-}
-
-{ "anilist": 1337 } => Entry | null
-[{ ... }] => Array<Entry | null>
-
-<b>The response code will always be 200 (OK).
-If an entry is not found null is returned instead.</b>
-
-Source code is available on GitHub at <a href="https://github.com/BeeeQueue/arm-server">https://github.com/BeeeQueue/arm-server</a>
-</pre>
-`
-})
-
-router.use(routes)
-
-App.use(router.routes())
-App.use(router.allowedMethods())

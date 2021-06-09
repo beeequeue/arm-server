@@ -6,7 +6,11 @@
 This app uses data from [`anime-offline-database`](https://github.com/manami-project/anime-offline-database/) - fetching
 and updating itself every 24 hours.
 
-[![Deploy to DigitalOcean](https://mp-assets1.sfo2.digitaloceanspaces.com/deploy-to-do/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/BeeeQueue/arm-server/tree/master&refcode=52b251df60e7)
+#### Get notifications on important API changes
+
+Subscribe to new releases in this repo:
+
+![image](https://user-images.githubusercontent.com/472500/121041611-c116fc00-c767-11eb-9aaa-64a894a1598a.png)
 
 ### Missing or duplicate entries
 
@@ -31,12 +35,12 @@ enum Source {
 
 ### Get IDS:
 
-`GET/POST` `/api/ids`
+`POST` `/api/ids`
 
-Either use GET query parameters:
+Either use GET with query parameters:
 `?source={Source}&id={number}`
 
-or send the query as a POST JSON body:
+or use POST with a JSON body:
 
 `{ "anilist": 1337 }`
 
@@ -52,7 +56,9 @@ interface Entry {
   kitsu: number | null
 }
 
+// If JSON body is a single object
 // { "anilist": 1337 } => Entry | null
+// // If JSON body is an array of objects
 // [{ ... }] => Array<Entry | null>
 ```
 

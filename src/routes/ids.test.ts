@@ -1,25 +1,19 @@
-import request from "supertest"
+import { FastifyInstance } from "fastify"
 
-import { App } from "@/app"
+import { buildApp } from "@/app"
 import { knex, Relation } from "@/db"
-import { Source } from "@/routes/handlers/common"
+import { Source } from "@/schemas/common"
 
 let id = 0
 const createRelations = async <N extends number>(
   amount: N,
 ): Promise<N extends 1 ? Relation : Relation[]> => {
-  const relations: Relation[] = Array.from({ length: amount }).map(() => {
-    const r = {
-      anilist: id,
-      anidb: id + 1,
-      kitsu: id + 2,
-      myanimelist: id + 3,
-    }
-
-    id += 4
-
-    return r
-  })
+  const relations = Array.from({ length: amount }).map(() => ({
+    anilist: id++,
+    anidb: id++,
+    kitsu: id++,
+    myanimelist: id++,
+  }))
 
   await knex.insert(relations).into("relations")
 
@@ -30,10 +24,13 @@ const createRelations = async <N extends number>(
   return relations as any
 }
 
-const server = App.listen()
+let app: FastifyInstance
+beforeAll(async () => {
+  app = await buildApp()
+})
 
-afterAll(() => {
-  server.close()
+afterAll(async () => {
+  await app.close()
 })
 
 afterEach(() => knex.delete().from("relations"))
@@ -42,66 +39,78 @@ describe("query params", () => {
   test("fetches relation correctly", async () => {
     const relation = await createRelations(1)
 
-    return request(server)
-      .get("/api/ids")
-      .query({
-        source: Source.AniList,
-        id: relation.anilist,
-      })
-      .expect(200, relation)
-      .expect("Content-Type", /json/)
+    const response = await app.inject().get("/api/ids").query({
+      source: Source.AniList,
+      id: relation.anilist,
+    })
+
+    expect(response.json()).toStrictEqual(relation)
+    expect(response.statusCode).toBe(200)
+    expect(response.headers["content-type"]).toContain("application/json")
   })
 
-  test("returns null when id doesn't exist", async () =>
-    request(server)
-      .get("/api/ids")
-      .query({
-        source: Source.Kitsu,
-        id: 404,
-      })
-      .expect(200, null))
+  test("returns null when id doesn't exist", async () => {
+    const response = await app.inject().get("/api/ids").query({
+      source: Source.Kitsu,
+      id: 404,
+    })
+
+    expect(response.json()).toBe(null)
+    expect(response.statusCode).toBe(200)
+    expect(response.headers["content-type"]).toContain("application/json")
+  })
 })
 
 describe("json body", () => {
   describe("object input", () => {
+    test("GET fails with json body", async () => {
+      const relations = await createRelations(4)
+
+      const response = await app
+        .inject()
+        .get("/api/ids")
+        .body({
+          [Source.AniDB]: relations[0].anidb,
+        })
+
+      expect(response.json()).toMatchSnapshot()
+      expect(response.statusCode).toBe(400)
+      expect(response.headers["content-type"]).toContain("application/json")
+    })
+
     test("fetches a single relation", async () => {
       const relations = await createRelations(4)
 
-      const body = {
-        [Source.AniDB]: relations[0].anidb,
-      }
-
-      return request(server)
+      const response = await app
+        .inject()
         .post("/api/ids")
-        .send(body)
-        .expect(relations[0])
-        .expect("Content-Type", /json/)
+        .body({
+          [Source.AniDB]: relations[0].anidb,
+        })
+
+      expect(response.json()).toStrictEqual(relations[0])
+      expect(response.statusCode).toBe(200)
+      expect(response.headers["content-type"]).toContain("application/json")
     })
 
     test("errors correctly on an empty object", async () => {
       await createRelations(4)
 
-      const response = {
-        code: 400,
-        error: "Bad Request",
-        validation: '"value" must have at least 1 key',
-      }
+      const response = await app.inject().post("/api/ids").body({})
 
-      return request(server)
-        .post("/api/ids")
-        .send({})
-        .expect(400, response)
-        .expect("Content-Type", /json/)
+      expect(response.json()).toMatchSnapshot()
+      expect(response.statusCode).toBe(400)
+      expect(response.headers["content-type"]).toContain("application/json")
     })
 
     test("returns null if not found", async () => {
       await createRelations(4)
 
-      return request(server)
-        .post("/api/ids")
-        .send({ anidb: 100_000 })
-        .expect(200, null)
-        .expect("Content-Type", /json/)
+      const response = await app.inject().post("/api/ids").body({ anidb: 100_000 })
+
+      expect(response.json()).toBe(null)
+      expect(response.statusCode).toBe(200)
+      expect(response.headers["content-type"]).toContain("application/json")
     })
   })
 
@@ -117,11 +126,11 @@ describe("json body", () => {
 
       const result = [relations[0], null, relations[2]]
 
-      return request(server)
-        .post("/api/ids")
-        .send(body)
-        .expect(result)
-        .expect("Content-Type", /json/)
+      const response = await app.inject().post("/api/ids").body(body)
+
+      expect(response.json()).toStrictEqual(result)
+      expect(response.statusCode).toBe(200)
+      expect(response.headers["content-type"]).toContain("application/json")
     })
 
     test("responds correctly on no finds", async () => {
@@ -129,21 +138,21 @@ describe("json body", () => {
 
       const result = [null, null]
 
-      return request(server)
-        .post("/api/ids")
-        .send(body)
-        .expect(result)
-        .expect("Content-Type", /json/)
+      const response = await app.inject().post("/api/ids").body(body)
+
+      expect(response.json()).toStrictEqual(result)
+      expect(response.statusCode).toBe(200)
+      expect(response.headers["content-type"]).toContain("application/json")
     })
 
     test("requires at least one source", async () => {
       const body = [{}]
 
-      return request(server)
-        .post("/api/ids")
-        .send(body)
-        .expect(400)
-        .expect("Content-Type", /json/)
+      const response = await app.inject().post("/api/ids").body(body)
+
+      expect(response.json()).toMatchSnapshot()
+      expect(response.statusCode).toBe(400)
+      expect(response.headers["content-type"]).toContain("application/json")
     })
   })
 })

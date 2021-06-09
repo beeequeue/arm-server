@@ -3,7 +3,6 @@ import Http from "got"
 import { captureException } from "@sentry/node"
 
 import { knex, Relation } from "./db"
-import { Logger } from "./lib/logger"
 import { updateBasedOnManualRules } from "./manual-rules"
 
 type OfflineDatabaseSchema = {
@@ -26,7 +25,7 @@ const fetchDatabase = async (): Promise<OfflineDatabaseSchema[] | null> => {
   )
 
   if (response.statusCode !== 200) {
-    Logger.error("Could not fetch updated database!!")
+    console.error("Could not fetch updated database!!")
     captureException(new Error("Could not fetch updated database!!"))
 
     return null
@@ -87,22 +86,22 @@ const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
 }
 
 export const updateRelations = async () => {
-  Logger.info(`Using ${process.env.NODE_ENV!} database configuration...`)
+  console.log(`Using ${process.env.NODE_ENV!} database configuration...`)
 
-  Logger.info("Fetching updated Database...")
+  console.log("Fetching updated Database...")
   const data = await fetchDatabase()
-  Logger.info("Fetched updated Database.")
+  console.log("Fetched updated Database.")
 
   if (data == null) {
-    Logger.info("got no data")
+    console.log("got no data")
     return
   }
 
-  Logger.info("Formatting data...")
+  console.log("Formatting data...")
   const formattedEntries = data.map(formatEntry)
-  Logger.info("Formatted data.")
+  console.log("Formatted data.")
 
-  Logger.info("Updating database...")
+  console.log("Updating database...")
   try {
     await knex.transaction((trx) =>
       knex
@@ -116,10 +115,10 @@ export const updateRelations = async () => {
   } catch (error) {
     throw new Error(error)
   }
-  Logger.info("Updated database.")
+  console.log("Updated database.")
 
-  Logger.info("Executing manual rules...")
+  console.log("Executing manual rules...")
   await updateBasedOnManualRules()
 
-  Logger.info("Done.")
+  console.log("Done.")
 }
