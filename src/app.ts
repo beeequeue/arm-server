@@ -37,7 +37,9 @@ export const buildApp = async () => {
   })
 
   App.addHook("onError", (request, _reply, error, next) => {
-    sendErrorToSentry(error, request as any)
+    if (error.validation == null) {
+      sendErrorToSentry(error, request as any)
+    }
 
     next()
   })
