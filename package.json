@@ -8,11 +8,6 @@
   "engines": {
     "node": "^14.17"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.{js,ts,json}": [
       "prettier --write"
@@ -25,7 +20,8 @@
     "migrate": "knex migrate:latest --knexfile knexfile.ts",
     "migrate:create": "knex migrate:make --knexfile knexfile.ts -x ts",
     "start": "yarn run migrate && ts-node -r tsconfig-paths/register src/index.ts",
-    "test": "cross-env NODE_ENV=test yarn run migrate && yarn jest"
+    "test": "cross-env NODE_ENV=test yarn run migrate && yarn jest",
+    "postinstall": "husky install"
   },
   "resolutions": {
     "@types/node": "14.17.2"
