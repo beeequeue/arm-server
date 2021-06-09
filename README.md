@@ -65,23 +65,6 @@ interface Entry {
 **The response code will always be 200 (OK).**
 If an entry is not found `null` is returned instead.
 
-## Changelog
-
-#### 2020-06-02
-
-Invalid HTTP requests have been deprecated.
-
-They will have a 33% chance to respond with a `400`, with a message detailing this deprecation.
-
-i.e:
-
-- Sending JSON bodies in `GET` requests
-- Sending query parameters in `POST` requests
-
-#### 2020-12-27
-
-API no longer returns `204`s - now always returns `200` with a `null` JSON body.
-
 ## Development
 
 1. Clone the project
