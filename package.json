@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@beequeue/eslint-plugin": "0.2.1",
-    "@tsconfig/node14": "1.0.0",
+    "@tsconfig/node14": "1.0.1",
     "@types/jest": "26.0.23",
     "@types/node": "14.17.3",
     "dotenv": "10.0.0",

@@ -896,10 +896,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/node14@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@tsconfig/node14@npm:1.0.0"
-  checksum: a6e564b91e588bc05d37e2689e009ccd12743f6e1a2532ca7d20ca5e80b4d3b5b324b03e477497f2ebf2311901a369095a36c1c3cf744da7f35486923672c1f0
+"@tsconfig/node14@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@tsconfig/node14@npm:1.0.1"
+  checksum: 976345e896c0f059867f94f8d0f6ddb8b1844fb62bf36b727de8a9a68f024857e5db97ed51d3325e23e0616a5e48c034ff51a8d595b3fe7e955f3587540489be
   languageName: node
   linkType: hard
 
@@ -1466,7 +1466,7 @@ __metadata:
     "@beequeue/eslint-plugin": 0.2.1
     "@sentry/node": 6.5.1
     "@sentry/tracing": 6.5.1
-    "@tsconfig/node14": 1.0.0
+    "@tsconfig/node14": 1.0.1
     "@types/jest": 26.0.23
     "@types/node": 14.17.3
     cross-env: 7.0.3
