@@ -434,9 +434,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@beequeue/eslint-plugin@npm:0.2.0":
-  version: 0.2.0
-  resolution: "@beequeue/eslint-plugin@npm:0.2.0"
+"@beequeue/eslint-plugin@npm:0.2.1":
+  version: 0.2.1
+  resolution: "@beequeue/eslint-plugin@npm:0.2.1"
   dependencies:
     "@typescript-eslint/eslint-plugin": 4.25.0
     "@typescript-eslint/parser": 4.25.0
@@ -451,7 +451,11 @@ __metadata:
     eslint-plugin-vue: 7.9.0
   peerDependencies:
     eslint: ^7.21.0
-  checksum: 0bae6f320c6255ab3268aa16b96da44c152fa325c434a70e59656f60f33c0855f1e42ddcd695a897fdf8583926fb0da0a3e36b6913a95bf2a75567c716060238
+    prettier: ^2.3.0
+  peerDependenciesMeta:
+    prettier:
+      optional: true
+  checksum: d3ea5b53462b215205350104704a2f6360be4bb517574a1e2113e1a5bc002b00e12995ef993ac9f71983ebaaba19b8e14992a193138205e2676cb2c9d7bf4f2a
   languageName: node
   linkType: hard
 
@@ -1459,7 +1463,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "arm-server@workspace:."
   dependencies:
-    "@beequeue/eslint-plugin": 0.2.0
+    "@beequeue/eslint-plugin": 0.2.1
     "@sentry/node": 6.5.1
     "@sentry/tracing": 6.5.1
     "@tsconfig/node14": 1.0.0
