@@ -27,8 +27,8 @@
     "@types/node": "14.17.3"
   },
   "dependencies": {
-    "@sentry/node": "6.5.1",
-    "@sentry/tracing": "6.5.1",
+    "@sentry/node": "6.8.0",
+    "@sentry/tracing": "6.8.0",
     "cross-env": "7.0.3",
     "envsafe": "2.0.3",
     "fastify": "3.17.0",
