@@ -2,12 +2,11 @@ import { FastifyRequest } from "fastify"
 
 import * as Sentry from "@sentry/node"
 
-const { NODE_ENV, TRACES_SAMPLERATE, SENTRY_DSN } = process.env
+const { NODE_ENV, SENTRY_DSN } = process.env
 
 Sentry.init({
   dsn: SENTRY_DSN,
   enabled: NODE_ENV === "production",
-  tracesSampleRate: Number(TRACES_SAMPLERATE ?? 0.25),
 })
 
 export const sendErrorToSentry = (
