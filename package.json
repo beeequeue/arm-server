@@ -24,14 +24,13 @@
     "postinstall": "husky install"
   },
   "resolutions": {
-    "@types/node": "14.17.3"
+    "@types/node": "14.17.4"
   },
   "dependencies": {
-    "@sentry/node": "6.5.1",
-    "@sentry/tracing": "6.5.1",
+    "@sentry/node": "6.8.0",
     "cross-env": "7.0.3",
     "envsafe": "2.0.3",
-    "fastify": "3.17.0",
+    "fastify": "3.18.1",
     "fastify-cors": "6.0.1",
     "fastify-helmet": "5.3.1",
     "got": "11.8.2",
@@ -40,23 +39,23 @@
     "sqlite3": "5.0.2",
     "ts-json-validator": "0.7.1",
     "ts-node": "9.1.1",
-    "type-fest": "1.2.0",
-    "typescript": "4.3.2"
+    "type-fest": "1.2.1",
+    "typescript": "4.3.5"
   },
   "devDependencies": {
     "@beequeue/eslint-plugin": "0.2.1",
     "@tsconfig/node14": "1.0.1",
     "@types/jest": "26.0.23",
-    "@types/node": "14.17.3",
+    "@types/node": "14.17.4",
     "dotenv": "10.0.0",
-    "eslint": "7.28.0",
+    "eslint": "7.29.0",
     "husky": "6.0.0",
     "jest": "27.0.6",
     "lint-staged": "11.0.0",
-    "pino-pretty": "5.0.2",
-    "prettier": "2.3.1",
-    "ts-jest": "26.5.6",
-    "ts-node-dev": "1.1.6",
+    "pino-pretty": "5.1.0",
+    "prettier": "2.3.2",
+    "ts-jest": "27.0.3",
+    "ts-node-dev": "1.1.7",
     "tsconfig-paths": "3.9.0"
   }
 }
