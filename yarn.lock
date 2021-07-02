@@ -1511,7 +1511,7 @@ __metadata:
     ts-jest: 27.0.3
     ts-json-validator: 0.7.1
     ts-node: 9.1.1
-    ts-node-dev: 1.1.7
+    ts-node-dev: 1.1.8
     tsconfig-paths: 3.9.0
     type-fest: 1.2.1
     typescript: 4.3.5
@@ -7485,9 +7485,9 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"ts-node-dev@npm:1.1.7":
-  version: 1.1.7
-  resolution: "ts-node-dev@npm:1.1.7"
+"ts-node-dev@npm:1.1.8":
+  version: 1.1.8
+  resolution: "ts-node-dev@npm:1.1.8"
   dependencies:
     chokidar: ^3.5.1
     dynamic-dedupe: ^0.3.0
@@ -7508,7 +7508,7 @@ resolve@^2.0.0-next.3:
   bin:
     ts-node-dev: lib/bin.js
     tsnd: lib/bin.js
-  checksum: b0750d9ea005262c89eaea30169987887cb899fd9e93907be6011cb103ce0d4453cbb92ab53f0e8fce1e1dae60afb66d34cbf319eb94cc78ce009ef5cbb6a1e1
+  checksum: 768a5806215ca78694d39b85ec6877ba41d33b5affcbedc8208f0e4befd5ba1cffbcc505d5d8eca82ea23a4517a79be5f5de6350cb6e249425c832f4ddf10a0f
   languageName: node
   linkType: hard
 
