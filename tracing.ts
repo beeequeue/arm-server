@@ -1,22 +1,9 @@
-import { CollectorTraceExporter } from "@opentelemetry/exporter-collector"
-import { registerInstrumentations } from "@opentelemetry/instrumentation"
-import { HttpInstrumentation } from "@opentelemetry/instrumentation-http"
-import { NodeTracerProvider } from "@opentelemetry/node"
-import { BatchSpanProcessor } from "@opentelemetry/tracing"
+import { lightstep } from "lightstep-opentelemetry-launcher-node"
 
-const provider: NodeTracerProvider = new NodeTracerProvider()
-
-const exportUrl = process.env.OTEL_EXPORT_URL
-const exporter = new CollectorTraceExporter({
-  url: exportUrl,
+const sdk = lightstep.configureOpenTelemetry({
+  serviceName: "arm-server",
 })
 
-provider.addSpanProcessor(new BatchSpanProcessor(exporter))
-
-if (exportUrl != null) {
-  provider.register()
+if (process.env.OTEL_EXPORTER_OTLP_SPAN_ENDPOINT != null) {
+  sdk.start()
 }
-
-registerInstrumentations({
-  instrumentations: [new HttpInstrumentation({ serverName: "arm-server" })],
-})
