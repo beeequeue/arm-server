@@ -19,7 +19,7 @@
     "lint": "eslint src",
     "migrate": "knex migrate:latest --knexfile knexfile.ts",
     "migrate:create": "knex migrate:make --knexfile knexfile.ts -x ts",
-    "start": "yarn run migrate && ts-node -r tsconfig-paths/register src/index.ts",
+    "start": "yarn run migrate && ts-node src/index.ts",
     "test": "cross-env NODE_ENV=test yarn run migrate && yarn jest --forceExit",
     "postinstall": "husky install"
   },
@@ -27,6 +27,7 @@
     "@types/node": "14.17.4"
   },
   "dependencies": {
+    "@autotelic/fastify-opentelemetry": "0.14.0",
     "@sentry/node": "6.8.0",
     "cross-env": "7.0.3",
     "envsafe": "2.0.3",
@@ -35,6 +36,7 @@
     "fastify-helmet": "5.3.1",
     "got": "11.8.2",
     "knex": "0.95.6",
+    "lightstep-opentelemetry-launcher-node": "0.17.0",
     "nanoid": "3.1.23",
     "sqlite3": "5.0.2",
     "ts-json-validator": "0.7.1",

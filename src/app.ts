@@ -3,6 +3,8 @@ import Cors from "fastify-cors"
 import Helmet from "fastify-helmet"
 import { customAlphabet, urlAlphabet } from "nanoid"
 
+import OpenTelemetryPlugin from "@autotelic/fastify-opentelemetry"
+
 import { config } from "@/config"
 import { sendErrorToSentry } from "@/lib/sentry"
 import { apiPlugin } from "@/routes/ids"
@@ -25,6 +27,12 @@ export const buildApp = async () => {
       level: config.LOG_LEVEL,
       prettyPrint: !isProd,
     },
+  })
+
+  await App.register(OpenTelemetryPlugin, {
+    serviceName: "arm-server",
+    wrapRoutes: true,
+    logLevel: "info",
   })
 
   await App.register(Cors, {

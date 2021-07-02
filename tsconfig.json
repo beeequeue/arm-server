@@ -16,6 +16,9 @@
     "noUnusedParameters": true,
     "types": ["node", "jest"]
   },
+  "ts-node": {
+    "require": ["dotenv/config", "tsconfig-paths/register", "./tracing.ts"]
+  },
   "include": ["**/*.ts"],
   "exclude": ["node_modules"]
 }
