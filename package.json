@@ -41,7 +41,7 @@
     "sqlite3": "5.0.2",
     "ts-json-validator": "0.7.1",
     "ts-node": "9.1.1",
-    "type-fest": "1.2.1",
+    "type-fest": "1.2.2",
     "typescript": "4.3.5"
   },
   "devDependencies": {
