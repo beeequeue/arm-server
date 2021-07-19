@@ -2367,7 +2367,7 @@ __metadata:
     envsafe: 2.0.3
     eslint: 7.30.0
     fastify: 3.18.1
-    fastify-cors: 6.0.1
+    fastify-cors: 6.0.2
     fastify-helmet: 5.3.2
     got: 11.8.2
     husky: 7.0.1
@@ -4087,13 +4087,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fastify-cors@npm:6.0.1":
-  version: 6.0.1
-  resolution: "fastify-cors@npm:6.0.1"
+"fastify-cors@npm:6.0.2":
+  version: 6.0.2
+  resolution: "fastify-cors@npm:6.0.2"
   dependencies:
     fastify-plugin: ^3.0.0
     vary: ^1.1.2
-  checksum: 21f15cfb4602601f1ed1bfe56e93c433a3680e522bd3951b441e2a137028c255a4b420af30a149594f42e37de3a5147a8f2f8c6878af2392cddcee8e963f6fbf
+  checksum: f600eb30d2259bf0277c3df72c73f09f6891f3984c62e1c9a7489f0d6b2ffb1749dbe9a79a05ad74b08a660c1a707c9fb7636c20b87d07eae0e6efd9c951fd03
   languageName: node
   linkType: hard
 
