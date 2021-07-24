@@ -2374,7 +2374,7 @@ __metadata:
     jest: 27.0.6
     knex: 0.95.6
     lightstep-opentelemetry-launcher-node: 0.17.0
-    lint-staged: 11.0.0
+    lint-staged: 11.1.1
     nanoid: 3.1.23
     pino-pretty: 5.1.0
     prettier: 2.3.2
@@ -6021,9 +6021,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:11.0.0":
-  version: 11.0.0
-  resolution: "lint-staged@npm:11.0.0"
+"lint-staged@npm:11.1.1":
+  version: 11.1.1
+  resolution: "lint-staged@npm:11.1.1"
   dependencies:
     chalk: ^4.1.1
     cli-truncate: ^2.1.0
@@ -6042,7 +6042,7 @@ __metadata:
     stringify-object: ^3.3.0
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 3be24b4a88799264bbb9baeedfc5be278d25aa85dc766c5328da23d5d92300c0a163563b455d530ca2a74510a161f17623e846e1aca81e44f389108274ad2acd
+  checksum: 87d6654b71b898552712a6dba4689f40c887f1fd4b6a7b102a3e3e234cd8d6545c39e0f8b6380e26e5552ac788e2954d91eb7709ce6b5df9508584e2ddb8141f
   languageName: node
   linkType: hard
 
