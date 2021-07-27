@@ -26,6 +26,12 @@ export const updateBasedOnManualRules = async () => {
       throw new Error(`Could not find rule source for ${from}->${to}!!!!!`)
     }
 
+    if (badRelation[toSource as keyof Relation] === Number(toId)) {
+      return console.warn(
+        `${from}:${to} has been fixed, can be removed from manual rules.`,
+      )
+    }
+
     await knex
       .transaction((trx) =>
         knex("relations")
