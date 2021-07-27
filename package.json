@@ -24,19 +24,20 @@
     "postinstall": "husky install"
   },
   "resolutions": {
-    "@types/node": "14.17.5"
+    "@types/node": "14.17.6"
   },
   "dependencies": {
-    "@autotelic/fastify-opentelemetry": "0.14.0",
-    "@sentry/node": "6.8.0",
+    "@autotelic/fastify-opentelemetry": "0.15.0",
+    "@opentelemetry/api": "1.0.1",
+    "@sentry/node": "6.10.0",
     "cross-env": "7.0.3",
     "envsafe": "2.0.3",
-    "fastify": "3.18.1",
-    "fastify-cors": "6.0.1",
+    "fastify": "3.19.2",
+    "fastify-cors": "6.0.2",
     "fastify-helmet": "5.3.2",
     "got": "11.8.2",
-    "knex": "0.95.6",
-    "lightstep-opentelemetry-launcher-node": "0.17.0",
+    "knex": "0.95.8",
+    "lightstep-opentelemetry-launcher-node": "0.18.0",
     "nanoid": "3.1.23",
     "sqlite3": "5.0.2",
     "ts-json-validator": "0.7.1",
@@ -48,16 +49,16 @@
     "@beequeue/eslint-plugin": "0.2.1",
     "@tsconfig/node14": "1.0.1",
     "@types/jest": "26.0.24",
-    "@types/node": "14.17.5",
+    "@types/node": "14.17.6",
     "dotenv": "10.0.0",
-    "eslint": "7.30.0",
+    "eslint": "7.31.0",
     "husky": "7.0.1",
     "jest": "27.0.6",
-    "lint-staged": "11.0.0",
-    "pino-pretty": "5.1.0",
+    "lint-staged": "11.1.1",
+    "pino-pretty": "5.1.2",
     "prettier": "2.3.2",
-    "ts-jest": "27.0.3",
+    "ts-jest": "27.0.4",
     "ts-node-dev": "1.1.8",
-    "tsconfig-paths": "3.9.0"
+    "tsconfig-paths": "3.10.1"
   }
 }
