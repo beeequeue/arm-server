@@ -98,8 +98,10 @@ export const updateRelations = async () => {
   }
 
   console.log("Formatting data...")
-  const formattedEntries = data.map(formatEntry)
-  console.log("Formatted data.")
+  const formattedEntries = data
+    .map(formatEntry)
+    .filter((entry) => Object.keys(entry).length > 1)
+  console.log(`Formatted data. (${formattedEntries.length} entries)`)
 
   console.log("Updating database...")
   try {
