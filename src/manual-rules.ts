@@ -1,34 +1,24 @@
 import { knex, Relation } from "./db"
 
-const rules = {
-  // Kaguya-sama
-  "anidb:14111": "anilist:101921",
-  // Shield Hero
-  "anidb:13246": "anilist:99263",
-  // Vivy #385
-  "anidb:15988": "myanimelist:46095",
-  // Osananajimi #386
-  "anidb:15756": "myanimelist:43007",
-  // Iruma-kun S2 #387
-  "anidb:15428": "myanimelist:41402",
-}
+type Rule = `${keyof Relation}:${number}`
+const rules: Record<Rule, Rule> = {}
 
 export const updateBasedOnManualRules = async () => {
   const promises = Object.entries(rules).map(async ([from, to]) => {
     const [fromSource, fromId] = from.split(":")
     const fromWhere = { [fromSource]: Number(fromId) }
-    const [toSource, toId] = to.split(":")
+    const [toSource, toId] = (to as string).split(":")
     const toWhere = { [toSource]: Number(toId) }
 
     const badRelation: Relation | null = await knex("relations").where(fromWhere).first()
 
     if (!badRelation) {
-      throw new Error(`Could not find rule source for ${from}->${to}!!!!!`)
+      throw new Error(`Could not find rule source for ${from}->${to as string}!!!!!`)
     }
 
     if (badRelation[toSource as keyof Relation] === Number(toId)) {
       return console.warn(
-        `${from}:${to} has been fixed, can be removed from manual rules.`,
+        `${from}:${to as string} has been fixed, can be removed from manual rules.`,
       )
     }
 
