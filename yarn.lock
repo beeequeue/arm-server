@@ -904,7 +904,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opentelemetry/api@npm:1.0.1, @opentelemetry/api@npm:^1.0.1":
+"@opentelemetry/api@npm:1.0.2":
+  version: 1.0.2
+  resolution: "@opentelemetry/api@npm:1.0.2"
+  checksum: cb3ea3761a6e643b97b180bb5fea5e85c2d6cb5b7e352b989bd0772443d2edad16491e3f749034d8bb6ac3173d0bc10d2b4e753b602fb8b2a3352d7d25c914c8
+  languageName: node
+  linkType: hard
+
+"@opentelemetry/api@npm:^1.0.1":
   version: 1.0.1
   resolution: "@opentelemetry/api@npm:1.0.1"
   checksum: a8464ee52c0616cf354893a1d9b14aaaa5819dcb9ae520d851989f5e75ede1d9c81a21442ec89d14912c7bc7dd5fa45ba49abf95800d40ba0fdd97ec5f492d3e
@@ -2352,7 +2359,7 @@ __metadata:
   dependencies:
     "@autotelic/fastify-opentelemetry": 0.15.0
     "@beequeue/eslint-plugin": 0.2.1
-    "@opentelemetry/api": 1.0.1
+    "@opentelemetry/api": 1.0.2
     "@sentry/node": 6.10.0
     "@tsconfig/node14": 1.0.1
     "@types/jest": 26.0.24
