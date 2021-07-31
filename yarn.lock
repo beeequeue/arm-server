@@ -2367,7 +2367,7 @@ __metadata:
     got: 11.8.2
     husky: 7.0.1
     jest: 27.0.6
-    knex: 0.95.8
+    knex: 0.95.9
     lightstep-opentelemetry-launcher-node: 0.18.0
     lint-staged: 11.1.1
     nanoid: 3.1.23
@@ -5858,9 +5858,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"knex@npm:0.95.8":
-  version: 0.95.8
-  resolution: "knex@npm:0.95.8"
+"knex@npm:0.95.9":
+  version: 0.95.9
+  resolution: "knex@npm:0.95.9"
   dependencies:
     colorette: 1.2.1
     commander: ^7.1.0
@@ -5888,7 +5888,7 @@ __metadata:
       optional: true
   bin:
     knex: bin/cli.js
-  checksum: dc6715af37e11df1dd9386d5a4183a0ffd981d143ac341633ee4f1d8604ab603d347421f3159e6567f10271b82a2a5d576b1131308e4140ab1b8153e7c6f59b1
+  checksum: 87a66d7b612518697a2459d544ccac70b0d86971400cfa175e67c93733476156046fa113005f4f95c342af99e3b88dbfc7842b4fabec2e4db4fb7b271a1389c5
   languageName: node
   linkType: hard
 
