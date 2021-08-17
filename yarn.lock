@@ -1834,10 +1834,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:14.17.6":
-  version: 14.17.6
-  resolution: "@types/node@npm:14.17.6"
-  checksum: 19b11f3c49689d1ffd2b7b534a49ab7daca18ce702cce9d9b5d28d60e79de94367339217f602053d0353170a9e02f7ad2d5cd796200977dc176d6d7ba376cf09
+"@types/node@npm:14.17.9":
+  version: 14.17.9
+  resolution: "@types/node@npm:14.17.9"
+  checksum: e59b92e4346ed0db61e042d439f9658d1d3e8ad1d14825b714804cafae8ce22220ff6c8d907c4e4c6384aac748de07283fa321ef13cb8bdeb460eb789d634244
   languageName: node
   linkType: hard
 
@@ -2363,7 +2363,7 @@ __metadata:
     "@sentry/node": 6.10.0
     "@tsconfig/node14": 1.0.1
     "@types/jest": 26.0.24
-    "@types/node": 14.17.6
+    "@types/node": 14.17.9
     cross-env: 7.0.3
     dotenv: 10.0.0
     envsafe: 2.0.3
