@@ -30,7 +30,7 @@ export const buildApp = async () => {
   })
 
   await App.register(OpenTelemetryPlugin, {
-    serviceName: "arm-server",
+    prefix: "arm-",
     wrapRoutes: true,
     logLevel: "info",
   })
