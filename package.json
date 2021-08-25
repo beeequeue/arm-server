@@ -38,7 +38,7 @@
     "got": "11.8.2",
     "knex": "0.95.9",
     "lightstep-opentelemetry-launcher-node": "0.18.0",
-    "nanoid": "3.1.23",
+    "nanoid": "3.1.25",
     "sqlite3": "5.0.2",
     "ts-json-validator": "0.7.1",
     "ts-node": "10.2.1",

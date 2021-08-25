@@ -2421,7 +2421,7 @@ __metadata:
     knex: 0.95.9
     lightstep-opentelemetry-launcher-node: 0.18.0
     lint-staged: 11.1.2
-    nanoid: 3.1.23
+    nanoid: 3.1.25
     pino-pretty: 5.1.3
     prettier: 2.3.2
     sqlite3: 5.0.2
@@ -6478,12 +6478,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:3.1.23":
-  version: 3.1.23
-  resolution: "nanoid@npm:3.1.23"
+"nanoid@npm:3.1.25":
+  version: 3.1.25
+  resolution: "nanoid@npm:3.1.25"
   bin:
     nanoid: bin/nanoid.cjs
-  checksum: 8fa8dc3283a4fa159700a36cb22f61197547c8155831cb74f1b9c51fbc29ea80c136fd91001468d147a31d3a77f884958aec6c1beabac903c89780acacca9327
+  checksum: e2353828c7d8fde65265e9c981380102e2021f292038a93fd27288bad390339833286e8cbc7531abe1cb2c6b317e55f38b895dcb775151637bb487388558e0ff
   languageName: node
   linkType: hard
 
