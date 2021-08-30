@@ -46,7 +46,7 @@
     "typescript": "4.3.5"
   },
   "devDependencies": {
-    "@beequeue/eslint-plugin": "0.2.1",
+    "@beequeue/eslint-plugin": "0.3.0",
     "@tsconfig/node14": "1.0.1",
     "@types/jest": "27.0.1",
     "@types/node": "16.7.1",
