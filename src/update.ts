@@ -104,19 +104,13 @@ export const updateRelations = async () => {
   console.log(`Formatted data. (${formattedEntries.length} entries)`)
 
   console.log("Updating database...")
-  try {
-    await knex.transaction((trx) =>
-      knex
-        .delete()
-        .from("relations")
-        .transacting(trx)
-        .then(() =>
-          knex.batchInsert("relations", formattedEntries, 100).transacting(trx),
-        ),
-    )
-  } catch (error) {
-    throw new Error(error)
-  }
+  await knex.transaction((trx) =>
+    knex
+      .delete()
+      .from("relations")
+      .transacting(trx)
+      .then(() => knex.batchInsert("relations", formattedEntries, 100).transacting(trx)),
+  )
   console.log("Updated database.")
 
   console.log("Executing manual rules...")
