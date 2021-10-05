@@ -2426,7 +2426,7 @@ __metadata:
     ts-node-dev: 1.1.8
     tsconfig-paths: 3.11.0
     type-fest: 2.3.4
-    typescript: 4.5.0-dev.20211004
+    typescript: 4.5.0-dev.20211005
   languageName: unknown
   linkType: soft
 
@@ -8750,23 +8750,23 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-typescript@4.5.0-dev.20211004:
-  version: 4.5.0-dev.20211004
-  resolution: "typescript@npm:4.5.0-dev.20211004"
+typescript@4.5.0-dev.20211005:
+  version: 4.5.0-dev.20211005
+  resolution: "typescript@npm:4.5.0-dev.20211005"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: b3066d7bba9dd102016851ac087baac60d5ea7caa22648d17d8fe790b065fc69b8f8c97c2a14e5cd11d5529ed9e6ad361aef443f3b389def12e45195aa735a1c
+  checksum: 043a22ff87724dd7f27854481902a11a6ef541cd3ba4b84aa7b13d1e4ddaaae6c3980d64d382e66480edfcd0502eb8c15cd61fc0da23df019ef89335dfd7c1b0
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@4.5.0-dev.20211004#~builtin<compat/typescript>":
-  version: 4.5.0-dev.20211004
-  resolution: "typescript@patch:typescript@npm%3A4.5.0-dev.20211004#~builtin<compat/typescript>::version=4.5.0-dev.20211004&hash=d8b4e7"
+"typescript@patch:typescript@4.5.0-dev.20211005#~builtin<compat/typescript>":
+  version: 4.5.0-dev.20211005
+  resolution: "typescript@patch:typescript@npm%3A4.5.0-dev.20211005#~builtin<compat/typescript>::version=4.5.0-dev.20211005&hash=d8b4e7"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: aa80c825c4cb0356a0ee4d43c97d1f09a672de2dc56bed9d0e6d02d93ff0ad0a990f8df51f19696461d4e0e17d80bb2a0f722145dd05f9c932ea599fc67d214b
+  checksum: 18718e8f36577abab82e9e8da819efab74066f1d88e522c3a836721461a51e00853e2f456174714773c3930637c3d519f7dc8cfb47cef695bcf10c5a5841fde6
   languageName: node
   linkType: hard
 

@@ -43,7 +43,7 @@
     "ts-json-validator": "0.7.1",
     "ts-node": "10.2.1",
     "type-fest": "2.3.4",
-    "typescript": "4.5.0-dev.20211004"
+    "typescript": "4.5.0-dev.20211005"
   },
   "devDependencies": {
     "@beequeue/eslint-plugin": "0.3.0",
