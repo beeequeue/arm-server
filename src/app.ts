@@ -3,8 +3,6 @@ import Cors from "fastify-cors"
 import Helmet from "fastify-helmet"
 import { customAlphabet, urlAlphabet } from "nanoid"
 
-import OpenTelemetryPlugin from "@autotelic/fastify-opentelemetry"
-
 import { config } from "@/config"
 import { sendErrorToSentry } from "@/lib/sentry"
 import { apiPlugin } from "@/routes/ids"
@@ -29,12 +27,6 @@ export const buildApp = async () => {
     },
   })
 
-  await App.register(OpenTelemetryPlugin, {
-    prefix: "arm-",
-    wrapRoutes: true,
-    logLevel: "info",
-  })
-
   await App.register(Cors, {
     origin: true,
   })
@@ -46,6 +38,7 @@ export const buildApp = async () => {
 
   App.addHook("onError", (request, _reply, error, next) => {
     if (error.validation == null) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       sendErrorToSentry(error, request as any)
     }
 
