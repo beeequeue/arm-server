@@ -2421,7 +2421,7 @@ __metadata:
     dotenv: 10.0.0
     envsafe: 2.0.3
     eslint: 7.32.0
-    fastify: 3.22.0
+    fastify: 3.23.1
     fastify-cors: 6.0.2
     fastify-helmet: 5.3.2
     got: 11.8.2
@@ -4167,9 +4167,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fastify@npm:3.22.0":
-  version: 3.22.0
-  resolution: "fastify@npm:3.22.0"
+"fastify@npm:3.23.1":
+  version: 3.23.1
+  resolution: "fastify@npm:3.23.1"
   dependencies:
     "@fastify/ajv-compiler": ^1.0.0
     abstract-logging: ^2.0.0
@@ -4182,12 +4182,11 @@ __metadata:
     light-my-request: ^4.2.0
     pino: ^6.13.0
     proxy-addr: ^2.0.7
-    readable-stream: ^3.4.0
     rfdc: ^1.1.4
     secure-json-parse: ^2.0.0
     semver: ^7.3.2
     tiny-lru: ^7.0.0
-  checksum: 4f06ccb4b75df5748d8683b11050920439db642a6fecf508d0e6aa58cefd874a4d9ef76e3ec29a9e87a06c373c4d1adfa0d92c092f793d1bbfd9f3207e2c1c6a
+  checksum: c1110085c9aacbc8734b3c570e14276c94d406361c1280a8a9345266eaf8218e420eaab742de171581e9d9f5195fff3d0206d582da1ab7ea4ba0f455ab9efbba
   languageName: node
   linkType: hard
 
@@ -7502,7 +7501,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"readable-stream@npm:^3.0.0, readable-stream@npm:^3.4.0, readable-stream@npm:^3.6.0":
+"readable-stream@npm:^3.0.0, readable-stream@npm:^3.6.0":
   version: 3.6.0
   resolution: "readable-stream@npm:3.6.0"
   dependencies:
