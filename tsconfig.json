@@ -17,7 +17,7 @@
     "types": ["node", "jest"]
   },
   "ts-node": {
-    "require": ["dotenv/config", "tsconfig-paths/register", "./tracing.ts"]
+    "require": ["dotenv/config", "tsconfig-paths/register"]
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules"]
