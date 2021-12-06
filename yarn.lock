@@ -2709,7 +2709,7 @@ __metadata:
     sqlite3: 5.0.2
     ts-jest: 27.0.7
     ts-json-validator: 0.7.1
-    ts-node: 10.3.0
+    ts-node: 10.4.0
     ts-node-dev: 1.1.8
     tsconfig-paths: 3.11.0
     type-fest: 2.5.3
@@ -9126,9 +9126,9 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"ts-node@npm:10.3.0":
-  version: 10.3.0
-  resolution: "ts-node@npm:10.3.0"
+"ts-node@npm:10.4.0":
+  version: 10.4.0
+  resolution: "ts-node@npm:10.4.0"
   dependencies:
     "@cspotcode/source-map-support": 0.7.0
     "@tsconfig/node10": ^1.0.7
@@ -9158,7 +9158,7 @@ resolve@^2.0.0-next.3:
     ts-node-script: dist/bin-script.js
     ts-node-transpile-only: dist/bin-transpile.js
     ts-script: dist/bin-script-deprecated.js
-  checksum: aea1b9eac4d4c735c453a0e7efef6fd76c7b59db3be158eabe21abad9d35209d243b210a9a5ef39742ffbda542250c2e771fa387e3b4829e8cb699e82f3820c4
+  checksum: 3933ac0a937d33c45e04a6750fcdd3e765eb2897d1da1307cd97ac52af093bcfb632ec0453a75000a65c8b5b7bdb32b1077050a186dcc556e62657cb592e6d49
   languageName: node
   linkType: hard
 
