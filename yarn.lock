@@ -780,7 +780,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hapi/bourne@npm:2.x.x, @hapi/bourne@npm:^2.0.0":
+"@hapi/bourne@npm:2.x.x":
   version: 2.0.0
   resolution: "@hapi/bourne@npm:2.0.0"
   checksum: 2ea0922101d3fecec43428194c72c5dbe0be908dd7ad07347879dc720820ac410ead79a4c349a2e1726e8af062464160c6d32b6566bbc4c60865923f9d7dd006
@@ -2704,7 +2704,7 @@ __metadata:
     lightstep-opentelemetry-launcher-node: 0.24.0
     lint-staged: 12.1.2
     nanoid: 3.1.30
-    pino-pretty: 6.0.0
+    pino-pretty: 7.2.0
     prettier: 2.4.1
     sqlite3: 5.0.2
     ts-jest: 27.0.7
@@ -3356,7 +3356,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colorette@npm:2.0.16, colorette@npm:^2.0.16":
+"colorette@npm:2.0.16, colorette@npm:^2.0.16, colorette@npm:^2.0.7":
   version: 2.0.16
   resolution: "colorette@npm:2.0.16"
   checksum: cd55596a3a2d1071c1a28eee7fd8a5387593ff1bd10a3e8d0a6221499311fe34a9f2b9272d77c391e0e003dcdc8934fb2f8d106e7ef1f7516f8060c901d41a27
@@ -3558,10 +3558,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dateformat@npm:^4.5.1":
-  version: 4.5.1
-  resolution: "dateformat@npm:4.5.1"
-  checksum: 2c80b0fed4977db338aa70fbdd605a50c06ec36f4ef8d8fd36193a08c4910da1172eec919a74ed93abfc134fc71dca8707877d4fd149c07f0d1c919d598283e3
+"dateformat@npm:^4.6.3":
+  version: 4.6.3
+  resolution: "dateformat@npm:4.6.3"
+  checksum: c3aa0617c0a5b30595122bc8d1bee6276a9221e4d392087b41cbbdf175d9662ae0e50d0d6dcdf45caeac5153c4b5b0844265f8cd2b2245451e3da19e39e3b65d
   languageName: node
   linkType: hard
 
@@ -3756,6 +3756,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"duplexify@npm:^4.1.2":
+  version: 4.1.2
+  resolution: "duplexify@npm:4.1.2"
+  dependencies:
+    end-of-stream: ^1.4.1
+    inherits: ^2.0.3
+    readable-stream: ^3.1.1
+    stream-shift: ^1.0.0
+  checksum: 964376c61c0e92f6ed0694b3ba97c84f199413dc40ab8dfdaef80b7a7f4982fcabf796214e28ed614a5bc1ec45488a29b81e7d46fa3f5ddf65bcb118c20145ad
+  languageName: node
+  linkType: hard
+
 "dynamic-dedupe@npm:^0.3.0":
   version: 0.3.0
   resolution: "dynamic-dedupe@npm:0.3.0"
@@ -3812,7 +3824,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"end-of-stream@npm:^1.1.0":
+"end-of-stream@npm:^1.1.0, end-of-stream@npm:^1.4.1":
   version: 1.4.4
   resolution: "end-of-stream@npm:1.4.4"
   dependencies:
@@ -6159,13 +6171,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jmespath@npm:^0.15.0":
-  version: 0.15.0
-  resolution: "jmespath@npm:0.15.0"
-  checksum: 353bb9e69cc4c1560be0a4df43cb4020abc246e1c60cb5b55dcc76d8c858383f1633faf22ccaf6a5e09568a2077d0f4f1e989e6fcfd496b5cef87964cc8cb9e7
-  languageName: node
-  linkType: hard
-
 "joi@npm:^17.3.0":
   version: 17.4.2
   resolution: "joi@npm:17.4.2"
@@ -7589,25 +7594,35 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pino-pretty@npm:6.0.0":
-  version: 6.0.0
-  resolution: "pino-pretty@npm:6.0.0"
+"pino-abstract-transport@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "pino-abstract-transport@npm:0.5.0"
   dependencies:
-    "@hapi/bourne": ^2.0.0
+    duplexify: ^4.1.2
+    split2: ^4.0.0
+  checksum: c503f867de3189f8217ab9cf794e8a631dddd0029a829f0f985f5511308152ebd53e363764fbc5570b3d1c715b341e3923456ce16ad84cd41be2b9a074ada234
+  languageName: node
+  linkType: hard
+
+"pino-pretty@npm:7.2.0":
+  version: 7.2.0
+  resolution: "pino-pretty@npm:7.2.0"
+  dependencies:
     args: ^5.0.1
-    colorette: ^1.3.0
-    dateformat: ^4.5.1
+    colorette: ^2.0.7
+    dateformat: ^4.6.3
     fast-safe-stringify: ^2.0.7
-    jmespath: ^0.15.0
     joycon: ^3.0.0
+    pino-abstract-transport: ^0.5.0
     pump: ^3.0.0
     readable-stream: ^3.6.0
     rfdc: ^1.3.0
-    split2: ^3.1.1
+    secure-json-parse: ^2.4.0
+    sonic-boom: ^2.2.0
     strip-json-comments: ^3.1.1
   bin:
     pino-pretty: bin.js
-  checksum: dd2c8e09a62a2fe12420f55d8929bd425d24c9edc9ccaf8489b174398d45aad8376337a4f904c06d1381c8e233d3b97aa10f7c29e1e85d3c001d9030ffa2e3bb
+  checksum: dafe8a33681316c97eda6a1240ea8b8a0efad6e62183c793c6bbe594aae836bd5894f2fb5657b6a8e26576ccb364213186cf3dc060e89f68ddcee87c98e5a803
   languageName: node
   linkType: hard
 
@@ -7923,7 +7938,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"readable-stream@npm:^3.0.0, readable-stream@npm:^3.6.0":
+"readable-stream@npm:^3.1.1, readable-stream@npm:^3.6.0":
   version: 3.6.0
   resolution: "readable-stream@npm:3.6.0"
   dependencies:
@@ -8264,7 +8279,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"secure-json-parse@npm:^2.0.0":
+"secure-json-parse@npm:^2.0.0, secure-json-parse@npm:^2.4.0":
   version: 2.4.0
   resolution: "secure-json-parse@npm:2.4.0"
   checksum: efaafcaa08a4646ca829b29168474f57fb289a0ca7a1d77b66b55a0292785bc6eb9143b21cfc50b37dd12a823c25b12aa1771f18314ed5a616a1f8f12a318533
@@ -8455,6 +8470,15 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
+"sonic-boom@npm:^2.2.0":
+  version: 2.4.1
+  resolution: "sonic-boom@npm:2.4.1"
+  dependencies:
+    atomic-sleep: ^1.0.0
+  checksum: 77369f6211544f4fb30519b7ab2523b67818963c036301f5e417a2bcb0e1f3bc88f4cbd0d963607965be228e29644202452a6d7717f117652956f43e8c8be0e2
+  languageName: node
+  linkType: hard
+
 "source-map-support@npm:^0.5.12, source-map-support@npm:^0.5.17, source-map-support@npm:^0.5.6":
   version: 0.5.19
   resolution: "source-map-support@npm:0.5.19"
@@ -8520,12 +8544,10 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"split2@npm:^3.1.1":
-  version: 3.2.2
-  resolution: "split2@npm:3.2.2"
-  dependencies:
-    readable-stream: ^3.0.0
-  checksum: 8127ddbedd0faf31f232c0e9192fede469913aa8982aa380752e0463b2e31c2359ef6962eb2d24c125bac59eeec76873678d723b1c7ff696216a1cd071e3994a
+"split2@npm:^4.0.0":
+  version: 4.1.0
+  resolution: "split2@npm:4.1.0"
+  checksum: ec581597cb74c13cdfb5e2047543dd40cb1e8e9803c7b1e0c29ede05f2b4f049b2d6e7f2788a225d544549375719658b8f38e9366364dec35dc7a12edfda5ee5
   languageName: node
   linkType: hard
 
@@ -8591,6 +8613,13 @@ resolve@^2.0.0-next.3:
   dependencies:
     escape-string-regexp: ^2.0.0
   checksum: c86ac08f58d1a9bce3f17946cb2f18268f55f8180f5396ae147deecb4d23cd54f3d27e4a8d3227d525b0f0c89b7f7e839e223851a577136a763ccd7e488440be
+  languageName: node
+  linkType: hard
+
+"stream-shift@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "stream-shift@npm:1.0.1"
+  checksum: 59b82b44b29ec3699b5519a49b3cedcc6db58c72fb40c04e005525dfdcab1c75c4e0c180b923c380f204bed78211b9bad8faecc7b93dece4d004c3f6ec75737b
   languageName: node
   linkType: hard
 
