@@ -4,6 +4,7 @@ import Helmet from "fastify-helmet"
 import { customAlphabet, urlAlphabet } from "nanoid"
 
 import { config } from "@/config"
+import { logger } from "@/lib/logger"
 import { sendErrorToSentry } from "@/lib/sentry"
 import { apiPlugin } from "@/routes/ids"
 
@@ -21,10 +22,7 @@ export const buildApp = async () => {
     trustProxy: isProd,
     genReqId: nanoid,
     disableRequestLogging: process.env.NODE_ENV === "test",
-    logger: {
-      level: config.LOG_LEVEL,
-      prettyPrint: !isProd,
-    },
+    logger,
   })
 
   await App.register(Cors, {

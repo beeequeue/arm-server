@@ -2,6 +2,8 @@ import Http from "got"
 
 import { captureException } from "@sentry/node"
 
+import { logger } from "@/lib/logger"
+
 import { knex, Relation } from "./db"
 import { updateBasedOnManualRules } from "./manual-rules"
 
@@ -86,24 +88,24 @@ const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
 }
 
 export const updateRelations = async () => {
-  console.log(`Using ${process.env.NODE_ENV!} database configuration...`)
+  logger.debug(`Using ${process.env.NODE_ENV!} database configuration...`)
 
-  console.log("Fetching updated Database...")
+  logger.info("Fetching updated Database...")
   const data = await fetchDatabase()
-  console.log("Fetched updated Database.")
+  logger.info("Fetched updated Database.")
 
   if (data == null) {
-    console.log("got no data")
+    logger.error("got no data")
     return
   }
 
-  console.log("Formatting data...")
+  logger.info("Formatting entries...")
   const formattedEntries = data
     .map(formatEntry)
     .filter((entry) => Object.keys(entry).length > 1)
-  console.log(`Formatted data. (${formattedEntries.length} entries)`)
+  logger.info({ amount: formattedEntries.length }, `Formatted entries.`)
 
-  console.log("Updating database...")
+  logger.info("Updating database...")
   await knex.transaction((trx) =>
     knex
       .delete()
@@ -111,10 +113,10 @@ export const updateRelations = async () => {
       .transacting(trx)
       .then(() => knex.batchInsert("relations", formattedEntries, 100).transacting(trx)),
   )
-  console.log("Updated database.")
+  logger.info("Updated database.")
 
-  console.log("Executing manual rules...")
+  logger.info("Executing manual rules...")
   await updateBasedOnManualRules()
 
-  console.log("Done.")
+  logger.info("Done.")
 }

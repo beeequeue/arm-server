@@ -20,6 +20,9 @@ export const config = envsafe({
     devDefault: "debug",
     choices: ["fatal", "error", "warn", "info", "debug", "trace"],
   }),
+  LOGFLARE_API_KEY: str({
+    devDefault: "LOGFLARE_API_KEY",
+  }),
   USER_AGENT: str({
     default: "arm-server",
   }),
