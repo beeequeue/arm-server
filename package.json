@@ -34,7 +34,7 @@
     "fastify": "3.24.1",
     "fastify-cors": "6.0.2",
     "fastify-helmet": "5.3.2",
-    "got": "11.8.2",
+    "got": "11.8.3",
     "knex": "0.95.14",
     "lightstep-opentelemetry-launcher-node": "0.24.0",
     "nanoid": "3.1.30",
