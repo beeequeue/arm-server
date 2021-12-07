@@ -24,7 +24,7 @@
     "postinstall": "husky install"
   },
   "resolutions": {
-    "@types/node": "16.11.7"
+    "@types/node": "16.11.11"
   },
   "dependencies": {
     "@opentelemetry/api": "1.0.3",
@@ -50,8 +50,8 @@
   "devDependencies": {
     "@beequeue/eslint-plugin": "0.4.0",
     "@tsconfig/node14": "1.0.1",
-    "@types/jest": "27.0.2",
-    "@types/node": "16.11.7",
+    "@types/jest": "27.0.3",
+    "@types/node": "16.11.11",
     "dotenv": "10.0.0",
     "eslint": "8.2.0",
     "husky": "7.0.4",
