@@ -1,3 +1,4 @@
+import { FastifyRequest } from "fastify"
 import Pino from "pino"
 import { createWriteStream } from "pino-logflare"
 import Pretty from "pino-pretty"
@@ -16,6 +17,16 @@ const stream = isProd
 export const logger = Pino(
   {
     level: config.LOG_LEVEL,
+    redact: ["req.headers.authorization", "req.headers.cookie"],
+    serializers: {
+      req: ({ method, url, params, routerPath, headers }: FastifyRequest) => ({
+        method,
+        url,
+        params,
+        routerPath,
+        headers,
+      }),
+    },
   },
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   stream,
