@@ -37,7 +37,7 @@
     "got": "11.8.2",
     "knex": "0.95.14",
     "lightstep-opentelemetry-launcher-node": "0.24.0",
-    "nanoid": "3.1.30",
+    "nanoid": "3.1.31",
     "pino": "7.5.1",
     "pino-logflare": "0.3.12",
     "pino-pretty": "7.2.0",
