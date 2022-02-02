@@ -1524,85 +1524,85 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/core@npm:6.15.0":
-  version: 6.15.0
-  resolution: "@sentry/core@npm:6.15.0"
+"@sentry/core@npm:6.17.4":
+  version: 6.17.4
+  resolution: "@sentry/core@npm:6.17.4"
   dependencies:
-    "@sentry/hub": 6.15.0
-    "@sentry/minimal": 6.15.0
-    "@sentry/types": 6.15.0
-    "@sentry/utils": 6.15.0
+    "@sentry/hub": 6.17.4
+    "@sentry/minimal": 6.17.4
+    "@sentry/types": 6.17.4
+    "@sentry/utils": 6.17.4
     tslib: ^1.9.3
-  checksum: 6299324cfafc62968a3c063bb4d9c62745230d8e235c3148426ceb6df70bfeee2c250fe38b351e1ab5ca3fa4c9079c3bdce357e756c734c33680c84052f0a129
+  checksum: daf80e9b2df5acaf8eeafabfddf24d30b2f9ab981843e1b01120f428803dc71c58e761005eec17d9004ffb483c210118bad50d774a4042929f0d55d3fb476104
   languageName: node
   linkType: hard
 
-"@sentry/hub@npm:6.15.0":
-  version: 6.15.0
-  resolution: "@sentry/hub@npm:6.15.0"
+"@sentry/hub@npm:6.17.4":
+  version: 6.17.4
+  resolution: "@sentry/hub@npm:6.17.4"
   dependencies:
-    "@sentry/types": 6.15.0
-    "@sentry/utils": 6.15.0
+    "@sentry/types": 6.17.4
+    "@sentry/utils": 6.17.4
     tslib: ^1.9.3
-  checksum: 6645534f0de5056ea6a15d790f65356bf4085936c220584f78bdd59e81cd1482bff7e9a81a448a17da550e330a1c1b7b56bd11aa6a8533b73760076b6424003e
+  checksum: 61c27230a87c071050730a0d8cbd9ae1f92c5007c9852900d288fed5bf35303bdba8acdcb6cad849540085ce81e072b89ba0e1ede249f6d940e81e06c6452af6
   languageName: node
   linkType: hard
 
-"@sentry/minimal@npm:6.15.0":
-  version: 6.15.0
-  resolution: "@sentry/minimal@npm:6.15.0"
+"@sentry/minimal@npm:6.17.4":
+  version: 6.17.4
+  resolution: "@sentry/minimal@npm:6.17.4"
   dependencies:
-    "@sentry/hub": 6.15.0
-    "@sentry/types": 6.15.0
+    "@sentry/hub": 6.17.4
+    "@sentry/types": 6.17.4
     tslib: ^1.9.3
-  checksum: 98a39f2f2c4b5d0ec63aa034fbd37990c7e456c3db0e0b08d7deefc2d6d6d2353d94ccb1a2e5f4ed6c3e759b0948dcecf57efeaab8b27e0602581deeeca37674
+  checksum: e67efeaf1be5eda8afc1a9254f485fdf861361cc007cf2da18aad09fd7bae98600c94f013e673e907551dda80bc2925353ace2c7709cac42ba2e1924b6da6f04
   languageName: node
   linkType: hard
 
-"@sentry/node@npm:6.15.0":
-  version: 6.15.0
-  resolution: "@sentry/node@npm:6.15.0"
+"@sentry/node@npm:6.17.4":
+  version: 6.17.4
+  resolution: "@sentry/node@npm:6.17.4"
   dependencies:
-    "@sentry/core": 6.15.0
-    "@sentry/hub": 6.15.0
-    "@sentry/tracing": 6.15.0
-    "@sentry/types": 6.15.0
-    "@sentry/utils": 6.15.0
+    "@sentry/core": 6.17.4
+    "@sentry/hub": 6.17.4
+    "@sentry/tracing": 6.17.4
+    "@sentry/types": 6.17.4
+    "@sentry/utils": 6.17.4
     cookie: ^0.4.1
     https-proxy-agent: ^5.0.0
     lru_map: ^0.3.3
     tslib: ^1.9.3
-  checksum: a73f4de9c37c3334e034bc3ba7f21ef4c6424e2ae35585b1c71e8d2a1ea6ac89ca2a4d67e9c839526841ea886846c58b3d7068a9be931abb2eb576b054253870
+  checksum: 2d1f7844b14b145cf8233b8363fb43240805407d1ee89354184d91fa98ece7d6285453a2d56a8d2c0b6800e28c50a271ce26e7c668995c43dde3f472887958cc
   languageName: node
   linkType: hard
 
-"@sentry/tracing@npm:6.15.0":
-  version: 6.15.0
-  resolution: "@sentry/tracing@npm:6.15.0"
+"@sentry/tracing@npm:6.17.4":
+  version: 6.17.4
+  resolution: "@sentry/tracing@npm:6.17.4"
   dependencies:
-    "@sentry/hub": 6.15.0
-    "@sentry/minimal": 6.15.0
-    "@sentry/types": 6.15.0
-    "@sentry/utils": 6.15.0
+    "@sentry/hub": 6.17.4
+    "@sentry/minimal": 6.17.4
+    "@sentry/types": 6.17.4
+    "@sentry/utils": 6.17.4
     tslib: ^1.9.3
-  checksum: 63976d6047c7794e340b051ae9d9632b4077073017590a68f04f9e00dc8b35e27d44698fd516c7be74df7fba1fb2425e59092a6f2b5c715a36753abbb4c49c92
+  checksum: 4f630fece6ff9dd2d9d281ec9d70b30bb2c61ae4673c3780595fbbbc45d855478f4e8d26f1155769ea59fb476e1e9c70a252922992e7a55f935cbfc2696fe9c4
   languageName: node
   linkType: hard
 
-"@sentry/types@npm:6.15.0":
-  version: 6.15.0
-  resolution: "@sentry/types@npm:6.15.0"
-  checksum: e84a53cd8cf4603ac794049729d44f2d67cde3a29875b7404d61d36d904cdb4cd9d35ff53463ba1828ab4a4cbd734cd276ce10d3bb7c32a0ffdea1ac4344fb5f
+"@sentry/types@npm:6.17.4":
+  version: 6.17.4
+  resolution: "@sentry/types@npm:6.17.4"
+  checksum: e2c514b42cb27143150bcbea3438e65b96deebf5804ffbe6d889c5997cd448ec61ed486a4b903fd57d7297cfcc9cb33d2dd0b3a394830a66fe3b99c0fee05aab
   languageName: node
   linkType: hard
 
-"@sentry/utils@npm:6.15.0":
-  version: 6.15.0
-  resolution: "@sentry/utils@npm:6.15.0"
+"@sentry/utils@npm:6.17.4":
+  version: 6.17.4
+  resolution: "@sentry/utils@npm:6.17.4"
   dependencies:
-    "@sentry/types": 6.15.0
+    "@sentry/types": 6.17.4
     tslib: ^1.9.3
-  checksum: 150a7d8b4ed15f2cd04687062e08a62dad18a754ef8c00fcbaebc7816fb80336785aedd3ea3f6e47e7397d5c253177d029961fe98ff8869ceb566fd78cc91f84
+  checksum: 9c82b947d20a5324573963517fbde006f4b2b9568a788bd24889451eb922e4c726ff239793380d5af1a255c915f86d0c22d118e83eeedb5e0ec61c1b742127e9
   languageName: node
   linkType: hard
 
@@ -2702,7 +2702,7 @@ __metadata:
   dependencies:
     "@beequeue/eslint-plugin": 0.4.0
     "@opentelemetry/api": 1.0.3
-    "@sentry/node": 6.15.0
+    "@sentry/node": 6.17.4
     "@tsconfig/node14": 1.0.1
     "@types/jest": 27.0.3
     "@types/node": 16.11.12
