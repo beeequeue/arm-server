@@ -35,7 +35,7 @@ enum Source {
 
 ### Get IDS:
 
-`POST` `/api/ids`
+`GET/POST` `/api/ids`
 
 Either use GET with query parameters:
 `?source={Source}&id={number}`
