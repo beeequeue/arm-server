@@ -20,7 +20,7 @@ type OfflineDatabaseSchema = {
 
 const fetchDatabase = async (): Promise<OfflineDatabaseSchema[] | null> => {
   const response = await Http.get<{ data: OfflineDatabaseSchema[] }>(
-    "https://raw.githubusercontent.com/manami-project/anime-offline-database/master/anime-offline-database.json",
+    "https://raw.githubusercontent.com/manami-project/anime-offline-database/master/anime-offline-database-minified.json",
     {
       responseType: "json",
     },
