@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@opentelemetry/api": "1.0.3",
-    "@sentry/node": "6.17.4",
+    "@sentry/node": "6.17.9",
     "cross-env": "7.0.3",
     "envsafe": "2.0.3",
     "fastify": "3.24.1",
