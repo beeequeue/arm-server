@@ -27,7 +27,7 @@
     "@types/node": "16.11.12"
   },
   "dependencies": {
-    "@opentelemetry/api": "1.0.3",
+    "@opentelemetry/api": "1.0.4",
     "@sentry/node": "6.17.9",
     "cross-env": "7.0.3",
     "envsafe": "2.0.3",
