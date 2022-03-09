@@ -2710,7 +2710,7 @@ __metadata:
     dotenv: 10.0.0
     envsafe: 2.0.3
     eslint: 8.9.0
-    fastify: 3.24.1
+    fastify: 3.27.4
     fastify-cors: 6.0.2
     fastify-helmet: 5.3.2
     got: 11.8.3
@@ -4624,26 +4624,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fastify@npm:3.24.1":
-  version: 3.24.1
-  resolution: "fastify@npm:3.24.1"
+"fastify@npm:3.27.4":
+  version: 3.27.4
+  resolution: "fastify@npm:3.27.4"
   dependencies:
     "@fastify/ajv-compiler": ^1.0.0
     abstract-logging: ^2.0.0
     avvio: ^7.1.2
     fast-json-stringify: ^2.5.2
     fastify-error: ^0.3.0
-    fastify-warning: ^0.2.0
-    find-my-way: ^4.1.0
+    find-my-way: ^4.5.0
     flatstr: ^1.0.12
     light-my-request: ^4.2.0
     pino: ^6.13.0
+    process-warning: ^1.0.0
     proxy-addr: ^2.0.7
     rfdc: ^1.1.4
     secure-json-parse: ^2.0.0
     semver: ^7.3.2
-    tiny-lru: ^7.0.0
-  checksum: d73cd0398989d51df53c892ce5eac3a9e2c194aff7df8b557e8efa95093afca3cf7c9b9cc926249554272d94ff764722272ee0d37dd3f858b728106612a83fe7
+    tiny-lru: ^8.0.1
+  checksum: 1f5e84c133398946d66a1a94c4070a0fdf9ae49ba20b3f922608b9f230a3e9c13856feba2b3438f9088698eec3e90ddf4d3d85c7ea9b5b0b7456f78e7feb2385
   languageName: node
   linkType: hard
 
@@ -4683,15 +4683,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"find-my-way@npm:^4.1.0":
-  version: 4.3.3
-  resolution: "find-my-way@npm:4.3.3"
+"find-my-way@npm:^4.5.0":
+  version: 4.5.1
+  resolution: "find-my-way@npm:4.5.1"
   dependencies:
     fast-decode-uri-component: ^1.0.1
     fast-deep-equal: ^3.1.3
     safe-regex2: ^2.0.0
     semver-store: ^0.3.0
-  checksum: c5f212d2d2a5e76be91a86409b2de9391a1c3cf5210d357facf0fe91d1e46608865aa2396a98a8d4772116bfae2eb0b05abe4efa725d5cf3cc9b9554bb34e048
+  checksum: 85b8c07d34a36f0203438e0c0f0cdbfaf5e1c521ed2e56f9250bed846ceb0eea074127fad7f70137d61bed56387047f212969cc0ba5d818ed5e37b3e3606c43f
   languageName: node
   linkType: hard
 
@@ -7913,6 +7913,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"process-warning@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "process-warning@npm:1.0.0"
+  checksum: c708a03241deec3cabaeee39c4f9ee8c4d71f1c5ef9b746c8252cdb952a6059068cfcdaf348399775244cbc441b6ae5e26a9c87ed371f88335d84f26d19180f9
+  languageName: node
+  linkType: hard
+
 "promise-inflight@npm:^1.0.1":
   version: 1.0.1
   resolution: "promise-inflight@npm:1.0.1"
@@ -9214,10 +9221,10 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"tiny-lru@npm:^7.0.0":
-  version: 7.0.6
-  resolution: "tiny-lru@npm:7.0.6"
-  checksum: 36a786a9111a3a358a698c9404783ad3f5396f6ed891672ffa4cd7dec4617abb8dfed6af7611bbaf8a3942a9475534c8b80f9bd58d7efa9aa594f395c9805f09
+"tiny-lru@npm:^8.0.1":
+  version: 8.0.1
+  resolution: "tiny-lru@npm:8.0.1"
+  checksum: 189181b35992ff131f2947515bc53782aab1e39d50c6a8f102dc4c63a755609d39bf341c498a0cd6e4a1a6b24fbbee778e0de1ff5ded0ef8e243d66a38ee7f41
   languageName: node
   linkType: hard
 
