@@ -2,7 +2,7 @@
 .env
 
 # Database
-*.sqlite3
+sqlite/
 
 # Logs
 logs
