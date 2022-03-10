@@ -20,7 +20,8 @@
     "migrate": "knex migrate:latest --knexfile knexfile.ts",
     "migrate:create": "knex migrate:make --knexfile knexfile.ts -x ts",
     "start": "yarn run migrate && ts-node src/index.ts",
-    "test": "cross-env NODE_ENV=test yarn run migrate && yarn jest --forceExit",
+    "test": "cross-env NODE_ENV=test yarn run migrate && yarn vitest run --coverage",
+    "test:dev": "cross-env NODE_ENV=test yarn run migrate && yarn vitest",
     "postinstall": "husky install"
   },
   "resolutions": {
@@ -48,16 +49,16 @@
   "devDependencies": {
     "@beequeue/eslint-plugin": "0.4.0",
     "@tsconfig/node14": "1.0.1",
-    "@types/jest": "27.4.0",
     "@types/node": "16.11.25",
+    "c8": "7.11.0",
     "dotenv": "16.0.0",
     "eslint": "8.10.0",
     "husky": "7.0.4",
-    "jest": "27.5.1",
     "lint-staged": "12.3.5",
     "prettier": "2.5.1",
-    "ts-jest": "27.1.3",
     "ts-node-dev": "1.1.8",
-    "tsconfig-paths": "3.13.0"
+    "tsconfig-paths": "3.13.0",
+    "vite-tsconfig-paths": "3.4.1",
+    "vitest": "0.6.0"
   }
 }

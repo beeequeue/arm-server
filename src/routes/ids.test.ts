@@ -1,4 +1,5 @@
 import { FastifyInstance } from "fastify"
+import { afterAll, afterEach, beforeAll, describe, test, expect } from "vitest"
 
 import { buildApp } from "@/app"
 import { knex, Relation } from "@/db"
@@ -30,7 +31,7 @@ beforeAll(async () => {
 })
 
 afterAll(async () => {
-  await app.close()
+  await Promise.all([app.close(), knex.destroy()])
 })
 
 afterEach(() => knex.delete().from("relations"))

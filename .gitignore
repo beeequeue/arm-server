@@ -1,7 +1,6 @@
-.idea
+.idea/
 .env
-
-# Database
+coverage/
 sqlite/
 
 # Logs
