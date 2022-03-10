@@ -20,7 +20,7 @@ export const buildApp = async () => {
     onProtoPoisoning: "remove",
     onConstructorPoisoning: "remove",
     trustProxy: isProd,
-    genReqId: nanoid,
+    genReqId: () => nanoid(),
     disableRequestLogging: process.env.NODE_ENV === "test",
     logger,
   })
