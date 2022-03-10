@@ -8,7 +8,8 @@ import { config } from "@/config"
 const isProd = config.NODE_ENV === "production"
 
 const stream = isProd
-  ? createWriteStream({
+  ? /* c8 ignore next 4 */
+    createWriteStream({
       apiKey: config.LOGFLARE_API_KEY,
       sourceToken: "699c85bf-7f95-4836-9383-79b57ef87c23",
     })

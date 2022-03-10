@@ -1,3 +1,4 @@
+/* c8 ignore start */
 import { FastifyRequest } from "fastify"
 
 import * as Sentry from "@sentry/node"
