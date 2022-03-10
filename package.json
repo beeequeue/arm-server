@@ -28,7 +28,7 @@
     "@types/node": "16.11.25"
   },
   "dependencies": {
-    "@sentry/node": "6.17.9",
+    "@sentry/node": "6.18.2",
     "@vscode/sqlite3": "5.0.7",
     "cross-env": "7.0.3",
     "envsafe": "2.0.3",
