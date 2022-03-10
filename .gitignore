@@ -1,8 +1,7 @@
-.idea
+.idea/
 .env
-
-# Database
-*.sqlite3
+coverage/
+sqlite/
 
 # Logs
 logs

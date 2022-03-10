@@ -14,12 +14,12 @@
     },
     {
       groupName: "linters",
-      matchPackagePatterns: ["eslint"],
+      matchPackagePatterns: ["lint"],
       automerge: true,
     },
     {
       groupName: "testing packages",
-      matchPackagePatterns: ["jest", "test"],
+      matchPackagePatterns: ["jest", "test", "vitest"],
       automerge: true,
     },
     {

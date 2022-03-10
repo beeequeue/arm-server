@@ -1,23 +1,23 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`json body array input requires at least one source 1`] = `
-Object {
+exports[`json body > array input > requires at least one source 1`] = `
+{
   "error": "Bad Request",
   "message": "body should be object, body[0] should NOT have fewer than 1 properties, body should match exactly one schema in oneOf",
   "statusCode": 400,
 }
 `;
 
-exports[`json body object input GET fails with json body 1`] = `
-Object {
+exports[`json body > object input > GET fails with json body 1`] = `
+{
   "error": "Bad Request",
   "message": "querystring should have required property 'source'",
   "statusCode": 400,
 }
 `;
 
-exports[`json body object input errors correctly on an empty object 1`] = `
-Object {
+exports[`json body > object input > errors correctly on an empty object 1`] = `
+{
   "error": "Bad Request",
   "message": "body should NOT have fewer than 1 properties, body should be array, body should match exactly one schema in oneOf",
   "statusCode": 400,

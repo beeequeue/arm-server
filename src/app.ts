@@ -20,7 +20,7 @@ export const buildApp = async () => {
     onProtoPoisoning: "remove",
     onConstructorPoisoning: "remove",
     trustProxy: isProd,
-    genReqId: nanoid,
+    genReqId: () => nanoid(),
     disableRequestLogging: process.env.NODE_ENV === "test",
     logger,
   })
@@ -35,6 +35,7 @@ export const buildApp = async () => {
   })
 
   App.addHook("onError", (request, _reply, error, next) => {
+    /* c8 ignore next 4 */
     if (error.validation == null) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       sendErrorToSentry(error, request as any)

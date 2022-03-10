@@ -119,4 +119,8 @@ export const updateRelations = async () => {
   await updateBasedOnManualRules()
 
   logger.info("Done.")
+
+  if (process.argv.includes("--exit")) {
+    await knex.destroy()
+  }
 }
