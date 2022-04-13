@@ -36,7 +36,7 @@
     "fastify-cors": "6.0.3",
     "fastify-helmet": "7.0.1",
     "got": "11.8.3",
-    "knex": "1.0.3",
+    "knex": "1.0.7",
     "nanoid": "3.3.1",
     "pino": "7.8.1",
     "pino-logflare": "0.3.12",
