@@ -1352,7 +1352,7 @@ __metadata:
     fastify-helmet: 7.0.1
     got: 11.8.3
     husky: 7.0.4
-    knex: 1.0.3
+    knex: 1.0.7
     lint-staged: 12.3.5
     nanoid: 3.3.1
     pino: 7.8.1
@@ -1909,6 +1909,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commander@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "commander@npm:9.1.0"
+  checksum: 1428319b6b90600a813c28fe1e413996d1be99bf01afe9ebc4a9fc6f8077ff3e75f11809b2d2f85bd9b13d7cb592154278e9bbfdb16dc5843cef97bcba6a9cfd
+  languageName: node
+  linkType: hard
+
 "concat-map@npm:0.0.1":
   version: 0.0.1
   resolution: "concat-map@npm:0.0.1"
@@ -2038,7 +2045,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:4.3.3, debug@npm:^4.0.0, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.3":
+"debug@npm:4, debug@npm:^4.0.0, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.3":
   version: 4.3.3
   resolution: "debug@npm:4.3.3"
   dependencies:
@@ -2047,6 +2054,18 @@ __metadata:
     supports-color:
       optional: true
   checksum: 14472d56fe4a94dbcfaa6dbed2dd3849f1d72ba78104a1a328047bb564643ca49df0224c3a17fa63533fd11dd3d4c8636cd861191232a2c6735af00cc2d4de16
+  languageName: node
+  linkType: hard
+
+"debug@npm:4.3.4":
+  version: 4.3.4
+  resolution: "debug@npm:4.3.4"
+  dependencies:
+    ms: 2.1.2
+  peerDependenciesMeta:
+    supports-color:
+      optional: true
+  checksum: 3dbad3f94ea64f34431a9cbf0bafb61853eda57bff2880036153438f50fb5a84f27683ba0d8e5426bf41a8c6ff03879488120cf5b3a761e77953169c0600a708
   languageName: node
   linkType: hard
 
@@ -3359,6 +3378,13 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
+"get-package-type@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "get-package-type@npm:0.1.0"
+  checksum: bba0811116d11e56d702682ddef7c73ba3481f114590e705fc549f4d868972263896af313c57a25c076e3c0d567e11d919a64ba1b30c879be985fc9d44f96148
+  languageName: node
+  linkType: hard
+
 "get-stream@npm:^5.1.0":
   version: 5.2.0
   resolution: "get-stream@npm:5.2.0"
@@ -4155,15 +4181,16 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"knex@npm:1.0.3":
-  version: 1.0.3
-  resolution: "knex@npm:1.0.3"
+"knex@npm:1.0.7":
+  version: 1.0.7
+  resolution: "knex@npm:1.0.7"
   dependencies:
     colorette: 2.0.16
-    commander: ^8.3.0
-    debug: 4.3.3
+    commander: ^9.1.0
+    debug: 4.3.4
     escalade: ^3.1.1
     esm: ^3.2.25
+    get-package-type: ^0.1.0
     getopts: 2.3.0
     interpret: ^2.2.0
     lodash: ^4.17.21
@@ -4189,7 +4216,7 @@ fsevents@~2.3.2:
       optional: true
   bin:
     knex: bin/cli.js
-  checksum: 351bdb6f9a420c3b087dd7208029b99fe4e279eedcc2a4bf8f99b8ee45185425f0dbeb0c52853bb4b1cee458f61d0802ee7945929d13ba6e9c35becf01e53f2d
+  checksum: 57608a3a6813cb66da6f5a078016338166c53ab2cbaab66e81492352023db88fc158e4ad6bbd2156cd9d7c9cac14a4b1e581dd8232b4f9bab2285ea6f1efc5cf
   languageName: node
   linkType: hard
 
