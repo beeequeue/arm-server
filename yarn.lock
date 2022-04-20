@@ -1080,13 +1080,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vscode/sqlite3@npm:5.0.7":
-  version: 5.0.7
-  resolution: "@vscode/sqlite3@npm:5.0.7"
+"@vscode/sqlite3@npm:5.0.8":
+  version: 5.0.8
+  resolution: "@vscode/sqlite3@npm:5.0.8"
   dependencies:
     node-addon-api: ^4.2.0
     node-gyp: latest
-  checksum: af0c3b92d6f5407f631ed3dd0aabe3939b5d2b36a5aa8565e0b454eda901b39e4a96741a480bc3f42e705c851a8deca4f988d3f4711956cb302cb64c1cfa57a5
+  checksum: fba438ffa5bdcfd216292e4b28116689bebe728be7296ce508e6da6e2573dbd2b7cefe97f94d71f358b9440f309af7bc2a5604f7ad1df134aac0035c6c51ba58
   languageName: node
   linkType: hard
 
@@ -1341,7 +1341,7 @@ __metadata:
     "@sentry/node": 6.18.2
     "@tsconfig/node14": 1.0.1
     "@types/node": 16.11.27
-    "@vscode/sqlite3": 5.0.7
+    "@vscode/sqlite3": 5.0.8
     c8: 7.11.0
     cross-env: 7.0.3
     dotenv: 16.0.0

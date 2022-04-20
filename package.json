@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@sentry/node": "6.18.2",
-    "@vscode/sqlite3": "5.0.7",
+    "@vscode/sqlite3": "5.0.8",
     "cross-env": "7.0.3",
     "envsafe": "2.0.3",
     "fastify": "3.27.4",
