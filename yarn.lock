@@ -1354,7 +1354,7 @@ __metadata:
     husky: 7.0.4
     knex: 1.0.7
     lint-staged: 12.3.5
-    nanoid: 3.3.1
+    nanoid: 3.3.4
     pino: 7.8.1
     pino-logflare: 0.3.12
     pino-pretty: 7.5.3
@@ -4712,7 +4712,16 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"nanoid@npm:3.3.1, nanoid@npm:^3.3.1":
+"nanoid@npm:3.3.4":
+  version: 3.3.4
+  resolution: "nanoid@npm:3.3.4"
+  bin:
+    nanoid: bin/nanoid.cjs
+  checksum: 2fddd6dee994b7676f008d3ffa4ab16035a754f4bb586c61df5a22cf8c8c94017aadd360368f47d653829e0569a92b129979152ff97af23a558331e47e37cd9c
+  languageName: node
+  linkType: hard
+
+"nanoid@npm:^3.3.1":
   version: 3.3.1
   resolution: "nanoid@npm:3.3.1"
   bin:
