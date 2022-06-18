@@ -6,7 +6,7 @@ import * as Sentry from "@sentry/node"
 const { NODE_ENV, SENTRY_DSN } = process.env
 
 Sentry.init({
-  dsn: SENTRY_DSN,
+  dsn: SENTRY_DSN!,
   enabled: NODE_ENV === "production",
 })
 

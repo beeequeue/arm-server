@@ -28,7 +28,7 @@
     "@types/node": "16.11.41"
   },
   "dependencies": {
-    "@sentry/node": "6.18.2",
+    "@sentry/node": "7.2.0",
     "cross-env": "7.0.3",
     "envsafe": "2.0.3",
     "fastify": "3.27.4",
@@ -37,9 +37,9 @@
     "got": "11.8.3",
     "knex": "2.1.0",
     "nanoid": "3.3.1",
-    "pino": "7.8.1",
+    "pino": "8.0.0",
     "pino-logflare": "0.3.12",
-    "pino-pretty": "7.5.3",
+    "pino-pretty": "8.0.0",
     "sqlite3": "5.0.7",
     "ts-json-validator": "0.7.1",
     "tsx": "3.4.3",
