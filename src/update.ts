@@ -27,6 +27,7 @@ const fetchDatabase = async (): Promise<OfflineDatabaseSchema[] | null> => {
   )
 
   if (response.statusCode !== 200) {
+    // eslint-disable-next-line no-console
     console.error("Could not fetch updated database!!")
     captureException(new Error("Could not fetch updated database!!"))
 

@@ -1,4 +1,5 @@
-import { FastifyPluginAsync, FastifyRequest } from "fastify"
+import { FastifyRequest } from "fastify"
+import { FastifyPluginAsync } from "fastify/types/plugin"
 
 import { Relation } from "@/db"
 import { bodyHandler, bodyInputSchema, BodyQuery } from "@/schemas/json-body"
@@ -10,9 +11,8 @@ import {
 import { responseBodySchema } from "@/schemas/response"
 import { isEmpty } from "@/utils"
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
+/* eslint-disable @typescript-eslint/naming-convention */
 type BodyInput = { Body: BodyQuery; Querystring: undefined }
-// eslint-disable-next-line @typescript-eslint/naming-convention
 type QueryInput = { Body: undefined; Querystring: QueryParamQuery }
 
 const handler = async (
@@ -27,6 +27,7 @@ const handler = async (
   return (await handleQueryParams(request.query!)) ?? null
 }
 
+// eslint-disable-next-line @typescript-eslint/require-await
 export const apiPlugin: FastifyPluginAsync = async (fastify) => {
   fastify.get<QueryInput>(
     "/ids",

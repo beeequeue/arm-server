@@ -10,13 +10,12 @@ Sentry.init({
   enabled: NODE_ENV === "production",
 })
 
-export const sendErrorToSentry = (
-  err: Error,
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  request: FastifyRequest<{ Querystring: Record<string, unknown> }>,
-) => {
+export const sendErrorToSentry = (err: Error, request: FastifyRequest) => {
   Sentry.withScope((scope) => {
-    scope.addEventProcessor((event) => Sentry.Handlers.parseRequest(event, request))
+    scope.addEventProcessor((event) =>
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      Sentry.Handlers.parseRequest(event, request as any),
+    )
 
     Sentry.captureException(err)
   })

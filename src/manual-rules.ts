@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import { knex, Relation } from "./db"
 
 type Rule = `${keyof Relation}:${number}`
