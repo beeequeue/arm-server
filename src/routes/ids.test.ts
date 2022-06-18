@@ -60,6 +60,23 @@ describe("query params", () => {
     expect(response.statusCode).toBe(200)
     expect(response.headers["content-type"]).toContain("application/json")
   })
+
+  test("can return a partial response", async () => {
+    const relation: Relation = {
+      anidb: 1337,
+      anilist: 1337,
+    }
+    await knex.insert(relation).into("relations")
+
+    const response = await app.inject().get("/api/ids").query({
+      source: Source.AniList,
+      id: relation.anilist,
+    })
+
+    expect(response.json()).toStrictEqual(relation)
+    expect(response.statusCode).toBe(200)
+    expect(response.headers["content-type"]).toContain("application/json")
+  })
 })
 
 describe("json body", () => {
