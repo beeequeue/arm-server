@@ -1,5 +1,4 @@
-import { FastifyRequest } from "fastify"
-import { FastifyPluginAsync } from "fastify/types/plugin"
+import { FastifyPluginAsync, FastifyRequest } from "fastify"
 
 import { Relation } from "@/db"
 import { bodyHandler, bodyInputSchema, BodyQuery } from "@/schemas/json-body"
@@ -12,20 +11,22 @@ import { responseBodySchema } from "@/schemas/response"
 import { isEmpty } from "@/utils"
 
 /* eslint-disable @typescript-eslint/naming-convention */
-type BodyInput = { Body: BodyQuery; Querystring: undefined }
-type QueryInput = { Body: undefined; Querystring: QueryParamQuery }
+type BodyInput = { Body: BodyQuery }
+type QueryInput = { Querystring: QueryParamQuery }
 
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 const handler = async (
   request: FastifyRequest<BodyInput | QueryInput>,
 ): Promise<Relation | Relation[] | null> => {
-  const isBodyQuery = isEmpty(request.query)
+  const isBodyQuery = isEmpty(request.query as any)
 
   if (isBodyQuery) {
-    return (await bodyHandler(request.body!)) ?? null
+    return (await bodyHandler(request.body as any)) ?? null
   }
 
-  return (await handleQueryParams(request.query!)) ?? null
+  return (await handleQueryParams(request.query as any)) ?? null
 }
+/* eslint-enable */
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const apiPlugin: FastifyPluginAsync = async (fastify) => {
