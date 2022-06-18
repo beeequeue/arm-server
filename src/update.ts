@@ -1,4 +1,4 @@
-import Http from "got"
+import { $fetch, FetchError } from "ohmyfetch"
 
 import { captureException } from "@sentry/node"
 
@@ -6,6 +6,9 @@ import { logger } from "@/lib/logger"
 
 import { knex, Relation } from "./db"
 import { updateBasedOnManualRules } from "./manual-rules"
+
+const isFetchError = <T>(response: T | FetchError): response is FetchError =>
+  (response as FetchError).stack != null
 
 type OfflineDatabaseSchema = {
   sources: string[]
@@ -19,22 +22,25 @@ type OfflineDatabaseSchema = {
 }
 
 const fetchDatabase = async (): Promise<OfflineDatabaseSchema[] | null> => {
-  const response = await Http.get<{ data: OfflineDatabaseSchema[] }>(
+  const response = await $fetch<{ data: OfflineDatabaseSchema[] }>(
     "https://raw.githubusercontent.com/manami-project/anime-offline-database/master/anime-offline-database-minified.json",
     {
       responseType: "json",
+      retry: 5,
     },
-  )
+  ).catch((error: FetchError) => error)
 
-  if (response.statusCode !== 200) {
+  if (isFetchError(response)) {
+    const error = new Error("Could not fetch updated database!!", { cause: response })
+
     // eslint-disable-next-line no-console
-    console.error("Could not fetch updated database!!")
-    captureException(new Error("Could not fetch updated database!!"))
+    console.error(error)
+    captureException(error)
 
     return null
   }
 
-  return response.body.data
+  return response.data
 }
 
 const regexes = {
