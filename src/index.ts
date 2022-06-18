@@ -24,4 +24,5 @@ const listen = async () => {
   })
 }
 
-void listen()
+// eslint-disable-next-line no-console
+void listen().catch(console.error)
