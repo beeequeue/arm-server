@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { envsafe, port, str } from "envsafe"
+import zod from "zod"
 
 export enum Environment {
   Development = "development",
@@ -7,20 +7,13 @@ export enum Environment {
   Production = "production",
 }
 
-export const config = envsafe({
-  NODE_ENV: str({
-    choices: [Environment.Development, Environment.Test, Environment.Production],
-    default: Environment.Development,
-  }),
-  PORT: port({
-    devDefault: 3000,
-  }),
-  LOG_LEVEL: str({
-    default: "info",
-    devDefault: "debug",
-    choices: ["fatal", "error", "warn", "info", "debug", "trace"],
-  }),
-  USER_AGENT: str({
-    default: "arm-server",
-  }),
+const schema = zod.object({
+  NODE_ENV: zod.nativeEnum(Environment).default(Environment.Development),
+  PORT: zod.number().default(3000),
+  LOG_LEVEL: zod
+    .enum(["fatal", "error", "warn", "info", "debug", "trace"])
+    .default("info"),
+  USER_AGENT: zod.string().default("arm-server"),
 })
+
+export const config = schema.parse(process.env)
