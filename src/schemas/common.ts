@@ -1,6 +1,4 @@
-import { createSchema as S } from "ts-json-validator"
-
-import { enumToArray } from "@/utils"
+import { JSONSchema7 } from "json-schema"
 
 export enum Source {
   AniList = "anilist",
@@ -9,13 +7,13 @@ export enum Source {
   Kitsu = "kitsu",
 }
 
-export const sourceSchema = S({
+export const sourceSchema: JSONSchema7 = {
   type: "string",
-  enum: enumToArray(Source),
-})
+  enum: Object.values(Source),
+}
 
-export const idSchema = S({
+export const idSchema: JSONSchema7 = {
   type: "integer",
   minimum: 0,
   maximum: 50_000_000,
-})
+}

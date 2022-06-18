@@ -1,22 +1,31 @@
-import { createSchema as S } from "ts-json-validator"
+import { JSONSchema7 } from "json-schema"
 
-import { idSchema, sourceSchema } from "@/schemas/common"
+import { idSchema } from "@/schemas/common"
 
-const nullSchema = S({ type: "null" })
+const nullSchema: JSONSchema7 = { type: "null" }
 
-const responseItemSchema = S({
+const nullableIdSchema = {
+  oneOf: [nullSchema, idSchema],
+}
+
+export const responseItemSchema: JSONSchema7 = {
   type: "object",
-  propertyNames: sourceSchema,
-  additionalProperties: idSchema,
-})
+  additionalProperties: false,
+  properties: {
+    anidb: nullableIdSchema,
+    anilist: nullableIdSchema,
+    myanimelist: nullableIdSchema,
+    kitsu: nullableIdSchema,
+  },
+}
 
-const responseArraySchema = S({
+const responseArraySchema: JSONSchema7 = {
   type: "array",
-  items: S({
+  items: {
     oneOf: [nullSchema, responseItemSchema],
-  }),
-})
+  },
+}
 
-export const responseBodySchema = S({
+export const responseBodySchema: JSONSchema7 = {
   oneOf: [nullSchema, responseItemSchema, responseArraySchema],
-})
+}
