@@ -1,0 +1,29 @@
+_id: req_wrk_215de5f85350491cb7eb1dd32c66969e190d9e8d
+type: Request
+parentId: wrk_215de5f85350491cb7eb1dd32c66969e
+modified: 1655551177812
+created: 1655551032235
+url: "{{ base_url }}/api/ids"
+name: JSON Single
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"anilist": 1337
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_f998aa86802645b1b7a37420778d9ec7
+authentication: {}
+metaSortKey: -1655551032235
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

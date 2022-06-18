@@ -1,0 +1,18 @@
+_id: env_env_020ff1cbd92eadefdda751c15c80b118dd5c8388_sub
+type: Environment
+parentId: env_020ff1cbd92eadefdda751c15c80b118dd5c8388
+modified: 1655551070556
+created: 1655550514236
+name: OpenAPI env
+data:
+  scheme: https
+  base_path: ""
+  host: relations.yuna.moe
+dataPropertyOrder:
+  "&":
+    - scheme
+    - base_path
+    - host
+color: null
+isPrivate: false
+metaSortKey: 1655550514236
