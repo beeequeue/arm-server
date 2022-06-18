@@ -65,6 +65,8 @@ describe("query params", () => {
     const relation: Relation = {
       anidb: 1337,
       anilist: 1337,
+      myanimelist: null as any,
+      kitsu: null as any,
     }
     await knex.insert(relation).into("relations")
 
@@ -127,6 +129,24 @@ describe("json body", () => {
       const response = await app.inject().post("/api/ids").body({ anidb: 100_000 })
 
       expect(response.json()).toBe(null)
+      expect(response.statusCode).toBe(200)
+      expect(response.headers["content-type"]).toContain("application/json")
+    })
+
+    test("can return a partial response", async () => {
+      const relation: Relation = {
+        anidb: 1337,
+        anilist: 1337,
+        myanimelist: null as any,
+        kitsu: null as any,
+      }
+      await knex.insert(relation).into("relations")
+
+      const response = await app.inject().post("/api/ids").body({
+        anilist: 1337,
+      })
+
+      expect(response.json()).toStrictEqual(relation)
       expect(response.statusCode).toBe(200)
       expect(response.headers["content-type"]).toContain("application/json")
     })

@@ -1,4 +1,4 @@
-import { createSchema as S } from "ts-json-validator"
+import { JSONSchema7 } from "json-schema"
 
 import { knex } from "@/db"
 import { idSchema, Source, sourceSchema } from "@/schemas/common"
@@ -8,14 +8,14 @@ export type QueryParamQuery = {
   id: number
 }
 
-export const queryInputSchema = S({
+export const queryInputSchema: JSONSchema7 = {
   type: "object",
   properties: {
     source: sourceSchema,
     id: idSchema,
   },
   required: ["source", "id"],
-})
+}
 
 export const handleQueryParams = async (input: QueryParamQuery) => {
   return knex

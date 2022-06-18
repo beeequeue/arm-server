@@ -1,4 +1,4 @@
-import { createSchema as S } from "ts-json-validator"
+import { JSONSchema7 } from "json-schema"
 
 import { knex, Relation } from "@/db"
 import { idSchema, Source, sourceSchema } from "@/schemas/common"
@@ -7,26 +7,26 @@ type BodyItem = {
   [key in Source]?: number
 }
 
-export const singularItemInputSchema = S({
+export const singularItemInputSchema: JSONSchema7 = {
   type: "object",
   propertyNames: sourceSchema,
   minProperties: 1,
   maxProperties: 4,
   additionalProperties: idSchema,
-})
+}
 
 export type BodyQuery = BodyItem | BodyItem[]
 
-const arrayInputSchema = S({
+const arrayInputSchema: JSONSchema7 = {
   type: "array",
   minItems: 1,
   maxItems: 100,
   items: singularItemInputSchema,
-})
+}
 
-export const bodyInputSchema = S({
+export const bodyInputSchema: JSONSchema7 = {
   oneOf: [singularItemInputSchema, arrayInputSchema],
-})
+}
 
 export const bodyHandler = async (
   input: BodyQuery,

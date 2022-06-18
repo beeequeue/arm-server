@@ -1,4 +1,4 @@
-import { TsjsonParser } from "ts-json-validator"
+import Ajv, { Schema } from "ajv"
 import { JsonValue } from "type-fest"
 import { describe, expect, test } from "vitest"
 
@@ -28,12 +28,13 @@ const badCases: Cases = [
 describe("schema", () => {
   const inputs: Cases = [...okCases, ...badCases]
 
-  const parser = new TsjsonParser(queryInputSchema)
+  const ajv = new Ajv()
+  const validate = ajv.compile(queryInputSchema as Schema)
 
   test.each(inputs)("%s = %p", (input, expected) => {
-    parser.validates(input)
+    validate(input)
 
-    const errors = parser.getErrors()
+    const { errors } = validate
     if (expected) {
       expect(errors).toBeNull()
     } else {
