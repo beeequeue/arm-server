@@ -10,7 +10,6 @@ Sentry.init({
   enabled: NODE_ENV === "production",
   environment: NODE_ENV!,
   release: RENDER_GIT_COMMIT!,
-  debug: true,
   ignoreErrors: [/unsupported media type/i],
 })
 
