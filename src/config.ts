@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+
 import zod from "zod"
 
 export enum Environment {
@@ -9,11 +10,24 @@ export enum Environment {
 
 const schema = zod.object({
   NODE_ENV: zod.nativeEnum(Environment).default(Environment.Development),
-  PORT: zod.number().default(3000),
+  PORT: zod.preprocess(Number, zod.number().int()).default(3000),
   LOG_LEVEL: zod
     .enum(["fatal", "error", "warn", "info", "debug", "trace"])
     .default("info"),
   USER_AGENT: zod.string().default("arm-server"),
 })
 
-export const config = schema.parse(process.env)
+const result = schema.safeParse(process.env)
+
+if (!result.success) {
+  // eslint-disable-next-line no-console
+  console.error(
+    "❌ Invalid environment variables:",
+    JSON.stringify(result.error.format(), null, 4),
+  )
+
+  // eslint-disable-next-line no-process-exit,unicorn/no-process-exit
+  process.exit(1)
+}
+
+export const config = result.data
