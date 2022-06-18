@@ -19,7 +19,7 @@ const listen = async () => {
 
   const app = await buildApp()
   await app.listen({
-    host: `::`,
+    host: "0.0.0.0",
     port: PORT,
   })
 }
