@@ -18,7 +18,10 @@ const listen = async () => {
   }
 
   const app = await buildApp()
-  await app.listen(PORT, process.env.NODE_ENV === "production" ? "0.0.0.0" : undefined)
+  await app.listen({
+    host: `::`,
+    port: PORT,
+  })
 }
 
 void listen()

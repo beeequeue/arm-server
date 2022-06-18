@@ -1,7 +1,8 @@
 import Fastify from "fastify"
-import Cors from "fastify-cors"
-import Helmet from "fastify-helmet"
 import { customAlphabet, urlAlphabet } from "nanoid"
+
+import Cors from "@fastify/cors"
+import Helmet from "@fastify/helmet"
 
 import { config } from "@/config"
 import { logger } from "@/lib/logger"
@@ -34,13 +35,11 @@ export const buildApp = async () => {
     contentSecurityPolicy: false,
   })
 
-  App.addHook("onError", (request, _reply, error, next) => {
+  App.setErrorHandler((error, request) => {
     /* c8 ignore next 4 */
     if (error.validation == null) {
       sendErrorToSentry(error, request)
     }
-
-    next()
   })
 
   await App.register(apiPlugin, { prefix: "/api" })
