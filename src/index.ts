@@ -17,9 +17,11 @@ const listen = async () => {
     setInterval(runUpdateScript, 1000 * 60 * 60 * 24)
   }
 
-  await (
-    await buildApp()
-  ).listen(PORT, process.env.NODE_ENV === "production" ? "0.0.0.0" : undefined)
+  const app = await buildApp()
+  await app.listen({
+    host: `::`,
+    port: PORT,
+  })
 }
 
 void listen()

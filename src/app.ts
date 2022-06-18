@@ -1,7 +1,8 @@
 import Fastify from "fastify"
-import Cors from "fastify-cors"
-import Helmet from "fastify-helmet"
 import { customAlphabet, urlAlphabet } from "nanoid"
+
+import Cors from "@fastify/cors"
+import Helmet from "@fastify/helmet"
 
 import { config } from "@/config"
 import { logger } from "@/lib/logger"
@@ -37,8 +38,7 @@ export const buildApp = async () => {
   App.addHook("onError", (request, _reply, error, next) => {
     /* c8 ignore next 4 */
     if (error.validation == null) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      sendErrorToSentry(error, request as any)
+      sendErrorToSentry(error, request)
     }
 
     next()
