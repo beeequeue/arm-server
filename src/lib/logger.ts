@@ -1,19 +1,12 @@
 import { FastifyRequest } from "fastify"
 import Pino from "pino"
-import { createWriteStream } from "pino-logflare"
 import Pretty from "pino-pretty"
 
 import { config } from "@/config"
 
 const isProd = config.NODE_ENV === "production"
 
-const stream = isProd
-  ? /* c8 ignore next 4 */
-    createWriteStream({
-      apiKey: config.LOGFLARE_API_KEY,
-      sourceToken: "699c85bf-7f95-4836-9383-79b57ef87c23",
-    })
-  : Pretty({ colorize: true })
+const stream = !isProd ? Pretty({ colorize: true }) : undefined
 
 export const logger = Pino(
   {
@@ -29,6 +22,5 @@ export const logger = Pino(
       }),
     },
   },
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-  stream,
+  stream!,
 )
