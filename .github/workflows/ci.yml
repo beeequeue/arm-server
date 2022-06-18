@@ -17,13 +17,25 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: yarn
+
+      - run: corepack enable
+
+      - name: Get yarn cache directory path
+        id: cache-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.cache-path.outputs.dir }}
+          key: yarn-v1-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            yarn-v1-
 
       - name: Install dependencies
         run: yarn install --immutable
 
       - name: Typecheck
-        run: yarn tsc
+        run: yarn typecheck
 
   lint:
     runs-on: ubuntu-latest
@@ -35,7 +47,19 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: yarn
+
+      - run: corepack enable
+
+      - name: Get yarn cache directory path
+        id: cache-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.cache-path.outputs.dir }}
+          key: yarn-v1-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            yarn-v1-
 
       - name: Install dependencies
         run: yarn install --immutable
@@ -53,7 +77,19 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: yarn
+
+      - run: corepack enable
+
+      - name: Get yarn cache directory path
+        id: cache-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.cache-path.outputs.dir }}
+          key: yarn-v1-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            yarn-v1-
 
       - name: Install dependencies
         run: yarn install --immutable

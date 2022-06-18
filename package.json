@@ -5,6 +5,7 @@
   "private": true,
   "license": "AGPL-3.0-only",
   "homepage": "https://github.com/BeeeQueue/arm-server",
+  "packageManager": "yarn@3.2.1",
   "engines": {
     "node": ">=16.15"
   },
@@ -22,6 +23,7 @@
     "start": "yarn run migrate && tsx src/index.ts",
     "test": "cross-env NODE_ENV=test yarn run migrate && yarn vitest run --coverage",
     "test:dev": "cross-env NODE_ENV=test yarn run migrate && yarn vitest",
+    "typecheck": "tsc --noEmit",
     "prepare": "husky install"
   },
   "resolutions": {
