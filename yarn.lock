@@ -209,10 +209,34 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@istanbuljs/schema@npm:^0.1.2":
+"@istanbuljs/schema@npm:^0.1.2, @istanbuljs/schema@npm:^0.1.3":
   version: 0.1.3
   resolution: "@istanbuljs/schema@npm:0.1.3"
   checksum: 5282759d961d61350f33d9118d16bcaed914ebf8061a52f4fa474b2cb08720c9c81d165e13b82f2e5a8a212cc5af482f0c6fc1ac27b9e067e5394c9a6ed186c9
+  languageName: node
+  linkType: hard
+
+"@jridgewell/resolve-uri@npm:^3.0.3":
+  version: 3.0.7
+  resolution: "@jridgewell/resolve-uri@npm:3.0.7"
+  checksum: 94f454f4cef8f0acaad85745fd3ca6cd0d62ef731cf9f952ecb89b8b2ce5e20998cd52be31311cedc5fa5b28b1708a15f3ad9df0fe1447ee4f42959b036c4b5b
+  languageName: node
+  linkType: hard
+
+"@jridgewell/sourcemap-codec@npm:^1.4.10":
+  version: 1.4.13
+  resolution: "@jridgewell/sourcemap-codec@npm:1.4.13"
+  checksum: f14449096f60a5f921262322fef65ce0bbbfb778080b3b20212080bcefdeba621c43a58c27065bd536ecb4cc767b18eb9c45f15b6b98a4970139572b60603a1c
+  languageName: node
+  linkType: hard
+
+"@jridgewell/trace-mapping@npm:^0.3.7":
+  version: 0.3.13
+  resolution: "@jridgewell/trace-mapping@npm:0.3.13"
+  dependencies:
+    "@jridgewell/resolve-uri": ^3.0.3
+    "@jridgewell/sourcemap-codec": ^1.4.10
+  checksum: e38254e830472248ca10a6ed1ae75af5e8514f0680245a5e7b53bc3c030fd8691d4d3115d80595b45d3badead68269769ed47ecbbdd67db1343a11f05700e75a
   languageName: node
   linkType: hard
 
@@ -832,27 +856,27 @@ __metadata:
     "@sentry/node": 7.2.0
     "@tsconfig/node16-strictest": 1.0.2
     "@types/node": 16.11.41
-    c8: 7.11.0
+    c8: 7.11.3
     cross-env: 7.0.3
     dotenv: 16.0.1
     envsafe: 2.0.3
     eslint: 8.18.0
     fastify: 4.0.3
-    got: 11.8.3
+    got: 11.8.5
     husky: 8.0.1
     knex: 2.1.0
     lint-staged: 13.0.2
-    nanoid: 3.3.1
+    nanoid: 4.0.0
     pino: 8.0.0
     pino-logflare: 0.3.12
     pino-pretty: 8.0.0
     prettier: 2.7.1
-    sqlite3: 5.0.7
+    sqlite3: 5.0.8
     sucrase: 3.21.0
     ts-json-validator: 0.7.1
     tsconfig-paths: 4.0.0
     tsx: 3.4.3
-    type-fest: 2.12.0
+    type-fest: 2.13.1
     typescript: 4.7.4
     vite-tsconfig-paths: 3.5.0
     vitest: 0.15.1
@@ -1035,25 +1059,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"c8@npm:7.11.0":
-  version: 7.11.0
-  resolution: "c8@npm:7.11.0"
+"c8@npm:7.11.3":
+  version: 7.11.3
+  resolution: "c8@npm:7.11.3"
   dependencies:
     "@bcoe/v8-coverage": ^0.2.3
-    "@istanbuljs/schema": ^0.1.2
+    "@istanbuljs/schema": ^0.1.3
     find-up: ^5.0.0
     foreground-child: ^2.0.0
-    istanbul-lib-coverage: ^3.0.1
+    istanbul-lib-coverage: ^3.2.0
     istanbul-lib-report: ^3.0.0
-    istanbul-reports: ^3.0.2
-    rimraf: ^3.0.0
+    istanbul-reports: ^3.1.4
+    rimraf: ^3.0.2
     test-exclude: ^6.0.0
-    v8-to-istanbul: ^8.0.0
+    v8-to-istanbul: ^9.0.0
     yargs: ^16.2.0
-    yargs-parser: ^20.2.7
+    yargs-parser: ^20.2.9
   bin:
     c8: bin/c8.js
-  checksum: 3576fd62dfbef7ef8ae0ce95349d3b297c3b10fa77902b5067896f40a6a3a4bc89637fb81a5badc6b36b4da3f883edc96172c325629d3ec3e24ff9aefab6dcca
+  checksum: 9f7272bb5fd3d4f7d1c2f7fb986c1025a09c3afefce168c3ba62497dd6294f887c1678d23736126485ec534263ec6b4ed9b4bd2a05aa8d1682c949c3db1f5359
   languageName: node
   linkType: hard
 
@@ -3042,9 +3066,9 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"got@npm:11.8.3":
-  version: 11.8.3
-  resolution: "got@npm:11.8.3"
+"got@npm:11.8.5":
+  version: 11.8.5
+  resolution: "got@npm:11.8.5"
   dependencies:
     "@sindresorhus/is": ^4.0.0
     "@szmarczak/http-timer": ^4.0.5
@@ -3057,7 +3081,7 @@ fsevents@~2.3.2:
     lowercase-keys: ^2.0.0
     p-cancelable: ^2.0.0
     responselike: ^2.0.0
-  checksum: 3b6db107d9765470b18e4cb22f7c7400381be7425b9be5823f0168d6c21b5d6b28b023c0b3ee208f73f6638c3ce251948ca9b54a1e8f936d3691139ac202d01b
+  checksum: 2de8a1bbda4e9b6b2b72b2d2100bc055a59adc1740529e631f61feb44a8b9a1f9f8590941ed9da9df0090b6d6d0ed8ffee94cd9ac086ec3409b392b33440f7d2
   languageName: node
   linkType: hard
 
@@ -3506,7 +3530,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"istanbul-lib-coverage@npm:^3.0.0, istanbul-lib-coverage@npm:^3.0.1":
+"istanbul-lib-coverage@npm:^3.0.0, istanbul-lib-coverage@npm:^3.2.0":
   version: 3.2.0
   resolution: "istanbul-lib-coverage@npm:3.2.0"
   checksum: a2a545033b9d56da04a8571ed05c8120bf10e9bce01cf8633a3a2b0d1d83dff4ac4fe78d6d5673c27fc29b7f21a41d75f83a36be09f82a61c367b56aa73c1ff9
@@ -3524,7 +3548,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"istanbul-reports@npm:^3.0.2":
+"istanbul-reports@npm:^3.1.4":
   version: 3.1.4
   resolution: "istanbul-reports@npm:3.1.4"
   dependencies:
@@ -4142,12 +4166,12 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"nanoid@npm:3.3.1":
-  version: 3.3.1
-  resolution: "nanoid@npm:3.3.1"
+"nanoid@npm:4.0.0":
+  version: 4.0.0
+  resolution: "nanoid@npm:4.0.0"
   bin:
-    nanoid: bin/nanoid.cjs
-  checksum: 4ef0969e1bbe866fc223eb32276cbccb0961900bfe79104fa5abe34361979dead8d0e061410a5c03bc3d47455685adf32c09d6f27790f4a6898fb51f7df7ec86
+    nanoid: bin/nanoid.js
+  checksum: 7d5946df5c6d383694195b781ae7b5067c149d164ec71e910d6b06676309c3459b68af570b944fb5ecd5065d19df464f05700d141d70bb712ff8ca06642fd8df
   languageName: node
   linkType: hard
 
@@ -5177,7 +5201,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"rimraf@npm:^3.0.0, rimraf@npm:^3.0.2":
+"rimraf@npm:^3.0.2":
   version: 3.0.2
   resolution: "rimraf@npm:3.0.2"
   dependencies:
@@ -5480,13 +5504,6 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"source-map@npm:^0.7.3":
-  version: 0.7.3
-  resolution: "source-map@npm:0.7.3"
-  checksum: cd24efb3b8fa69b64bf28e3c1b1a500de77e84260c5b7f2b873f88284df17974157cc88d386ee9b6d081f08fdd8242f3fc05c953685a6ad81aad94c7393dedea
-  languageName: node
-  linkType: hard
-
 "spdx-correct@npm:^3.0.0":
   version: 3.1.1
   resolution: "spdx-correct@npm:3.1.1"
@@ -5537,9 +5554,9 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"sqlite3@npm:5.0.7":
-  version: 5.0.7
-  resolution: "sqlite3@npm:5.0.7"
+"sqlite3@npm:5.0.8":
+  version: 5.0.8
+  resolution: "sqlite3@npm:5.0.8"
   dependencies:
     "@mapbox/node-pre-gyp": ^1.0.0
     node-addon-api: ^4.2.0
@@ -5553,7 +5570,7 @@ resolve@^2.0.0-next.3:
   peerDependenciesMeta:
     node-gyp:
       optional: true
-  checksum: a5b8e3a71f989f830c2a1df1520e10f7347bf327563eaf6434f26600e1074d7ae1875a61b48305307a18972144c951fb753f2c7986abe16e848badeccef8479a
+  checksum: 6b19d4cad0f53e3df9745aa4b743b0f9388b9ca857e69e851a24336b8fe174381b84d7867bdbf4bc0b572c7e84ef1bb962d8bdc10b0aa18810bf9078536f3d49
   languageName: node
   linkType: hard
 
@@ -6011,10 +6028,10 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"type-fest@npm:2.12.0":
-  version: 2.12.0
-  resolution: "type-fest@npm:2.12.0"
-  checksum: 3ebe6529db84c7ceb579a0c693b92c4bf83fa5a78b5d6a1d3c2138696ad69e0a1ebc7e1b707ee0a2a6bd5aef71bf2bf4fc6fc81a6c752330e10faf0deea80f05
+"type-fest@npm:2.13.1":
+  version: 2.13.1
+  resolution: "type-fest@npm:2.13.1"
+  checksum: 16f05cfd2b701f923176b2d6c5656d26435e71dc874851c95df9b0a287ce18a31f5b14e487cc325df6286daac02124cb0551d48c2ae7039f8a763aa376f3b479
   languageName: node
   linkType: hard
 
@@ -6119,14 +6136,14 @@ typescript@4.7.4:
   languageName: node
   linkType: hard
 
-"v8-to-istanbul@npm:^8.0.0":
-  version: 8.1.1
-  resolution: "v8-to-istanbul@npm:8.1.1"
+"v8-to-istanbul@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "v8-to-istanbul@npm:9.0.0"
   dependencies:
+    "@jridgewell/trace-mapping": ^0.3.7
     "@types/istanbul-lib-coverage": ^2.0.1
     convert-source-map: ^1.6.0
-    source-map: ^0.7.3
-  checksum: 54ce92bec2727879626f623d02c8d193f0c7e919941fa373ec135189a8382265117f5316ea317a1e12a5f9c13d84d8449052a731fe3306fa4beaafbfa4cab229
+  checksum: d8ed2c39ba657dfd851a3c7b3f2b87e5b96c9face806ecfe5b627abe53b0c86f264f51425c591e451405b739e3f8a6728da59670f081790990710e813d8d3440
   languageName: node
   linkType: hard
 
@@ -6354,7 +6371,7 @@ typescript@4.7.4:
   languageName: node
   linkType: hard
 
-"yargs-parser@npm:^20.2.2, yargs-parser@npm:^20.2.7":
+"yargs-parser@npm:^20.2.2, yargs-parser@npm:^20.2.9":
   version: 20.2.9
   resolution: "yargs-parser@npm:20.2.9"
   checksum: 8bb69015f2b0ff9e17b2c8e6bfe224ab463dd00ca211eece72a4cd8a906224d2703fb8a326d36fdd0e68701e201b2a60ed7cf81ce0fd9b3799f9fe7745977ae3
