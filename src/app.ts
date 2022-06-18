@@ -35,11 +35,13 @@ export const buildApp = async () => {
     contentSecurityPolicy: false,
   })
 
-  App.setErrorHandler((error, request) => {
+  App.addHook("onError", (request, _reply, error, next) => {
     /* c8 ignore next 4 */
     if (error.validation == null) {
       sendErrorToSentry(error, request)
     }
+
+    next()
   })
 
   await App.register(apiPlugin, { prefix: "/api" })

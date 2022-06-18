@@ -3,18 +3,22 @@ import { FastifyRequest } from "fastify"
 
 import * as Sentry from "@sentry/node"
 
-const { NODE_ENV, SENTRY_DSN } = process.env
+const { NODE_ENV, SENTRY_DSN, RENDER_GIT_COMMIT } = process.env
 
 Sentry.init({
   dsn: SENTRY_DSN!,
   enabled: NODE_ENV === "production",
+  environment: NODE_ENV!,
+  release: RENDER_GIT_COMMIT!,
+  debug: true,
+  ignoreErrors: [/unsupported media type/i],
 })
 
 export const sendErrorToSentry = (err: Error, request: FastifyRequest) => {
   Sentry.withScope((scope) => {
     scope.addEventProcessor((event) =>
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      Sentry.Handlers.parseRequest(event, request as any),
+      Sentry.addRequestDataToEvent(event, request as any),
     )
 
     Sentry.captureException(err)
