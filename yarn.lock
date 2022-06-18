@@ -299,10 +299,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/node14@npm:1.0.3":
-  version: 1.0.3
-  resolution: "@tsconfig/node14@npm:1.0.3"
-  checksum: 19275fe80c4c8d0ad0abed6a96dbf00642e88b220b090418609c4376e1cef81bf16237bf170ad1b341452feddb8115d8dd2e5acdfdea1b27422071163dc9ba9d
+"@tsconfig/node16-strictest@npm:1.0.2":
+  version: 1.0.2
+  resolution: "@tsconfig/node16-strictest@npm:1.0.2"
+  checksum: 8bfe0d4eae1b78d3fb10f9e3fb0d5137313cbde43d2fa1d033012b3176f1afcc81c6da460009cfb8af5342c6303616ab1e69a59515b1e7fc8c482580465f29a8
   languageName: node
   linkType: hard
 
@@ -742,7 +742,7 @@ __metadata:
   dependencies:
     "@beequeue/eslint-plugin": 0.6.0
     "@sentry/node": 6.18.2
-    "@tsconfig/node14": 1.0.3
+    "@tsconfig/node16-strictest": 1.0.2
     "@types/node": 16.11.41
     "@vscode/sqlite3": 5.0.7
     c8: 7.11.0
@@ -767,7 +767,7 @@ __metadata:
     tsconfig-paths: 4.0.0
     tsx: 3.4.3
     type-fest: 2.12.0
-    typescript: 4.6.2
+    typescript: 4.7.4
     vite-tsconfig-paths: 3.4.1
     vitest: 0.6.1
   languageName: unknown
@@ -5578,23 +5578,23 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-typescript@4.6.2:
-  version: 4.6.2
-  resolution: "typescript@npm:4.6.2"
+typescript@4.7.4:
+  version: 4.7.4
+  resolution: "typescript@npm:4.7.4"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 8a44ed7e6f6c4cb1ebe8cf236ecda2fb119d84dcf0fbd77e707b2dfea1bbcfc4e366493a143513ce7f57203c75da9d4e20af6fe46de89749366351046be7577c
+  checksum: 5750181b1cd7e6482c4195825547e70f944114fb47e58e4aa7553e62f11b3f3173766aef9c281783edfd881f7b8299cf35e3ca8caebe73d8464528c907a164df
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@4.6.2#~builtin<compat/typescript>":
-  version: 4.6.2
-  resolution: "typescript@patch:typescript@npm%3A4.6.2#~builtin<compat/typescript>::version=4.6.2&hash=d8b4e7"
+"typescript@patch:typescript@4.7.4#~builtin<compat/typescript>":
+  version: 4.7.4
+  resolution: "typescript@patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=d8b4e7"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 4b15830bdbd391a66f9f3bcc2dc81fdcaa8143adbf3f9e47dc67ab2d971646a1caf19b89c677afea066e22d3d111f3c1b7b137e3d9a7e8663a6bf9497d428041
+  checksum: 0b078b97f27848c2d10fc0777b7cb4cb85374426620edac25b2fe62459a4344569655e7f1a989d0ce9d5618cdeb958451eb2ee9436e78f7af86a99e800df967b
   languageName: node
   linkType: hard
 

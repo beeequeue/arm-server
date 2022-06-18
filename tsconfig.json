@@ -1,5 +1,5 @@
 {
-  "extends": "@tsconfig/node14/tsconfig.json",
+  "extends": "@tsconfig/node16-strictest/tsconfig.json",
   "compilerOptions": {
     "noEmit": true,
     "moduleResolution": "node",
@@ -8,16 +8,14 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "sourceMap": true,
+    "importsNotUsedAsValues": "remove",
+    "noUncheckedIndexedAccess": false,
+    "noPropertyAccessFromIndexSignature": false,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     },
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "types": ["node"]
-  },
-  "ts-node": {
-    "require": ["dotenv/config", "tsconfig-paths/register"]
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules"]
