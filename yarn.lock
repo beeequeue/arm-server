@@ -369,10 +369,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/node16-strictest@npm:1.0.2":
-  version: 1.0.2
-  resolution: "@tsconfig/node16-strictest@npm:1.0.2"
-  checksum: 8bfe0d4eae1b78d3fb10f9e3fb0d5137313cbde43d2fa1d033012b3176f1afcc81c6da460009cfb8af5342c6303616ab1e69a59515b1e7fc8c482580465f29a8
+"@tsconfig/node16-strictest@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@tsconfig/node16-strictest@npm:1.0.3"
+  checksum: ab4b129be6cb38baf5223e64d4887dcc4276efbee8734e87e7c2d9c4df4ee8837323ef45a6710fe803841ab26676ef3d53c3cf3e0dede65963b5356fc172b8e6
   languageName: node
   linkType: hard
 
@@ -801,7 +801,7 @@ __metadata:
     "@fastify/cors": 8.0.0
     "@fastify/helmet": 9.1.0
     "@sentry/node": 7.2.0
-    "@tsconfig/node16-strictest": 1.0.2
+    "@tsconfig/node16-strictest": 1.0.3
     "@types/json-schema": 7.0.11
     "@types/node": 18.0.0
     ajv: 8.11.0
