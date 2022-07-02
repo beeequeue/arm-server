@@ -828,7 +828,7 @@ __metadata:
     pino-pretty: 8.0.0
     prettier: 2.7.1
     sqlite3: 5.0.8
-    sucrase: 3.21.0
+    sucrase: 3.23.0
     tsconfig-paths: 4.0.0
     tsx: 3.7.0
     type-fest: 2.13.1
@@ -5447,9 +5447,9 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"sucrase@npm:3.21.0":
-  version: 3.21.0
-  resolution: "sucrase@npm:3.21.0"
+"sucrase@npm:3.23.0":
+  version: 3.23.0
+  resolution: "sucrase@npm:3.23.0"
   dependencies:
     commander: ^4.0.0
     glob: 7.1.6
@@ -5460,7 +5460,7 @@ resolve@^2.0.0-next.3:
   bin:
     sucrase: bin/sucrase
     sucrase-node: bin/sucrase-node
-  checksum: d686f255af65bab2cb4e685287a7a4fe00f241a891a2ddea8c6218ff8f412780339d4d544e4a582e93e3994d1ebbe2fbce6a555474e80641958319a2b249e836
+  checksum: 28b007fd5eb52abcabc88502f50670c3d53d157cc8f305610dabae23aa165a919a6c638308b1b03434d83b6957ac8924383c579dd8b2d33578a705c0140efe9d
   languageName: node
   linkType: hard
 
