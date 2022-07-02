@@ -6,6 +6,7 @@
   labels: ["dependencies"],
   baseBranches: ["master"],
   automerge: false,
+  postUpdateOptions: ["yarnDedupeHighest"],
   packageRules: [
     {
       packageNames: ["node"],
