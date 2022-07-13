@@ -90,33 +90,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild-kit/cjs-loader@npm:^2.3.0":
-  version: 2.3.0
-  resolution: "@esbuild-kit/cjs-loader@npm:2.3.0"
+"@esbuild-kit/cjs-loader@npm:^2.3.1":
+  version: 2.3.1
+  resolution: "@esbuild-kit/cjs-loader@npm:2.3.1"
   dependencies:
-    "@esbuild-kit/core-utils": ^2.0.0
+    "@esbuild-kit/core-utils": ^2.1.0
     get-tsconfig: ^4.1.0
-  checksum: 2a2b377bcc9a81895479d308389d4ec7a162e4b75465a7b8ea156288ef451b64a1a219668106aa34483258b8ffbf9dda2f52c77bb5d81ddd358af2560b4f5795
+  checksum: 741f73acae8b90283538060801acaab0c06e630cc11758281ecf116d459eeec7929591971e7dd169693ec567ce22c870d1d02fd44286221bf4eb69558f6a1a60
   languageName: node
   linkType: hard
 
-"@esbuild-kit/core-utils@npm:^2.0.0, @esbuild-kit/core-utils@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "@esbuild-kit/core-utils@npm:2.0.2"
+"@esbuild-kit/core-utils@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@esbuild-kit/core-utils@npm:2.1.0"
   dependencies:
     esbuild: ~0.14.47
     source-map-support: ^0.5.21
-  checksum: 5292e0d7eaa225f4e7784a7edcb04b23b2d9aa8f6e7cc9b65535f6b647c8607a16138539e52bdf7634cb9d9fde6f4dcd3d04c13390f264919fd28576f8f5937e
+  checksum: 6c55564aab599e6232f581a8ed45ee9d3cb4877667ad0831cdde6e474496cdf8f2fc8310a27f1f4e1eb087fe7edf80196c5fa9c7714ef6cafc095b162cf06d80
   languageName: node
   linkType: hard
 
-"@esbuild-kit/esm-loader@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "@esbuild-kit/esm-loader@npm:2.4.0"
+"@esbuild-kit/esm-loader@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "@esbuild-kit/esm-loader@npm:2.4.1"
   dependencies:
-    "@esbuild-kit/core-utils": ^2.0.0
+    "@esbuild-kit/core-utils": ^2.1.0
     get-tsconfig: ^4.1.0
-  checksum: 866e4ce46e425657434796c40e046c1e40395a0e0680d8a2cde792f97d57190c5962fb74ef2206d843ae0a4672ee742848891a09a4807a4179881c1b6dc16543
+  checksum: 3b7998a630b61e824726c75de8b602c3304834297d465b276b5d4bd44a79e8ac02a83397b3e35a8ddb67970b131912fe501ea5187c0f1ec0615a566da36c85ae
   languageName: node
   linkType: hard
 
@@ -823,7 +823,7 @@ __metadata:
     sqlite3: 5.0.8
     sucrase: 3.23.0
     tsconfig-paths: 4.0.0
-    tsx: 3.7.0
+    tsx: 3.8.0
     type-fest: 2.15.1
     typescript: 4.7.4
     vite-tsconfig-paths: 3.5.0
@@ -5400,20 +5400,20 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"tsx@npm:3.7.0":
-  version: 3.7.0
-  resolution: "tsx@npm:3.7.0"
+"tsx@npm:3.8.0":
+  version: 3.8.0
+  resolution: "tsx@npm:3.8.0"
   dependencies:
-    "@esbuild-kit/cjs-loader": ^2.3.0
-    "@esbuild-kit/core-utils": ^2.0.2
-    "@esbuild-kit/esm-loader": ^2.4.0
+    "@esbuild-kit/cjs-loader": ^2.3.1
+    "@esbuild-kit/core-utils": ^2.1.0
+    "@esbuild-kit/esm-loader": ^2.4.1
     fsevents: ~2.3.2
   dependenciesMeta:
     fsevents:
       optional: true
   bin:
     tsx: dist/cli.js
-  checksum: c7d8fa7750b3940eb254028ac5b67d220d36159345e260af42a02a63ef329890f1e089e35c68a3b22c13cee6eb0ef009f6e123c1fd16bacf1bc05b87ab1e62b8
+  checksum: 2990425ad04aa5a1bb7ad1c7dc054fe97d56b22cfbc840a3c65417c7c73bec6274bbcb29c46dfc5b1f386b68144c37df0c413e277c0218b3162c8768ddb61778
   languageName: node
   linkType: hard
 
