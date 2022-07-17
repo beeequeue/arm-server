@@ -137,14 +137,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/ajv-compiler@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "@fastify/ajv-compiler@npm:3.1.0"
+"@fastify/ajv-compiler@npm:^3.1.1":
+  version: 3.1.2
+  resolution: "@fastify/ajv-compiler@npm:3.1.2"
   dependencies:
     ajv: ^8.10.0
     ajv-formats: ^2.1.1
-    fast-uri: ^1.0.1
-  checksum: e18a758aea73637fb88f6f8f2ae547d802f7edbfc861769732f13a355d8262e0d5c6d2a9524a249aa249075e4b4b5e19fb0757223b353c6ceba9a99a2c0c7e69
+    fast-uri: ^2.0.0
+  checksum: 8876754279eef74d91b2a5dd42c2a5ca43c80de92a15d1b6cb980e0b27f572710a67a7675dd100b172e92941efaf2ecda57653d254542e5d94ca3ff785e0ce31
   languageName: node
   linkType: hard
 
@@ -811,7 +811,7 @@ __metadata:
     cross-env: 7.0.3
     dotenv: 16.0.1
     eslint: 8.19.0
-    fastify: 4.2.0
+    fastify: 4.2.1
     husky: 8.0.1
     knex: 2.1.0
     lint-staged: 13.0.3
@@ -2271,14 +2271,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-uri@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "fast-uri@npm:1.0.1"
-  checksum: c0fde2ddbb6311cd249db4c04174f40a10af6d2366473eef902b8c7fb0f5d2329b1a01deea269a1623350532c49d46e6c1695c5fd4710eab39f6e1dacdeda2f5
-  languageName: node
-  linkType: hard
-
-"fast-uri@npm:^2.1.0":
+"fast-uri@npm:^2.0.0, fast-uri@npm:^2.1.0":
   version: 2.1.0
   resolution: "fast-uri@npm:2.1.0"
   checksum: 60ecece5ab05515729ec04d1732ee68bd4429cab8c06ebf8db512a094a0077ddc5af6a27c75922875bc9e13b58e947832242cdcb2cb23c51dc753412222dca83
@@ -2292,11 +2285,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fastify@npm:4.2.0":
-  version: 4.2.0
-  resolution: "fastify@npm:4.2.0"
+"fastify@npm:4.2.1":
+  version: 4.2.1
+  resolution: "fastify@npm:4.2.1"
   dependencies:
-    "@fastify/ajv-compiler": ^3.1.0
+    "@fastify/ajv-compiler": ^3.1.1
     "@fastify/error": ^3.0.0
     "@fastify/fast-json-stringify-compiler": ^4.0.0
     abstract-logging: ^2.0.1
@@ -2310,7 +2303,7 @@ __metadata:
     secure-json-parse: ^2.4.0
     semver: ^7.3.7
     tiny-lru: ^8.0.2
-  checksum: 7bbb9307274d1559221cd617a9844023d9dc3c34f0b6dbe9fced39ba512b9174945050cd09184b43e75aea2549f1d6d4fc457a4986d4eced8725ac1eefa1a442
+  checksum: 443c634d1a65016649f2ee782c057b8e7f02dcaab45ef5b3c1a22663a2c88ecb361f301f1cc92c3ad27c0a1c434c53d9ae051ce4474bee55abcd73ebf6c7af2d
   languageName: node
   linkType: hard
 
