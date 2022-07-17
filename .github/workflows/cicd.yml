@@ -16,7 +16,7 @@ jobs:
       - uses: BeeeQueue/setup-node@corepack
         with:
           node-version: 16
-          corepack: true
+          corepack: npm
 
       - name: find pnpm cache path
         id: cache
@@ -30,7 +30,7 @@ jobs:
             v1-pnpm-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm install --frozen-lockfile
 
       - run: pnpm lint --format compact
 
@@ -43,7 +43,7 @@ jobs:
       - uses: BeeeQueue/setup-node@corepack
         with:
           node-version: 16
-          corepack: true
+          corepack: pnpm
 
       - name: find pnpm cache path
         id: cache
