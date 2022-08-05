@@ -815,7 +815,7 @@ __metadata:
     type-fest: 2.16.0
     typescript: 4.7.4
     vite-tsconfig-paths: 3.5.0
-    vitest: 0.18.1
+    vitest: 0.20.3
     zod: 3.17.10
   languageName: unknown
   linkType: soft
@@ -5586,9 +5586,9 @@ typescript@4.7.4:
   languageName: node
   linkType: hard
 
-"vitest@npm:0.18.1":
-  version: 0.18.1
-  resolution: "vitest@npm:0.18.1"
+"vitest@npm:0.20.3":
+  version: 0.20.3
+  resolution: "vitest@npm:0.20.3"
   dependencies:
     "@types/chai": ^4.3.1
     "@types/chai-subset": ^1.3.3
@@ -5601,12 +5601,15 @@ typescript@4.7.4:
     vite: ^2.9.12 || ^3.0.0-0
   peerDependencies:
     "@edge-runtime/vm": "*"
+    "@vitest/browser": "*"
     "@vitest/ui": "*"
     c8: "*"
     happy-dom: "*"
     jsdom: "*"
   peerDependenciesMeta:
     "@edge-runtime/vm":
+      optional: true
+    "@vitest/browser":
       optional: true
     "@vitest/ui":
       optional: true
@@ -5618,7 +5621,7 @@ typescript@4.7.4:
       optional: true
   bin:
     vitest: vitest.mjs
-  checksum: 0d3a77625eb542bae27715cb24c91b7f4379d1084ce154ff54c991ab669fe0977a927121d232e6659e97b71b852060ca85c0b1825612f2e092b436e24cca276c
+  checksum: 1478030f2e34ee91274a544b7d2e2d447969ce37d6452bfbc8e21fe42ec6fb94c496a09b822d7c8d667cee243b6630c871640d4a8b4434e1a25b858dad3548ed
   languageName: node
   linkType: hard
 
