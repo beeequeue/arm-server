@@ -805,7 +805,7 @@ __metadata:
     lint-staged: 13.0.3
     nanoid: 4.0.0
     ohmyfetch: 0.4.18
-    pino: 8.4.0
+    pino: 8.4.2
     pino-pretty: 8.1.0
     prettier: 2.7.1
     sqlite3: 5.0.11
@@ -4256,9 +4256,9 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"pino@npm:8.4.0, pino@npm:^8.0.0":
-  version: 8.4.0
-  resolution: "pino@npm:8.4.0"
+"pino@npm:8.4.2, pino@npm:^8.0.0":
+  version: 8.4.2
+  resolution: "pino@npm:8.4.2"
   dependencies:
     atomic-sleep: ^1.0.0
     fast-redact: ^3.1.1
@@ -4273,7 +4273,7 @@ fsevents@~2.3.2:
     thread-stream: ^2.0.0
   bin:
     pino: bin.js
-  checksum: ccb5d3d83ae9b9fc17b6a8f44a0204cbb57036322cc7ed6cfaba2d1cebacbeaadebf7c9c047bc0b8136654698ca7f2b6671243f5151998a8f5e0bb431e7a2476
+  checksum: 870ee673d54a8e0b03766f39800e9805023f7f5efbbd33f61142febcdc556e24463d1d2af182c9b504e44ffa82bf692d67e4c284a64ea2cf96e166a13d77a0bc
   languageName: node
   linkType: hard
 
