@@ -415,7 +415,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/chai@npm:*, @types/chai@npm:^4.3.1":
+"@types/chai@npm:*, @types/chai@npm:^4.3.3":
   version: 4.3.3
   resolution: "@types/chai@npm:4.3.3"
   checksum: 20cd094753e137cfc35939cae7f0ed78ecda7861e5c94704efab6979b9121a63807e9b631bdcf3a2792d6c6dba44050b13387262f9e63ebb040741c01c345f0a
@@ -572,6 +572,16 @@ __metadata:
     "@typescript-eslint/types": 5.36.1
     eslint-visitor-keys: ^3.3.0
   checksum: 45ab7c2fd455a8e4beff418bed6c9e7e1f9f66bcaad3bfaed868f97a3f8cfec1fa4faa45948af1a1c32ce573a7b1c6d10427119c257622445b06b488fefd8b49
+  languageName: node
+  linkType: hard
+
+"@vitest/coverage-c8@npm:0.22.1":
+  version: 0.22.1
+  resolution: "@vitest/coverage-c8@npm:0.22.1"
+  dependencies:
+    c8: ^7.12.0
+    vitest: 0.22.1
+  checksum: 141c10127a556ff32e43c6d92a468d800d7c62c767feef1a4123e204a07b58456b410efdba720fa3035639903098dc12767602aa7dabadd40e2d60abc0b008f1
   languageName: node
   linkType: hard
 
@@ -791,9 +801,9 @@ __metadata:
     "@tsconfig/node16-strictest": 1.0.3
     "@types/json-schema": 7.0.11
     "@types/node": 18.0.0
+    "@vitest/coverage-c8": 0.22.1
     ajv: 8.11.0
     better-sqlite3: 7.6.2
-    c8: 7.12.0
     cross-env: 7.0.3
     dotenv: 16.0.2
     eslint: 8.23.0
@@ -812,7 +822,7 @@ __metadata:
     type-fest: 2.19.0
     typescript: 4.8.2
     vite-tsconfig-paths: 3.5.0
-    vitest: 0.20.3
+    vitest: 0.22.1
     zod: 3.18.0
   languageName: unknown
   linkType: soft
@@ -1027,7 +1037,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"c8@npm:7.12.0":
+"c8@npm:^7.12.0":
   version: 7.12.0
   resolution: "c8@npm:7.12.0"
   dependencies:
@@ -5599,7 +5609,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinyspy@npm:^1.0.0":
+"tinyspy@npm:^1.0.2":
   version: 1.0.2
   resolution: "tinyspy@npm:1.0.2"
   checksum: 32096121aa8d52bb625ad62c9314b3e4daba4ab9ac428217b12b1e1dfe9860e3c94d54a7affa279cc70dc6f10d88c6ba46b51de68896b318a06d02f05e87dcc3
@@ -5894,24 +5904,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest@npm:0.20.3":
-  version: 0.20.3
-  resolution: "vitest@npm:0.20.3"
+"vitest@npm:0.22.1":
+  version: 0.22.1
+  resolution: "vitest@npm:0.22.1"
   dependencies:
-    "@types/chai": ^4.3.1
+    "@types/chai": ^4.3.3
     "@types/chai-subset": ^1.3.3
     "@types/node": "*"
     chai: ^4.3.6
     debug: ^4.3.4
     local-pkg: ^0.4.2
     tinypool: ^0.2.4
-    tinyspy: ^1.0.0
+    tinyspy: ^1.0.2
     vite: ^2.9.12 || ^3.0.0-0
   peerDependencies:
     "@edge-runtime/vm": "*"
     "@vitest/browser": "*"
     "@vitest/ui": "*"
-    c8: "*"
     happy-dom: "*"
     jsdom: "*"
   peerDependenciesMeta:
@@ -5921,15 +5930,13 @@ __metadata:
       optional: true
     "@vitest/ui":
       optional: true
-    c8:
-      optional: true
     happy-dom:
       optional: true
     jsdom:
       optional: true
   bin:
     vitest: vitest.mjs
-  checksum: 1478030f2e34ee91274a544b7d2e2d447969ce37d6452bfbc8e21fe42ec6fb94c496a09b822d7c8d667cee243b6630c871640d4a8b4434e1a25b858dad3548ed
+  checksum: 7abe50ceb51181e77cd62eb3a07c2da17f13078f09be34cc2e98f1f94a77eba33a56c644d48ae16bb474945ffc1cfc8664b1f4976c3de495c5e474057420c4ca
   languageName: node
   linkType: hard
 
