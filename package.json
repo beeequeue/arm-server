@@ -33,7 +33,7 @@
   "dependencies": {
     "@fastify/cors": "8.1.0",
     "@fastify/helmet": "9.1.0",
-    "@sentry/node": "7.11.1",
+    "@sentry/node": "7.12.1",
     "cross-env": "7.0.3",
     "fastify": "4.2.1",
     "knex": "2.2.0",
