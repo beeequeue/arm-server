@@ -35,7 +35,7 @@
     "@fastify/helmet": "9.1.0",
     "@sentry/node": "7.11.1",
     "cross-env": "7.0.3",
-    "fastify": "4.2.1",
+    "fastify": "4.5.3",
     "knex": "2.3.0",
     "nanoid": "4.0.0",
     "ohmyfetch": "0.4.18",
