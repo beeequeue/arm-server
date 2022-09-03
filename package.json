@@ -44,7 +44,7 @@
     "sqlite3": "5.0.11",
     "tsx": "3.8.2",
     "type-fest": "2.19.0",
-    "typescript": "4.7.4",
+    "typescript": "4.8.2",
     "zod": "3.18.0"
   },
   "devDependencies": {
