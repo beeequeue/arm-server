@@ -811,7 +811,7 @@ __metadata:
     sqlite3: 5.0.11
     sucrase: 3.25.0
     tsconfig-paths: 4.1.0
-    tsx: 3.8.2
+    tsx: 3.9.0
     type-fest: 2.19.0
     typescript: 4.7.4
     vite-tsconfig-paths: 3.5.0
@@ -5380,9 +5380,9 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"tsx@npm:3.8.2":
-  version: 3.8.2
-  resolution: "tsx@npm:3.8.2"
+"tsx@npm:3.9.0":
+  version: 3.9.0
+  resolution: "tsx@npm:3.9.0"
   dependencies:
     "@esbuild-kit/cjs-loader": ^2.3.3
     "@esbuild-kit/core-utils": ^2.1.0
@@ -5393,7 +5393,7 @@ resolve@^2.0.0-next.3:
       optional: true
   bin:
     tsx: dist/cli.js
-  checksum: 2e95643727bd36a1a72fcf64b23f0bc6d95cce8d2092256cfbe1fe1f47d6db5387214cb6c0d73919621c6ffe0fa5fb6a47eb566ff4c41279632a27cb1f3a6dc2
+  checksum: 871dd3f8f1e288f3f88a4e7adf26a5d85c1a991a70e25b9ae7de14fef4c5838be0e9b202ceca9d17663ce0b0e50aab755183753d269dfeb58649d1b65a06f90b
   languageName: node
   linkType: hard
 
