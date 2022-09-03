@@ -443,10 +443,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:18.0.0":
-  version: 18.0.0
-  resolution: "@types/node@npm:18.0.0"
-  checksum: aab2b325727a2599f6d25ebe0dedf58c40fb66a51ce4ca9c0226ceb70fcda2d3afccdca29db5942eb48b158ee8585a274a1e3750c718bbd5399d7f41d62dfdcc
+"@types/node@npm:18.7.14":
+  version: 18.7.14
+  resolution: "@types/node@npm:18.7.14"
+  checksum: 99cf28ff854100158de875cca23c7acc3cc01dfee526a52b90b7f36767c821bcbaf2be0a98a70f06f3b78f3c60639168ff949d725b61e2e124f9f71f1fb8043d
   languageName: node
   linkType: hard
 
@@ -800,7 +800,7 @@ __metadata:
     "@sentry/node": 7.12.1
     "@tsconfig/node16-strictest": 1.0.3
     "@types/json-schema": 7.0.11
-    "@types/node": 18.0.0
+    "@types/node": 18.7.14
     "@vitest/coverage-c8": 0.22.1
     ajv: 8.11.0
     better-sqlite3: 7.6.2

@@ -27,7 +27,7 @@
     "prepare": "husky install"
   },
   "resolutions": {
-    "@types/node": "18.0.0",
+    "@types/node": "18.7.14",
     "node-fetch": "npm:node-fetch-native@0.1.4"
   },
   "dependencies": {
@@ -51,7 +51,7 @@
     "@beequeue/eslint-plugin": "0.8.0",
     "@tsconfig/node16-strictest": "1.0.3",
     "@types/json-schema": "7.0.11",
-    "@types/node": "18.0.0",
+    "@types/node": "18.7.14",
     "@vitest/coverage-c8": "0.22.1",
     "ajv": "8.11.0",
     "dotenv": "16.0.2",
