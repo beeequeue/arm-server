@@ -26,7 +26,7 @@ if (!result.success) {
     JSON.stringify(result.error.format(), null, 4),
   )
 
-  // eslint-disable-next-line no-process-exit,unicorn/no-process-exit
+  // eslint-disable-next-line n/no-process-exit,unicorn/no-process-exit
   process.exit(1)
 }
 

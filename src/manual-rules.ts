@@ -12,7 +12,7 @@ export const updateBasedOnManualRules = async () => {
     const [toSource, toId] = (to as string).split(":")
     const toWhere = { [toSource]: Number(toId) }
 
-    const badRelation: Relation | null = await knex("relations").where(fromWhere).first()
+    const badRelation = await knex("relations").where(fromWhere).first()
 
     if (!badRelation) {
       throw new Error(`Could not find rule source for ${from}->${to as string}!!!!!`)
