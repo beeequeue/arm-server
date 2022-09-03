@@ -34,7 +34,7 @@ export const bodyHandler = async (
   if (!Array.isArray(input)) {
     const relation = await knex.where(input).from("relations").first()
 
-    return relation ?? null
+    return relation ?? null!
   }
 
   let relations: Array<Relation | null> = []

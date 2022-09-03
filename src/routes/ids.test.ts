@@ -65,8 +65,9 @@ describe("query params", () => {
     const relation: Relation = {
       anidb: 1337,
       anilist: 1337,
-      myanimelist: null as any,
-      kitsu: null as any,
+      // TODO
+      myanimelist: null!,
+      kitsu: null!,
     }
     await knex.insert(relation).into("relations")
 

@@ -51,7 +51,7 @@ const regexes = {
 }
 
 const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
-  const relation: Relation = {}
+  const relation: Partial<Relation> = {}
 
   for (const src of entry.sources) {
     const anilistMatch = regexes.anilist.exec(src)
@@ -91,7 +91,7 @@ const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
     }
   }
 
-  return relation
+  return relation as Relation
 }
 
 export const updateRelations = async () => {
