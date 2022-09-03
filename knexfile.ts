@@ -1,5 +1,5 @@
 export const config: import("knex").Knex.Config = {
-  client: "sqlite3",
+  client: "better-sqlite3",
   migrations: {
     tableName: "migrations",
     directory: "migrations",
