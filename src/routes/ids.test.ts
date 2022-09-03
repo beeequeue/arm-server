@@ -42,7 +42,7 @@ describe("query params", () => {
 
     const response = await app.inject().get("/api/ids").query({
       source: Source.AniList,
-      id: relation.anilist,
+      id: relation.anilist!.toString(),
     })
 
     expect(response.json()).toStrictEqual(relation)
@@ -53,7 +53,7 @@ describe("query params", () => {
   test("returns null when id doesn't exist", async () => {
     const response = await app.inject().get("/api/ids").query({
       source: Source.Kitsu,
-      id: 404,
+      id: 404!.toString(),
     })
 
     expect(response.json()).toBe(null)
@@ -73,7 +73,7 @@ describe("query params", () => {
 
     const response = await app.inject().get("/api/ids").query({
       source: Source.AniList,
-      id: relation.anilist,
+      id: relation.anilist!.toString(),
     })
 
     expect(response.json()).toStrictEqual(relation)
