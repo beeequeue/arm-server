@@ -6,6 +6,8 @@ WORKDIR /app
 
 COPY . .
 
+# Source maps enabled, since it does not affect performance from what I found
+ENV HUSKY=0
 # Install dependencies
 RUN pnpm install --frozen-lockfile
 
