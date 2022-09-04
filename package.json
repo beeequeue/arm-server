@@ -16,6 +16,9 @@
   },
   "scripts": {
     "dev": "",
+    "docker:build": "docker build . --tag arm-server",
+    "docker:prune": "docker image prune --force",
+    "docker:run": "docker run --rm --name arm -p 3000:3000 arm-server",
     "fetch-data": "tsx bin/update.ts --exit",
     "lint": "eslint src",
     "migrate": "knex migrate:latest --knexfile knexfile.ts",
