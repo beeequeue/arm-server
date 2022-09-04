@@ -3,7 +3,7 @@ FROM node:16-alpine
 WORKDIR /server
 
 COPY . /server
-RUN yarn install
+RUN pnpm install --frozen-lockfile
 
 EXPOSE 3000
-CMD [ "yarn", "start" ]
+CMD [ "pnpm", "start" ]

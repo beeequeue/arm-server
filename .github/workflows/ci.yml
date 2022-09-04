@@ -1,98 +1,121 @@
-name: CI
+name: ci
 
 on:
   push:
-    branches: [master]
+    branches:
+      - main
   pull_request:
-    branches: [master]
 
 jobs:
-  typecheck:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v3
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - run: corepack enable
-
-      - name: Get yarn cache directory path
-        id: cache-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-
-      - uses: actions/cache@v3
-        with:
-          path: ${{ steps.cache-path.outputs.dir }}
-          key: yarn-v1-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            yarn-v1-
-
-      - name: Install dependencies
-        run: yarn install --immutable
-
-      - name: Typecheck
-        run: yarn typecheck
-
   lint:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
+      - uses: BeeeQueue/setup-node@corepack
         with:
-          node-version: 18
+          node-version: 16
+          corepack: true
 
-      - run: corepack enable
-
-      - name: Get yarn cache directory path
-        id: cache-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+      - name: find pnpm cache path
+        id: cache
+        run: echo "::set-output name=path::$(pnpm store path)"
 
       - uses: actions/cache@v3
         with:
-          path: ${{ steps.cache-path.outputs.dir }}
-          key: yarn-v1-${{ hashFiles('**/yarn.lock') }}
+          path: ${{ steps.cache.outputs.path }}
+          key: v1-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            yarn-v1-
+            v1-pnpm-
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
 
-      - name: Lint
-        run: yarn lint
+      - run: pnpm lint --format compact
+
+  typecheck:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: BeeeQueue/setup-node@corepack
+        with:
+          node-version: 16
+          corepack: true
+
+      - name: find pnpm cache path
+        id: cache
+        run: echo "::set-output name=path::$(pnpm store path)"
+
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.cache.outputs.path }}
+          key: v1-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            v1-pnpm-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - run: pnpm typecheck
 
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
+      - uses: BeeeQueue/setup-node@corepack
         with:
-          node-version: 18
+          node-version: 16
+          corepack: true
 
-      - run: corepack enable
-
-      - name: Get yarn cache directory path
-        id: cache-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+      - name: find pnpm cache path
+        id: cache
+        run: echo "::set-output name=path::$(pnpm store path)"
 
       - uses: actions/cache@v3
         with:
-          path: ${{ steps.cache-path.outputs.dir }}
-          key: yarn-v1-${{ hashFiles('**/yarn.lock') }}
+          path: ${{ steps.cache.outputs.path }}
+          key: v1-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            yarn-v1-
+            v1-pnpm-
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
 
-      - name: Test
-        run: yarn test
+      - run: pnpm test
+
+      - uses: codecov/codecov-action@v2
+        with:
+          files: node_modules/.coverage/lcov.info
+          fail_ci_if_error: true
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: BeeeQueue/setup-node@corepack
+        with:
+          node-version: 16
+          corepack: true
+
+      - name: find pnpm cache path
+        id: cache
+        run: echo "::set-output name=path::$(pnpm store path)"
+
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.cache.outputs.path }}
+          key: v1-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            v1-pnpm-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - run: pnpm build

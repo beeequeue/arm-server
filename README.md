@@ -68,9 +68,9 @@ If an entry is not found `null` is returned instead.
 ## Development
 
 1. Clone the project
-1. Install dependencies - `yarn`
-1. Run database migrations - `yarn migrate`
-1. Download data (optional) - `yarn fetch-data`
-1. Start the server - `yarn dev`
+1. Install dependencies - `pnpm`
+1. Run database migrations - `pnpm migrate`
+1. Download data (optional) - `pnpm fetch-data`
+1. Start the server - `pnpm dev`
 
 If the database connection fails double check that your `NODE_ENV` is set to `development`.
