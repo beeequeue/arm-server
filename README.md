@@ -22,7 +22,7 @@ a [manual rule request](https://github.com/BeeeQueue/arm-server/issues/new?templ
 
 ## API
 
-**Base URL:** `https://relations.yuna.moe`
+**Base URL:** `https://arm.haglund.dev`
 
 ```ts
 enum Source {
