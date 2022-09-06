@@ -45,7 +45,7 @@
     "tsx": "3.9.0",
     "type-fest": "2.19.0",
     "typescript": "4.8.2",
-    "zod": "3.18.0"
+    "zod": "3.19.0"
   },
   "devDependencies": {
     "@beequeue/eslint-plugin": "0.8.0",
