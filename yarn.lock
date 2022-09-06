@@ -575,13 +575,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/coverage-c8@npm:0.23.0":
-  version: 0.23.0
-  resolution: "@vitest/coverage-c8@npm:0.23.0"
+"@vitest/coverage-c8@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@vitest/coverage-c8@npm:0.23.1"
   dependencies:
     c8: ^7.12.0
-    vitest: 0.23.0
-  checksum: dfe9c55876c6570ef3da2e4764c3c5168f0551f7399f3c1973c214210fc6ab4c4efadc29cd688abd6ffb2154870bf5abf5c7adbe52ce49d4388bdafedb31602e
+    vitest: 0.23.1
+  checksum: 632788d2579e029d53ba42fa3a4d432fc50f8b4feb974900c8ae734bed8afae02f56dae1feadf92aacc60a113884a37c2cbf454240725985eba705dc501f2976
   languageName: node
   linkType: hard
 
@@ -801,7 +801,7 @@ __metadata:
     "@tsconfig/node16-strictest": 1.0.3
     "@types/json-schema": 7.0.11
     "@types/node": 18.7.14
-    "@vitest/coverage-c8": 0.23.0
+    "@vitest/coverage-c8": 0.23.1
     ajv: 8.11.0
     better-sqlite3: 7.6.2
     cross-env: 7.0.3
@@ -822,7 +822,7 @@ __metadata:
     type-fest: 2.19.0
     typescript: 4.8.2
     vite-tsconfig-paths: 3.5.0
-    vitest: 0.23.0
+    vitest: 0.23.1
     zod: 3.18.0
   languageName: unknown
   linkType: soft
@@ -5906,9 +5906,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest@npm:0.23.0":
-  version: 0.23.0
-  resolution: "vitest@npm:0.23.0"
+"vitest@npm:0.23.1":
+  version: 0.23.1
+  resolution: "vitest@npm:0.23.1"
   dependencies:
     "@types/chai": ^4.3.3
     "@types/chai-subset": ^1.3.3
@@ -5940,7 +5940,7 @@ __metadata:
       optional: true
   bin:
     vitest: vitest.mjs
-  checksum: e35db8a2618b95cda9c98a8e1b5a6c83e7c84c7500296614829adef21ca7ac3e9580b19062f379e57df8d847a53eb6bfd8d66c501b5fb666e504c35ca5b18107
+  checksum: 26ca78dc0979c435f2b2f265fc94d13d4e2da5e72680812471cd0b802e5727784c1c05b7dff945bb6638da0ae50ada06dfea5c28cec318575cad95d8a769c131
   languageName: node
   linkType: hard
 
