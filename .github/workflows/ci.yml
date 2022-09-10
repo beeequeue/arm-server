@@ -111,7 +111,7 @@ jobs:
             type=raw,value=latest
 
       - name: Login to GitHub Container Registry
-        #if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/master'
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
@@ -121,14 +121,14 @@ jobs:
       - name: Build and maybe Push Docker image
         uses: docker/build-push-action@v3
         with:
-          push: ${{ github.ref == 'refs/heads/main' }}
+          push: ${{ github.ref == 'refs/heads/master' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
   deploy:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/master'
     needs: [lint, test, typecheck, build]
     runs-on: ubuntu-latest
     environment:
