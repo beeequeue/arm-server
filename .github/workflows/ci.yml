@@ -146,4 +146,5 @@ jobs:
         uses: dokku/github-action@v1
         with:
           git_remote_url: 'ssh://dokku@arm.haglund.dev:22/arm-server'
+          git_push_flags: '--force'
           ssh_private_key: ${{ secrets.DOKKU_PRIVATE_KEY }}
