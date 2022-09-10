@@ -107,7 +107,7 @@ jobs:
           images: |
             ghcr.io/${{ github.repository }}
           tags: |
-            type=sha
+            type=sha,prefix=''
             type=raw,value=latest
 
       - name: Build Docker image
