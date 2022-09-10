@@ -97,25 +97,54 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-      - uses: BeeeQueue/setup-node@corepack
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
         with:
-          node-version: 16
-          corepack: true
+          images: |
+            ghcr.io/${{ github.repository }}
+          tags: |
+            type=sha
+            type=raw,value=latest
 
-      - name: find pnpm cache path
-        id: cache
-        run: echo "::set-output name=path::$(pnpm store path)"
-
-      - uses: actions/cache@v3
+      - name: Build Docker image
+        uses: docker/build-push-action@v3
         with:
-          path: ${{ steps.cache.outputs.path }}
-          key: v1-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            v1-pnpm-
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          outputs: type=docker,dest=/tmp/myimage.tar
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Upload image as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: image
+          path: /tmp/image.tar
 
-      - run: pnpm build
+  deploy:
+    #if: github.ref == 'refs/heads/main'
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download image artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: image
+          path: /tmp
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Load image
+        run: |
+          docker load --input /tmp/image.tar
+          docker image ls -a
