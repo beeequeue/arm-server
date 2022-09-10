@@ -107,8 +107,7 @@ jobs:
           images: |
             ghcr.io/${{ github.repository }}
           tags: |
-            type=sha,prefix=''
-            type=raw,value=latest
+            type=raw,value={{sha}}
 
       - name: Build Docker image
         uses: docker/build-push-action@v3
