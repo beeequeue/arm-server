@@ -87,6 +87,8 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - run: pnpm test
+        env:
+          NODE_ENV: test
 
       - uses: codecov/codecov-action@v2
         with:
