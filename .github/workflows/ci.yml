@@ -143,7 +143,7 @@ jobs:
 
     steps:
       - name: Push to dokku
-        uses: dokku/github-action@v1
+        uses: dokku/github-action@v1.1.3
         with:
           git_remote_url: 'ssh://dokku@arm.haglund.dev:22/arm-server'
           git_push_flags: '--force'
