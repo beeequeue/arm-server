@@ -121,11 +121,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Docker image
-        #if: github.ref == 'refs/heads/main'
+      - name: Build and maybe Push Docker image
         uses: docker/build-push-action@v3
         with:
-          push: true #${{ github.ref == 'refs/heads/main' }}
+          push: ${{ github.ref == 'refs/heads/main' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
