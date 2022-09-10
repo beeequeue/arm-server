@@ -131,7 +131,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push to registry
-        run: docker push "ghcr.io/${{ github.repository }}:*"
+        run: docker push ${{ steps.meta.outputs.tags }}
 
   deploy:
     #if: github.ref == 'refs/heads/main'
