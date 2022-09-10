@@ -14,7 +14,7 @@ export default defineConfig(({ command }) => ({
     },
 
     coverage: {
-      enabled: command === "serve",
+      enabled: command !== "serve",
       exclude: ["config.ts"],
 
       lines: 90,
