@@ -111,6 +111,7 @@ jobs:
             ghcr.io/${{ github.repository }}
           tags: |
             type=raw,value={{sha}}
+            type=raw,value=latest
 
       - name: Login to GitHub Container Registry
         #if: github.ref == 'refs/heads/main'
