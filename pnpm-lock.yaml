@@ -45,8 +45,8 @@ dependencies:
     specifier: 4.8.3
     version: 4.8.3
   zod:
-    specifier: 3.19.0
-    version: 3.19.0
+    specifier: 3.19.1
+    version: 3.19.1
 
 devDependencies:
   '@beequeue/eslint-plugin':
@@ -4316,6 +4316,6 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /zod/3.19.0:
-    resolution: {integrity: sha512-Yw0qvUsCNGBe5YacikdMt5gVYeUuaEFVDIHKMfElrGSaBhwR3CQK6vOzgfAJOjTdGIhEeoaj8GtT+NDZrepZbw==}
+  /zod/3.19.1:
+    resolution: {integrity: sha512-LYjZsEDhCdYET9ikFu6dVPGp2YH9DegXjdJToSzD9rO6fy4qiRYFoyEYwps88OseJlPyl2NOe2iJuhEhL7IpEA==}
     dev: false
