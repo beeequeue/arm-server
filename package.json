@@ -35,7 +35,7 @@
   "dependencies": {
     "@fastify/cors": "8.1.0",
     "@fastify/helmet": "10.0.0",
-    "@sentry/node": "7.12.1",
+    "@sentry/node": "7.13.0",
     "better-sqlite3": "7.6.2",
     "fastify": "4.5.3",
     "knex": "2.3.0",
