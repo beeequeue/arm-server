@@ -62,8 +62,8 @@ devDependencies:
     specifier: 18.7.14
     version: 18.7.14
   '@vitest/coverage-c8':
-    specifier: 0.23.2
-    version: 0.23.2
+    specifier: 0.23.4
+    version: 0.23.4
   ajv:
     specifier: 8.11.0
     version: 8.11.0
@@ -89,8 +89,8 @@ devDependencies:
     specifier: 4.1.0
     version: 4.1.0
   vitest:
-    specifier: 0.23.2
-    version: 0.23.2
+    specifier: 0.23.4
+    version: 0.23.4
 
 packages:
 
@@ -542,11 +542,11 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@vitest/coverage-c8/0.23.2:
-    resolution: {integrity: sha512-VWT6zGj9iXEZCimnRLAUhf3siYVGIG9VryyMoo7B8zMOd+bnAbH8/7PhqvmjedVwa9wh61nkxqgG7/3Y/mzofQ==}
+  /@vitest/coverage-c8/0.23.4:
+    resolution: {integrity: sha512-jmD00a5DQH9gu9K+YdvVhcMuv2CzHvU4gCnySS40Ec5hKlXtlCzRfNHl00VnhfuBeaQUmaQYe60BLT413HyDdg==}
     dependencies:
       c8: 7.12.0
-      vitest: 0.23.2
+      vitest: 0.23.4
     transitivePeerDependencies:
       - '@edge-runtime/vm'
       - '@vitest/browser'
@@ -3856,8 +3856,8 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
 
-  /strip-literal/0.4.0:
-    resolution: {integrity: sha512-ql/sBDoJOybTKSIOWrrh8kgUEMjXMwRAkZTD0EwiwxQH/6tTPkZvMIEjp0CRlpi6V5FMiJyvxeRkEi1KrGISoA==}
+  /strip-literal/0.4.2:
+    resolution: {integrity: sha512-pv48ybn4iE1O9RLgCAN0iU4Xv7RlBTiit6DKmMiErbs9x1wH6vXBs45tWc0H5wUIF6TLTrKweqkmYF/iraQKNw==}
     dependencies:
       acorn: 8.8.0
     dev: true
@@ -4172,8 +4172,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest/0.23.2:
-    resolution: {integrity: sha512-kTBKp3ROPDkYC+x2zWt4znkDtnT08W1FQ6ngRFuqxpBGNuNVS+eWZKfffr8y2JGvEzZ9EzMAOcNaiqMj/FZqMw==}
+  /vitest/0.23.4:
+    resolution: {integrity: sha512-iukBNWqQAv8EKDBUNntspLp9SfpaVFbmzmM0sNcnTxASQZMzRw3PsM6DMlsHiI+I6GeO5/sYDg3ecpC+SNFLrQ==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
     peerDependencies:
@@ -4200,7 +4200,7 @@ packages:
       chai: 4.3.6
       debug: 4.3.4
       local-pkg: 0.4.2
-      strip-literal: 0.4.0
+      strip-literal: 0.4.2
       tinybench: 2.1.5
       tinypool: 0.3.0
       tinyspy: 1.0.2
