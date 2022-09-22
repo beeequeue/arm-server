@@ -1,5 +1,5 @@
 {
-  extends: ["config:js-app", "helpers:disableTypesNodeMajor"],
+  extends: ["config:js-app", "helpers:disableTypesNodeMajor", "schedule:earlyMondays", "group:allNonMajor"],
   prConcurrentLimit: 5,
   branchConcurrentLimit: 5,
   schedule: ["before 11am"],
