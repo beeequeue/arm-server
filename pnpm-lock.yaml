@@ -53,8 +53,8 @@ devDependencies:
     specifier: 0.8.0
     version: 0.8.0_prdxvwpqz7ols7qpi4wzmubrfu
   '@tsconfig/node16-strictest':
-    specifier: 1.0.3
-    version: 1.0.3
+    specifier: 1.0.4
+    version: 1.0.4
   '@types/json-schema':
     specifier: 7.0.11
     version: 7.0.11
@@ -381,8 +381,8 @@ packages:
       tslib: 1.14.1
     dev: false
 
-  /@tsconfig/node16-strictest/1.0.3:
-    resolution: {integrity: sha512-sY7TxE3BzAdsCuKqGWOTtAoPe4tPD0xlPWfjinJvrBvCulyALVSwvIoo7WMcX8O/WyMFzn9rQObA43mAogQ8MQ==}
+  /@tsconfig/node16-strictest/1.0.4:
+    resolution: {integrity: sha512-kp6/DuAoKzHVv5U+p0uOesYbjrEvrYVNdQMl163a+yXXUv9twabvkCGEn3pmVxKXB45JU5MPGolDDWnONZL5ZQ==}
     dev: true
 
   /@types/chai-subset/1.3.3:

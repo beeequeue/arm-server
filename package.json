@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@beequeue/eslint-plugin": "0.8.0",
-    "@tsconfig/node16-strictest": "1.0.3",
+    "@tsconfig/node16-strictest": "1.0.4",
     "@types/json-schema": "7.0.11",
     "@types/node": "18.7.14",
     "@vitest/coverage-c8": "0.23.4",
