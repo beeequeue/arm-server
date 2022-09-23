@@ -39,8 +39,8 @@ dependencies:
     specifier: 3.9.0
     version: 3.9.0
   type-fest:
-    specifier: 2.19.0
-    version: 2.19.0
+    specifier: 3.0.0
+    version: 3.0.0
   typescript:
     specifier: 4.8.3
     version: 4.8.3
@@ -4093,9 +4093,9 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /type-fest/2.19.0:
-    resolution: {integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==}
-    engines: {node: '>=12.20'}
+  /type-fest/3.0.0:
+    resolution: {integrity: sha512-MINvUN5ug9u+0hJDzSZNSnuKXI8M4F5Yvb6SQZ2CYqe7SgKXKOosEcU5R7tRgo85I6eAVBbkVF7TCvB4AUK2xQ==}
+    engines: {node: '>=14.16'}
     dev: false
 
   /typescript/4.8.3:
