@@ -5,7 +5,7 @@
   "private": true,
   "license": "AGPL-3.0-only",
   "homepage": "https://github.com/BeeeQueue/arm-server",
-  "packageManager": "pnpm@7.11.0",
+  "packageManager": "pnpm@7.12.2",
   "engines": {
     "node": ">=18"
   },
@@ -30,18 +30,18 @@
   },
   "resolutions": {
     "@types/node": "18.7.14",
-    "node-fetch": "npm:node-fetch-native@0.1.4"
+    "node-fetch": "npm:node-fetch-native@0.1.7"
   },
   "dependencies": {
     "@fastify/cors": "8.1.0",
     "@fastify/helmet": "10.0.0",
-    "@sentry/node": "7.12.1",
+    "@sentry/node": "7.13.0",
     "better-sqlite3": "7.6.2",
-    "fastify": "4.5.3",
+    "fastify": "4.6.0",
     "knex": "2.3.0",
     "nanoid": "4.0.0",
-    "ohmyfetch": "0.4.18",
-    "pino": "8.5.0",
+    "ohmyfetch": "0.4.19",
+    "pino": "8.6.0",
     "pino-pretty": "9.1.0",
     "tsx": "3.9.0",
     "type-fest": "2.19.0",
@@ -60,7 +60,7 @@
     "husky": "8.0.1",
     "lint-staged": "13.0.3",
     "prettier": "2.7.1",
-    "sucrase": "3.26.0",
+    "sucrase": "3.27.0",
     "tsconfig-paths": "4.1.0",
     "vitest": "0.23.4"
   }
