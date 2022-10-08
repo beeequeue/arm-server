@@ -146,6 +146,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - uses: actions/checkout@v3
+
       - name: Declare some variables
         id: sha
         shell: bash
