@@ -146,9 +146,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Declare some variables
+        id: sha
+        shell: bash
+        run: echo "::set-output name=short::$(git rev-parse --short HEAD)"
+
       - name: Push to dokku
         uses: dokku/github-action@v1.3.0
         with:
           git_remote_url: "ssh://dokku@arm.haglund.dev:22/arm-server"
-          deploy_docker_image: "ghcr.io/beeequeue/arm-server:latest"
+          deploy_docker_image: "ghcr.io/beeequeue/arm-server:${{ steps.sha.outputs.short }}"
           ssh_private_key: ${{ secrets.DOKKU_PRIVATE_KEY }}
