@@ -50,8 +50,8 @@ dependencies:
 
 devDependencies:
   '@beequeue/eslint-plugin':
-    specifier: 1.0.0
-    version: 1.0.0_jgy3n4355e6bfws3px3ickn7ti
+    specifier: 1.0.2
+    version: 1.0.2_jgy3n4355e6bfws3px3ickn7ti
   '@tsconfig/node16-strictest':
     specifier: 1.0.4
     version: 1.0.4
@@ -134,8 +134,8 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
-  /@beequeue/eslint-plugin/1.0.0_jgy3n4355e6bfws3px3ickn7ti:
-    resolution: {integrity: sha512-bFttQTJXdOyQAPJORTdnReT1gTgPEUh5W3mpHr/3WCRKbCuhw14Fz39dUt/y6pgQ0sCcFuyUWt7uqQ9WVDyg0g==}
+  /@beequeue/eslint-plugin/1.0.2_jgy3n4355e6bfws3px3ickn7ti:
+    resolution: {integrity: sha512-6ygnr7Ie8k1QZFyNGe2N+0wF52rXt9BEA5dwFKnhboqXKQkgR8yMWPw5GMK1ji6LxG1dViUsRmngi01hm3kcvw==}
     engines: {node: '>=14'}
     peerDependencies:
       eslint: ^8.22.0
