@@ -6,14 +6,14 @@ overrides:
 
 dependencies:
   '@fastify/cors':
-    specifier: 8.1.1
-    version: 8.1.1
+    specifier: 8.2.0
+    version: 8.2.0
   '@fastify/helmet':
     specifier: 10.0.2
     version: 10.0.2
   '@sentry/node':
-    specifier: 7.17.4
-    version: 7.17.4
+    specifier: 7.19.0
+    version: 7.19.0
   better-sqlite3:
     specifier: 7.6.2
     version: 7.6.2
@@ -36,8 +36,8 @@ dependencies:
     specifier: 9.1.1
     version: 9.1.1
   tsx:
-    specifier: 3.11.0
-    version: 3.11.0
+    specifier: 3.12.0
+    version: 3.12.0
   type-fest:
     specifier: 3.2.0
     version: 3.2.0
@@ -74,8 +74,8 @@ devDependencies:
     specifier: 8.27.0
     version: 8.27.0
   husky:
-    specifier: 8.0.1
-    version: 8.0.1
+    specifier: 8.0.2
+    version: 8.0.2
   lint-staged:
     specifier: 13.0.3
     version: 13.0.3
@@ -236,11 +236,11 @@ packages:
       fast-uri: 2.1.0
     dev: false
 
-  /@fastify/cors/8.1.1:
-    resolution: {integrity: sha512-YpkNonoJtn7Zcq2uyh0bFPcjW+njWZ9rz5gl8o5NDUvpBIPjg5m/3IHvsq91Pp/fFhLL7XgVOUyk+gMl8tb5FQ==}
+  /@fastify/cors/8.2.0:
+    resolution: {integrity: sha512-qDgwpmg6C4D0D3nh8MTMuRXWyEwPnDZDBODaJv90FP2o9ukbahJByW4FtrM5Bpod5KbTf1oIExBmpItbUTQmHg==}
     dependencies:
       fastify-plugin: 4.2.1
-      mnemonist: 0.39.4
+      mnemonist: 0.39.5
     dev: false
 
   /@fastify/deepmerge/1.1.0:
@@ -338,22 +338,22 @@ packages:
       tslib: 2.4.0
     dev: true
 
-  /@sentry/core/7.17.4:
-    resolution: {integrity: sha512-U3ABSJBKGK8dJ01nEG2+qNOb6Wv7U3VqoajiZxfV4lpPWNFGCoEhiTytxBlFTOCmdUH8209zSZiWJZaDLy+TSA==}
+  /@sentry/core/7.19.0:
+    resolution: {integrity: sha512-YF9cTBcAnO4R44092BJi5Wa2/EO02xn2ziCtmNgAVTN2LD31a/YVGxGBt/FDr4Y6yeuVehaqijVVvtpSmXrGJw==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/types': 7.17.4
-      '@sentry/utils': 7.17.4
+      '@sentry/types': 7.19.0
+      '@sentry/utils': 7.19.0
       tslib: 1.14.1
     dev: false
 
-  /@sentry/node/7.17.4:
-    resolution: {integrity: sha512-cR+Gsir9c/tzFWxvk4zXkMQy6tNRHEYixHrb88XIjZVYDqDS9l2/bKs5nJusdmaUeLtmPp5Et2o7RJyS7gvKTQ==}
+  /@sentry/node/7.19.0:
+    resolution: {integrity: sha512-yG7Tx32WqOkEHVotFLrumCcT9qlaSDTkFNZ+yLSvZXx74ifsE781DzBA9W7K7bBdYO3op+p2YdsOKzf3nPpAyQ==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/core': 7.17.4
-      '@sentry/types': 7.17.4
-      '@sentry/utils': 7.17.4
+      '@sentry/core': 7.19.0
+      '@sentry/types': 7.19.0
+      '@sentry/utils': 7.19.0
       cookie: 0.4.2
       https-proxy-agent: 5.0.1
       lru_map: 0.3.3
@@ -362,16 +362,16 @@ packages:
       - supports-color
     dev: false
 
-  /@sentry/types/7.17.4:
-    resolution: {integrity: sha512-QJj8vO4AtxuzQfJIzDnECSmoxwnS+WJsm1Ta2Cwdy+TUCBJyWpW7aIJJGta76zb9gNPGb3UcAbeEjhMJBJeRMQ==}
+  /@sentry/types/7.19.0:
+    resolution: {integrity: sha512-oGRAT6lfzoKrxO1mvxiSj0XHxWPd6Gd1wpPGuu6iJo03xgWDS+MIlD1h2unqL4N5fAzLjzmbC2D2lUw50Kn2pA==}
     engines: {node: '>=8'}
     dev: false
 
-  /@sentry/utils/7.17.4:
-    resolution: {integrity: sha512-ioG0ANy8uiWzig82/e7cc+6C9UOxkyBzJDi1luoQVDH6P0/PvM8GzVU+1iUVUipf8+OL1Jh09GrWnd5wLm3XNQ==}
+  /@sentry/utils/7.19.0:
+    resolution: {integrity: sha512-2L6lq+c9Ol2uiRxQDdcgoapmHJp24MhMN0gIkn2alSfMJ+ls6bGXzQHx6JAIdoOiwFQXRZHKL9ecfAc8O+vItA==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/types': 7.17.4
+      '@sentry/types': 7.19.0
       tslib: 1.14.1
     dev: false
 
@@ -2454,8 +2454,8 @@ packages:
     engines: {node: '>=12.20.0'}
     dev: true
 
-  /husky/8.0.1:
-    resolution: {integrity: sha512-xs7/chUH/CKdOCs7Zy0Aev9e/dKOMZf3K1Az1nar3tzlv0jfqnYtu235bstsWTmXOR0EfINrPa97yy4Lz6RiKw==}
+  /husky/8.0.2:
+    resolution: {integrity: sha512-Tkv80jtvbnkK3mYWxPZePGFpQ/tT3HNSs/sasF9P2YfkMezDl3ON37YN6jUUI4eTg5LcyVynlb6r4eyvOmspvg==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
@@ -2986,8 +2986,8 @@ packages:
     resolution: {integrity: sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==}
     dev: false
 
-  /mnemonist/0.39.4:
-    resolution: {integrity: sha512-WlE2Ugow1ENH5un0OthjsjpJb/nbkUQ/jUOHtZUqh58JNzEHNxkm0tIFRAoExsANW/fTN/rxBUMFY/7jPDvxdQ==}
+  /mnemonist/0.39.5:
+    resolution: {integrity: sha512-FPUtkhtJ0efmEFGpU14x7jGbTB+s18LrzRL2KgoWz9YvcY3cPomz8tih01GbHwnGk/OmkOKfqd/RAQoc8Lm7DQ==}
     dependencies:
       obliterator: 2.0.4
     dev: false
@@ -4072,8 +4072,8 @@ packages:
       typescript: 4.8.4
     dev: true
 
-  /tsx/3.11.0:
-    resolution: {integrity: sha512-q+q4xxu41+AafVwvAGqtNJ1ekPFd33ZhTMXvgIpHMqv/W89efwDRE9IyjhEAZm5iTHsshKaf1BYWSk789BrNCA==}
+  /tsx/3.12.0:
+    resolution: {integrity: sha512-Z9drA8U1/jRJRWVTS2rOwdsCfkAShwfYBlE+6BVZsZChDsgYsEZZe44MGNNK6V6wQTTtu1kRNV57MsKRMJfdpg==}
     hasBin: true
     dependencies:
       '@esbuild-kit/cjs-loader': 2.4.0
