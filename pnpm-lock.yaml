@@ -62,8 +62,8 @@ devDependencies:
     specifier: 18.11.9
     version: 18.11.9
   '@vitest/coverage-c8':
-    specifier: 0.25.1
-    version: 0.25.1
+    specifier: 0.25.2
+    version: 0.25.2
   ajv:
     specifier: 8.11.0
     version: 8.11.0
@@ -89,8 +89,8 @@ devDependencies:
     specifier: 4.1.0
     version: 4.1.0
   vitest:
-    specifier: 0.25.1
-    version: 0.25.1
+    specifier: 0.25.2
+    version: 0.25.2
 
 packages:
 
@@ -541,11 +541,11 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@vitest/coverage-c8/0.25.1:
-    resolution: {integrity: sha512-gpl5QNaNeIN0mfRiosCqBFoZcizb5GA458TDnOQXkGDc4kklazxn70u9evGfV62wiiAUfGGebgRhxlBkAa6m6g==}
+  /@vitest/coverage-c8/0.25.2:
+    resolution: {integrity: sha512-qKsiUJh3bjbB5Q229CbxEWCqiDBwvIrcZ9OOuQdMEC0pce3/LlTUK3+K3hd7WqAYEbbiqXfC5MVMKHZkV82PgA==}
     dependencies:
       c8: 7.12.0
-      vitest: 0.25.1
+      vitest: 0.25.2
     transitivePeerDependencies:
       - '@edge-runtime/vm'
       - '@vitest/browser'
@@ -4202,8 +4202,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest/0.25.1:
-    resolution: {integrity: sha512-eH74h6MkuEgsqR4mAQZeMK9O0PROiKY+i+1GMz/fBi5A3L2ml5U7JQs7LfPU7+uWUziZyLHagl+rkyfR8SLhlA==}
+  /vitest/0.25.2:
+    resolution: {integrity: sha512-qqkzfzglEFbQY7IGkgSJkdOhoqHjwAao/OrphnHboeYHC5JzsVFoLCaB2lnAy8krhj7sbrFTVRApzpkTOeuDWQ==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
     peerDependencies:
