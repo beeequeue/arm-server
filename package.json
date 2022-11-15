@@ -30,7 +30,7 @@
   },
   "resolutions": {
     "@types/node": "18.11.9",
-    "node-fetch": "npm:node-fetch-native@0.1.8"
+    "node-fetch": "npm:node-fetch-native@1.0.1"
   },
   "dependencies": {
     "@fastify/cors": "8.2.0",
