@@ -36,7 +36,7 @@
     "@fastify/cors": "8.2.0",
     "@fastify/helmet": "10.1.0",
     "@sentry/node": "7.23.0",
-    "better-sqlite3": "7.6.2",
+    "better-sqlite3": "8.0.1",
     "fastify": "4.10.2",
     "knex": "2.3.0",
     "nanoid": "4.0.0",
