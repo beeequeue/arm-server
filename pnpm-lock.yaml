@@ -18,8 +18,8 @@ dependencies:
     specifier: 7.6.2
     version: 7.6.2
   fastify:
-    specifier: 4.10.0
-    version: 4.10.0
+    specifier: 4.10.2
+    version: 4.10.2
   knex:
     specifier: 2.3.0
     version: 2.3.0_better-sqlite3@7.6.2
@@ -1003,6 +1003,11 @@ packages:
   /concat-map/0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
+
+  /content-type/1.0.4:
+    resolution: {integrity: sha512-hIP3EEPs8tB9AT1L+NUqtwOAps4mk2Zob89MWXMHjHWg9milF/j4osnnQLXBCBFBk/tvIG/tUc9mOUJiPBhPXA==}
+    engines: {node: '>= 0.6'}
+    dev: false
 
   /convert-source-map/1.8.0:
     resolution: {integrity: sha512-+OQdjP49zViI/6i7nIJpA8rAl4sV/JdPfU9nZs3VqOwGIgizICvuN2ru6fMd+4llL0tar18UYJXfZ/TWtmhUjA==}
@@ -2123,14 +2128,15 @@ packages:
     resolution: {integrity: sha512-dlGKiwLzRBKkEf5J5ho0uAD/Jdv8GQVUbriB3tAX3ehRUXE4gTV3lRd5inEg9li1aLzb0EGj8y2K4/8g1TN06g==}
     dev: false
 
-  /fastify/4.10.0:
-    resolution: {integrity: sha512-8yQPT+c/EbETjNxwM9PHeu2U4eXMoXTva0L9zoVgv7/ZCBtovWpfK4RKexhyh5Va3Jg82HovnfCxoZmwcZDfsQ==}
+  /fastify/4.10.2:
+    resolution: {integrity: sha512-0T+4zI6N3S8ex0LCZi3H4FasJR4AzWw834fUkPWvV8r6GBJkLmAOfFxH8f5V29Plef24IK0QSQD/tz1Nx+1UOA==}
     dependencies:
       '@fastify/ajv-compiler': 3.3.1
       '@fastify/error': 3.0.0
       '@fastify/fast-json-stringify-compiler': 4.1.0
       abstract-logging: 2.0.1
       avvio: 8.2.0
+      content-type: 1.0.4
       find-my-way: 7.3.0
       light-my-request: 5.6.1
       pino: 8.7.0

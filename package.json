@@ -37,7 +37,7 @@
     "@fastify/helmet": "10.1.0",
     "@sentry/node": "7.23.0",
     "better-sqlite3": "7.6.2",
-    "fastify": "4.10.0",
+    "fastify": "4.10.2",
     "knex": "2.3.0",
     "nanoid": "4.0.0",
     "ohmyfetch": "0.4.21",
