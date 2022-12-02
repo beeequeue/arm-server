@@ -1,4 +1,4 @@
-import { FastifyPluginAsync, FastifyRequest } from "fastify"
+import { FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify"
 
 import { Relation } from "@/db"
 import { bodyHandler, bodyInputSchema, BodyQuery } from "@/schemas/json-body"
@@ -17,6 +17,7 @@ type QueryInput = { Querystring: QueryParamQuery }
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 const handler = async (
   request: FastifyRequest<BodyInput | QueryInput>,
+  reply: FastifyReply,
 ): Promise<Relation | Relation[] | null> => {
   const isBodyQuery = isEmpty(request.query as any)
 
@@ -24,7 +25,7 @@ const handler = async (
     return (await bodyHandler(request.body as any)) ?? null
   }
 
-  return (await handleQueryParams(request.query as any)) ?? null
+  return (await handleQueryParams(request, reply)) ?? null
 }
 /* eslint-enable */
 
