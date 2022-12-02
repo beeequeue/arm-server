@@ -154,7 +154,7 @@ jobs:
         run: echo "::set-output name=short::$(git rev-parse --short HEAD)"
 
       - name: Push to dokku
-        uses: dokku/github-action@v1.3.0
+        uses: dokku/github-action@v1.4.0
         with:
           git_remote_url: "ssh://dokku@arm.haglund.dev:22/arm-server"
           deploy_docker_image: "ghcr.io/beeequeue/arm-server:${{ steps.sha.outputs.short }}"
