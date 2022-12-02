@@ -54,5 +54,5 @@ export const bodyHandler = async (
     return relations.find((relation) => relation![realItem[0]] === realItem[1]) ?? null
   })
 
-  return relations as any
+  return relations as never
 }

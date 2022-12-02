@@ -16,8 +16,7 @@ Sentry.init({
 export const sendErrorToSentry = (err: Error, request: FastifyRequest) => {
   Sentry.withScope((scope) => {
     scope.addEventProcessor((event) =>
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      Sentry.addRequestDataToEvent(event, request as any),
+      Sentry.addRequestDataToEvent(event, request as never),
     )
 
     Sentry.captureException(err)

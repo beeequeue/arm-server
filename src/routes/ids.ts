@@ -10,24 +10,23 @@ import {
 import { responseBodySchema } from "@/schemas/response"
 import { isEmpty } from "@/utils"
 
-/* eslint-disable @typescript-eslint/naming-convention */
 type BodyInput = { Body: BodyQuery }
 type QueryInput = { Querystring: QueryParamQuery }
 
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-const handler = async (
+const isBodyQuery = (
   request: FastifyRequest<BodyInput | QueryInput>,
+): request is FastifyRequest<BodyInput> => isEmpty(request.query as QueryParamQuery)
+
+const handler = async (
+  request: FastifyRequest<BodyInput> | FastifyRequest<QueryInput>,
   reply: FastifyReply,
 ): Promise<Relation | Relation[] | null> => {
-  const isBodyQuery = isEmpty(request.query as any)
-
-  if (isBodyQuery) {
-    return (await bodyHandler(request.body as any)) ?? null
+  if (isBodyQuery(request)) {
+    return (await bodyHandler(request.body)) ?? null
   }
 
   return (await handleQueryParams(request, reply)) ?? null
 }
-/* eslint-enable */
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const apiPlugin: FastifyPluginAsync = async (fastify) => {

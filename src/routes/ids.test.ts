@@ -19,10 +19,10 @@ const createRelations = async <N extends number>(
   await knex.insert(relations).into("relations")
 
   if (amount === 1) {
-    return relations[0] as any
+    return relations[0] as never
   }
 
-  return relations as any
+  return relations as never
 }
 
 let app: FastifyInstance
@@ -138,8 +138,8 @@ describe("json body", () => {
       const relation: Relation = {
         anidb: 1337,
         anilist: 1337,
-        myanimelist: null as any,
-        kitsu: null as any,
+        myanimelist: null as never,
+        kitsu: null as never,
       }
       await knex.insert(relation).into("relations")
 
