@@ -159,6 +159,6 @@ jobs:
       - name: Push to dokku
         uses: dokku/github-action@v1.4.0
         with:
-          git_remote_url: "ssh://dokku@arm.haglund.dev:22/arm-server"
+          git_remote_url: "ssh://dokku@${{ secrets.SERVER_IP }}:22/arm-server"
           deploy_docker_image: "ghcr.io/beeequeue/arm-server:${{ steps.sha.outputs.short }}"
           ssh_private_key: ${{ secrets.DOKKU_PRIVATE_KEY }}
