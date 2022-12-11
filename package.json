@@ -5,7 +5,7 @@
   "private": true,
   "license": "AGPL-3.0-only",
   "homepage": "https://github.com/BeeeQueue/arm-server",
-  "packageManager": "pnpm@7.17.1",
+  "packageManager": "pnpm@7.18.1",
   "engines": {
     "node": ">=18"
   },
@@ -35,7 +35,7 @@
   "dependencies": {
     "@fastify/cors": "8.2.0",
     "@fastify/helmet": "10.1.0",
-    "@sentry/node": "7.23.0",
+    "@sentry/node": "7.24.2",
     "better-sqlite3": "8.0.1",
     "fastify": "4.10.2",
     "knex": "2.3.0",
@@ -45,7 +45,7 @@
     "pino-pretty": "9.1.1",
     "tsx": "3.12.1",
     "type-fest": "3.3.0",
-    "typescript": "4.9.3",
+    "typescript": "4.9.4",
     "zod": "3.19.1"
   },
   "devDependencies": {
@@ -59,7 +59,7 @@
     "eslint": "8.29.0",
     "husky": "8.0.2",
     "lint-staged": "13.1.0",
-    "prettier": "2.8.0",
+    "prettier": "2.8.1",
     "sucrase": "3.29.0",
     "tsconfig-paths": "4.1.1",
     "vitest": "0.25.7"
