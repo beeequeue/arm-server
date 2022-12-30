@@ -1,6 +1,6 @@
 # arm-server
 
-[![](https://img.shields.io/github/workflow/status/BeeeQueue/arm-server/CI)](https://github.com/BeeeQueue/arm-server/actions?query=branch%3Amaster+workflow%3ACI)
+[![](https://img.shields.io/github/actions/workflow/status/BeeeQueue/arm-server/cicd.yml?branch=master)](https://github.com/BeeeQueue/arm-server/actions?query=branch%3Amaster+workflow%3ACI)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FBeeeQueue%2Fupptime%2FHEAD%2Fapi%2Farm-server-arm-haglund-dev%2Fuptime-week.json)](https://status.haglund.dev/history/arm-server-arm-haglund-dev)
 
 This app uses data from [`anime-offline-database`](https://github.com/manami-project/anime-offline-database/) - fetching
