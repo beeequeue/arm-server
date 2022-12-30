@@ -15,6 +15,7 @@
     "importsNotUsedAsValues": "remove",
     "noUncheckedIndexedAccess": false,
     "noPropertyAccessFromIndexSignature": false,
+    "exactOptionalPropertyTypes": false,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]

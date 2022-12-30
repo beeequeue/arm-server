@@ -12,8 +12,15 @@ declare module "knex/types/tables" {
 export const knex = Knex(config)
 
 export type Relation = {
-  anilist?: number
   anidb?: number
-  myanimelist?: number
+  anilist?: number
+  "anime-planet"?: string
+  anisearch?: number
+  imdb?: string
   kitsu?: number
+  livechart?: number
+  "notify-moe"?: string
+  themoviedb?: number
+  thetvdb?: number
+  myanimelist?: number
 }

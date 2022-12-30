@@ -10,20 +10,23 @@ import { updateBasedOnManualRules } from "./manual-rules"
 const isFetchError = <T>(response: T | FetchError): response is FetchError =>
   (response as FetchError).stack != null
 
-type OfflineDatabaseSchema = {
-  sources: string[]
-  type: string
-  title: string
-  picture: string
-  relations: string[]
-  thumbnail: string
-  episodes: number
-  synonyms: string[]
-}
+type AnimeListsSchema = Array<{
+  anidb_id?: number
+  anilist_id?: number
+  "anime-planet_id"?: string
+  anisearch_id?: number
+  imdb_id?: string
+  kitsu_id?: number
+  livechart_id?: number
+  mal_id?: number
+  "notify.moe_id"?: string
+  themoviedb_id?: number | "unknown"
+  thetvdb_id?: number
+}>
 
-const fetchDatabase = async (): Promise<OfflineDatabaseSchema[] | null> => {
-  const response = await $fetch<{ data: OfflineDatabaseSchema[] }>(
-    "https://raw.githubusercontent.com/manami-project/anime-offline-database/master/anime-offline-database-minified.json",
+const fetchDatabase = async (): Promise<AnimeListsSchema | null> => {
+  const response = await $fetch<AnimeListsSchema>(
+    "https://raw.githubusercontent.com/Fribb/anime-lists/master/anime-list-full.json",
     {
       responseType: "json",
       retry: 5,
@@ -40,59 +43,23 @@ const fetchDatabase = async (): Promise<OfflineDatabaseSchema[] | null> => {
     return null
   }
 
-  return response.data
+  return response
 }
 
-const regexes = {
-  anilist: /anilist.co\/anime\/(\d+)$/,
-  anidb: /anidb.net\/a(?:nime\/)?(\d+)$/,
-  mal: /myanimelist.net\/anime\/(\d+)$/,
-  kitsu: /kitsu.io\/anime\/(.+)$/,
-}
-
-const formatEntry = (entry: OfflineDatabaseSchema): Relation => {
-  const relation: Partial<Relation> = {}
-
-  for (const src of entry.sources) {
-    const anilistMatch = regexes.anilist.exec(src)
-    if (anilistMatch) {
-      const id = Number(anilistMatch[1])
-
-      if (Number.isNaN(id)) throw new Error(`${src}'s ID is not a number!!`)
-
-      relation.anilist = id
-    }
-
-    const anidbMatch = regexes.anidb.exec(src)
-    if (anidbMatch) {
-      const id = Number(anidbMatch[1])
-
-      if (Number.isNaN(id)) throw new Error(`${src}'s ID is not a number!!`)
-
-      relation.anidb = id
-    }
-
-    const malMatch = regexes.mal.exec(src)
-    if (malMatch) {
-      const id = Number(malMatch[1])
-
-      if (Number.isNaN(id)) throw new Error(`${src}'s ID is not a number!!`)
-
-      relation.myanimelist = id
-    }
-
-    const kitsuMatch = regexes.kitsu.exec(src)
-    if (kitsuMatch) {
-      const id = Number(kitsuMatch[1])
-
-      if (Number.isNaN(id)) throw new Error(`${src}'s ID is not a number!!`)
-
-      relation.kitsu = id
-    }
-  }
-
-  return relation as Relation
-}
+const formatEntry = (entry: AnimeListsSchema[number]): Relation => ({
+  anidb: entry["anidb_id"],
+  anilist: entry["anilist_id"],
+  "anime-planet": entry["anime-planet_id"],
+  anisearch: entry["anisearch_id"],
+  imdb: entry["imdb_id"],
+  kitsu: entry["kitsu_id"],
+  livechart: entry["livechart_id"],
+  myanimelist: entry["mal_id"],
+  "notify-moe": entry["notify.moe_id"],
+  themoviedb:
+    typeof entry["themoviedb_id"] !== "string" ? entry["themoviedb_id"] : undefined,
+  thetvdb: entry["thetvdb_id"],
+})
 
 export const updateRelations = async () => {
   logger.debug(`Using ${process.env.NODE_ENV!} database configuration...`)
@@ -109,7 +76,7 @@ export const updateRelations = async () => {
   logger.info("Formatting entries...")
   const formattedEntries = data
     .map(formatEntry)
-    .filter((entry) => Object.keys(entry).length > 1)
+    .filter((entry) => Object.values(entry).some((value) => value != null))
   logger.info({ amount: formattedEntries.length }, `Formatted entries.`)
 
   logger.info("Updating database...")
@@ -118,7 +85,9 @@ export const updateRelations = async () => {
       .delete()
       .from("relations")
       .transacting(trx)
-      .then(() => knex.batchInsert("relations", formattedEntries, 100).transacting(trx)),
+      .then(async () => {
+        await knex.batchInsert("relations", formattedEntries, 100).transacting(trx)
+      }),
   )
   logger.info("Updated database.")
 
