@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify"
 import { JSONSchema7 } from "json-schema"
 
 import { knex } from "@/db"
-import { idSchema, Source, sourceSchema } from "@/schemas/common"
+import { numberIdSchema, Source, oldSourceSchema } from "@/schemas/common"
 
 export type QueryParamQuery = {
   source: Source
@@ -12,8 +12,8 @@ export type QueryParamQuery = {
 export const queryInputSchema: JSONSchema7 = {
   type: "object",
   properties: {
-    source: sourceSchema,
-    id: idSchema,
+    source: oldSourceSchema,
+    id: numberIdSchema,
   },
   required: ["source", "id"],
 }

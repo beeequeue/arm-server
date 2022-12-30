@@ -1,7 +1,7 @@
 import { JSONSchema7 } from "json-schema"
 
 import { knex, Relation } from "@/db"
-import { idSchema, Source, sourceSchema } from "@/schemas/common"
+import { numberIdSchema, Source, oldSourceSchema } from "@/schemas/common"
 
 type BodyItem = {
   [key in Source]?: number
@@ -9,10 +9,10 @@ type BodyItem = {
 
 export const singularItemInputSchema: JSONSchema7 = {
   type: "object",
-  propertyNames: sourceSchema,
+  propertyNames: oldSourceSchema,
   minProperties: 1,
   maxProperties: 4,
-  additionalProperties: idSchema,
+  additionalProperties: numberIdSchema,
 }
 
 export type BodyQuery = BodyItem | BodyItem[]
