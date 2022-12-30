@@ -1,20 +1,23 @@
-import Ajv, { Schema } from "ajv"
+import Ajv from "ajv"
 import { JsonValue } from "type-fest"
 import { describe, expect, test } from "vitest"
 
 import { Source } from "@/db"
-import { queryInputSchema } from "@/routes/v1/ids/schemas/query-params"
 
-type Case = [JsonValue, boolean]
-type Cases = Case[]
+import { queryInputSchema, QueryParamQuery } from "./query-params"
 
-const okCases: Cases = [
+type Case<V> = [V, boolean]
+type Cases<V = JsonValue> = Case<V>[]
+
+const okCases = [
   [{ source: Source.AniList, id: 1337 }, true],
   [{ source: Source.AniDB, id: 1337 }, true],
   [{ source: Source.MAL, id: 1337 }, true],
   [{ source: Source.Kitsu, id: 1337 }, true],
   [{ source: Source.Kitsu, id: 133_700 }, true],
-]
+  [{ source: Source.AnimePlanet, id: "1337" }, true],
+  [{ source: Source.IMDB, id: "tt1337" }, true],
+] satisfies Cases<QueryParamQuery>
 
 const badCases: Cases = [
   [{}, false],
@@ -23,13 +26,15 @@ const badCases: Cases = [
   [{ source: Source.AniList, id: null }, false],
   [{ source: Source.AniList, id: -1234 }, false],
   [{ source: Source.AniList, id: 50_000_001 }, false],
+  [{ source: Source.IMDB, id: "1337" }, false],
+  [{ source: Source.TheTVDB, id: 1337 }, false],
 ]
 
 describe("schema", () => {
-  const inputs: Cases = [...okCases, ...badCases]
+  const inputs = [...okCases, ...badCases] satisfies Cases
 
   const ajv = new Ajv()
-  const validate = ajv.compile(queryInputSchema as Schema)
+  const validate = ajv.compile(queryInputSchema)
 
   test.each(inputs)("%s = %p", (input, expected) => {
     validate(input)

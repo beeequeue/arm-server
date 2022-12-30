@@ -2,8 +2,7 @@ import { FastifyInstance } from "fastify"
 import { afterAll, afterEach, beforeAll, describe, test, expect } from "vitest"
 
 import { buildApp } from "@/app"
-import { knex, Relation } from "@/db"
-import { Source } from "@/shared-schemas"
+import { knex, Relation, Source } from "@/db"
 
 let id = 0
 const createRelations = async <N extends number>(

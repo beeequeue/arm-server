@@ -1,7 +1,7 @@
 import { JSONSchema7 } from "json-schema"
 
-import { knex, Relation } from "@/db"
-import { numberIdSchema, Source, oldSourceSchema } from "@/shared-schemas"
+import { knex, Relation, Source } from "@/db"
+import { numberIdSchema, oldSourceSchema } from "@/shared-schemas"
 
 type BodyItem = {
   [key in Source]?: number

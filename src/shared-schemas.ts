@@ -1,37 +1,30 @@
 import { JSONSchema7 } from "json-schema"
 
-const nullSchema: JSONSchema7 = { type: "null" }
-export const makeNullable = (...input: JSONSchema7[]): JSONSchema7 => ({
+const nullSchema = { type: "null" } satisfies JSONSchema7
+export const makeNullable = <Input extends JSONSchema7>(...input: Input[]) => ({
   oneOf: [nullSchema, ...input],
 })
 
-export enum Source {
-  AniList = "anilist",
-  AniDB = "anidb",
-  MAL = "myanimelist",
-  Kitsu = "kitsu",
-}
-
-export const oldSourceSchema: JSONSchema7 = {
+export const oldSourceSchema = {
   type: "string",
-  enum: Object.values(Source),
-}
+  enum: ["anilist", "anidb", "myanimelist", "kitsu"],
+} satisfies JSONSchema7
 
-export const numberIdSchema: JSONSchema7 = {
+export const numberIdSchema = {
   type: "integer",
   minimum: 0,
   maximum: 50_000_000,
-}
+} satisfies JSONSchema7
 
-export const stringIdSchema: JSONSchema7 = {
+export const stringIdSchema = {
   type: "string",
   minLength: 1,
   maxLength: 50,
-}
+} satisfies JSONSchema7
 
-export const imdbIdSchema: JSONSchema7 = {
+export const imdbIdSchema = {
   type: "string",
   pattern: "tt\\d+",
   minLength: 1,
   maxLength: 50,
-}
+} satisfies JSONSchema7

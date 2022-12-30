@@ -8,6 +8,7 @@ import { config } from "@/config"
 import { logger } from "@/lib/logger"
 import { sendErrorToSentry } from "@/lib/sentry"
 import { apiPlugin } from "@/routes/v1/ids/handler"
+import { v2Plugin } from "@/routes/v2/ids/handler"
 
 import pkgJson from "../package.json"
 
@@ -45,6 +46,7 @@ export const buildApp = async () => {
   })
 
   await App.register(apiPlugin, { prefix: "/api" })
+  await App.register(v2Plugin, { prefix: "/api/v2" })
 
   App.get("/", async (_request, reply) => reply.redirect(301, pkgJson.homepage))
 
