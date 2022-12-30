@@ -15,7 +15,7 @@ type AnimeListsSchema = Array<{
   anilist_id?: number
   "anime-planet_id"?: string
   anisearch_id?: number
-  imdb_id?: string
+  imdb_id?: `tt${string}`
   kitsu_id?: number
   livechart_id?: number
   mal_id?: number
