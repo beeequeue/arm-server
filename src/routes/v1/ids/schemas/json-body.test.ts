@@ -2,7 +2,7 @@ import Ajv, { Schema } from "ajv"
 import { JsonValue } from "type-fest"
 import { describe, expect, test } from "vitest"
 
-import { bodyInputSchema } from "@/schemas/json-body"
+import { bodyInputSchema } from "./json-body"
 
 type Case = [JsonValue, boolean]
 type Cases = Case[]

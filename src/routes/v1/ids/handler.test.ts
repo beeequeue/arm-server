@@ -3,7 +3,7 @@ import { afterAll, afterEach, beforeAll, describe, test, expect } from "vitest"
 
 import { buildApp } from "@/app"
 import { knex, Relation } from "@/db"
-import { Source } from "@/schemas/common"
+import { Source } from "@/shared-schemas"
 
 let id = 0
 const createRelations = async <N extends number>(

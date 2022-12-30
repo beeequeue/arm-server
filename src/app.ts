@@ -7,7 +7,7 @@ import Helmet from "@fastify/helmet"
 import { config } from "@/config"
 import { logger } from "@/lib/logger"
 import { sendErrorToSentry } from "@/lib/sentry"
-import { apiPlugin } from "@/routes/ids"
+import { apiPlugin } from "@/routes/v1/ids/handler"
 
 import pkgJson from "../package.json"
 

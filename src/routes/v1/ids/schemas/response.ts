@@ -1,6 +1,6 @@
 import { JSONSchema7 } from "json-schema"
 
-import { makeNullable, numberIdSchema } from "@/schemas/common"
+import { makeNullable, numberIdSchema } from "@/shared-schemas"
 
 const nullableIdSchema = makeNullable(numberIdSchema)
 

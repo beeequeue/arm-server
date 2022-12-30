@@ -2,8 +2,8 @@ import Ajv, { Schema } from "ajv"
 import { JsonValue } from "type-fest"
 import { describe, expect, test } from "vitest"
 
-import { Source } from "@/schemas/common"
-import { queryInputSchema } from "@/schemas/query-params"
+import { queryInputSchema } from "@/routes/v1/ids/schemas/query-params"
+import { Source } from "@/shared-schemas"
 
 type Case = [JsonValue, boolean]
 type Cases = Case[]

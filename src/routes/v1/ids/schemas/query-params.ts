@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify"
 import { JSONSchema7 } from "json-schema"
 
 import { knex } from "@/db"
-import { numberIdSchema, Source, oldSourceSchema } from "@/schemas/common"
+import { numberIdSchema, Source, oldSourceSchema } from "@/shared-schemas"
 
 export type QueryParamQuery = {
   source: Source
