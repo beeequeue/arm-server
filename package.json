@@ -15,7 +15,7 @@
     ]
   },
   "scripts": {
-    "dev": "",
+    "dev": "onchange --initial --kill 'src/**' pnpm-lock.yaml -- pnpm --silent start",
     "docker:build": "docker build . --tag arm-server",
     "docker:prune": "docker image prune --force",
     "docker:run": "docker run --rm --name arm -p 3000:3000 arm-server",
@@ -23,8 +23,8 @@
     "lint": "eslint src",
     "migrate": "knex migrate:latest --knexfile knexfile.ts",
     "migrate:create": "knex migrate:make --knexfile knexfile.ts -x ts",
-    "start": "pnpm run migrate && tsx src/index.ts",
-    "test": "pnpm run migrate && pnpm vitest",
+    "start": "pnpm --silent run migrate && tsx src/index.ts",
+    "test": "pnpm --silent run migrate && vitest",
     "typecheck": "tsc --noEmit",
     "prepare": "husky install"
   },
@@ -59,6 +59,7 @@
     "eslint": "8.31.0",
     "husky": "8.0.2",
     "lint-staged": "13.1.0",
+    "onchange": "7.1.0",
     "prettier": "2.8.1",
     "sucrase": "3.29.0",
     "tsconfig-paths": "4.1.2",
