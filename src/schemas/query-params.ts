@@ -23,6 +23,7 @@ export const handleQueryParams = async (
   reply: FastifyReply,
 ) => {
   const data = await knex
+    .select(["anidb", "anilist", "myanimelist", "kitsu"])
     .where({ [request.query.source]: request.query.id })
     .from("relations")
     .first()

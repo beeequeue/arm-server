@@ -32,7 +32,11 @@ export const bodyHandler = async (
   input: BodyQuery,
 ): Promise<BodyQuery extends Array<undefined> ? Array<Relation | null> : Relation> => {
   if (!Array.isArray(input)) {
-    const relation = await knex.where(input).from("relations").first()
+    const relation = await knex
+      .select(["anidb", "anilist", "myanimelist", "kitsu"])
+      .where(input)
+      .from("relations")
+      .first()
 
     return relation ?? null!
   }
@@ -41,6 +45,7 @@ export const bodyHandler = async (
 
   // Get relations
   relations = await knex
+    .select(["anidb", "anilist", "myanimelist", "kitsu"])
     .where(function () {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       for (const item of input) this.orWhere(item)
