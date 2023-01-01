@@ -24,7 +24,7 @@
     "migrate": "knex migrate:latest --knexfile knexfile.ts",
     "migrate:create": "knex migrate:make --knexfile knexfile.ts -x ts",
     "start": "pnpm --silent run migrate && tsx src/index.ts",
-    "test": "pnpm --silent run migrate && vitest",
+    "test": "NODE_ENV=test pnpm --silent run migrate && vitest",
     "typecheck": "tsc --noEmit",
     "prepare": "husky install"
   },
