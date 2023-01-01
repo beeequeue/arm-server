@@ -9,6 +9,8 @@ export default defineConfig(({ command }) => ({
   },
 
   test: {
+    threads: false,
+
     env: {
       NODE_ENV: "test",
     },

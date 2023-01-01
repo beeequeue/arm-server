@@ -6,10 +6,10 @@ export type TheTVDBQuery = {
   id: number
 }
 
-export const thetvdbInputSchema: JSONSchema7 = {
+export const thetvdbInputSchema = {
   type: "object",
   properties: {
     id: numberIdSchema,
   },
   required: ["id"],
-}
+} satisfies JSONSchema7

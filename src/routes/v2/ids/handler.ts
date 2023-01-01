@@ -1,23 +1,31 @@
 import { FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify"
 
 import { knex, Relation, Source } from "@/db"
+import { buildSelectFromInclude, IncludeQuery, includeSchema } from "@/routes/v2/include"
+import { mergeSchemas } from "@/utils"
 
 import { bodyInputSchema, BodyQuery } from "../schemas/json-body"
 import { queryInputSchema, QueryParamQuery } from "../schemas/query-params"
 import { responseBodySchema } from "../schemas/response"
 
-type BodyInput = { Body: BodyQuery }
-type QueryInput = { Querystring: QueryParamQuery }
+type BodyInput = { Body: BodyQuery; Querystring: IncludeQuery }
+type QueryInput = { Querystring: QueryParamQuery & IncludeQuery }
 
 const isBodyQuery = (
   request: FastifyRequest<BodyInput | QueryInput>,
 ): request is FastifyRequest<BodyInput> => request.method === "POST"
 
 const bodyHandler = async (
-  input: BodyQuery,
+  request: FastifyRequest<BodyInput>,
 ): Promise<BodyQuery extends Array<undefined> ? Array<Relation | null> : Relation> => {
+  const input = request.body
+
   if (!Array.isArray(input)) {
-    const relation = await knex.where(input).from("relations").first()
+    const relation = await knex
+      .select(buildSelectFromInclude(request))
+      .where(input)
+      .from("relations")
+      .first()
 
     return relation ?? null!
   }
@@ -26,6 +34,7 @@ const bodyHandler = async (
 
   // Get relations
   relations = await knex
+    .select(buildSelectFromInclude(request))
     .where(function () {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       for (const item of input) this.orWhere(item)
@@ -43,10 +52,11 @@ const bodyHandler = async (
 }
 
 const handleQueryParams = async (
-  request: FastifyRequest<{ Querystring: QueryParamQuery }>,
+  request: FastifyRequest<QueryInput>,
   reply: FastifyReply,
 ) => {
   const data = await knex
+    .select(buildSelectFromInclude(request))
     .where({ [request.query.source]: request.query.id })
     .from("relations")
     .first()
@@ -61,7 +71,7 @@ const handler = async (
   reply: FastifyReply,
 ): Promise<Relation | Relation[] | null> => {
   if (isBodyQuery(request)) {
-    return (await bodyHandler(request.body)) ?? null
+    return (await bodyHandler(request)) ?? null
   }
 
   return (await handleQueryParams(request, reply)) ?? null
@@ -73,7 +83,7 @@ export const v2Plugin: FastifyPluginAsync = async (fastify) => {
     "/ids",
     {
       schema: {
-        querystring: queryInputSchema,
+        querystring: mergeSchemas(queryInputSchema, includeSchema),
         response: {
           200: responseBodySchema,
         },
@@ -86,6 +96,7 @@ export const v2Plugin: FastifyPluginAsync = async (fastify) => {
     "/ids",
     {
       schema: {
+        querystring: includeSchema,
         body: bodyInputSchema,
         response: {
           200: responseBodySchema,

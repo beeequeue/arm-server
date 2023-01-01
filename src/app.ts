@@ -50,7 +50,7 @@ export const buildApp = async () => {
   await App.register(v2Plugin, { prefix: "/api/v2" })
   await App.register(thetvdbPlugin, { prefix: "/api/v2" })
 
-  App.get("/", async (_request, reply) => reply.redirect(301, pkgJson.homepage))
+  App.get("/", async (_, reply) => reply.redirect(301, pkgJson.homepage))
 
   return App
 }
