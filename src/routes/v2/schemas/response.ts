@@ -29,7 +29,7 @@ export const responseItemSchema: JSONSchema7 = {
   },
 }
 
-const responseArraySchema: JSONSchema7 = {
+export const responseArraySchema: JSONSchema7 = {
   type: "array",
   items: makeNullable(responseItemSchema),
 }
