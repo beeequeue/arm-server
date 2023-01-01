@@ -49,14 +49,14 @@
     "zod": "3.20.2"
   },
   "devDependencies": {
-    "@beequeue/eslint-plugin": "1.1.0",
+    "@beequeue/eslint-plugin": "1.1.2",
     "@tsconfig/node16-strictest": "1.0.4",
     "@types/json-schema": "7.0.11",
     "@types/node": "18.11.18",
     "@vitest/coverage-c8": "0.26.2",
     "ajv": "8.11.2",
     "dotenv": "16.0.3",
-    "eslint": "8.29.0",
+    "eslint": "8.31.0",
     "husky": "8.0.2",
     "lint-staged": "13.1.0",
     "prettier": "2.8.1",
