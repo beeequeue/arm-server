@@ -5,7 +5,7 @@ import {
   imdbSourceSchema,
   numberIdSourceSchema,
   stringIdSourceSchema,
-} from "@/routes/v2/schemas/common"
+} from "@/routes/v2/ids/schemas/common"
 import { imdbIdSchema, numberIdSchema, stringIdSchema } from "@/shared-schemas"
 
 export type QueryParamQuery = {

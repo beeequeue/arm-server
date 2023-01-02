@@ -4,9 +4,10 @@ import { knex, Relation, Source } from "@/db"
 import { makeNullable } from "@/shared-schemas"
 import { mergeSchemas } from "@/utils"
 
+import { responseArraySchema } from "../ids/schemas/response"
 import { buildSelectFromInclude, IncludeQuery, includeSchema } from "../include"
-import { responseArraySchema } from "../schemas/response"
-import { thetvdbInputSchema, TheTVDBQuery } from "../schemas/thetvdb"
+
+import { thetvdbInputSchema, TheTVDBQuery } from "./schemas/thetvdb"
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const thetvdbPlugin: FastifyPluginAsync = async (fastify) => {

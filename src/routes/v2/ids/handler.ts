@@ -4,9 +4,9 @@ import { knex, Relation, Source } from "@/db"
 import { buildSelectFromInclude, IncludeQuery, includeSchema } from "@/routes/v2/include"
 import { mergeSchemas } from "@/utils"
 
-import { bodyInputSchema, BodyQuery } from "../schemas/json-body"
-import { queryInputSchema, QueryParamQuery } from "../schemas/query-params"
-import { responseBodySchema } from "../schemas/response"
+import { bodyInputSchema, BodyQuery } from "./schemas/json-body"
+import { queryInputSchema, QueryParamQuery } from "./schemas/query-params"
+import { responseBodySchema } from "./schemas/response"
 
 type BodyInput = { Body: BodyQuery; Querystring: IncludeQuery }
 type QueryInput = { Querystring: QueryParamQuery & IncludeQuery }
