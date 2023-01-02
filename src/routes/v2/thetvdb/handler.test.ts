@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify"
-import { afterAll, afterEach, beforeAll, describe, test, expect } from "vitest"
+import { afterAll, beforeAll, beforeEach, describe, expect, test } from "vitest"
 
 import { buildApp } from "@/app"
 import { knex, Relation, Source } from "@/db"
@@ -7,6 +7,7 @@ import { knex, Relation, Source } from "@/db"
 let id = 0
 const createRelations = async <N extends number>(
   amount: N,
+  thetvdbId?: number,
 ): Promise<N extends 1 ? Relation : Relation[]> => {
   const relations = Array.from({ length: amount }).map<Relation>(() => ({
     anidb: id++,
@@ -18,7 +19,7 @@ const createRelations = async <N extends number>(
     livechart: id++,
     "notify-moe": `${id++}`,
     themoviedb: id++,
-    thetvdb: id++,
+    thetvdb: thetvdbId ?? id++,
     myanimelist: id++,
   }))
 
@@ -36,33 +37,36 @@ beforeAll(async () => {
   app = await buildApp()
 })
 
+beforeEach(async () => {
+  await knex.delete().from("relations")
+})
+
 afterAll(async () => {
   await Promise.all([app.close(), knex.destroy()])
 })
 
-afterEach(() => knex.delete().from("relations"))
-
 describe("query params", () => {
-  test("fetches relation correctly", async () => {
-    const relation = await createRelations(1)
+  test("fetches relations correctly", async () => {
+    await createRelations(4, 1336)
+    const relations = await createRelations(3, 1337)
 
-    const response = await app.inject().get("/api/v2/ids").query({
-      source: Source.AniList,
-      id: relation.anilist!.toString(),
+    const response = await app.inject().get("/api/v2/thetvdb").query({
+      source: Source.TheTVDB,
+      id: relations[0].thetvdb!.toString(),
     })
 
-    expect(response.json()).toStrictEqual(relation)
+    expect(response.json()).toStrictEqual(relations)
     expect(response.statusCode).toBe(200)
     expect(response.headers["content-type"]).toContain("application/json")
   })
 
-  test("returns null when id doesn't exist", async () => {
-    const response = await app.inject().get("/api/v2/ids").query({
-      source: Source.Kitsu,
-      id: 404!.toString(),
+  test("returns empty array when id doesn't exist", async () => {
+    const response = await app.inject().get("/api/v2/thetvdb").query({
+      source: Source.TheTVDB,
+      id: (404).toString(),
     })
 
-    expect(response.json()).toBe(null)
+    expect(response.json()).toStrictEqual([])
     expect(response.statusCode).toBe(200)
     expect(response.headers["content-type"]).toContain("application/json")
   })
@@ -78,139 +82,18 @@ describe("query params", () => {
       livechart: null!,
       "notify-moe": null!,
       themoviedb: null!,
-      thetvdb: null!,
+      thetvdb: 1337,
       myanimelist: null!,
     }
     await knex.insert(relation).into("relations")
 
-    const response = await app.inject().get("/api/v2/ids").query({
-      source: Source.AniList,
-      id: relation.anilist!.toString(),
+    const response = await app.inject().get("/api/v2/thetvdb").query({
+      source: Source.TheTVDB,
+      id: relation.thetvdb!.toString(),
     })
 
-    expect(response.json()).toStrictEqual(relation)
+    expect(response.json()).toStrictEqual([relation])
     expect(response.statusCode).toBe(200)
     expect(response.headers["content-type"]).toContain("application/json")
-  })
-})
-
-describe("json body", () => {
-  describe("object input", () => {
-    test("GET fails with json body", async () => {
-      const relations = await createRelations(4)
-
-      const response = await app
-        .inject()
-        .get("/api/v2/ids")
-        .body({
-          [Source.AniDB]: relations[0].anidb,
-        })
-
-      expect(response.json()).toMatchSnapshot()
-      expect(response.statusCode).toBe(400)
-      expect(response.headers["content-type"]).toContain("application/json")
-    })
-
-    test("fetches a single relation", async () => {
-      const relations = await createRelations(4)
-
-      const response = await app
-        .inject()
-        .post("/api/v2/ids")
-        .body({
-          [Source.AniDB]: relations[0].anidb,
-        })
-
-      expect(response.json()).toStrictEqual(relations[0])
-      expect(response.statusCode).toBe(200)
-      expect(response.headers["content-type"]).toContain("application/json")
-    })
-
-    test("errors correctly on an empty object", async () => {
-      await createRelations(4)
-
-      const response = await app.inject().post("/api/v2/ids").body({})
-
-      expect(response.json()).toMatchSnapshot()
-      expect(response.statusCode).toBe(400)
-      expect(response.headers["content-type"]).toContain("application/json")
-    })
-
-    test("returns null if not found", async () => {
-      await createRelations(4)
-
-      const response = await app.inject().post("/api/v2/ids").body({ anidb: 100_000 })
-
-      expect(response.json()).toBe(null)
-      expect(response.statusCode).toBe(200)
-      expect(response.headers["content-type"]).toContain("application/json")
-    })
-
-    test("can return a partial response", async () => {
-      const relation: Relation = {
-        anidb: 1337,
-        anilist: 1337,
-        "anime-planet": null!,
-        anisearch: null!,
-        imdb: null!,
-        kitsu: null!,
-        livechart: null!,
-        "notify-moe": null!,
-        themoviedb: null!,
-        thetvdb: null!,
-        myanimelist: null!,
-      }
-      await knex.insert(relation).into("relations")
-
-      const response = await app.inject().post("/api/v2/ids").body({
-        anilist: 1337,
-      })
-
-      expect(response.json()).toStrictEqual(relation)
-      expect(response.statusCode).toBe(200)
-      expect(response.headers["content-type"]).toContain("application/json")
-    })
-  })
-
-  describe("array input", () => {
-    test("fetches relations correctly", async () => {
-      const relations = await createRelations(4)
-
-      const body = [
-        { [Source.AniDB]: relations[0].anidb },
-        { [Source.AniList]: 1000 },
-        { [Source.Kitsu]: relations[2].kitsu },
-      ]
-
-      const result = [relations[0], null, relations[2]]
-
-      const response = await app.inject().post("/api/v2/ids").body(body)
-
-      expect(response.json()).toStrictEqual(result)
-      expect(response.statusCode).toBe(200)
-      expect(response.headers["content-type"]).toContain("application/json")
-    })
-
-    test("responds correctly on no finds", async () => {
-      const body = [{ [Source.AniList]: 1000 }, { [Source.Kitsu]: 1000 }]
-
-      const result = [null, null]
-
-      const response = await app.inject().post("/api/v2/ids").body(body)
-
-      expect(response.json()).toStrictEqual(result)
-      expect(response.statusCode).toBe(200)
-      expect(response.headers["content-type"]).toContain("application/json")
-    })
-
-    test("requires at least one source", async () => {
-      const body = [{}]
-
-      const response = await app.inject().post("/api/v2/ids").body(body)
-
-      expect(response.json()).toMatchSnapshot()
-      expect(response.statusCode).toBe(400)
-      expect(response.headers["content-type"]).toContain("application/json")
-    })
   })
 })
