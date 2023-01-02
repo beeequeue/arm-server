@@ -31,7 +31,7 @@ describe("schema", () => {
   const ajv = new Ajv()
   const validate = ajv.compile(queryInputSchema as Schema)
 
-  test.each(inputs)("%s = %p", (input, expected) => {
+  test.each(inputs)("%o = %s", (input, expected) => {
     validate(input)
 
     const { errors } = validate

@@ -64,7 +64,7 @@ describe("schema", () => {
   const ajv = new Ajv()
   const validate = ajv.compile(bodyInputSchema)
 
-  test.each(inputs)("%s = %p", (input, expected) => {
+  test.each(inputs)("%o = %s", (input, expected) => {
     validate(input)
 
     const { errors } = validate

@@ -9,6 +9,7 @@ export default defineConfig(({ command }) => ({
   },
 
   test: {
+    reporters: ["verbose"],
     threads: false,
 
     env: {
