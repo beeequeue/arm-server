@@ -1,9 +1,10 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 import { FastifyInstance } from "fastify"
 import { describe, expect, test } from "vitest"
 
 import { knex, Source } from "@/db"
 
-// eslint-disable-next-line @typescript-eslint/no-shadow
 export const testIncludeQueryParam = (
   app: FastifyInstance,
   path: string,
