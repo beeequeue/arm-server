@@ -2,7 +2,7 @@
   "extends": "@tsconfig/node16-strictest/tsconfig.json",
   "compilerOptions": {
     "lib": ["es2022"],
-    "module": "commonjs",
+    "module": "esnext",
     "target": "es2022",
 
     "noEmit": true,

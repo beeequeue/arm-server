@@ -1,8 +1,9 @@
-import { FastifyInstance } from "fastify"
-import { afterAll, afterEach, beforeAll, describe, test, expect } from "vitest"
+import { afterAll, afterEach, describe, expect, test } from "vitest"
 
 import { buildApp } from "@/app"
 import { knex, Relation, Source } from "@/db"
+
+import { testIncludeQueryParam } from "../include.test-utils"
 
 let id = 0
 const createRelations = async <N extends number>(
@@ -31,10 +32,8 @@ const createRelations = async <N extends number>(
   return relations as never
 }
 
-let app: FastifyInstance
-beforeAll(async () => {
-  app = await buildApp()
-})
+const PATH = "/api/v2/ids"
+const app = await buildApp()
 
 afterAll(async () => {
   await Promise.all([app.close(), knex.destroy()])
@@ -46,7 +45,7 @@ describe("query params", () => {
   test("fetches relation correctly", async () => {
     const relation = await createRelations(1)
 
-    const response = await app.inject().get("/api/v2/ids").query({
+    const response = await app.inject().get(PATH).query({
       source: Source.AniList,
       id: relation.anilist!.toString(),
     })
@@ -57,7 +56,7 @@ describe("query params", () => {
   })
 
   test("returns null when id doesn't exist", async () => {
-    const response = await app.inject().get("/api/v2/ids").query({
+    const response = await app.inject().get(PATH).query({
       source: Source.Kitsu,
       id: 404!.toString(),
     })
@@ -83,7 +82,7 @@ describe("query params", () => {
     }
     await knex.insert(relation).into("relations")
 
-    const response = await app.inject().get("/api/v2/ids").query({
+    const response = await app.inject().get(PATH).query({
       source: Source.AniList,
       id: relation.anilist!.toString(),
     })
@@ -101,7 +100,7 @@ describe("json body", () => {
 
       const response = await app
         .inject()
-        .get("/api/v2/ids")
+        .get(PATH)
         .body({
           [Source.AniDB]: relations[0].anidb,
         })
@@ -116,7 +115,7 @@ describe("json body", () => {
 
       const response = await app
         .inject()
-        .post("/api/v2/ids")
+        .post(PATH)
         .body({
           [Source.AniDB]: relations[0].anidb,
         })
@@ -129,7 +128,7 @@ describe("json body", () => {
     test("errors correctly on an empty object", async () => {
       await createRelations(4)
 
-      const response = await app.inject().post("/api/v2/ids").body({})
+      const response = await app.inject().post(PATH).body({})
 
       expect(response.json()).toMatchSnapshot()
       expect(response.statusCode).toBe(400)
@@ -139,7 +138,7 @@ describe("json body", () => {
     test("returns null if not found", async () => {
       await createRelations(4)
 
-      const response = await app.inject().post("/api/v2/ids").body({ anidb: 100_000 })
+      const response = await app.inject().post(PATH).body({ anidb: 100_000 })
 
       expect(response.json()).toBe(null)
       expect(response.statusCode).toBe(200)
@@ -162,7 +161,7 @@ describe("json body", () => {
       }
       await knex.insert(relation).into("relations")
 
-      const response = await app.inject().post("/api/v2/ids").body({
+      const response = await app.inject().post(PATH).body({
         anilist: 1337,
       })
 
@@ -184,7 +183,7 @@ describe("json body", () => {
 
       const result = [relations[0], null, relations[2]]
 
-      const response = await app.inject().post("/api/v2/ids").body(body)
+      const response = await app.inject().post(PATH).body(body)
 
       expect(response.json()).toStrictEqual(result)
       expect(response.statusCode).toBe(200)
@@ -196,7 +195,7 @@ describe("json body", () => {
 
       const result = [null, null]
 
-      const response = await app.inject().post("/api/v2/ids").body(body)
+      const response = await app.inject().post(PATH).body(body)
 
       expect(response.json()).toStrictEqual(result)
       expect(response.statusCode).toBe(200)
@@ -206,7 +205,7 @@ describe("json body", () => {
     test("requires at least one source", async () => {
       const body = [{}]
 
-      const response = await app.inject().post("/api/v2/ids").body(body)
+      const response = await app.inject().post(PATH).body(body)
 
       expect(response.json()).toMatchSnapshot()
       expect(response.statusCode).toBe(400)
@@ -214,3 +213,5 @@ describe("json body", () => {
     })
   })
 })
+
+testIncludeQueryParam(app, PATH)

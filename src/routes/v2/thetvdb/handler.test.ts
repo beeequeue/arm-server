@@ -1,8 +1,9 @@
-import { FastifyInstance } from "fastify"
-import { afterAll, beforeAll, beforeEach, describe, expect, test } from "vitest"
+import { afterAll, beforeEach, describe, expect, test } from "vitest"
 
 import { buildApp } from "@/app"
 import { knex, Relation, Source } from "@/db"
+
+import { testIncludeQueryParam } from "../include.test-utils"
 
 let id = 0
 const createRelations = async <N extends number>(
@@ -32,10 +33,8 @@ const createRelations = async <N extends number>(
   return relations as never
 }
 
-let app: FastifyInstance
-beforeAll(async () => {
-  app = await buildApp()
-})
+const PATH = "/api/v2/thetvdb"
+const app = await buildApp()
 
 beforeEach(async () => {
   await knex.delete().from("relations")
@@ -50,7 +49,7 @@ describe("query params", () => {
     await createRelations(4, 1336)
     const relations = await createRelations(3, 1337)
 
-    const response = await app.inject().get("/api/v2/thetvdb").query({
+    const response = await app.inject().get(PATH).query({
       source: Source.TheTVDB,
       id: relations[0].thetvdb!.toString(),
     })
@@ -61,7 +60,7 @@ describe("query params", () => {
   })
 
   test("returns empty array when id doesn't exist", async () => {
-    const response = await app.inject().get("/api/v2/thetvdb").query({
+    const response = await app.inject().get(PATH).query({
       source: Source.TheTVDB,
       id: (404).toString(),
     })
@@ -87,7 +86,7 @@ describe("query params", () => {
     }
     await knex.insert(relation).into("relations")
 
-    const response = await app.inject().get("/api/v2/thetvdb").query({
+    const response = await app.inject().get(PATH).query({
       source: Source.TheTVDB,
       id: relation.thetvdb!.toString(),
     })
@@ -97,3 +96,5 @@ describe("query params", () => {
     expect(response.headers["content-type"]).toContain("application/json")
   })
 })
+
+testIncludeQueryParam(app, PATH, true)
