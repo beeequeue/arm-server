@@ -1,3 +1,18 @@
+FROM node:18-alpine as build
+
+RUN corepack enable
+
+WORKDIR /app
+
+COPY package.json .
+COPY pnpm-lock.yaml .
+COPY .npmrc .
+
+ENV HUSKY=0
+# Install dependencies
+RUN pnpm install --frozen-lockfile
+
+
 FROM node:18-alpine
 
 RUN corepack enable
@@ -5,11 +20,9 @@ RUN corepack enable
 WORKDIR /app
 
 COPY . .
+COPY --from=build /app/node_modules node_modules
 
-# Source maps enabled, since it does not affect performance from what I found
-ENV HUSKY=0
-# Install dependencies
-RUN pnpm install --frozen-lockfile
+RUN pnpm --silent run docs
 
 # Run with...
 # Source maps enabled, since it does not affect performance from what I found

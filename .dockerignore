@@ -3,3 +3,4 @@
 .github
 dist
 node_modules
+redoc-static.html

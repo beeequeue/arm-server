@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "private": true,
   "license": "AGPL-3.0-only",
-  "homepage": "https://github.com/BeeeQueue/arm-server",
+  "homepage": "https://arm.haglund.dev/docs",
   "packageManager": "pnpm@7.21.0",
   "engines": {
     "node": ">=18"
@@ -16,6 +16,7 @@
   },
   "scripts": {
     "dev": "onchange --initial --kill 'src/**' pnpm-lock.yaml -- pnpm --silent start",
+    "docs": "redoc-cli build docs/openapi.yaml",
     "docker:build": "docker build . --tag arm-server",
     "docker:prune": "docker image prune --force",
     "docker:run": "docker run --rm --name arm -p 3000:3000 arm-server",
