@@ -62,6 +62,7 @@
     "lint-staged": "13.1.0",
     "onchange": "7.1.0",
     "prettier": "2.8.1",
+    "redoc-cli": "0.13.20",
     "sucrase": "3.29.0",
     "tsconfig-paths": "4.1.2",
     "vitest": "0.26.3"

@@ -1,0 +1,507 @@
+openapi: 3.1.0
+
+info:
+  description: A service for mapping Anime IDs
+  version: 2.1.0
+  title: API Docs - arm-server
+  contact:
+    name: BeeeQueue
+    url: https://github.com/BeeeQueue/arm-server
+
+servers:
+  - url: https://arm.haglund.dev
+    description: Live service
+  - url: http://localhost:3000
+    description: Local dev server
+
+tags:
+  - name: v1
+  - name: v2
+
+$defs:
+  include_param:
+    name: include
+    in: query
+    required: false
+    example: anilist,anidb
+    description: "Comma-separated list of sources to return in response objects."
+    schema:
+      type: string
+
+  '400':
+    description: Invalid request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            statusCode:
+              type: integer
+              enum:
+                - 400
+            error:
+              type: string
+              example: Bad request
+            message:
+              type: string
+              example: body/1/anilist must be >= 0
+
+  relation:
+    type: object
+    properties:
+      anidb:
+        oneOf:
+          - type: 'null'
+          - type: integer
+            minimum: 0
+            maximum: 50000000
+            example: 1337
+      anilist:
+        oneOf:
+          - type: 'null'
+          - type: integer
+            minimum: 0
+            maximum: 50000000
+            example: 1337
+      anime-planet:
+        oneOf:
+          - type: 'null'
+          - type: string
+            minLength: 1
+            maxLength: 50
+            example: dororon-enma-kun
+      anisearch:
+        oneOf:
+          - type: 'null'
+          - type: integer
+            minimum: 0
+            maximum: 50000000
+            example: 1337
+      imdb:
+        oneOf:
+          - type: 'null'
+          - type: string
+            pattern: tt\d+
+            minLength: 1
+            maxLength: 50
+            example: tt0164917
+      kitsu:
+        oneOf:
+          - type: 'null'
+          - type: integer
+            minimum: 0
+            maximum: 50000000
+            example: 1337
+      livechart:
+        oneOf:
+          - type: 'null'
+          - type: integer
+            minimum: 0
+            maximum: 50000000
+            example: 1337
+      notify-moe:
+        oneOf:
+          - type: 'null'
+          - type: string
+            minLength: 1
+            maxLength: 50
+            example: "-cQb5Fmmg"
+      themoviedb:
+        oneOf:
+          - type: 'null'
+          - type: integer
+            minimum: 0
+            maximum: 50000000
+            example: 1337
+      thetvdb:
+        oneOf:
+          - type: 'null'
+          - type: integer
+            minimum: 0
+            maximum: 50000000
+            example: 1337
+      myanimelist:
+        oneOf:
+          - type: 'null'
+          - type: integer
+            minimum: 0
+            maximum: 50000000
+            example: 1337
+
+  nullable_relation:
+    oneOf:
+      - $ref: '#/$defs/relation'
+      - type: 'null'
+
+  response:
+    example:
+      anidb: 1337
+      anilist: 1337
+      anime-planet: spriggan
+      anisearch: null
+      imdb: tt0164917
+      kitsu: null
+      livechart: null
+      notify-moe: "-cQb5Fmmg"
+      themoviedb: null
+      thetvdb: null
+      myanimelist: null
+    oneOf:
+      - $ref: '#/$defs/nullable_relation'
+      - type: array
+        items:
+          $ref: '#/$defs/nullable_relation'
+
+  v1_relation:
+    type: object
+    properties:
+      anidb:
+        oneOf:
+          - type: 'null'
+          - type: integer
+            example: 1337
+      anilist:
+        oneOf:
+          - type: 'null'
+          - type: integer
+            example: 1337
+      myanimelist:
+        oneOf:
+          - type: 'null'
+          - type: integer
+            example: 1337
+      kitsu:
+        oneOf:
+          - type: 'null'
+          - type: integer
+            example: 1337
+
+  nullable_v1_relation:
+    oneOf:
+      - $ref: '#/$defs/v1_relation'
+      - type: 'null'
+
+  v1_response:
+    example:
+      anidb: 1337
+      anilist: 1337
+      kitsu: null
+      myanimelist: null
+    oneOf:
+      - $ref: '#/$defs/nullable_v1_relation'
+      - type: array
+        items:
+          $ref: '#/$defs/nullable_v1_relation'
+
+paths:
+  /api/ids:
+    get:
+      operationId: getIds
+      summary: Fetch IDs via query parameters
+      description: ' '
+      tags:
+        - v1
+
+      parameters:
+        - name: source
+          in: query
+          required: true
+          example: anilist
+          schema:
+            type: string
+            enum:
+              - anidb
+              - anilist
+              - kitsu
+              - myanimelist
+        - name: id
+          in: query
+          required: true
+          example: 1337
+          schema:
+            type: integer
+            minimum: 1
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/$defs/v1_response'
+        '400':
+          $ref: '#/$defs/400'
+
+    post:
+      operationId: postIds
+      summary: Fetch IDs via a JSON body
+      description: ' '
+      tags:
+        - v1
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              example:
+                - anilist: 1337
+                - anidb: 1337
+              oneOf:
+                - $ref: '#/$defs/v1_relation'
+                - type: array
+                  items:
+                    $ref: '#/$defs/v1_relation'
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/$defs/v1_response'
+        '400':
+          $ref: '#/$defs/400'
+
+  /api/v2/ids:
+    get:
+      operationId: v2-getIds
+      summary: Fetch IDs via query parameters
+      description: ' '
+      tags:
+        - v2
+
+      parameters:
+        - name: source
+          in: query
+          required: true
+          example: anilist
+          schema:
+            type: string
+            enum:
+              - anilist
+              - anidb
+              - anime-planet
+              - anisearch
+              - imdb
+              - kitsu
+              - livechart
+              - themoviedb
+              - notify-moe
+              - myanimelist
+        - name: id
+          in: query
+          required: true
+          example: 1337
+          schema:
+            oneOf:
+              - type: integer
+                minimum: 1
+              - type: string
+                minLength: 1
+        - $ref: "#/$defs/include_param"
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/$defs/response'
+        '400':
+          $ref: '#/$defs/400'
+
+    post:
+      operationId: v2-postIds
+      summary: Fetch IDs via a JSON body
+      description: ' '
+      tags:
+        - v2
+
+      parameters:
+        - $ref: "#/$defs/include_param"
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              example:
+                - anilist: 1337
+                - anidb: 1337
+                - notify-moe: -cQb5Fmmg
+              oneOf:
+                - type: object
+                  minProperties: 1
+                  additionalProperties: false
+                  properties:
+                    anidb:
+                      oneOf:
+                        - type: 'null'
+                        - type: integer
+                          minimum: 0
+                          maximum: 50000000
+                    anilist:
+                      oneOf:
+                        - type: 'null'
+                        - type: integer
+                          minimum: 0
+                          maximum: 50000000
+                    anime-planet:
+                      oneOf:
+                        - type: 'null'
+                        - type: string
+                          minLength: 1
+                          maxLength: 50
+                    anisearch:
+                      oneOf:
+                        - type: 'null'
+                        - type: integer
+                          minimum: 0
+                          maximum: 50000000
+                    imdb:
+                      oneOf:
+                        - type: 'null'
+                        - type: string
+                          pattern: tt\d+
+                          minLength: 1
+                          maxLength: 50
+                    kitsu:
+                      oneOf:
+                        - type: 'null'
+                        - type: integer
+                          minimum: 0
+                          maximum: 50000000
+                    livechart:
+                      oneOf:
+                        - type: 'null'
+                        - type: integer
+                          minimum: 0
+                          maximum: 50000000
+                    notify-moe:
+                      oneOf:
+                        - type: 'null'
+                        - type: string
+                          minLength: 1
+                          maxLength: 50
+                    themoviedb:
+                      oneOf:
+                        - type: 'null'
+                        - type: integer
+                          minimum: 0
+                          maximum: 50000000
+                    myanimelist:
+                      oneOf:
+                        - type: 'null'
+                        - type: integer
+                          minimum: 0
+                          maximum: 50000000
+                - type: array
+                  minItems: 1
+                  maxItems: 100
+                  items:
+                    type: object
+                    minProperties: 1
+                    additionalProperties: false
+                    properties:
+                      anidb:
+                        oneOf:
+                          - type: 'null'
+                          - type: integer
+                            minimum: 0
+                            maximum: 50000000
+                      anilist:
+                        oneOf:
+                          - type: 'null'
+                          - type: integer
+                            minimum: 0
+                            maximum: 50000000
+                      anime-planet:
+                        oneOf:
+                          - type: 'null'
+                          - type: string
+                            minLength: 1
+                            maxLength: 50
+                      anisearch:
+                        oneOf:
+                          - type: 'null'
+                          - type: integer
+                            minimum: 0
+                            maximum: 50000000
+                      imdb:
+                        oneOf:
+                          - type: 'null'
+                          - type: string
+                            pattern: tt\d+
+                            minLength: 1
+                            maxLength: 50
+                      kitsu:
+                        oneOf:
+                          - type: 'null'
+                          - type: integer
+                            minimum: 0
+                            maximum: 50000000
+                      livechart:
+                        oneOf:
+                          - type: 'null'
+                          - type: integer
+                            minimum: 0
+                            maximum: 50000000
+                      notify-moe:
+                        oneOf:
+                          - type: 'null'
+                          - type: string
+                            minLength: 1
+                            maxLength: 50
+                      themoviedb:
+                        oneOf:
+                          - type: 'null'
+                          - type: integer
+                            minimum: 0
+                            maximum: 50000000
+                      myanimelist:
+                        oneOf:
+                          - type: 'null'
+                          - type: integer
+                            minimum: 0
+                            maximum: 50000000
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/$defs/response'
+        '400':
+          $ref: '#/$defs/400'
+
+  /api/v2/thetvdb:
+    get:
+      operationId: v2-thetvdb
+      summary: Fetch IDs by TheTVDB ID
+      description: ' '
+      tags:
+        - v2
+
+      parameters:
+        - name: id
+          in: query
+          required: true
+          example: 1337
+          schema:
+              type: integer
+              minimum: 1
+        - $ref: "#/$defs/include_param"
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/$defs/nullable_relation'
+        '400':
+          $ref: '#/$defs/400'
