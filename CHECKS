@@ -3,3 +3,4 @@ TIMEOUT=60
 ATTEMPTS=10
 
 /api/ids?source=anilist&id=145815 145815
+/api/v2/ids?source=anilist&id=145815 145815
