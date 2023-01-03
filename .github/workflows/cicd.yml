@@ -154,7 +154,7 @@ jobs:
       - name: Declare some variables
         id: sha
         shell: bash
-        run: echo "::set-output name=short::$(git rev-parse --short HEAD)"
+        run: echo "short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Push to dokku
         uses: dokku/github-action@v1.4.0
