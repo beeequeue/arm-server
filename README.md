@@ -3,8 +3,14 @@
 [![](https://img.shields.io/github/actions/workflow/status/BeeeQueue/arm-server/cicd.yml?branch=master)](https://github.com/BeeeQueue/arm-server/actions?query=branch%3Amaster+workflow%3ACI)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FBeeeQueue%2Fupptime%2FHEAD%2Fapi%2Farm-server-arm-haglund-dev%2Fuptime-week.json)](https://status.haglund.dev/history/arm-server-arm-haglund-dev)
 
-This app uses data from [`anime-offline-database`](https://github.com/manami-project/anime-offline-database/) - fetching
+This app uses data from [`Fribb/anime-lists`](https://github.com/Fribb/anime-lists) - fetching
 and updating itself every 24 hours.
+
+[`Fribb/anime-lists`](https://github.com/Fribb/anime-lists) is an automatic merged copy of 
+[`anime-offline-database`](https://github.com/manami-project/anime-offline-database)
+and
+[`Anime-Lists/anime-lists`](https://github.com/Anime-Lists/anime-lists).
+
 
 #### Get notifications on important API changes
 
@@ -20,52 +26,11 @@ cannot fix them due to complexity. Therefore this service has manual rules that 
 You can help add rules by submitting
 a [manual rule request](https://github.com/BeeeQueue/arm-server/issues/new?template=manual-rule-request.md).
 
-## API
-
-**Base URL:** `https://arm.haglund.dev`
-
-```ts
-enum Source {
-  anilist,
-  anidb,
-  myanimelist,
-  kitsu,
-}
-```
-
-### Get IDS:
-
-`GET/POST` `/api/ids`
-
-Either use GET with query parameters:
-`?source={Source}&id={number}`
-
-or use POST with a JSON body:
-
-`{ "anilist": 1337 }`
-
-`[{ "anilist": 1337 }, { "anilist": 69 }, { "anidb": 420 }]`
-
-#### Response
-
-```ts
-interface Entry {
-  anilist: number | null
-  anidb: number | null
-  myanimelist: number | null
-  kitsu: number | null
-}
-
-// If JSON body is a single object
-// { "anilist": 1337 } => Entry | null
-// // If JSON body is an array of objects
-// [{ ... }] => Array<Entry | null>
-```
-
-**The response code will always be 200 (OK).**
-If an entry is not found `null` is returned instead.
+## [API Docs](https://arm.haglund.dev/docs)
 
 ## Development
+
+### Server
 
 1. Clone the project
 1. Install dependencies - `pnpm`
@@ -74,3 +39,11 @@ If an entry is not found `null` is returned instead.
 1. Start the server - `pnpm dev`
 
 If the database connection fails double check that your `NODE_ENV` is set to `development`.
+
+### Docs
+
+1. Clone the project
+1. Install dependencies - `pnpm`
+1. Start the build - `pnpm docs:dev`
+1. Open the file in a browser - `redoc-static.html`
+1. Edit `docs/openapi.yaml` file

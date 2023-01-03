@@ -1,12 +1,17 @@
 openapi: 3.1.0
 
 info:
-  description: A service for mapping Anime IDs
   version: 2.1.0
   title: API Docs - arm-server
   contact:
     name: BeeeQueue
     url: https://github.com/BeeeQueue/arm-server
+  description: |
+    A service for mapping Anime IDs.
+    
+    **Important:**
+
+    Every endpoint returns `null` and not `404` when it does not find any match based on a query.
 
 servers:
   - url: https://arm.haglund.dev
@@ -17,6 +22,14 @@ servers:
 tags:
   - name: v1
   - name: v2
+    description: |
+      `v2` adds more Sources thanks to [Fribb/anime-lists](https://github.com/Fribb/anime-lists).
+      
+      Unfortunately TheTVDB uses one entry per **show** instead of **season** meaning its IDs become one-to-many mappings.
+      
+      This meant it cannot be queried for in `/api/v2/ids` since it's impossible for the API to look the same in that case.
+      
+      Instead I added `/api/v2/thetvdb` if you _really_ want to query by their IDs.
 
 $defs:
   include_param:
@@ -198,7 +211,7 @@ paths:
     get:
       operationId: getIds
       summary: Fetch IDs via query parameters
-      description: ' '
+
       tags:
         - v1
 
@@ -235,7 +248,12 @@ paths:
     post:
       operationId: postIds
       summary: Fetch IDs via a JSON body
-      description: ' '
+      description: |
+        The JSON body can either be an object containing the query, or an array containing multiple queries.
+        
+        If using array queries, the resulting array will map to the corresponding input!
+        
+        e.g. `body[1]` will be the result of `query[1]`.
       tags:
         - v1
 
@@ -314,7 +332,12 @@ paths:
     post:
       operationId: v2-postIds
       summary: Fetch IDs via a JSON body
-      description: ' '
+      description: |
+        The JSON body can either be an object containing the query, or an array containing multiple queries.
+        
+        If using array queries, the resulting array will map to the corresponding input!
+        
+        e.g. `body[1]` will be the result of `query[1]`.
       tags:
         - v2
 
@@ -490,8 +513,8 @@ paths:
           required: true
           example: 1337
           schema:
-              type: integer
-              minimum: 1
+            type: integer
+            minimum: 1
         - $ref: "#/$defs/include_param"
 
       responses:

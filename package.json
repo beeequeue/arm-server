@@ -17,6 +17,7 @@
   "scripts": {
     "dev": "onchange --initial --kill 'src/**' pnpm-lock.yaml -- pnpm --silent start",
     "docs": "redoc-cli build docs/openapi.yaml",
+    "docs:dev": "onchange --initial --kill docs/openapi.yaml -- pnpm --silent docs",
     "docker:build": "docker build . --tag arm-server",
     "docker:prune": "docker image prune --force",
     "docker:run": "docker run --rm --name arm -p 3000:3000 arm-server",
