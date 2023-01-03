@@ -8,7 +8,7 @@ COPY package.json .
 COPY pnpm-lock.yaml .
 COPY .npmrc .
 
-ENV HUSKY=0
+ENV CI=1
 ENV NODE_ENV=production
 # Install dependencies
 RUN pnpm install --frozen-lockfile
@@ -25,7 +25,7 @@ COPY pnpm-lock.yaml .
 COPY .npmrc .
 COPY docs/openapi.yaml docs/openapi.yaml
 
-ENV HUSKY=0
+ENV CI=1
 # Install dependencies
 RUN pnpm install --frozen-lockfile
 

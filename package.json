@@ -28,7 +28,7 @@
     "start": "pnpm --silent run migrate && tsx src/index.ts",
     "test": "NODE_ENV=test pnpm --silent run migrate && vitest",
     "typecheck": "tsc --noEmit",
-    "prepare": "husky install"
+    "prepare": "is-ci || husky install"
   },
   "resolutions": {
     "@types/node": "18.11.18",
@@ -39,13 +39,16 @@
     "@fastify/cors": "8.2.0",
     "@fastify/helmet": "10.1.0",
     "@sentry/node": "7.28.1",
+    "@tsconfig/node16-strictest": "1.0.4",
     "better-sqlite3": "8.0.1",
     "fastify": "4.11.0",
+    "is-ci": "3.0.1",
     "knex": "2.3.0",
     "nanoid": "4.0.0",
     "ohmyfetch": "0.4.21",
     "pino": "8.8.0",
     "pino-pretty": "9.1.1",
+    "sucrase": "3.29.0",
     "tsx": "3.12.1",
     "type-fest": "3.5.0",
     "typescript": "4.9.4",
@@ -53,7 +56,6 @@
   },
   "devDependencies": {
     "@beequeue/eslint-plugin": "1.1.2",
-    "@tsconfig/node16-strictest": "1.0.4",
     "@types/json-schema": "7.0.11",
     "@types/node": "18.11.18",
     "@vitest/coverage-c8": "0.26.3",
@@ -65,7 +67,6 @@
     "onchange": "7.1.0",
     "prettier": "2.8.1",
     "redoc-cli": "0.13.20",
-    "sucrase": "3.29.0",
     "tsconfig-paths": "4.1.2",
     "vitest": "0.26.3"
   }
