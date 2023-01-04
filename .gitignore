@@ -2,6 +2,7 @@
 .env
 coverage/
 sqlite/
+redoc-static.html
 
 # Logs
 logs

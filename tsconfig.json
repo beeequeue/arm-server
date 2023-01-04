@@ -2,7 +2,7 @@
   "extends": "@tsconfig/node16-strictest/tsconfig.json",
   "compilerOptions": {
     "lib": ["es2022"],
-    "module": "commonjs",
+    "module": "esnext",
     "target": "es2022",
 
     "noEmit": true,
@@ -15,6 +15,7 @@
     "importsNotUsedAsValues": "remove",
     "noUncheckedIndexedAccess": false,
     "noPropertyAccessFromIndexSignature": false,
+    "exactOptionalPropertyTypes": false,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]

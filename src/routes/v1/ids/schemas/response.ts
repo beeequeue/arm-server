@@ -1,12 +1,8 @@
 import { JSONSchema7 } from "json-schema"
 
-import { idSchema } from "@/schemas/common"
+import { makeNullable, numberIdSchema } from "@/shared-schemas"
 
-const nullSchema: JSONSchema7 = { type: "null" }
-
-const nullableIdSchema = {
-  oneOf: [nullSchema, idSchema],
-}
+const nullableIdSchema = makeNullable(numberIdSchema)
 
 export const responseItemSchema: JSONSchema7 = {
   type: "object",
@@ -21,11 +17,10 @@ export const responseItemSchema: JSONSchema7 = {
 
 const responseArraySchema: JSONSchema7 = {
   type: "array",
-  items: {
-    oneOf: [nullSchema, responseItemSchema],
-  },
+  items: makeNullable(responseItemSchema),
 }
 
-export const responseBodySchema: JSONSchema7 = {
-  oneOf: [nullSchema, responseItemSchema, responseArraySchema],
-}
+export const responseBodySchema: JSONSchema7 = makeNullable(
+  responseItemSchema,
+  responseArraySchema,
+)

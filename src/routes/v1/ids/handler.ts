@@ -1,21 +1,21 @@
 import { FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify"
 
 import { Relation } from "@/db"
-import { bodyHandler, bodyInputSchema, BodyQuery } from "@/schemas/json-body"
+
+import { bodyHandler, bodyInputSchema, BodyQuery } from "./schemas/json-body"
 import {
   handleQueryParams,
   queryInputSchema,
   QueryParamQuery,
-} from "@/schemas/query-params"
-import { responseBodySchema } from "@/schemas/response"
-import { isEmpty } from "@/utils"
+} from "./schemas/query-params"
+import { responseBodySchema } from "./schemas/response"
 
 type BodyInput = { Body: BodyQuery }
 type QueryInput = { Querystring: QueryParamQuery }
 
 const isBodyQuery = (
   request: FastifyRequest<BodyInput | QueryInput>,
-): request is FastifyRequest<BodyInput> => isEmpty(request.query as QueryParamQuery)
+): request is FastifyRequest<BodyInput> => request.method === "POST"
 
 const handler = async (
   request: FastifyRequest<BodyInput> | FastifyRequest<QueryInput>,

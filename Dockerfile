@@ -1,3 +1,37 @@
+FROM node:18-alpine as runtime_deps
+
+RUN corepack enable
+
+WORKDIR /app
+
+COPY package.json .
+COPY pnpm-lock.yaml .
+COPY .npmrc .
+
+ENV CI=1
+ENV NODE_ENV=production
+# Install dependencies
+RUN pnpm install --frozen-lockfile
+
+
+FROM node:18-alpine as docs
+
+RUN corepack enable
+
+WORKDIR /app
+
+COPY package.json .
+COPY pnpm-lock.yaml .
+COPY .npmrc .
+COPY docs/openapi.yaml docs/openapi.yaml
+
+ENV CI=1
+# Install dependencies
+RUN pnpm install --frozen-lockfile
+
+RUN pnpm --silent run docs
+
+
 FROM node:18-alpine
 
 RUN corepack enable
@@ -5,11 +39,8 @@ RUN corepack enable
 WORKDIR /app
 
 COPY . .
-
-# Source maps enabled, since it does not affect performance from what I found
-ENV HUSKY=0
-# Install dependencies
-RUN pnpm install --frozen-lockfile
+COPY --from=runtime_deps /app/node_modules node_modules
+COPY --from=docs /app/redoc-static.html .
 
 # Run with...
 # Source maps enabled, since it does not affect performance from what I found

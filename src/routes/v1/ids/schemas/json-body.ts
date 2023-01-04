@@ -1,7 +1,7 @@
 import { JSONSchema7 } from "json-schema"
 
-import { knex, Relation } from "@/db"
-import { idSchema, Source, sourceSchema } from "@/schemas/common"
+import { knex, Relation, Source } from "@/db"
+import { numberIdSchema, oldSourceSchema } from "@/shared-schemas"
 
 type BodyItem = {
   [key in Source]?: number
@@ -9,10 +9,10 @@ type BodyItem = {
 
 export const singularItemInputSchema: JSONSchema7 = {
   type: "object",
-  propertyNames: sourceSchema,
+  propertyNames: oldSourceSchema,
   minProperties: 1,
   maxProperties: 4,
-  additionalProperties: idSchema,
+  additionalProperties: numberIdSchema,
 }
 
 export type BodyQuery = BodyItem | BodyItem[]
@@ -32,7 +32,11 @@ export const bodyHandler = async (
   input: BodyQuery,
 ): Promise<BodyQuery extends Array<undefined> ? Array<Relation | null> : Relation> => {
   if (!Array.isArray(input)) {
-    const relation = await knex.where(input).from("relations").first()
+    const relation = await knex
+      .select(["anidb", "anilist", "myanimelist", "kitsu"])
+      .where(input)
+      .from("relations")
+      .first()
 
     return relation ?? null!
   }
@@ -41,6 +45,7 @@ export const bodyHandler = async (
 
   // Get relations
   relations = await knex
+    .select(["anidb", "anilist", "myanimelist", "kitsu"])
     .where(function () {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       for (const item of input) this.orWhere(item)

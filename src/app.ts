@@ -5,9 +5,12 @@ import Cors from "@fastify/cors"
 import Helmet from "@fastify/helmet"
 
 import { config } from "@/config"
+import { docsPlugin } from "@/docs"
 import { logger } from "@/lib/logger"
 import { sendErrorToSentry } from "@/lib/sentry"
-import { apiPlugin } from "@/routes/ids"
+import { apiPlugin } from "@/routes/v1/ids/handler"
+import { v2Plugin } from "@/routes/v2/ids/handler"
+import { thetvdbPlugin } from "@/routes/v2/thetvdb/handler"
 
 import pkgJson from "../package.json"
 
@@ -45,8 +48,11 @@ export const buildApp = async () => {
   })
 
   await App.register(apiPlugin, { prefix: "/api" })
+  await App.register(v2Plugin, { prefix: "/api/v2" })
+  await App.register(thetvdbPlugin, { prefix: "/api/v2" })
+  await App.register(docsPlugin)
 
-  App.get("/", async (_request, reply) => reply.redirect(301, pkgJson.homepage))
+  App.get("/", async (_, reply) => reply.redirect(301, pkgJson.homepage))
 
   return App
 }

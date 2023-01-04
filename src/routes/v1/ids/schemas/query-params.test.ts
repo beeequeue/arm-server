@@ -2,8 +2,8 @@ import Ajv, { Schema } from "ajv"
 import { JsonValue } from "type-fest"
 import { describe, expect, test } from "vitest"
 
-import { Source } from "@/schemas/common"
-import { queryInputSchema } from "@/schemas/query-params"
+import { Source } from "@/db"
+import { queryInputSchema } from "@/routes/v1/ids/schemas/query-params"
 
 type Case = [JsonValue, boolean]
 type Cases = Case[]
@@ -31,7 +31,7 @@ describe("schema", () => {
   const ajv = new Ajv()
   const validate = ajv.compile(queryInputSchema as Schema)
 
-  test.each(inputs)("%s = %p", (input, expected) => {
+  test.each(inputs)("%o = %s", (input, expected) => {
     validate(input)
 
     const { errors } = validate
