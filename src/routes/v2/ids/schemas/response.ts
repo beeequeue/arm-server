@@ -8,7 +8,10 @@ import {
 } from "@/shared-schemas"
 
 const nullableNumberIdSchema = makeNullable(numberIdSchema)
-const nullableStringIdSchema = makeNullable(stringIdSchema)
+const nullableLongStringIdSchema = makeNullable({
+  ...stringIdSchema,
+  maxLength: undefined,
+})
 const nullableImdbIdSchema = makeNullable(imdbIdSchema)
 
 export const responseItemSchema: JSONSchema7 = {
@@ -17,12 +20,12 @@ export const responseItemSchema: JSONSchema7 = {
   properties: {
     anidb: nullableNumberIdSchema,
     anilist: nullableNumberIdSchema,
-    "anime-planet": nullableStringIdSchema,
+    "anime-planet": nullableLongStringIdSchema,
     anisearch: nullableNumberIdSchema,
     imdb: nullableImdbIdSchema,
     kitsu: nullableNumberIdSchema,
     livechart: nullableNumberIdSchema,
-    "notify-moe": nullableStringIdSchema,
+    "notify-moe": nullableLongStringIdSchema,
     themoviedb: nullableNumberIdSchema,
     thetvdb: nullableNumberIdSchema,
     myanimelist: nullableNumberIdSchema,

@@ -19,7 +19,7 @@ export const numberIdSchema = {
 export const stringIdSchema = {
   type: "string",
   minLength: 1,
-  maxLength: 100,
+  maxLength: 150,
 } satisfies JSONSchema7
 
 export const imdbIdSchema = {
