@@ -11,10 +11,11 @@ import { sendErrorToSentry } from "@/lib/sentry"
 import { apiPlugin } from "@/routes/v1/ids/handler"
 import { v2Plugin } from "@/routes/v2/ids/handler"
 import { thetvdbPlugin } from "@/routes/v2/thetvdb/handler"
+import { cacheReply, CacheTimes } from "@/utils"
 
 import pkgJson from "../package.json"
 
-const isProd = config.NODE_ENV === "production"
+const PROD = config.NODE_ENV === "production"
 
 const nanoid = customAlphabet(urlAlphabet, 16)
 
@@ -23,7 +24,7 @@ export const buildApp = async () => {
     ignoreTrailingSlash: true,
     onProtoPoisoning: "remove",
     onConstructorPoisoning: "remove",
-    trustProxy: isProd,
+    trustProxy: PROD,
     genReqId: () => nanoid(),
     disableRequestLogging: process.env.NODE_ENV === "test",
     logger,
@@ -38,9 +39,11 @@ export const buildApp = async () => {
     contentSecurityPolicy: false,
   })
 
-  App.addHook("onError", (request, _reply, error, next) => {
+  App.addHook("onError", (request, reply, error, next) => {
     /* c8 ignore next 4 */
-    if (error.validation == null) {
+    if (error.validation != null) {
+      cacheReply(reply, CacheTimes.WEEK)
+    } else {
       sendErrorToSentry(error, request)
     }
 
@@ -52,7 +55,10 @@ export const buildApp = async () => {
   await App.register(thetvdbPlugin, { prefix: "/api/v2" })
   await App.register(docsPlugin)
 
-  App.get("/", async (_, reply) => reply.redirect(301, pkgJson.homepage))
+  App.get("/", async (_, reply) => {
+    cacheReply(reply, CacheTimes.WEEK * 2)
+    void reply.redirect(301, pkgJson.homepage)
+  })
 
   return App
 }

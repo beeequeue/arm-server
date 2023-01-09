@@ -3,6 +3,7 @@ import { JSONSchema7 } from "json-schema"
 
 import { knex, Source } from "@/db"
 import { numberIdSchema, oldSourceSchema } from "@/shared-schemas"
+import { cacheReply, CacheTimes } from "@/utils"
 
 export type QueryParamQuery = {
   source: Source
@@ -28,7 +29,7 @@ export const handleQueryParams = async (
     .from("relations")
     .first()
 
-  void reply.header("Cache-Control", "public,max-age=10800")
+  cacheReply(reply, CacheTimes.SIX_HOURS)
 
   return data
 }

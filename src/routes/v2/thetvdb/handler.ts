@@ -2,7 +2,7 @@ import { FastifyPluginAsync } from "fastify"
 
 import { knex, Relation, Source } from "@/db"
 import { makeNullable } from "@/shared-schemas"
-import { mergeSchemas } from "@/utils"
+import { cacheReply, CacheTimes, mergeSchemas } from "@/utils"
 
 import { responseArraySchema } from "../ids/schemas/response"
 import { buildSelectFromInclude, IncludeQuery, includeSchema } from "../include"
@@ -27,7 +27,7 @@ export const thetvdbPlugin: FastifyPluginAsync = async (fastify) => {
         .where({ [Source.TheTVDB]: request.query.id })
         .from("relations")
 
-      void reply.header("Cache-Control", "public,max-age=10800")
+      cacheReply(reply, CacheTimes.SIX_HOURS)
 
       return data
     },

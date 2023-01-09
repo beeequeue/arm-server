@@ -2,7 +2,7 @@ import { FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify"
 
 import { knex, Relation, Source } from "@/db"
 import { buildSelectFromInclude, IncludeQuery, includeSchema } from "@/routes/v2/include"
-import { mergeSchemas } from "@/utils"
+import { cacheReply, CacheTimes, mergeSchemas } from "@/utils"
 
 import { bodyInputSchema, BodyQuery } from "./schemas/json-body"
 import { queryInputSchema, QueryParamQuery } from "./schemas/query-params"
@@ -61,7 +61,7 @@ const handleQueryParams = async (
     .from("relations")
     .first()
 
-  void reply.header("Cache-Control", "public,max-age=10800")
+  cacheReply(reply, CacheTimes.SIX_HOURS)
 
   return data
 }
