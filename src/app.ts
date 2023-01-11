@@ -42,7 +42,9 @@ export const buildApp = async () => {
   App.addHook("onError", (request, reply, error, next) => {
     /* c8 ignore next 4 */
     if (error.validation != null) {
-      cacheReply(reply, CacheTimes.WEEK)
+      if (request.method === "GET") {
+        cacheReply(reply, CacheTimes.WEEK)
+      }
     } else {
       sendErrorToSentry(error, request)
     }
