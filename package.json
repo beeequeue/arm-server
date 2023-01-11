@@ -5,7 +5,7 @@
   "private": true,
   "license": "AGPL-3.0-only",
   "homepage": "https://arm.haglund.dev/docs",
-  "packageManager": "pnpm@7.22.0",
+  "packageManager": "pnpm@7.24.3",
   "engines": {
     "node": ">=18"
   },
@@ -32,13 +32,13 @@
   },
   "resolutions": {
     "@types/node": "18.11.18",
-    "esbuild": "0.16.14",
+    "esbuild": "0.16.16",
     "node-fetch": "npm:node-fetch-native@1.0.1"
   },
   "dependencies": {
     "@fastify/cors": "8.2.0",
     "@fastify/helmet": "10.1.0",
-    "@sentry/node": "7.29.0",
+    "@sentry/node": "7.30.0",
     "@tsconfig/node16-strictest": "1.0.4",
     "better-sqlite3": "8.0.1",
     "fastify": "4.11.0",
@@ -49,7 +49,7 @@
     "pino": "8.8.0",
     "pino-pretty": "9.1.1",
     "sucrase": "3.29.0",
-    "tsx": "3.12.1",
+    "tsx": "3.12.2",
     "type-fest": "3.5.1",
     "typescript": "4.9.4",
     "zod": "3.20.2"
@@ -65,7 +65,7 @@
     "husky": "8.0.3",
     "lint-staged": "13.1.0",
     "onchange": "7.1.0",
-    "prettier": "2.8.1",
+    "prettier": "2.8.2",
     "redoc-cli": "0.13.20",
     "tsconfig-paths": "4.1.2",
     "vitest": "0.27.0"
