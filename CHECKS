@@ -1,5 +1,5 @@
-WAIT=30
-TIMEOUT=60
+WAIT=60
+TIMEOUT=3
 ATTEMPTS=10
 
 /api/ids?source=anilist&id=145815 145815
