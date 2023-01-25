@@ -63,7 +63,9 @@ const handleBadValues = <T extends string | number | undefined>(
 }
 
 export const removeDuplicates = (entries: Relation[]): Relation[] => {
-  const sources = Object.values(Source) as Source[]
+  const sources = (Object.values(Source) as Source[]).filter(
+    (source) => source !== Source.TheTVDB,
+  )
   const existing = new Map<Source, Set<unknown>>(sources.map((name) => [name, new Set()]))
 
   return entries.filter((entry) => {
