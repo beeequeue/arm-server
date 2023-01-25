@@ -15,7 +15,7 @@ jobs:
 
       - uses: BeeeQueue/setup-node@corepack
         with:
-          node-version: 16
+          node-version: 18
           corepack: true
 
       - name: find pnpm cache path
@@ -42,7 +42,7 @@ jobs:
 
       - uses: BeeeQueue/setup-node@corepack
         with:
-          node-version: 16
+          node-version: 18
           corepack: true
 
       - name: find pnpm cache path
@@ -69,7 +69,7 @@ jobs:
 
       - uses: BeeeQueue/setup-node@corepack
         with:
-          node-version: 16
+          node-version: 18
           corepack: true
 
       - name: find pnpm cache path
