@@ -42,6 +42,9 @@ dependencies:
   pino-pretty:
     specifier: 9.1.1
     version: 9.1.1
+  remeda:
+    specifier: 1.6.0
+    version: 1.6.0
   sucrase:
     specifier: 3.29.0
     version: 3.29.0
@@ -4816,6 +4819,10 @@ packages:
     dependencies:
       jsesc: 0.5.0
     dev: true
+
+  /remeda@1.6.0:
+    resolution: {integrity: sha512-2NBGJZrwWeqAY+Tzo66FyBYyW0CmMFh0tCg97T8G76krXmI45j/EK1oy+5WYrl2j7oPbgRkN6loGIiliiquvxg==}
+    dev: false
 
   /require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}

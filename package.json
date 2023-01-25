@@ -48,6 +48,7 @@
     "ohmyfetch": "0.4.21",
     "pino": "8.8.0",
     "pino-pretty": "9.1.1",
+    "remeda": "1.6.0",
     "sucrase": "3.29.0",
     "tsx": "3.12.2",
     "type-fest": "3.5.3",
