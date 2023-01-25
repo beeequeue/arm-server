@@ -1,6 +1,6 @@
 import Knex from "knex"
 
-import { config } from "../knexfile"
+import knexfile from "../knexfile"
 
 declare module "knex/types/tables" {
   /* eslint-disable @typescript-eslint/consistent-type-definitions */
@@ -9,7 +9,7 @@ declare module "knex/types/tables" {
   }
 }
 
-export const knex = Knex(config)
+export const knex = Knex(knexfile)
 
 export enum Source {
   AniDB = "anidb",
