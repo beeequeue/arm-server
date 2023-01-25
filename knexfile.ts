@@ -1,4 +1,4 @@
-export const config: import("knex").Knex.Config = {
+export default {
   client: "better-sqlite3",
   migrations: {
     tableName: "migrations",
@@ -8,6 +8,4 @@ export const config: import("knex").Knex.Config = {
   connection: {
     filename: `./sqlite/${process.env.NODE_ENV ?? "development"}.sqlite3`,
   },
-}
-
-export default config
+} satisfies import("knex").Knex.Config
