@@ -135,7 +135,6 @@ jobs:
       packages: read
     concurrency:
       group: deploy
-      cancel-in-progress: true
     environment:
       name: prod
       url: https://arm.haglund.dev/api
