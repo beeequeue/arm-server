@@ -28,6 +28,16 @@ a [manual rule request](https://github.com/BeeeQueue/arm-server/issues/new?templ
 
 ## [API Docs](https://arm.haglund.dev/docs)
 
+## Self-hosting
+
+Docker images are built and provided for each commit on master!
+
+The minimum configuration needed can be found in the following command:
+
+```
+docker run -it --name arm-server -p 3000:3000 ghcr.io/beeequeue/arm-server:latest
+```
+
 ## Development
 
 ### Server
