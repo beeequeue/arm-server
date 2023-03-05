@@ -56,7 +56,7 @@
     "zod": "3.20.6"
   },
   "devDependencies": {
-    "@beequeue/eslint-plugin": "1.1.2",
+    "@beequeue/eslint-plugin": "2.0.1",
     "@types/json-schema": "7.0.11",
     "@types/node": "18.14.2",
     "@vitest/coverage-c8": "0.28.5",
