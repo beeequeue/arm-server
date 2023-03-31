@@ -47,7 +47,7 @@
     "nanoid": "4.0.1",
     "ohmyfetch": "0.4.21",
     "pino": "8.11.0",
-    "pino-pretty": "9.4.0",
+    "pino-pretty": "10.0.0",
     "remeda": "1.9.0",
     "sucrase": "3.29.0",
     "tsx": "3.12.5",
