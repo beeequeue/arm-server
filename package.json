@@ -56,15 +56,15 @@
     "zod": "3.21.4"
   },
   "devDependencies": {
-    "@beequeue/eslint-plugin": "2.0.1",
+    "@beequeue/eslint-plugin": "2.1.0",
     "@types/json-schema": "7.0.11",
     "@types/node": "18.15.11",
     "@vitest/coverage-c8": "0.29.8",
     "ajv": "8.12.0",
     "dotenv": "16.0.3",
-    "eslint": "8.36.0",
+    "eslint": "8.38.0",
     "husky": "8.0.3",
-    "lint-staged": "13.2.0",
+    "lint-staged": "13.2.1",
     "onchange": "7.1.0",
     "prettier": "2.8.7",
     "redoc-cli": "0.13.21",
