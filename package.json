@@ -31,7 +31,7 @@
     "prepare": "is-ci || husky install"
   },
   "resolutions": {
-    "@types/node": "18.16.9",
+    "@types/node": "18.16.16",
     "esbuild": "0.17.18",
     "node-fetch": "npm:node-fetch-native@1.1.0"
   },
@@ -57,8 +57,8 @@
   },
   "devDependencies": {
     "@beequeue/eslint-plugin": "2.1.0",
-    "@types/json-schema": "7.0.11",
-    "@types/node": "18.16.9",
+    "@types/json-schema": "7.0.12",
+    "@types/node": "18.16.16",
     "@vitest/coverage-c8": "0.29.8",
     "ajv": "8.12.0",
     "dotenv": "16.0.3",
