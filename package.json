@@ -66,7 +66,7 @@
     "husky": "8.0.3",
     "lint-staged": "13.2.3",
     "onchange": "7.1.0",
-    "prettier": "2.8.8",
+    "prettier": "3.0.0",
     "redoc-cli": "0.13.21",
     "tsconfig-paths": "4.2.0",
     "vitest": "0.33.0"
