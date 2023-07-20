@@ -7,7 +7,7 @@ import { Relation } from "@/db"
 import { bodyInputSchema } from "./json-body"
 
 type Case<V> = [V, boolean]
-type Cases<V = JsonValue> = Case<V>[]
+type Cases<V = JsonValue> = Array<Case<V>>
 
 const okCases = [
   [{ anilist: 1337 }, true],
