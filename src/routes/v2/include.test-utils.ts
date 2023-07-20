@@ -1,12 +1,21 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
+import { IncomingMessage, ServerResponse } from "http"
+
 import { FastifyInstance } from "fastify"
+import { RawServerDefault } from "fastify/types/utils"
+import { Logger } from "pino"
 import { describe, expect, test } from "vitest"
 
 import { knex, Source } from "@/db"
 
 export const testIncludeQueryParam = (
-  app: FastifyInstance,
+  app: FastifyInstance<
+    RawServerDefault,
+    IncomingMessage,
+    ServerResponse<IncomingMessage>,
+    Logger
+  >,
   path: string,
   thetvdb = false,
 ) => {

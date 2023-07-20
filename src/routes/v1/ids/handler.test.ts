@@ -1,4 +1,8 @@
+import { IncomingMessage, ServerResponse } from "http"
+
 import { FastifyInstance } from "fastify"
+import { RawServerDefault } from "fastify/types/utils"
+import { Logger } from "pino"
 import { afterAll, afterEach, beforeAll, describe, test, expect } from "vitest"
 
 import { buildApp } from "@/app"
@@ -24,7 +28,12 @@ const createRelations = async <N extends number>(
   return relations as never
 }
 
-let app: FastifyInstance
+let app: FastifyInstance<
+  RawServerDefault,
+  IncomingMessage,
+  ServerResponse<IncomingMessage>,
+  Logger
+>
 beforeAll(async () => {
   app = await buildApp()
 })
