@@ -56,8 +56,8 @@ dependencies:
     specifier: 3.12.7
     version: 3.12.7
   type-fest:
-    specifier: 3.13.0
-    version: 3.13.0
+    specifier: 4.0.0
+    version: 4.0.0
   typescript:
     specifier: 5.1.6
     version: 5.1.6
@@ -5737,9 +5737,9 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /type-fest@3.13.0:
-    resolution: {integrity: sha512-Gur3yQGM9qiLNs0KPP7LPgeRbio2QTt4xXouobMCarR0/wyW3F+F/+OWwshg3NG0Adon7uQfSZBpB46NfhoF1A==}
-    engines: {node: '>=14.16'}
+  /type-fest@4.0.0:
+    resolution: {integrity: sha512-d/oYtUnPM9zar2fqqGLYPzgcY0qUlYK0evgNVti93xpzfjGkMgZHu9Lvgrkn0rqGXTgsFRxFamzjGoD9Uo+dgw==}
+    engines: {node: '>=16'}
     dev: false
 
   /typed-array-length@1.0.4:
