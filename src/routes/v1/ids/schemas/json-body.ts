@@ -30,7 +30,7 @@ export const bodyInputSchema: JSONSchema7 = {
 
 export const bodyHandler = async (
   input: BodyQuery,
-): Promise<BodyQuery extends Array<undefined> ? Array<Relation | null> : Relation> => {
+): Promise<BodyQuery extends undefined[] ? Array<Relation | null> : Relation> => {
   if (!Array.isArray(input)) {
     const relation = await knex
       .select(["anidb", "anilist", "myanimelist", "kitsu"])

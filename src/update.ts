@@ -53,7 +53,7 @@ const handleBadValues = <T extends string | number | undefined>(
 ): T | undefined => {
   if (
     typeof value === "string" &&
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (badValues.includes(value as any) || value.includes(","))
   ) {
     return undefined
@@ -83,17 +83,17 @@ export const removeDuplicates = (entries: Relation[]): Relation[] => {
 }
 
 export const formatEntry = (entry: AnimeListsSchema[number]): Relation => ({
-  anidb: handleBadValues(entry["anidb_id"]),
-  anilist: handleBadValues(entry["anilist_id"]),
+  anidb: handleBadValues(entry.anidb_id),
+  anilist: handleBadValues(entry.anilist_id),
   "anime-planet": handleBadValues(entry["anime-planet_id"]),
-  anisearch: handleBadValues(entry["anisearch_id"]),
-  imdb: handleBadValues(entry["imdb_id"]),
-  kitsu: handleBadValues(entry["kitsu_id"]),
-  livechart: handleBadValues(entry["livechart_id"]),
-  myanimelist: handleBadValues(entry["mal_id"]),
+  anisearch: handleBadValues(entry.anisearch_id),
+  imdb: handleBadValues(entry.imdb_id),
+  kitsu: handleBadValues(entry.kitsu_id),
+  livechart: handleBadValues(entry.livechart_id),
+  myanimelist: handleBadValues(entry.mal_id),
   "notify-moe": handleBadValues(entry["notify.moe_id"]),
-  themoviedb: handleBadValues(entry["themoviedb_id"]),
-  thetvdb: handleBadValues(entry["thetvdb_id"]),
+  themoviedb: handleBadValues(entry.themoviedb_id),
+  thetvdb: handleBadValues(entry.thetvdb_id),
 })
 
 export const updateRelations = async () => {

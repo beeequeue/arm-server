@@ -17,7 +17,7 @@ const isBodyQuery = (
 
 const bodyHandler = async (
   request: FastifyRequest<BodyInput>,
-): Promise<BodyQuery extends Array<undefined> ? Array<Relation | null> : Relation> => {
+): Promise<BodyQuery extends undefined[] ? Array<Relation | null> : Relation> => {
   const input = request.body
 
   if (!Array.isArray(input)) {

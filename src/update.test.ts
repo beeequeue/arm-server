@@ -10,7 +10,8 @@ import {
   updateRelations,
 } from "@/update"
 
-declare const fetch: (url: string) => Promise<any>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare const fetch: (url: string) => Promise<{ json: () => Promise<any[]> }>
 
 vi.mock("ohmyfetch/node")
 
@@ -28,7 +29,7 @@ const mockedFetch = vi.mocked($fetch)
 it("handles bad values", async () => {
   mockedFetch.mockResolvedValue([
     { anidb_id: 1337, themoviedb_id: "unknown" },
-    { anidb_id: 1338, thetvdb_id: "unknown" as any },
+    { anidb_id: 1338, thetvdb_id: "unknown" as never },
     { anidb_id: 1339, imdb_id: "tt1337,tt1338,tt1339" },
     { anidb_id: 1340, themoviedb_id: "unknown" },
     { anidb_id: 1341, themoviedb_id: 1341 },

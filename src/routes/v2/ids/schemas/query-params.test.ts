@@ -7,7 +7,7 @@ import { Source } from "@/db"
 import { queryInputSchema, QueryParamQuery } from "./query-params"
 
 type Case<V> = [V, boolean]
-type Cases<V = JsonValue> = Case<V>[]
+type Cases<V = JsonValue> = Array<Case<V>>
 
 const okCases = [
   [{ source: Source.AniList, id: 1337 }, true],
