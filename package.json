@@ -30,11 +30,6 @@
     "typecheck": "tsc --noEmit",
     "prepare": "is-ci || husky install"
   },
-  "resolutions": {
-    "@types/node": "18.17.14",
-    "esbuild": "0.19.2",
-    "node-fetch": "npm:node-fetch-native@1.4.0"
-  },
   "dependencies": {
     "@fastify/cors": "8.3.0",
     "@fastify/helmet": "11.0.0",
@@ -70,5 +65,23 @@
     "redoc-cli": "0.13.21",
     "tsconfig-paths": "4.2.0",
     "vitest": "0.34.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/node": "18.17.14",
+      "esbuild": "0.19.2",
+      "node-fetch": "npm:node-fetch-native@1.4.0",
+      "array-includes": "npm:@nolyfill/array-includes@latest",
+      "array.prototype.flat": "npm:@nolyfill/array.prototype.flat@latest",
+      "array.prototype.flatmap": "npm:@nolyfill/array.prototype.flatmap@latest",
+      "array.prototype.tosorted": "npm:@nolyfill/array.prototype.tosorted@latest",
+      "has": "npm:@nolyfill/has@latest",
+      "object.assign": "npm:@nolyfill/object.assign@latest",
+      "object.entries": "npm:@nolyfill/object.entries@latest",
+      "object.fromentries": "npm:@nolyfill/object.fromentries@latest",
+      "object.hasown": "npm:@nolyfill/object.hasown@latest",
+      "object.values": "npm:@nolyfill/object.values@latest",
+      "string.prototype.matchall": "npm:@nolyfill/string.prototype.matchall@latest"
+    }
   }
 }
