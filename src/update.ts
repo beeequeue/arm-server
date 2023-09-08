@@ -1,4 +1,4 @@
-import { $fetch, FetchError } from "ohmyfetch"
+import { $fetch, FetchError } from "ofetch/node"
 
 import { captureException } from "@sentry/node"
 

@@ -1,4 +1,4 @@
-import { $fetch } from "ohmyfetch/node"
+import { $fetch } from "ofetch/node"
 import { groupBy } from "remeda"
 import { afterAll, afterEach, expect, it, vi } from "vitest"
 
@@ -13,7 +13,7 @@ import {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const fetch: (url: string) => Promise<{ json: () => Promise<any[]> }>
 
-vi.mock("ohmyfetch/node")
+vi.mock("ofetch/node")
 
 afterEach(async () => {
   vi.resetAllMocks()
