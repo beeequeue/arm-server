@@ -1,11 +1,8 @@
 import { defineConfig } from "vitest/config"
 
-export default defineConfig(({ command }) => ({
+export default defineConfig(async ({ command }) => ({
   resolve: {
-    alias: {
-      "@": "./src",
-      nanoid: require.resolve("nanoid"),
-    },
+    alias: { "@": "./src" },
   },
 
   test: {
