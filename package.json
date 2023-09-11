@@ -5,13 +5,16 @@
   "private": true,
   "license": "AGPL-3.0-only",
   "homepage": "https://arm.haglund.dev/docs",
-  "packageManager": "pnpm@8.7.4",
+  "packageManager": "pnpm@8.7.5",
   "engines": {
     "node": ">=20"
   },
   "lint-staged": {
     "*.{js,ts,json}": [
-      "prettier --write"
+      "dprint fmt"
+    ],
+    "Dockerfile": [
+      "dprint fmt"
     ]
   },
   "scripts": {
@@ -62,7 +65,6 @@
     "husky": "8.0.3",
     "lint-staged": "14.0.1",
     "onchange": "7.1.0",
-    "prettier": "3.0.3",
     "redoc-cli": "0.13.21",
     "tsconfig-paths": "4.2.0",
     "vitest": "0.34.4"
