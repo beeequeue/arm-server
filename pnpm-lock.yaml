@@ -111,9 +111,6 @@ devDependencies:
   onchange:
     specifier: 7.1.0
     version: 7.1.0
-  prettier:
-    specifier: 3.0.3
-    version: 3.0.3
   redoc-cli:
     specifier: 0.13.21
     version: 0.13.21(@babel/core@7.22.17)(core-js@3.32.2)(react-is@18.2.0)(webpack@5.88.2)

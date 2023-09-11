@@ -34,6 +34,8 @@ jobs:
 
       - run: pnpm lint --format compact
 
+      - uses: dprint/check@v2.2
+
   typecheck:
     runs-on: ubuntu-latest
 

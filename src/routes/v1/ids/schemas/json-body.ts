@@ -46,7 +46,7 @@ export const bodyHandler = async (
   // Get relations
   relations = await knex
     .select(["anidb", "anilist", "myanimelist", "kitsu"])
-    .where(function () {
+    .where(function() {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       for (const item of input) this.orWhere(item)
     })

@@ -3,7 +3,7 @@ import { IncomingMessage, ServerResponse } from "http"
 import { FastifyInstance } from "fastify"
 import { RawServerDefault } from "fastify/types/utils"
 import { Logger } from "pino"
-import { afterAll, afterEach, beforeAll, describe, test, expect } from "vitest"
+import { afterAll, afterEach, beforeAll, describe, expect, test } from "vitest"
 
 import { buildApp } from "@/app"
 import { knex, Relation, Source } from "@/db"

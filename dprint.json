@@ -1,0 +1,20 @@
+{
+  "$schema": "https://dprint.dev/schemas/v0.json",
+  "newLineKind": "lf",
+  "useTabs": false,
+  "indentWidth": 2,
+  "typescript": {
+    "semiColons": "asi",
+    "quoteProps": "asNeeded",
+    "arrowFunction.useParentheses": "force"
+  },
+  "excludes": [
+    "**/node_modules",
+    "**/pnpm-lock*"
+  ],
+  "plugins": [
+    "https://plugins.dprint.dev/typescript-0.87.1.wasm",
+    "https://plugins.dprint.dev/json-0.17.4.wasm",
+    "https://plugins.dprint.dev/dockerfile-0.3.0.wasm"
+  ]
+}
