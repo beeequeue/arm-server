@@ -7,8 +7,7 @@ import { logger } from "@/lib/logger"
 import { knex, Relation, Source } from "./db"
 import { updateBasedOnManualRules } from "./manual-rules"
 
-const isFetchError = <T>(response: T | FetchError): response is FetchError =>
-  (response as FetchError).stack != null
+const isFetchError = <T>(response: T | FetchError): response is FetchError => (response as FetchError).stack != null
 
 export type AnimeListsSchema = Array<{
   anidb_id?: number
@@ -52,9 +51,9 @@ const handleBadValues = <T extends string | number | undefined>(
   value: T | "unknown",
 ): T | undefined => {
   if (
-    typeof value === "string" &&
+    typeof value === "string"
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (badValues.includes(value as any) || value.includes(","))
+    && (badValues.includes(value as any) || value.includes(","))
   ) {
     return undefined
   }
@@ -126,7 +125,7 @@ export const updateRelations = async () => {
       .transacting(trx)
       .then(async () => {
         await knex.batchInsert("relations", goodEntries, 100).transacting(trx)
-      }),
+      })
   )
   logger.info("Updated database.")
 

@@ -1,12 +1,7 @@
 import { JSONSchema7 } from "json-schema"
 
 import { Relation } from "@/db"
-import {
-  imdbIdSchema,
-  makeNullable,
-  numberIdSchema,
-  stringIdSchema,
-} from "@/shared-schemas"
+import { imdbIdSchema, makeNullable, numberIdSchema, stringIdSchema } from "@/shared-schemas"
 
 // Does not include `thetvdb` due to the one-to-many issue
 type BodyItem = Omit<Relation, "thetvdb">

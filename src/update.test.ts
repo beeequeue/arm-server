@@ -3,12 +3,7 @@ import { groupBy } from "remeda"
 import { afterAll, afterEach, expect, it, vi } from "vitest"
 
 import { knex, Relation } from "@/db"
-import {
-  AnimeListsSchema,
-  formatEntry,
-  removeDuplicates,
-  updateRelations,
-} from "@/update"
+import { AnimeListsSchema, formatEntry, removeDuplicates, updateRelations } from "@/update"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const fetch: (url: string) => Promise<{ json: () => Promise<any[]> }>
@@ -27,13 +22,15 @@ afterAll(async () => {
 const mockedFetch = vi.mocked($fetch)
 
 it("handles bad values", async () => {
-  mockedFetch.mockResolvedValue([
-    { anidb_id: 1337, themoviedb_id: "unknown" },
-    { anidb_id: 1338, thetvdb_id: "unknown" as never },
-    { anidb_id: 1339, imdb_id: "tt1337,tt1338,tt1339" },
-    { anidb_id: 1340, themoviedb_id: "unknown" },
-    { anidb_id: 1341, themoviedb_id: 1341 },
-  ] satisfies AnimeListsSchema)
+  mockedFetch.mockResolvedValue(
+    [
+      { anidb_id: 1337, themoviedb_id: "unknown" },
+      { anidb_id: 1338, thetvdb_id: "unknown" as never },
+      { anidb_id: 1339, imdb_id: "tt1337,tt1338,tt1339" },
+      { anidb_id: 1340, themoviedb_id: "unknown" },
+      { anidb_id: 1341, themoviedb_id: 1341 },
+    ] satisfies AnimeListsSchema,
+  )
 
   await updateRelations()
 

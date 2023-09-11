@@ -30,9 +30,7 @@ export const updateBasedOnManualRules = async () => {
           .delete()
           .where(fromWhere)
           .transacting(trx)
-          .then(() =>
-            knex("relations").update(fromWhere).where(toWhere).transacting(trx),
-          ),
+          .then(() => knex("relations").update(fromWhere).where(toWhere).transacting(trx))
       )
       .catch(console.error)
   })

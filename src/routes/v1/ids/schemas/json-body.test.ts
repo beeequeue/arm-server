@@ -30,8 +30,7 @@ const badCases = [
   [{ anidb: 1337, test: 123 }, false],
 ] satisfies Cases
 
-const mapToSingularArrayInput = (cases: Cases): Cases =>
-  cases.map(([input, expected]) => [[input], expected])
+const mapToSingularArrayInput = (cases: Cases): Cases => cases.map(([input, expected]) => [[input], expected])
 
 describe("schema", () => {
   const inputs = [

@@ -15,9 +15,7 @@ Sentry.init({
 
 export const sendErrorToSentry = (err: Error, request: FastifyRequest) => {
   Sentry.withScope((scope) => {
-    scope.addEventProcessor((event) =>
-      Sentry.addRequestDataToEvent(event, request as never),
-    )
+    scope.addEventProcessor((event) => Sentry.addRequestDataToEvent(event, request as never))
 
     Sentry.captureException(err)
   })
