@@ -85,7 +85,8 @@
       "object.hasown": "npm:@nolyfill/object.hasown@latest",
       "object.values": "npm:@nolyfill/object.values@latest",
       "string.prototype.matchall": "npm:@nolyfill/string.prototype.matchall@latest",
-      "side-channel": "npm:@nolyfill/side-channel@latest"
+      "side-channel": "npm:@nolyfill/side-channel@latest",
+      "es-iterator-helpers": "npm:@nolyfill/es-iterator-helpers@latest"
     }
   }
 }
