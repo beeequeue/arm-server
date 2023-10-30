@@ -48,8 +48,8 @@ dependencies:
     specifier: 3.0.1
     version: 3.0.1
   knex:
-    specifier: 2.5.1
-    version: 2.5.1(better-sqlite3@8.7.0)
+    specifier: 3.0.1
+    version: 3.0.1(better-sqlite3@8.7.0)
   nanoid:
     specifier: 5.0.2
     version: 5.0.2
@@ -3386,9 +3386,9 @@ packages:
       json-buffer: 3.0.1
     dev: true
 
-  /knex@2.5.1(better-sqlite3@8.7.0):
-    resolution: {integrity: sha512-z78DgGKUr4SE/6cm7ku+jHvFT0X97aERh/f0MUKAKgFnwCYBEW4TFBqtHWFYiJFid7fMrtpZ/gxJthvz5mEByA==}
-    engines: {node: '>=12'}
+  /knex@3.0.1(better-sqlite3@8.7.0):
+    resolution: {integrity: sha512-ruASxC6xPyDklRdrcDy6a9iqK+R9cGK214aiQa+D9gX2ZnHZKv6o6JC9ZfgxILxVAul4bZ13c3tgOAHSuQ7/9g==}
+    engines: {node: '>=16'}
     hasBin: true
     peerDependencies:
       better-sqlite3: '*'
