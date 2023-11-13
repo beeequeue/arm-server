@@ -63,7 +63,7 @@
     "dotenv": "16.3.1",
     "eslint": "8.53.0",
     "husky": "8.0.3",
-    "lint-staged": "14.0.1",
+    "lint-staged": "15.1.0",
     "onchange": "7.1.0",
     "redoc-cli": "0.13.21",
     "tsconfig-paths": "4.2.0",
