@@ -14,7 +14,7 @@ export const testIncludeQueryParam = (
     RawServerDefault,
     IncomingMessage,
     ServerResponse<IncomingMessage>,
-    Logger
+    Logger<string>
   >,
   path: string,
   thetvdb = false,

@@ -32,7 +32,7 @@ let app: FastifyInstance<
   RawServerDefault,
   IncomingMessage,
   ServerResponse<IncomingMessage>,
-  Logger
+  Logger<string>
 >
 beforeAll(async () => {
   app = await buildApp()
