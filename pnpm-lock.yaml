@@ -39,8 +39,8 @@ dependencies:
     specifier: 2.0.3
     version: 2.0.3
   better-sqlite3:
-    specifier: 8.7.0
-    version: 8.7.0
+    specifier: 9.4.1
+    version: 9.4.1
   fastify:
     specifier: 4.24.3
     version: 4.24.3
@@ -49,7 +49,7 @@ dependencies:
     version: 3.0.1
   knex:
     specifier: 3.0.1
-    version: 3.0.1(better-sqlite3@8.7.0)
+    version: 3.0.1(better-sqlite3@9.4.1)
   nanoid:
     specifier: 5.0.3
     version: 5.0.3
@@ -1538,8 +1538,8 @@ packages:
   /base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
 
-  /better-sqlite3@8.7.0:
-    resolution: {integrity: sha512-99jZU4le+f3G6aIl6PmmV0cxUIWqKieHxsiF7G34CVFiE+/UabpYqkU0NJIkY/96mQKikHeBjtR27vFfs5JpEw==}
+  /better-sqlite3@9.4.1:
+    resolution: {integrity: sha512-QpqiQeMI4WkE+dQ68zTMX5OzlPGc7lXIDP1iKUt4Omt9PdaVgzKYxHIJRIzt1E+RUBQoFmkip/IbvzyrxehAIg==}
     requiresBuild: true
     dependencies:
       bindings: 1.5.0
@@ -3431,7 +3431,7 @@ packages:
       json-buffer: 3.0.1
     dev: true
 
-  /knex@3.0.1(better-sqlite3@8.7.0):
+  /knex@3.0.1(better-sqlite3@9.4.1):
     resolution: {integrity: sha512-ruASxC6xPyDklRdrcDy6a9iqK+R9cGK214aiQa+D9gX2ZnHZKv6o6JC9ZfgxILxVAul4bZ13c3tgOAHSuQ7/9g==}
     engines: {node: '>=16'}
     hasBin: true
@@ -3459,7 +3459,7 @@ packages:
       tedious:
         optional: true
     dependencies:
-      better-sqlite3: 8.7.0
+      better-sqlite3: 9.4.1
       colorette: 2.0.19
       commander: 10.0.1
       debug: 4.3.4(supports-color@5.5.0)
