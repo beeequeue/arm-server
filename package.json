@@ -39,7 +39,7 @@
     "@sentry/node": "7.81.1",
     "@tsconfig/node20": "20.1.2",
     "@tsconfig/strictest": "2.0.3",
-    "better-sqlite3": "8.7.0",
+    "better-sqlite3": "9.4.1",
     "fastify": "4.24.3",
     "is-ci": "3.0.1",
     "knex": "3.0.1",
