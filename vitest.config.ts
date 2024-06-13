@@ -1,13 +1,18 @@
+import path from "node:path"
+
 import { defineConfig } from "vitest/config"
 
 export default defineConfig(async ({ command }) => ({
   resolve: {
-    alias: { "@": "./src" },
+    alias: { "@": path.resolve("./src") },
   },
 
   test: {
     reporters: ["verbose"],
-    threads: false,
+    pool: "forks",
+    poolOptions: {
+      forks: { minForks: 1, maxForks: 1 },
+    },
 
     env: {
       NODE_ENV: "test",
