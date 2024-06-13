@@ -1,7 +1,6 @@
 import { captureException } from "@sentry/node"
 
 import { config } from "@/config"
-
 import { buildApp } from "./app"
 import { updateRelations } from "./update"
 
@@ -13,7 +12,7 @@ const listen = async () => {
   if (NODE_ENV === "production") {
     void runUpdateScript()
 
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    // eslint-disable-next-line ts/no-misused-promises
     setInterval(runUpdateScript, 1000 * 60 * 60 * 24)
   }
 
@@ -24,5 +23,4 @@ const listen = async () => {
   })
 }
 
-// eslint-disable-next-line no-console
 void listen().catch(console.error)

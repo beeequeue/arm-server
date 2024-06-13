@@ -1,6 +1,7 @@
-import { JSONSchema7 } from "json-schema"
+import type { JSONSchema7 } from "json-schema"
 
-import { knex, Relation, Source } from "@/db"
+import type { Relation, Source } from "@/db"
+import { knex } from "@/db"
 import { numberIdSchema, oldSourceSchema } from "@/shared-schemas"
 
 type BodyItem = {
@@ -38,6 +39,7 @@ export const bodyHandler = async (
       .from("relations")
       .first()
 
+    // eslint-disable-next-line ts/no-unsafe-return
     return relation ?? null!
   }
 
@@ -47,7 +49,7 @@ export const bodyHandler = async (
   relations = await knex
     .select(["anidb", "anilist", "myanimelist", "kitsu"])
     .where(function() {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      // eslint-disable-next-line ts/no-floating-promises
       for (const item of input) this.orWhere(item)
     })
     .from("relations")

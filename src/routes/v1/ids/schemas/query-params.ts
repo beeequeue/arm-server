@@ -1,7 +1,8 @@
-import { FastifyReply, FastifyRequest } from "fastify"
-import { JSONSchema7 } from "json-schema"
+import type { FastifyReply, FastifyRequest } from "fastify"
+import type { JSONSchema7 } from "json-schema"
 
-import { knex, Source } from "@/db"
+import type { Source } from "@/db"
+import { knex } from "@/db"
 import { numberIdSchema, oldSourceSchema } from "@/shared-schemas"
 import { cacheReply, CacheTimes } from "@/utils"
 
@@ -31,5 +32,6 @@ export const handleQueryParams = async (
 
   cacheReply(reply, CacheTimes.SIX_HOURS)
 
+  // eslint-disable-next-line ts/no-unsafe-return
   return data
 }

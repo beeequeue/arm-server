@@ -1,4 +1,4 @@
-import { JSONSchema7 } from "json-schema"
+import type { JSONSchema7 } from "json-schema"
 
 const nullSchema = { type: "null" } satisfies JSONSchema7
 export const makeNullable = <Input extends JSONSchema7>(...input: Input[]) => ({

@@ -1,4 +1,4 @@
-import { JSONSchema7 } from "json-schema"
+import type { JSONSchema7 } from "json-schema"
 
 // Does not include `thetvdb` due to the one-to-many issue
 export const numberIdSourceSchema: JSONSchema7 = {

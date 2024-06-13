@@ -1,4 +1,4 @@
-import { FastifyRequest } from "fastify"
+import type { FastifyRequest } from "fastify"
 import Pino from "pino"
 import Pretty from "pino-pretty"
 

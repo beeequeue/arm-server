@@ -1,5 +1,5 @@
-import { FastifyReply } from "fastify"
-import { JSONSchema7 } from "json-schema"
+import type { FastifyReply } from "fastify"
+import type { JSONSchema7 } from "json-schema"
 
 export const mergeSchemas = <One extends JSONSchema7, Two extends JSONSchema7>(
   one: One,
@@ -16,7 +16,7 @@ export const mergeSchemas = <One extends JSONSchema7, Two extends JSONSchema7>(
 
 export enum CacheTimes {
   HOUR = 3600,
-  SIX_HOURS = 3600 * 6,
+  SIX_HOURS = 21_600,
   DAY = 86_400,
   WEEK = 1_209_600,
 }

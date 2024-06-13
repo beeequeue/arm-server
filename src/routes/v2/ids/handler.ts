@@ -1,11 +1,14 @@
-import { FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify"
+import type { FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify"
 
-import { knex, Relation, Source } from "@/db"
-import { buildSelectFromInclude, IncludeQuery, includeSchema } from "@/routes/v2/include"
+import type { Relation, Source } from "@/db"
+import { knex } from "@/db"
+import type { IncludeQuery } from "@/routes/v2/include"
+import { buildSelectFromInclude, includeSchema } from "@/routes/v2/include"
 import { cacheReply, CacheTimes, mergeSchemas } from "@/utils"
-
-import { bodyInputSchema, BodyQuery } from "./schemas/json-body"
-import { queryInputSchema, QueryParamQuery } from "./schemas/query-params"
+import type { BodyQuery } from "./schemas/json-body"
+import { bodyInputSchema } from "./schemas/json-body"
+import type { QueryParamQuery } from "./schemas/query-params"
+import { queryInputSchema } from "./schemas/query-params"
 import { responseBodySchema } from "./schemas/response"
 
 type BodyInput = { Body: BodyQuery; Querystring: IncludeQuery }
@@ -27,6 +30,7 @@ const bodyHandler = async (
       .from("relations")
       .first()
 
+    // eslint-disable-next-line ts/no-unsafe-return
     return relation ?? null!
   }
 
@@ -36,7 +40,7 @@ const bodyHandler = async (
   relations = await knex
     .select(buildSelectFromInclude(request))
     .where(function() {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      // eslint-disable-next-line ts/no-floating-promises
       for (const item of input) this.orWhere(item)
     })
     .from("relations")
@@ -63,6 +67,7 @@ const handleQueryParams = async (
 
   cacheReply(reply, CacheTimes.SIX_HOURS)
 
+  // eslint-disable-next-line ts/no-unsafe-return
   return data
 }
 
@@ -74,10 +79,10 @@ const handler = async (
     return (await bodyHandler(request)) ?? null
   }
 
+  // eslint-disable-next-line ts/no-unsafe-return
   return (await handleQueryParams(request, reply)) ?? null
 }
 
-// eslint-disable-next-line @typescript-eslint/require-await
 export const v2Plugin: FastifyPluginAsync = async (fastify) => {
   fastify.get<QueryInput>(
     "/ids",

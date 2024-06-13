@@ -1,10 +1,10 @@
 import Ajv from "ajv"
-import { JsonValue } from "type-fest"
-import { describe, expect, test } from "vitest"
+import type { JsonValue } from "type-fest"
+import { describe, expect, it } from "vitest"
 
 import { Source } from "@/db"
-
-import { queryInputSchema, QueryParamQuery } from "./query-params"
+import type { QueryParamQuery } from "./query-params"
+import { queryInputSchema } from "./query-params"
 
 type Case<V> = [V, boolean]
 type Cases<V = JsonValue> = Array<Case<V>>
@@ -36,7 +36,7 @@ describe("schema", () => {
   const ajv = new Ajv()
   const validate = ajv.compile(queryInputSchema)
 
-  test.each(inputs)("%o = %s", (input, expected) => {
+  it.each(inputs)("%o = %s", (input, expected) => {
     validate(input)
 
     const { errors } = validate

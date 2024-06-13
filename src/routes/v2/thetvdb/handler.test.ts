@@ -1,8 +1,8 @@
-import { afterAll, beforeEach, describe, expect, test } from "vitest"
+import { afterAll, beforeEach, describe, expect, it } from "vitest"
 
 import { buildApp } from "@/app"
-import { knex, Relation, Source } from "@/db"
-
+import type { Relation } from "@/db"
+import { knex, Source } from "@/db"
 import { testIncludeQueryParam } from "../include.test-utils"
 
 let id = 0
@@ -45,7 +45,7 @@ afterAll(async () => {
 })
 
 describe("query params", () => {
-  test("fetches relations correctly", async () => {
+  it("fetches relations correctly", async () => {
     await createRelations(4, 1336)
     const relations = await createRelations(3, 1337)
 
@@ -59,7 +59,7 @@ describe("query params", () => {
     expect(response.headers["content-type"]).toContain("application/json")
   })
 
-  test("returns empty array when id doesn't exist", async () => {
+  it("returns empty array when id doesn't exist", async () => {
     const response = await app.inject().get(PATH).query({
       source: Source.TheTVDB,
       id: (404).toString(),
@@ -70,7 +70,7 @@ describe("query params", () => {
     expect(response.headers["content-type"]).toContain("application/json")
   })
 
-  test("can return a partial response", async () => {
+  it("can return a partial response", async () => {
     const relation: Relation = {
       anidb: 1337,
       anilist: 1337,

@@ -1,6 +1,6 @@
-import { JSONSchema7 } from "json-schema"
+import type { JSONSchema7 } from "json-schema"
 
-import { Relation } from "@/db"
+import type { Relation } from "@/db"
 import { imdbIdSchema, makeNullable, numberIdSchema, stringIdSchema } from "@/shared-schemas"
 
 // Does not include `thetvdb` due to the one-to-many issue

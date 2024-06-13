@@ -1,6 +1,6 @@
-import { JSONSchema7 } from "json-schema"
+import type { JSONSchema7 } from "json-schema"
 
-import { Source } from "@/db"
+import type { Source } from "@/db"
 import { imdbSourceSchema, numberIdSourceSchema, stringIdSourceSchema } from "@/routes/v2/ids/schemas/common"
 import { imdbIdSchema, numberIdSchema, stringIdSchema } from "@/shared-schemas"
 

@@ -1,8 +1,8 @@
-import { afterAll, afterEach, describe, expect, test } from "vitest"
+import { afterAll, afterEach, describe, expect, it } from "vitest"
 
 import { buildApp } from "@/app"
-import { knex, Relation, Source } from "@/db"
-
+import type { Relation } from "@/db"
+import { knex, Source } from "@/db"
 import { testIncludeQueryParam } from "../include.test-utils"
 
 let id = 0
@@ -35,14 +35,14 @@ const createRelations = async <N extends number>(
 const PATH = "/api/v2/ids"
 const app = await buildApp()
 
+afterEach(() => knex.delete().from("relations"))
+
 afterAll(async () => {
   await Promise.all([app.close(), knex.destroy()])
 })
 
-afterEach(() => knex.delete().from("relations"))
-
 describe("query params", () => {
-  test("fetches relation correctly", async () => {
+  it("fetches relation correctly", async () => {
     const relation = await createRelations(1)
 
     const response = await app.inject().get(PATH).query({
@@ -55,10 +55,10 @@ describe("query params", () => {
     expect(response.headers["content-type"]).toContain("application/json")
   })
 
-  test("returns null when id doesn't exist", async () => {
+  it("returns null when id doesn't exist", async () => {
     const response = await app.inject().get(PATH).query({
       source: Source.Kitsu,
-      id: 404!.toString(),
+      id: "404" as never,
     })
 
     expect(response.json()).toBe(null)
@@ -66,7 +66,7 @@ describe("query params", () => {
     expect(response.headers["content-type"]).toContain("application/json")
   })
 
-  test("can return a partial response", async () => {
+  it("can return a partial response", async () => {
     const relation: Relation = {
       anidb: 1337,
       anilist: 1337,
@@ -95,7 +95,7 @@ describe("query params", () => {
 
 describe("json body", () => {
   describe("object input", () => {
-    test("GET fails with json body", async () => {
+    it("gET fails with json body", async () => {
       const relations = await createRelations(4)
 
       const response = await app
@@ -110,7 +110,7 @@ describe("json body", () => {
       expect(response.headers["content-type"]).toContain("application/json")
     })
 
-    test("fetches a single relation", async () => {
+    it("fetches a single relation", async () => {
       const relations = await createRelations(4)
 
       const response = await app
@@ -125,7 +125,7 @@ describe("json body", () => {
       expect(response.headers["content-type"]).toContain("application/json")
     })
 
-    test("errors correctly on an empty object", async () => {
+    it("errors correctly on an empty object", async () => {
       await createRelations(4)
 
       const response = await app.inject().post(PATH).body({})
@@ -135,7 +135,7 @@ describe("json body", () => {
       expect(response.headers["content-type"]).toContain("application/json")
     })
 
-    test("returns null if not found", async () => {
+    it("returns null if not found", async () => {
       await createRelations(4)
 
       const response = await app.inject().post(PATH).body({ anidb: 100_000 })
@@ -145,7 +145,7 @@ describe("json body", () => {
       expect(response.headers["content-type"]).toContain("application/json")
     })
 
-    test("can return a partial response", async () => {
+    it("can return a partial response", async () => {
       const relation: Relation = {
         anidb: 1337,
         anilist: 1337,
@@ -172,7 +172,7 @@ describe("json body", () => {
   })
 
   describe("array input", () => {
-    test("fetches relations correctly", async () => {
+    it("fetches relations correctly", async () => {
       const relations = await createRelations(4)
 
       const body = [
@@ -190,7 +190,7 @@ describe("json body", () => {
       expect(response.headers["content-type"]).toContain("application/json")
     })
 
-    test("responds correctly on no finds", async () => {
+    it("responds correctly on no finds", async () => {
       const body = [{ [Source.AniList]: 1000 }, { [Source.Kitsu]: 1000 }]
 
       const result = [null, null]
@@ -202,7 +202,7 @@ describe("json body", () => {
       expect(response.headers["content-type"]).toContain("application/json")
     })
 
-    test("requires at least one source", async () => {
+    it("requires at least one source", async () => {
       const body = [{}]
 
       const response = await app.inject().post(PATH).body(body)

@@ -1,15 +1,16 @@
-import { FastifyPluginAsync } from "fastify"
-
-import { knex, Relation, Source } from "@/db"
-import { makeNullable } from "@/shared-schemas"
-import { cacheReply, CacheTimes, mergeSchemas } from "@/utils"
+import type { FastifyPluginAsync } from "fastify"
 
 import { responseArraySchema } from "../ids/schemas/response"
-import { buildSelectFromInclude, IncludeQuery, includeSchema } from "../include"
+import type { IncludeQuery } from "../include"
+import { buildSelectFromInclude, includeSchema } from "../include"
 
-import { thetvdbInputSchema, TheTVDBQuery } from "./schemas/thetvdb"
+import { knex, Source } from "@/db"
+import type { Relation } from "@/db"
+import { makeNullable } from "@/shared-schemas"
+import { cacheReply, CacheTimes, mergeSchemas } from "@/utils"
+import type { TheTVDBQuery } from "./schemas/thetvdb"
+import { thetvdbInputSchema } from "./schemas/thetvdb"
 
-// eslint-disable-next-line @typescript-eslint/require-await
 export const thetvdbPlugin: FastifyPluginAsync = async (fastify) => {
   fastify.get<{ Querystring: TheTVDBQuery & IncludeQuery }>(
     "/thetvdb",

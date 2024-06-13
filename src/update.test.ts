@@ -2,10 +2,10 @@ import { $fetch } from "ofetch/node"
 import { groupBy } from "remeda"
 import { afterAll, afterEach, expect, it, vi } from "vitest"
 
-import { knex, Relation } from "@/db"
-import { AnimeListsSchema, formatEntry, removeDuplicates, updateRelations } from "@/update"
+import { knex, type Relation } from "@/db"
+import type { AnimeListsSchema } from "@/update"
+import { formatEntry, removeDuplicates, updateRelations } from "@/update"
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const fetch: (url: string) => Promise<{ json: () => Promise<any[]> }>
 
 vi.mock("ofetch/node")

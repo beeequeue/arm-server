@@ -3,7 +3,6 @@ import Knex from "knex"
 import knexfile from "../knexfile"
 
 declare module "knex/types/tables" {
-  /* eslint-disable @typescript-eslint/consistent-type-definitions */
   interface Tables {
     relations: Relation
   }

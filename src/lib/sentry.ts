@@ -1,5 +1,7 @@
 /* c8 ignore start */
-import { FastifyRequest } from "fastify"
+import process from "node:process"
+
+import type { FastifyRequest } from "fastify"
 
 import * as Sentry from "@sentry/node"
 

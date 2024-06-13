@@ -1,6 +1,7 @@
-import Ajv, { Schema } from "ajv"
-import { JsonValue } from "type-fest"
-import { describe, expect, test } from "vitest"
+import type { Schema } from "ajv"
+import Ajv from "ajv"
+import type { JsonValue } from "type-fest"
+import { describe, expect, it } from "vitest"
 
 import { Source } from "@/db"
 import { queryInputSchema } from "@/routes/v1/ids/schemas/query-params"
@@ -31,7 +32,7 @@ describe("schema", () => {
   const ajv = new Ajv()
   const validate = ajv.compile(queryInputSchema as Schema)
 
-  test.each(inputs)("%o = %s", (input, expected) => {
+  it.each(inputs)("%o = %s", (input, expected) => {
     validate(input)
 
     const { errors } = validate

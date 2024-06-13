@@ -1,9 +1,10 @@
-import { FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify"
+import type { FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify"
 
-import { Relation } from "@/db"
-
-import { bodyHandler, bodyInputSchema, BodyQuery } from "./schemas/json-body"
-import { handleQueryParams, queryInputSchema, QueryParamQuery } from "./schemas/query-params"
+import type { Relation } from "@/db"
+import type { BodyQuery } from "./schemas/json-body"
+import { bodyHandler, bodyInputSchema } from "./schemas/json-body"
+import type { QueryParamQuery } from "./schemas/query-params"
+import { handleQueryParams, queryInputSchema } from "./schemas/query-params"
 import { responseBodySchema } from "./schemas/response"
 
 type BodyInput = { Body: BodyQuery }
@@ -21,10 +22,10 @@ const handler = async (
     return (await bodyHandler(request.body)) ?? null
   }
 
+  // eslint-disable-next-line ts/no-unsafe-return
   return (await handleQueryParams(request, reply)) ?? null
 }
 
-// eslint-disable-next-line @typescript-eslint/require-await
 export const apiPlugin: FastifyPluginAsync = async (fastify) => {
   fastify.get<QueryInput>(
     "/ids",

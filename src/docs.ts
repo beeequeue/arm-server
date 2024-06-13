@@ -1,13 +1,12 @@
-import { existsSync } from "fs"
-import { readFile } from "fs/promises"
-import path from "path"
+import { existsSync } from "node:fs"
+import { readFile } from "node:fs/promises"
+import path from "node:path"
 
-import { FastifyPluginAsync } from "fastify"
+import type { FastifyPluginAsync } from "fastify"
 
 import { logger } from "@/lib/logger"
 import { cacheReply, CacheTimes } from "@/utils"
 
-// eslint-disable-next-line unicorn/prefer-module
 const filePath = path.resolve(__dirname, "../redoc-static.html")
 
 export const docsPlugin: FastifyPluginAsync = async (fastify) => {

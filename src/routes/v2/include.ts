@@ -1,5 +1,5 @@
-import { FastifyRequest } from "fastify"
-import { JSONSchema7 } from "json-schema"
+import type { FastifyRequest } from "fastify"
+import type { JSONSchema7 } from "json-schema"
 
 import { Source } from "@/db"
 

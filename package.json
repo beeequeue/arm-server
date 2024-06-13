@@ -1,5 +1,6 @@
 {
   "name": "arm-server",
+  "type": "module",
   "author": "BeeeQueue <adam@haglund.dev>",
   "version": "1.0.0",
   "private": true,
@@ -55,7 +56,7 @@
     "zod": "3.22.4"
   },
   "devDependencies": {
-    "@beequeue/eslint-plugin": "4.0.0",
+    "@antfu/eslint-config": "2.21.1",
     "@types/json-schema": "7.0.15",
     "@types/node": "20.5.9",
     "@vitest/coverage-v8": "1.6.0",

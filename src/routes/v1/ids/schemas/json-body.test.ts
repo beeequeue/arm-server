@@ -1,9 +1,8 @@
 import Ajv from "ajv"
-import { JsonValue } from "type-fest"
-import { describe, expect, test } from "vitest"
+import type { JsonValue } from "type-fest"
+import { describe, expect, it } from "vitest"
 
-import { Relation } from "@/db"
-
+import type { Relation } from "@/db"
 import { bodyInputSchema } from "./json-body"
 
 type Case<V> = [V, boolean]
@@ -44,7 +43,7 @@ describe("schema", () => {
   const ajv = new Ajv()
   const validate = ajv.compile(bodyInputSchema)
 
-  test.each(inputs)("%o = %s", (input, expected) => {
+  it.each(inputs)("%o = %s", (input, expected) => {
     validate(input)
 
     const { errors } = validate

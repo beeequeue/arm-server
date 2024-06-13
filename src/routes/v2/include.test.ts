@@ -1,8 +1,7 @@
 import Fastify from "fastify"
-import { afterAll, beforeEach, describe, expect, test, vi } from "vitest"
+import { afterAll, beforeEach, describe, expect, it, vi } from "vitest"
 
 import { knex, Source } from "@/db"
-
 import { includeSchema } from "./include"
 
 const app = Fastify()
@@ -18,7 +17,7 @@ afterAll(async () => {
 })
 
 describe("schema", () => {
-  test("single source (anilist)", async () => {
+  it("single source (anilist)", async () => {
     const response = await app.inject().get("/test").query({
       include: Source.AniList,
     })
@@ -28,7 +27,7 @@ describe("schema", () => {
     expect(response.headers["content-type"]).toContain("application/json")
   })
 
-  test("multiple sources (anilist,thetvdb)", async () => {
+  it("multiple sources (anilist,thetvdb)", async () => {
     const response = await app
       .inject()
       .get("/test")
@@ -41,7 +40,7 @@ describe("schema", () => {
     expect(response.headers["content-type"]).toContain("application/json")
   })
 
-  test("all the sources", async () => {
+  it("all the sources", async () => {
     const response = await app
       .inject()
       .get("/test")

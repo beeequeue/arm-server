@@ -1,10 +1,12 @@
-import { $fetch, FetchError } from "ofetch/node"
+import process from "node:process"
 
 import { captureException } from "@sentry/node"
+import type { FetchError } from "ofetch/node"
+import { $fetch } from "ofetch/node"
 
 import { logger } from "@/lib/logger"
-
-import { knex, Relation, Source } from "./db"
+import type { Relation } from "./db"
+import { knex, Source } from "./db"
 import { updateBasedOnManualRules } from "./manual-rules"
 
 const isFetchError = <T>(response: T | FetchError): response is FetchError => (response as FetchError).stack != null
@@ -35,7 +37,6 @@ const fetchDatabase = async (): Promise<AnimeListsSchema | null> => {
   if (isFetchError(response)) {
     const error = new Error("Could not fetch updated database!!", { cause: response })
 
-    // eslint-disable-next-line no-console
     console.error(error)
     captureException(error)
 
@@ -50,11 +51,7 @@ const badValues = ["unknown", "tv special"] as const
 const handleBadValues = <T extends string | number | undefined>(
   value: T | "unknown",
 ): T | undefined => {
-  if (
-    typeof value === "string"
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    && (badValues.includes(value as any) || value.includes(","))
-  ) {
+  if (typeof value === "string" && (badValues.includes(value as any) || value.includes(","))) {
     return undefined
   }
 

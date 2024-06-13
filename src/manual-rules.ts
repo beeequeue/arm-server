@@ -1,6 +1,5 @@
-/* eslint-disable no-console */
-
-import { knex, Relation } from "./db"
+import type { Relation } from "./db"
+import { knex } from "./db"
 
 type Rule = `${keyof Relation}:${number}`
 const rules: Record<Rule, Rule> = {}

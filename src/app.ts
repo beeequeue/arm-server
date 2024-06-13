@@ -1,3 +1,5 @@
+import process from "node:process"
+
 import Fastify from "fastify"
 import { customAlphabet, urlAlphabet } from "nanoid"
 
@@ -12,7 +14,6 @@ import { apiPlugin } from "@/routes/v1/ids/handler"
 import { v2Plugin } from "@/routes/v2/ids/handler"
 import { thetvdbPlugin } from "@/routes/v2/thetvdb/handler"
 import { cacheReply, CacheTimes } from "@/utils"
-
 import pkgJson from "../package.json"
 
 const PROD = config.NODE_ENV === "production"

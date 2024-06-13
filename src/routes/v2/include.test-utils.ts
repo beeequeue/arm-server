@@ -1,10 +1,8 @@
-/* eslint-disable import/no-extraneous-dependencies */
+import type { IncomingMessage, ServerResponse } from "node:http"
 
-import { IncomingMessage, ServerResponse } from "http"
-
-import { FastifyInstance } from "fastify"
-import { RawServerDefault } from "fastify/types/utils"
-import { Logger } from "pino"
+import type { FastifyInstance } from "fastify"
+import type { RawServerDefault } from "fastify/types/utils"
+import type { Logger } from "pino"
 import { describe, expect, test } from "vitest"
 
 import { knex, Source } from "@/db"
