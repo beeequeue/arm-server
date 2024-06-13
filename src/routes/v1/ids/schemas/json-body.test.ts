@@ -2,8 +2,8 @@ import Ajv from "ajv"
 import type { JsonValue } from "type-fest"
 import { describe, expect, it } from "vitest"
 
-import { bodyInputSchema } from "./json-body"
-import type { Relation } from "@/db"
+import type { Relation } from "../../../../db.js"
+import { bodyInputSchema } from "./json-body.js"
 
 type Case<V> = [V, boolean]
 type Cases<V = JsonValue> = Array<Case<V>>

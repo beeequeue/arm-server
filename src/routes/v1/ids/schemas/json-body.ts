@@ -1,6 +1,7 @@
 import { z } from "zod"
-import type { Source } from "@/db"
-import { numberIdSchema, oldSourceSchema } from "@/shared-schemas"
+
+import type { Source } from "../../../../db.js"
+import { numberIdSchema, oldSourceSchema } from "../../../../shared-schemas.js"
 
 export const singularItemInputSchema = z.record(oldSourceSchema, numberIdSchema)
 

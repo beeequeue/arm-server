@@ -1,12 +1,6 @@
 import Knex from "knex"
 
-import knexfile from "../knexfile"
-
-declare module "knex/types/tables" {
-  interface Tables {
-    relations: Relation
-  }
-}
+import knexfile from "../knexfile.js"
 
 export const knex = Knex(knexfile)
 

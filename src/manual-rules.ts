@@ -1,5 +1,4 @@
-import type { Relation } from "./db"
-import { knex } from "./db"
+import { type Relation, knex } from "./db.js"
 
 type Rule = `${keyof Relation}:${number}`
 const rules: Record<Rule, Rule> = {}
@@ -11,7 +10,7 @@ export const updateBasedOnManualRules = async () => {
     const [toSource, toId] = (to as string).split(":")
     const toWhere = { [toSource]: Number(toId) }
 
-    const badRelation = await knex("relations").where(fromWhere).first()
+    const badRelation: Relation | null = await knex("relations").where(fromWhere).first()
 
     if (!badRelation) {
       throw new Error(`Could not find rule source for ${from}->${to as string}!!!!!`)

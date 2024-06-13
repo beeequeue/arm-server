@@ -1,12 +1,10 @@
 import type { IncomingMessage, ServerResponse } from "node:http"
 
-import type { FastifyInstance } from "fastify"
-import type { RawServerDefault } from "fastify/types/utils"
 import type { Logger } from "pino"
 import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest"
 
-import { buildApp } from "@/app"
-import { type Relation, Source, knex } from "@/db"
+import { createApp } from "../../../app.js"
+import { type Relation, Source, knex } from "../../../db.js"
 
 let id = 0
 const createRelations = async <N extends number>(

@@ -2,9 +2,8 @@ import { $fetch } from "ofetch/node"
 import { groupBy } from "rambda"
 import { afterAll, afterEach, expect, it, vi } from "vitest"
 
-import { type Relation, knex } from "@/db"
-import type { AnimeListsSchema } from "@/update"
-import { formatEntry, removeDuplicates, updateRelations } from "@/update"
+import { type Relation, knex } from "./db.js"
+import { type AnimeListsSchema, formatEntry, removeDuplicates, updateRelations } from "./update.js"
 
 declare const fetch: (url: string) => Promise<{ json: () => Promise<any[]> }>
 

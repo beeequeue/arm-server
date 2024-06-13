@@ -3,8 +3,8 @@ import Ajv from "ajv"
 import type { JsonValue } from "type-fest"
 import { describe, expect, it } from "vitest"
 
-import { Source } from "@/db"
-import { queryInputSchema } from "@/routes/v1/ids/schemas/query-params"
+import { Source } from "../../../../db.js"
+import { queryInputSchema } from "./query-params.js"
 
 type Case = [JsonValue, boolean]
 type Cases = Case[]

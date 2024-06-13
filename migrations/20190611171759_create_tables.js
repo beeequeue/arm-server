@@ -1,9 +1,7 @@
-import type { Knex } from "knex"
-
-export async function up(knex: Knex): Promise<void> {
+export async function up(knex) {
   if (await knex.schema.hasTable("relations")) return
 
-  const promises: Promise<void>[] = []
+  const promises = []
 
   promises.push(
     knex.schema.createTable("relations", (table) => {
@@ -17,6 +15,6 @@ export async function up(knex: Knex): Promise<void> {
   await Promise.all(promises)
 }
 
-export async function down(knex: Knex): Promise<void> {
+export async function down(knex) {
   await knex.schema.dropTableIfExists("relations")
 }
