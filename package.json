@@ -10,6 +10,9 @@
   "engines": {
     "node": ">=20"
   },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm --silent lint-staged"
+  },
   "lint-staged": {
     "*.{js,ts,json}": [
       "dprint fmt"
@@ -35,13 +38,11 @@
     "prepare": "is-ci || simple-git-hooks"
   },
   "dependencies": {
-    "@fastify/cors": "8.4.1",
-    "@fastify/helmet": "11.1.1",
-    "@sentry/node": "7.81.1",
+    "@hono/node-server": "1.11.2",
     "@tsconfig/node20": "20.1.4",
     "@tsconfig/strictest": "2.0.5",
     "better-sqlite3": "11.0.0",
-    "fastify": "4.24.3",
+    "hono": "4.4.5",
     "is-ci": "3.0.1",
     "knex": "3.0.1",
     "nanoid": "5.0.7",
@@ -49,19 +50,19 @@
     "pino": "9.2.0",
     "pino-pretty": "11.2.1",
     "remeda": "1.29.0",
-    "sucrase": "3.34.0",
-    "tsx": "4.7.0",
-    "type-fest": "4.8.2",
+    "sucrase": "3.35.0",
+    "tsx": "4.15.4",
+    "type-fest": "4.20.0",
     "typescript": "5.4.5",
     "zod": "3.23.8"
   },
   "devDependencies": {
     "@antfu/eslint-config": "2.21.1",
     "@types/json-schema": "7.0.15",
-    "@types/node": "20.5.9",
+    "@types/node": "20.14.2",
     "@vitest/coverage-v8": "1.6.0",
     "ajv": "8.12.0",
-    "dotenv": "16.3.1",
+    "dotenv": "16.4.5",
     "eslint": "8.57.0",
     "lint-staged": "15.2.7",
     "onchange": "7.1.0",
@@ -72,22 +73,10 @@
   },
   "pnpm": {
     "overrides": {
-      "@types/node": "20.5.9",
-      "esbuild": "0.19.2",
-      "node-fetch": "npm:node-fetch-native@1.4.0",
-      "array-includes": "npm:@nolyfill/array-includes@latest",
-      "array.prototype.flat": "npm:@nolyfill/array.prototype.flat@latest",
-      "array.prototype.flatmap": "npm:@nolyfill/array.prototype.flatmap@latest",
-      "array.prototype.tosorted": "npm:@nolyfill/array.prototype.tosorted@latest",
-      "has": "npm:@nolyfill/has@latest",
-      "object.assign": "npm:@nolyfill/object.assign@latest",
-      "object.entries": "npm:@nolyfill/object.entries@latest",
-      "object.fromentries": "npm:@nolyfill/object.fromentries@latest",
-      "object.hasown": "npm:@nolyfill/object.hasown@latest",
-      "object.values": "npm:@nolyfill/object.values@latest",
-      "string.prototype.matchall": "npm:@nolyfill/string.prototype.matchall@latest",
-      "side-channel": "npm:@nolyfill/side-channel@latest",
-      "es-iterator-helpers": "npm:@nolyfill/es-iterator-helpers@latest"
+      "assert": "npm:@nolyfill/assert@latest",
+      "hasown": "npm:@nolyfill/hasown@latest",
+      "isarray": "npm:@nolyfill/isarray@latest",
+      "side-channel": "npm:@nolyfill/side-channel@latest"
     }
   }
 }
