@@ -1,14 +1,10 @@
-import process from "node:process"
+import { Hono } from "hono"
+import { cors } from "hono/cors"
+import { HTTPException } from "hono/http-exception"
+import { secureHeaders } from "hono/secure-headers"
 
-import Fastify from "fastify"
-import { customAlphabet, urlAlphabet } from "nanoid"
-
-import Cors from "@fastify/cors"
-import Helmet from "@fastify/helmet"
-
-import pkgJson from "../package.json"
-import { config } from "@/config"
-import { docsPlugin } from "@/docs"
+import pkgJson from "../package.json" assert { type: "json" }
+import { docsRoutes } from "@/docs"
 import { logger } from "@/lib/logger"
 import { sendErrorToSentry } from "@/lib/sentry"
 import { apiPlugin } from "@/routes/v1/ids/handler"
@@ -16,52 +12,55 @@ import { v2Plugin } from "@/routes/v2/ids/handler"
 import { thetvdbPlugin } from "@/routes/v2/thetvdb/handler"
 import { CacheTimes, cacheReply } from "@/utils"
 
-const PROD = config.NODE_ENV === "production"
-
-const nanoid = customAlphabet(urlAlphabet, 16)
-
 export const buildApp = async () => {
-  const App = Fastify({
-    ignoreTrailingSlash: true,
-    onProtoPoisoning: "remove",
-    onConstructorPoisoning: "remove",
-    trustProxy: PROD,
-    genReqId: () => nanoid(),
-    disableRequestLogging: process.env.NODE_ENV === "test",
-    logger,
+  const app = new Hono()
+
+  app.use("*", async (c, next) => {
+    const start = Date.now()
+    logger.info({
+      method: c.req.method,
+      path: c.req.path,
+      headers: c.req.header(),
+    }, "req")
+
+    await next()
+
+    logger.info({
+      status: c.res.status,
+      ms: Date.now() - start,
+    }, "res")
   })
 
-  await App.register(Cors, {
-    origin: true,
-  })
+  app.use("*", cors({ origin: (origin) => origin }))
+  app.use("*", secureHeaders())
 
-  await App.register(Helmet, {
-    hsts: false,
-    contentSecurityPolicy: false,
-  })
-
-  App.addHook("onError", (request, reply, error, next) => {
+  app.onError((error, c) => {
     /* c8 ignore next 4 */
-    if (error.validation != null) {
-      if (request.method === "GET") {
-        cacheReply(reply, CacheTimes.WEEK)
+    if (error instanceof HTTPException) {
+      const res = error.getResponse()
+
+      if (c.req.method === "GET") {
+        cacheReply(res, CacheTimes.WEEK)
       }
-    } else {
-      sendErrorToSentry(error, request)
+
+      return res
     }
 
-    next()
+    sendErrorToSentry(error, c.req)
+
+    return new HTTPException(500, { message: "Internal Server Error" }).getResponse()
   })
 
-  await App.register(apiPlugin, { prefix: "/api" })
-  await App.register(v2Plugin, { prefix: "/api/v2" })
-  await App.register(thetvdbPlugin, { prefix: "/api/v2" })
-  await App.register(docsPlugin)
+  app.route("/api", apiPlugin)
+  app.route("/api/v2", v2Plugin)
+  app.route("/api/v2", thetvdbPlugin)
+  app.route("/docs", docsRoutes)
 
-  App.get("/", async (_, reply) => {
-    cacheReply(reply, CacheTimes.WEEK * 2)
-    void reply.redirect(301, pkgJson.homepage)
+  app.get("/", (c) => {
+    cacheReply(c.res, CacheTimes.WEEK * 4)
+
+    return c.redirect(pkgJson.homepage, 301)
   })
 
-  return App
+  return app
 }

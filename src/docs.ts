@@ -2,24 +2,29 @@ import { existsSync } from "node:fs"
 import { readFile } from "node:fs/promises"
 import path from "node:path"
 
-import type { FastifyPluginAsync } from "fastify"
+import { Hono } from "hono"
 
-import { logger } from "@/lib/logger"
 import { CacheTimes, cacheReply } from "@/utils"
 
 const filePath = path.resolve(__dirname, "../redoc-static.html")
+let docsHtml: string | null = null
 
-export const docsPlugin: FastifyPluginAsync = async (fastify) => {
-  const docsHtml = existsSync(filePath) ? await readFile(filePath, "utf8") : null
+export const docsRoutes = new Hono()
+
+docsRoutes.get("/", async (c) => {
+  if (docsHtml != null) {
+    cacheReply(c.res, CacheTimes.DAY)
+
+    return c.html(docsHtml)
+  }
+
+  docsHtml = existsSync(filePath) ? await readFile(filePath, "utf8") : null
 
   if (docsHtml == null) {
-    logger.warn("Could not find a build docs HTML file.")
+    throw new Error("docs.html not found")
   } else {
-    fastify.get("/docs", async (_, reply) => {
-      cacheReply(reply, CacheTimes.DAY)
-      void reply.header("Content-Type", "text/html")
+    cacheReply(c.res, CacheTimes.DAY)
 
-      return docsHtml
-    })
+    return c.html(docsHtml)
   }
-}
+})

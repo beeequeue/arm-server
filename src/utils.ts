@@ -1,4 +1,3 @@
-import type { FastifyReply } from "fastify"
 import type { JSONSchema7 } from "json-schema"
 
 export const mergeSchemas = <One extends JSONSchema7, Two extends JSONSchema7>(
@@ -21,6 +20,8 @@ export enum CacheTimes {
   WEEK = 1_209_600,
 }
 
-export const cacheReply = (reply: FastifyReply, value: CacheTimes | number | string) => {
-  void reply.header("Cache-Control", `public, max-age=${value}`)
+export const cacheReply = (response: Response, value: CacheTimes | number | string) => {
+  response.headers.set("Cache-Control", `public, max-age=${value.toString()}`)
+
+  return response
 }
