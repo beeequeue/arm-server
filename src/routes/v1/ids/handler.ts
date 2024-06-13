@@ -1,11 +1,11 @@
 import type { FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify"
 
-import type { Relation } from "@/db"
 import type { BodyQuery } from "./schemas/json-body"
 import { bodyHandler, bodyInputSchema } from "./schemas/json-body"
 import type { QueryParamQuery } from "./schemas/query-params"
 import { handleQueryParams, queryInputSchema } from "./schemas/query-params"
 import { responseBodySchema } from "./schemas/response"
+import type { Relation } from "@/db"
 
 type BodyInput = { Body: BodyQuery }
 type QueryInput = { Querystring: QueryParamQuery }

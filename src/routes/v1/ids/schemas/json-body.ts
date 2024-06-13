@@ -1,7 +1,6 @@
 import type { JSONSchema7 } from "json-schema"
 
-import type { Relation, Source } from "@/db"
-import { knex } from "@/db"
+import { type Relation, type Source, knex } from "@/db"
 import { numberIdSchema, oldSourceSchema } from "@/shared-schemas"
 
 type BodyItem = {

@@ -1,8 +1,8 @@
 import Fastify from "fastify"
 import { afterAll, beforeEach, describe, expect, it, vi } from "vitest"
 
-import { knex, Source } from "@/db"
 import { includeSchema } from "./include"
+import { Source, knex } from "@/db"
 
 const app = Fastify()
 const handlerFn = vi.fn(() => ({ message: "ok" }))

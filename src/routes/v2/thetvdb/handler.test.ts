@@ -1,9 +1,8 @@
 import { afterAll, beforeEach, describe, expect, it } from "vitest"
 
-import { buildApp } from "@/app"
-import type { Relation } from "@/db"
-import { knex, Source } from "@/db"
 import { testIncludeQueryParam } from "../include.test-utils"
+import { buildApp } from "@/app"
+import { type Relation, Source, knex } from "@/db"
 
 let id = 0
 const createRelations = async <N extends number>(

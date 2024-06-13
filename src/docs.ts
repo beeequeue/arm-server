@@ -5,7 +5,7 @@ import path from "node:path"
 import type { FastifyPluginAsync } from "fastify"
 
 import { logger } from "@/lib/logger"
-import { cacheReply, CacheTimes } from "@/utils"
+import { CacheTimes, cacheReply } from "@/utils"
 
 const filePath = path.resolve(__dirname, "../redoc-static.html")
 

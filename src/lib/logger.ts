@@ -22,5 +22,5 @@ export const logger = Pino(
       }),
     },
   },
-  stream!,
+  stream,
 )

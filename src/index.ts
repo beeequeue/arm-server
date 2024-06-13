@@ -1,8 +1,8 @@
 import { captureException } from "@sentry/node"
 
-import { config } from "@/config"
 import { buildApp } from "./app"
 import { updateRelations } from "./update"
+import { config } from "@/config"
 
 const { NODE_ENV, PORT } = config
 

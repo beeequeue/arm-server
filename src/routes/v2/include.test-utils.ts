@@ -5,7 +5,7 @@ import type { RawServerDefault } from "fastify/types/utils"
 import type { Logger } from "pino"
 import { describe, expect, test } from "vitest"
 
-import { knex, Source } from "@/db"
+import { Source, knex } from "@/db"
 
 export const testIncludeQueryParam = (
   app: FastifyInstance<

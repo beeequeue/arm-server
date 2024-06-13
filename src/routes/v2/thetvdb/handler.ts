@@ -4,12 +4,11 @@ import { responseArraySchema } from "../ids/schemas/response"
 import type { IncludeQuery } from "../include"
 import { buildSelectFromInclude, includeSchema } from "../include"
 
-import { knex, Source } from "@/db"
-import type { Relation } from "@/db"
-import { makeNullable } from "@/shared-schemas"
-import { cacheReply, CacheTimes, mergeSchemas } from "@/utils"
 import type { TheTVDBQuery } from "./schemas/thetvdb"
 import { thetvdbInputSchema } from "./schemas/thetvdb"
+import { type Relation, Source, knex } from "@/db"
+import { makeNullable } from "@/shared-schemas"
+import { CacheTimes, cacheReply, mergeSchemas } from "@/utils"
 
 export const thetvdbPlugin: FastifyPluginAsync = async (fastify) => {
   fastify.get<{ Querystring: TheTVDBQuery & IncludeQuery }>(

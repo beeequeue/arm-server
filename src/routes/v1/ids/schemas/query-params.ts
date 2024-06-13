@@ -4,7 +4,7 @@ import type { JSONSchema7 } from "json-schema"
 import type { Source } from "@/db"
 import { knex } from "@/db"
 import { numberIdSchema, oldSourceSchema } from "@/shared-schemas"
-import { cacheReply, CacheTimes } from "@/utils"
+import { CacheTimes, cacheReply } from "@/utils"
 
 export type QueryParamQuery = {
   source: Source

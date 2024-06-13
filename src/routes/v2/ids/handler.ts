@@ -1,15 +1,14 @@
 import type { FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify"
 
-import type { Relation, Source } from "@/db"
-import { knex } from "@/db"
-import type { IncludeQuery } from "@/routes/v2/include"
-import { buildSelectFromInclude, includeSchema } from "@/routes/v2/include"
-import { cacheReply, CacheTimes, mergeSchemas } from "@/utils"
 import type { BodyQuery } from "./schemas/json-body"
 import { bodyInputSchema } from "./schemas/json-body"
 import type { QueryParamQuery } from "./schemas/query-params"
 import { queryInputSchema } from "./schemas/query-params"
 import { responseBodySchema } from "./schemas/response"
+import { type Relation, type Source, knex } from "@/db"
+import type { IncludeQuery } from "@/routes/v2/include"
+import { buildSelectFromInclude, includeSchema } from "@/routes/v2/include"
+import { CacheTimes, cacheReply, mergeSchemas } from "@/utils"
 
 type BodyInput = { Body: BodyQuery; Querystring: IncludeQuery }
 type QueryInput = { Querystring: QueryParamQuery & IncludeQuery }
@@ -30,7 +29,7 @@ const bodyHandler = async (
       .from("relations")
       .first()
 
-    // eslint-disable-next-line ts/no-unsafe-return
+
     return relation ?? null!
   }
 
@@ -67,7 +66,7 @@ const handleQueryParams = async (
 
   cacheReply(reply, CacheTimes.SIX_HOURS)
 
-  // eslint-disable-next-line ts/no-unsafe-return
+
   return data
 }
 
@@ -79,7 +78,7 @@ const handler = async (
     return (await bodyHandler(request)) ?? null
   }
 
-  // eslint-disable-next-line ts/no-unsafe-return
+
   return (await handleQueryParams(request, reply)) ?? null
 }
 

@@ -2,9 +2,9 @@ import Ajv from "ajv"
 import type { JsonValue } from "type-fest"
 import { describe, expect, it } from "vitest"
 
-import { Source } from "@/db"
 import type { QueryParamQuery } from "./query-params"
 import { queryInputSchema } from "./query-params"
+import { Source } from "@/db"
 
 type Case<V> = [V, boolean]
 type Cases<V = JsonValue> = Array<Case<V>>

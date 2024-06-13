@@ -6,6 +6,7 @@ import { customAlphabet, urlAlphabet } from "nanoid"
 import Cors from "@fastify/cors"
 import Helmet from "@fastify/helmet"
 
+import pkgJson from "../package.json"
 import { config } from "@/config"
 import { docsPlugin } from "@/docs"
 import { logger } from "@/lib/logger"
@@ -13,8 +14,7 @@ import { sendErrorToSentry } from "@/lib/sentry"
 import { apiPlugin } from "@/routes/v1/ids/handler"
 import { v2Plugin } from "@/routes/v2/ids/handler"
 import { thetvdbPlugin } from "@/routes/v2/thetvdb/handler"
-import { cacheReply, CacheTimes } from "@/utils"
-import pkgJson from "../package.json"
+import { CacheTimes, cacheReply } from "@/utils"
 
 const PROD = config.NODE_ENV === "production"
 
