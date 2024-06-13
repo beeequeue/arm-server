@@ -1,8 +1,8 @@
 import { $fetch } from "ofetch/node"
-import { groupBy } from "remeda"
+import { groupBy } from "rambda"
 import { afterAll, afterEach, expect, it, vi } from "vitest"
 
-import { knex, type Relation } from "@/db"
+import { type Relation, knex } from "@/db"
 import type { AnimeListsSchema } from "@/update"
 import { formatEntry, removeDuplicates, updateRelations } from "@/update"
 
@@ -78,7 +78,7 @@ it("handles duplicates", async () => {
     .then((r) => r.json())
     .then((e) => e.map(formatEntry))
 
-  const groups = groupBy(removeDuplicates(entries), (e) => e.imdb!)
+  const groups = groupBy((e) => e.imdb!, removeDuplicates(entries))
   expect(
     Object.fromEntries(
       Object.entries(groups)
