@@ -1,55 +1,57 @@
-import type { FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify"
+import { Hono } from "hono"
 
-import type { BodyQuery } from "./schemas/json-body"
-import { bodyHandler, bodyInputSchema } from "./schemas/json-body"
-import type { QueryParamQuery } from "./schemas/query-params"
-import { handleQueryParams, queryInputSchema } from "./schemas/query-params"
-import { responseBodySchema } from "./schemas/response"
-import type { Relation } from "@/db"
+import { zValidator } from "@hono/zod-validator"
 
-type BodyInput = { Body: BodyQuery }
-type QueryInput = { Querystring: QueryParamQuery }
+import { bodyInputSchema } from "./schemas/json-body"
+import { queryInputSchema } from "./schemas/query-params"
+import { type OldRelation, type Relation, type Source, knex } from "@/db"
+import { CacheTimes, cacheReply } from "@/utils"
 
-const isBodyQuery = (
-  request: FastifyRequest<BodyInput | QueryInput>,
-): request is FastifyRequest<BodyInput> => request.method === "POST"
+export const v1Routes = new Hono()
+  .get("/ids", zValidator("query", queryInputSchema), async (c) => {
+    const query = c.req.query()
 
-const handler = async (
-  request: FastifyRequest<BodyInput> | FastifyRequest<QueryInput>,
-  reply: FastifyReply,
-): Promise<Relation | Relation[] | null> => {
-  if (isBodyQuery(request)) {
-    return (await bodyHandler(request.body)) ?? null
-  }
+    const row = await knex
+      .select(["anidb", "anilist", "myanimelist", "kitsu"])
+      .where({ [query.source]: query.id })
+      .from("relations")
+      .first()
 
-  // eslint-disable-next-line ts/no-unsafe-return
-  return (await handleQueryParams(request, reply)) ?? null
-}
+    cacheReply(c.res, CacheTimes.SIX_HOURS)
 
-export const apiPlugin: FastifyPluginAsync = async (fastify) => {
-  fastify.get<QueryInput>(
-    "/ids",
-    {
-      schema: {
-        querystring: queryInputSchema,
-        response: {
-          200: responseBodySchema,
-        },
-      },
-    },
-    handler,
-  )
+    return c.json(row as OldRelation ?? null)
+  })
+  .post("/ids", zValidator("json", bodyInputSchema), async (c) => {
+    const input = await c.req.json()
 
-  fastify.post<BodyInput>(
-    "/ids",
-    {
-      schema: {
-        body: bodyInputSchema,
-        response: {
-          200: responseBodySchema,
-        },
-      },
-    },
-    handler,
-  )
-}
+    if (!Array.isArray(input)) {
+      const relation = await knex
+        .select(["anidb", "anilist", "myanimelist", "kitsu"])
+        .where(input)
+        .from("relations")
+        .first()
+
+      // eslint-disable-next-line ts/no-unsafe-return
+      return relation ?? null!
+    }
+
+    let relations: Array<Relation | null> = []
+
+    // Get relations
+    relations = await knex
+      .select(["anidb", "anilist", "myanimelist", "kitsu"])
+      .where(function() {
+        // eslint-disable-next-line ts/no-floating-promises
+        for (const item of input) this.orWhere(item)
+      })
+      .from("relations")
+
+    // Map them against the input, so we get results like [{item}, null, {item}]
+    relations = input.map((item) => {
+      const realItem = Object.entries(item)[0] as [Source, number]
+
+      return relations.find((relation) => relation![realItem[0]] === realItem[1]) ?? null
+    })
+
+    return relations as never
+  })

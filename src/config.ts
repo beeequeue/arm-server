@@ -1,6 +1,6 @@
 import process from "node:process"
 
-import zod from "zod"
+import { z }od from "zod"
 
 export enum Environment {
   Development = "development",

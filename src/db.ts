@@ -37,3 +37,11 @@ export type Relation = {
   [Source.TheTVDB]?: number
   [Source.MAL]?: number
 }
+
+export type OldRelation = Pick<
+  Relation,
+  | Source.AniDB
+  | Source.AniList
+  | Source.MAL
+  | Source.Kitsu
+>

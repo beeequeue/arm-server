@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@hono/node-server": "1.11.2",
+    "@hono/zod-validator": "0.2.2",
     "@tsconfig/node20": "20.1.4",
     "@tsconfig/strictest": "2.0.5",
     "better-sqlite3": "11.0.0",
