@@ -6,7 +6,7 @@ import { Hono } from "hono"
 
 import { CacheTimes, cacheReply } from "./utils.js"
 
-const filePath = path.resolve(__dirname, "../redoc-static.html")
+const filePath = path.resolve(import.meta.dirname, "../redoc-static.html")
 let docsHtml: string | null = null
 
 export const docsRoutes = new Hono()
