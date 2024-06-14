@@ -4,13 +4,13 @@ import { zValidator } from "@hono/zod-validator"
 import { buildSelectFromInclude } from "../include.js"
 
 import { Source, knex } from "../../../db.js"
-import { CacheTimes, cacheReply } from "../../../utils.js"
+import { CacheTimes, cacheReply, zHook } from "../../../utils.js"
 import { thetvdbInputSchema } from "./schemas/thetvdb.js"
 
 export const thetvdbRoutes = new Hono()
   .get(
     "/thetvdb",
-    zValidator("query", thetvdbInputSchema),
+    zValidator("query", thetvdbInputSchema, zHook),
     async (c) => {
       const query = c.req.query()
 

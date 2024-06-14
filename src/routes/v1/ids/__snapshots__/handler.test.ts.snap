@@ -2,63 +2,27 @@
 
 exports[`json body > array input > requires at least one source 1`] = `
 {
-  "error": {
-    "issues": [
-      {
-        "code": "custom",
-        "message": "At least one source is required.",
-        "path": [
-          0,
-        ],
-      },
-    ],
-    "name": "ZodError",
-  },
-  "success": false,
+  "code": "FST_ERR_VALIDATION",
+  "error": "Bad Request",
+  "message": "0: At least one source is required.",
+  "statusCode": 400,
 }
 `;
 
 exports[`json body > object input > errors correctly on an empty object 1`] = `
 {
-  "error": {
-    "issues": [
-      {
-        "code": "custom",
-        "message": "At least one source is required.",
-        "path": [],
-      },
-    ],
-    "name": "ZodError",
-  },
-  "success": false,
+  "code": "FST_ERR_VALIDATION",
+  "error": "Bad Request",
+  "message": "At least one source is required.",
+  "statusCode": 400,
 }
 `;
 
 exports[`json body > object input > gET fails with json body 1`] = `
 {
-  "error": {
-    "issues": [
-      {
-        "code": "invalid_type",
-        "expected": "'anilist' | 'anidb' | 'myanimelist' | 'kitsu'",
-        "message": "Invalid source",
-        "path": [
-          "source",
-        ],
-        "received": "undefined",
-      },
-      {
-        "code": "invalid_type",
-        "expected": "number",
-        "message": "Invalid ID",
-        "path": [
-          "id",
-        ],
-        "received": "nan",
-      },
-    ],
-    "name": "ZodError",
-  },
-  "success": false,
+  "code": "FST_ERR_VALIDATION",
+  "error": "Bad Request",
+  "message": "source: Invalid source, id: Invalid ID",
+  "statusCode": 400,
 }
 `;

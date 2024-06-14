@@ -2,121 +2,27 @@
 
 exports[`json body > array input > requires at least one source 1`] = `
 {
-  "error": {
-    "issues": [
-      {
-        "code": "custom",
-        "message": "At least one ID must be provided",
-        "path": [
-          0,
-        ],
-      },
-    ],
-    "name": "ZodError",
-  },
-  "success": false,
+  "code": "FST_ERR_VALIDATION",
+  "error": "Bad Request",
+  "message": "0: At least one ID must be provided",
+  "statusCode": 400,
 }
 `;
 
 exports[`json body > object input > errors correctly on an empty object 1`] = `
 {
-  "error": {
-    "issues": [
-      {
-        "code": "custom",
-        "message": "At least one ID must be provided",
-        "path": [],
-      },
-    ],
-    "name": "ZodError",
-  },
-  "success": false,
+  "code": "FST_ERR_VALIDATION",
+  "error": "Bad Request",
+  "message": "At least one ID must be provided",
+  "statusCode": 400,
 }
 `;
 
 exports[`json body > object input > gET fails with json body 1`] = `
 {
-  "error": {
-    "issues": [
-      {
-        "code": "invalid_union",
-        "message": "Invalid input",
-        "path": [],
-        "unionErrors": [
-          {
-            "issues": [
-              {
-                "code": "invalid_type",
-                "expected": "'anilist' | 'anidb' | 'anisearch' | 'kitsu' | 'livechart' | 'themoviedb' | 'myanimelist'",
-                "message": "Required",
-                "path": [
-                  "source",
-                ],
-                "received": "undefined",
-              },
-              {
-                "code": "invalid_type",
-                "expected": "number",
-                "message": "Invalid ID",
-                "path": [
-                  "id",
-                ],
-                "received": "nan",
-              },
-            ],
-            "name": "ZodError",
-          },
-          {
-            "issues": [
-              {
-                "code": "invalid_type",
-                "expected": "'anime-planet' | 'notify-moe'",
-                "message": "Required",
-                "path": [
-                  "source",
-                ],
-                "received": "undefined",
-              },
-              {
-                "code": "invalid_type",
-                "expected": "string",
-                "message": "Invalid ID",
-                "path": [
-                  "id",
-                ],
-                "received": "undefined",
-              },
-            ],
-            "name": "ZodError",
-          },
-          {
-            "issues": [
-              {
-                "code": "invalid_type",
-                "expected": "'imdb'",
-                "message": "Required",
-                "path": [
-                  "source",
-                ],
-                "received": "undefined",
-              },
-              {
-                "code": "invalid_type",
-                "expected": "string",
-                "message": "Invalid IMDB ID",
-                "path": [
-                  "id",
-                ],
-                "received": "undefined",
-              },
-            ],
-            "name": "ZodError",
-          },
-        ],
-      },
-    ],
-    "name": "ZodError",
-  },
-  "success": false,
+  "code": "FST_ERR_VALIDATION",
+  "error": "Bad Request",
+  "message": "Invalid input",
+  "statusCode": 400,
 }
 `;

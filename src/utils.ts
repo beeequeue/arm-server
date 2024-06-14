@@ -1,4 +1,6 @@
+import type { Context } from "hono"
 import type { JSONSchema7 } from "json-schema"
+import type { TypeOf, ZodError, z } from "zod"
 
 export const mergeSchemas = <One extends JSONSchema7, Two extends JSONSchema7>(
   one: One,
@@ -12,6 +14,24 @@ export const mergeSchemas = <One extends JSONSchema7, Two extends JSONSchema7>(
     ...two.properties,
   },
 })
+
+export const zHook = <T extends z.ZodType<any, z.ZodTypeDef, any>>(result: TypeOf<T>, c: Context) => {
+  if (result.success === true) return
+
+  const flat = (result.error as ZodError).flatten()
+  const messages = [
+    ...flat.formErrors,
+    ...Object.entries(flat.fieldErrors).map(([key, value]) => `${key}: ${value}`),
+  ]
+
+  c.status(400)
+  return c.json({
+    code: "FST_ERR_VALIDATION",
+    error: "Bad Request",
+    statusCode: 400,
+    message: messages.join(", "),
+  })
+}
 
 export enum CacheTimes {
   HOUR = 3600,

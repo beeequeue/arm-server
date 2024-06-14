@@ -3,13 +3,13 @@ import { Hono } from "hono"
 import { zValidator } from "@hono/zod-validator"
 
 import { type OldRelation, type Relation, type Source, knex } from "../../../db.js"
-import { CacheTimes, cacheReply } from "../../../utils.js"
+import { CacheTimes, cacheReply, zHook } from "../../../utils.js"
 
 import { bodyInputSchema } from "./schemas/json-body.js"
 import { queryInputSchema } from "./schemas/query-params.js"
 
 export const v1Routes = new Hono()
-  .get("/ids", zValidator("query", queryInputSchema), async (c) => {
+  .get("/ids", zValidator("query", queryInputSchema, zHook), async (c) => {
     const query = c.req.query()
 
     const row = await knex
@@ -22,7 +22,7 @@ export const v1Routes = new Hono()
 
     return c.json(row as OldRelation ?? null)
   })
-  .post("/ids", zValidator("json", bodyInputSchema), async (c) => {
+  .post("/ids", zValidator("json", bodyInputSchema, zHook), async (c) => {
     const input = await c.req.json()
 
     if (!Array.isArray(input)) {

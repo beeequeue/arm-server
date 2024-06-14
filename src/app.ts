@@ -44,10 +44,19 @@ export const createApp = () => {
           cacheReply(res, CacheTimes.WEEK)
         }
 
-        return res
+        c.status(error.status)
+        return c.json({
+          statusCode: error.status,
+          error: error.message,
+        })
       }
 
-      return new HTTPException(500, { message: "Internal Server Error" }).getResponse()
+      const badImpl = new HTTPException(500, { message: "Internal Server Error", cause: error })
+      c.status(badImpl.status)
+      return c.json({
+        statusCode: badImpl.status,
+        error: badImpl.message,
+      })
     })
     .route("/api", v1Routes)
     .route("/api/v2", v2Routes)

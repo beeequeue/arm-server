@@ -2,13 +2,13 @@ import { zValidator } from "@hono/zod-validator"
 import { Hono } from "hono"
 
 import { type Relation, type Source, knex } from "../../../db.js"
-import { CacheTimes, cacheReply } from "../../../utils.js"
+import { CacheTimes, cacheReply, zHook } from "../../../utils.js"
 import { buildSelectFromInclude, includeSchema } from "../include.js"
 import { bodyInputSchema } from "./schemas/json-body.js"
 import { queryInputSchema } from "./schemas/query-params.js"
 
 export const v2Routes = new Hono()
-  .get("/ids", zValidator("query", queryInputSchema), async (c) => {
+  .get("/ids", zValidator("query", queryInputSchema, zHook), async (c) => {
     const query = c.req.query()
     const data = await knex
       .select(buildSelectFromInclude(query.include))
@@ -20,7 +20,7 @@ export const v2Routes = new Hono()
 
     return c.json(data as Relation | null ?? null)
   })
-  .post("/ids", zValidator("json", bodyInputSchema), zValidator("query", includeSchema), async (c) => {
+  .post("/ids", zValidator("json", bodyInputSchema, zHook), zValidator("query", includeSchema, zHook), async (c) => {
     const input = await c.req.json()
     const query = c.req.query()
 
