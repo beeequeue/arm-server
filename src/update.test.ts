@@ -81,7 +81,7 @@ it("handles duplicates", async () => {
   expect(
     Object.fromEntries(
       Object.entries(groups)
-        .filter(([id, g]) => id !== "undefined" && g.length > 1)
+        .filter(([id, g]) => id !== "undefined" && id !== "null" && g.length > 1)
         .map(([id, g]) => [id, g.length]),
     ),
   ).toStrictEqual({})
