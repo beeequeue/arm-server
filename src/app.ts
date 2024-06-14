@@ -9,6 +9,7 @@ import pkgJson from "../package.json" assert { type: "json" }
 import { docsRoutes } from "./docs.js"
 import { logger } from "./lib/logger.js"
 import { v1Routes } from "./routes/v1/ids/handler.js"
+import { v2Routes } from "./routes/v2/ids/handler.js"
 import { CacheTimes, cacheReply } from "./utils.js"
 
 export const createApp = () => {
@@ -46,7 +47,7 @@ export const createApp = () => {
       return new HTTPException(500, { message: "Internal Server Error" }).getResponse()
     })
     .route("/api", v1Routes)
-    // .route("/api/v2", v2Plugin)
+    .route("/api/v2", v2Routes)
     // .route("/api/v2", thetvdbPlugin)
     .route("/docs", docsRoutes)
     .get("/", (c) => {

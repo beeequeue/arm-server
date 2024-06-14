@@ -1,9 +1,8 @@
-import Ajv from "ajv"
 import type { JsonValue } from "type-fest"
 import { describe, expect, it } from "vitest"
 
-import { bodyInputSchema } from "./json-body"
-import type { Relation } from "@/db"
+import type { Relation } from "../../../../db.js"
+import { bodyInputSchema } from "./json-body.js"
 
 type Case<V> = [V, boolean]
 type Cases<V = JsonValue> = Array<Case<V>>
@@ -52,24 +51,20 @@ const mapToSingularArrayInput = (cases: Cases): Cases => cases.map(([input, expe
 
 describe("schema", () => {
   const inputs = [
+    [[], false],
     ...okCases,
     ...badCases,
-    [[], false],
     ...mapToSingularArrayInput(okCases),
     ...mapToSingularArrayInput(badCases),
   ] satisfies Cases
 
-  const ajv = new Ajv()
-  const validate = ajv.compile(bodyInputSchema)
-
   it.each(inputs)("%o = %s", (input, expected) => {
-    validate(input)
+    const result = bodyInputSchema.safeParse(input)
 
-    const { errors } = validate
     if (expected) {
-      expect(errors).toBeNull()
+      expect(result.error?.errors?.[0]).not.toBeDefined()
     } else {
-      expect(errors?.length).toBeGreaterThanOrEqual(1)
+      expect(result.error?.errors.length ?? 0).toBeGreaterThanOrEqual(1)
     }
   })
 })

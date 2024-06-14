@@ -1,19 +1,10 @@
-import type { IncomingMessage, ServerResponse } from "node:http"
-
-import type { FastifyInstance } from "fastify"
-import type { RawServerDefault } from "fastify/types/utils"
-import type { Logger } from "pino"
 import { describe, expect, test } from "vitest"
 
-import { Source, knex } from "@/db"
+import type { Hono } from "hono"
+import { Source, knex } from "../../db.js"
 
 export const testIncludeQueryParam = (
-  app: FastifyInstance<
-    RawServerDefault,
-    IncomingMessage,
-    ServerResponse<IncomingMessage>,
-    Logger
-  >,
+  app: Hono,
   path: string,
   thetvdb = false,
 ) => {
@@ -24,11 +15,12 @@ export const testIncludeQueryParam = (
     test("single source (anilist)", async () => {
       await knex.insert({ thetvdb: 1337, anilist: 1337 }).into("relations")
 
-      const response = await app.inject().get(path).query({
+      const query = new URLSearchParams({
         source,
         id: (1337).toString(),
         include: source,
       })
+      const response = await app.fetch(new Request(`http://localhost${path}?${query.toString()}`))
 
       await expect(response.json()).resolves.toStrictEqual(arrayify({ [source]: 1337 }))
       expect(response.status).toBe(200)
@@ -38,14 +30,12 @@ export const testIncludeQueryParam = (
     test("multiple sources (anilist,thetvdb)", async () => {
       await knex.insert({ thetvdb: 1337, anilist: 1337 }).into("relations")
 
-      const response = await app
-        .inject()
-        .get(path)
-        .query({
-          source,
-          id: (1337).toString(),
-          include: [Source.AniList, Source.TheTVDB].join(","),
-        })
+      const query = new URLSearchParams({
+        source,
+        id: (1337).toString(),
+        include: [Source.AniList, Source.TheTVDB].join(","),
+      })
+      const response = await app.fetch(new Request(`http://localhost${path}?${query.toString()}`))
 
       await expect(response.json()).resolves.toStrictEqual(arrayify({ thetvdb: 1337, anilist: 1337 }))
       expect(response.status).toBe(200)
@@ -55,14 +45,12 @@ export const testIncludeQueryParam = (
     test("all the sources", async () => {
       await knex.insert({ thetvdb: 1337, anilist: 1337 }).into("relations")
 
-      const response = await app
-        .inject()
-        .get(path)
-        .query({
-          source,
-          id: (1337).toString(),
-          include: Object.values(Source).join(","),
-        })
+      const query = new URLSearchParams({
+        source,
+        id: (1337).toString(),
+        include: Object.values(Source).join(","),
+      })
+      const response = await app.fetch(new Request(`http://localhost${path}?${query.toString()}`))
 
       await expect(response.json()).resolves.toStrictEqual(
         arrayify({

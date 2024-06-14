@@ -1,11 +1,9 @@
 import type { FastifyPluginAsync } from "fastify"
 
 import { responseArraySchema } from "../ids/schemas/response"
-import type { IncludeQuery } from "../include"
-import { buildSelectFromInclude, includeSchema } from "../include"
+import { type IncludeQuery, buildSelectFromInclude, includeSchema } from "../include"
 
-import type { TheTVDBQuery } from "./schemas/thetvdb"
-import { thetvdbInputSchema } from "./schemas/thetvdb"
+import { type TheTVDBQuery, thetvdbInputSchema } from "./schemas/thetvdb"
 import { type Relation, Source, knex } from "@/db"
 import { makeNullable } from "@/shared-schemas"
 import { CacheTimes, cacheReply, mergeSchemas } from "@/utils"

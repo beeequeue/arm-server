@@ -10,6 +10,7 @@ export default antfu({
       "ts/consistent-type-definitions": "off",
       "ts/no-unsafe-argument": "off",
       "ts/no-unsafe-assignment": "off",
+      "@typescript-eslint/consistent-type-imports": ["error", { fixStyle: "inline-type-imports" }],
     },
   },
 })

@@ -18,5 +18,5 @@
     "types": ["node"]
   },
   "include": ["**/*.ts"],
-  "exclude": ["node_modules", "src/routes/v2/**/*"]
+  "exclude": ["node_modules"]
 }

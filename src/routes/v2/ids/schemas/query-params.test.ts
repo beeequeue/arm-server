@@ -1,10 +1,8 @@
-import Ajv from "ajv"
 import type { JsonValue } from "type-fest"
 import { describe, expect, it } from "vitest"
 
-import type { QueryParamQuery } from "./query-params"
-import { queryInputSchema } from "./query-params"
-import { Source } from "@/db"
+import { Source } from "../../../../db.js"
+import { type QueryParamQuery, queryInputSchema } from "./query-params.js"
 
 type Case<V> = [V, boolean]
 type Cases<V = JsonValue> = Array<Case<V>>
@@ -33,17 +31,13 @@ const badCases: Cases = [
 describe("schema", () => {
   const inputs = [...okCases, ...badCases] satisfies Cases
 
-  const ajv = new Ajv()
-  const validate = ajv.compile(queryInputSchema)
-
   it.each(inputs)("%o = %s", (input, expected) => {
-    validate(input)
+    const result = queryInputSchema.safeParse(input)
 
-    const { errors } = validate
     if (expected) {
-      expect(errors).toBeNull()
+      expect(result.error?.errors).not.toBeDefined()
     } else {
-      expect(errors?.length).toBeGreaterThanOrEqual(1)
+      expect(result.error?.errors.length ?? 0).toBeGreaterThanOrEqual(1)
     }
   })
 })
