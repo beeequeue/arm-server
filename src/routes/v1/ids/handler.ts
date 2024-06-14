@@ -32,8 +32,7 @@ export const v1Routes = new Hono()
         .from("relations")
         .first()
 
-      // eslint-disable-next-line ts/no-unsafe-return
-      return relation ?? null!
+      return c.json(relation ?? null)
     }
 
     let relations: Array<Relation | null> = []
@@ -54,5 +53,5 @@ export const v1Routes = new Hono()
       return relations.find((relation) => relation![realItem[0]] === realItem[1]) ?? null
     })
 
-    return relations as never
+    return c.json(relations)
   })

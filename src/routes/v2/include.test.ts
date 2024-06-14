@@ -22,9 +22,9 @@ describe("schema", () => {
       include: Source.AniList,
     })
 
-    expect(response.json()).toStrictEqual({ message: "ok" })
-    expect(response.statusCode).toBe(200)
-    expect(response.headers["content-type"]).toContain("application/json")
+    await expect(response.json()).resolves.toStrictEqual({ message: "ok" })
+    expect(response.status).toBe(200)
+    expect(response.headers.get("content-type")).toContain("application/json")
   })
 
   it("multiple sources (anilist,thetvdb)", async () => {
@@ -35,9 +35,9 @@ describe("schema", () => {
         include: [Source.AniList, Source.TheTVDB].join(","),
       })
 
-    expect(response.json()).toStrictEqual({ message: "ok" })
-    expect(response.statusCode).toBe(200)
-    expect(response.headers["content-type"]).toContain("application/json")
+    await expect(response.json()).resolves.toStrictEqual({ message: "ok" })
+    expect(response.status).toBe(200)
+    expect(response.headers.get("content-type")).toContain("application/json")
   })
 
   it("all the sources", async () => {
@@ -48,8 +48,8 @@ describe("schema", () => {
         include: Object.values(Source).join(","),
       })
 
-    expect(response.json()).toStrictEqual({ message: "ok" })
-    expect(response.statusCode).toBe(200)
-    expect(response.headers["content-type"]).toContain("application/json")
+    await expect(response.json()).resolves.toStrictEqual({ message: "ok" })
+    expect(response.status).toBe(200)
+    expect(response.headers.get("content-type")).toContain("application/json")
   })
 })

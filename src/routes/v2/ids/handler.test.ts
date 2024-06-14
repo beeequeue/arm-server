@@ -49,9 +49,9 @@ describe("query params", () => {
       id: relation.anilist!.toString(),
     })
 
-    expect(response.json()).toStrictEqual(relation)
-    expect(response.statusCode).toBe(200)
-    expect(response.headers["content-type"]).toContain("application/json")
+    await expect(response.json()).resolves.toStrictEqual(relation)
+    expect(response.status).toBe(200)
+    expect(response.headers.get("content-type")).toContain("application/json")
   })
 
   it("returns null when id doesn't exist", async () => {
@@ -61,8 +61,8 @@ describe("query params", () => {
     })
 
     expect(response.json()).toBe(null)
-    expect(response.statusCode).toBe(200)
-    expect(response.headers["content-type"]).toContain("application/json")
+    expect(response.status).toBe(200)
+    expect(response.headers.get("content-type")).toContain("application/json")
   })
 
   it("can return a partial response", async () => {
@@ -86,9 +86,9 @@ describe("query params", () => {
       id: relation.anilist!.toString(),
     })
 
-    expect(response.json()).toStrictEqual(relation)
-    expect(response.statusCode).toBe(200)
-    expect(response.headers["content-type"]).toContain("application/json")
+    await expect(response.json()).resolves.toStrictEqual(relation)
+    expect(response.status).toBe(200)
+    expect(response.headers.get("content-type")).toContain("application/json")
   })
 })
 
@@ -104,9 +104,9 @@ describe("json body", () => {
           [Source.AniDB]: relations[0].anidb,
         })
 
-      expect(response.json()).toMatchSnapshot()
-      expect(response.statusCode).toBe(400)
-      expect(response.headers["content-type"]).toContain("application/json")
+      await expect(response.json()).resolves.toMatchSnapshot()
+      expect(response.status).toBe(400)
+      expect(response.headers.get("content-type")).toContain("application/json")
     })
 
     it("fetches a single relation", async () => {
@@ -119,9 +119,9 @@ describe("json body", () => {
           [Source.AniDB]: relations[0].anidb,
         })
 
-      expect(response.json()).toStrictEqual(relations[0])
-      expect(response.statusCode).toBe(200)
-      expect(response.headers["content-type"]).toContain("application/json")
+      await expect(response.json()).resolves.toStrictEqual(relations[0])
+      expect(response.status).toBe(200)
+      expect(response.headers.get("content-type")).toContain("application/json")
     })
 
     it("errors correctly on an empty object", async () => {
@@ -129,9 +129,9 @@ describe("json body", () => {
 
       const response = await app.inject().post(PATH).body({})
 
-      expect(response.json()).toMatchSnapshot()
-      expect(response.statusCode).toBe(400)
-      expect(response.headers["content-type"]).toContain("application/json")
+      await expect(response.json()).resolves.toMatchSnapshot()
+      expect(response.status).toBe(400)
+      expect(response.headers.get("content-type")).toContain("application/json")
     })
 
     it("returns null if not found", async () => {
@@ -139,9 +139,9 @@ describe("json body", () => {
 
       const response = await app.inject().post(PATH).body({ anidb: 100_000 })
 
-      expect(response.json()).toBe(null)
-      expect(response.statusCode).toBe(200)
-      expect(response.headers["content-type"]).toContain("application/json")
+      await expect(response.json()).resolves.toBe(null)
+      expect(response.status).toBe(200)
+      expect(response.headers.get("content-type")).toContain("application/json")
     })
 
     it("can return a partial response", async () => {
@@ -164,9 +164,9 @@ describe("json body", () => {
         anilist: 1337,
       })
 
-      expect(response.json()).toStrictEqual(relation)
-      expect(response.statusCode).toBe(200)
-      expect(response.headers["content-type"]).toContain("application/json")
+      await expect(response.json()).resolves.toStrictEqual(relation)
+      expect(response.status).toBe(200)
+      expect(response.headers.get("content-type")).toContain("application/json")
     })
   })
 
@@ -184,9 +184,9 @@ describe("json body", () => {
 
       const response = await app.inject().post(PATH).body(body)
 
-      expect(response.json()).toStrictEqual(result)
-      expect(response.statusCode).toBe(200)
-      expect(response.headers["content-type"]).toContain("application/json")
+      await expect(response.json()).resolves.toStrictEqual(result)
+      expect(response.status).toBe(200)
+      expect(response.headers.get("content-type")).toContain("application/json")
     })
 
     it("responds correctly on no finds", async () => {
@@ -196,9 +196,9 @@ describe("json body", () => {
 
       const response = await app.inject().post(PATH).body(body)
 
-      expect(response.json()).toStrictEqual(result)
-      expect(response.statusCode).toBe(200)
-      expect(response.headers["content-type"]).toContain("application/json")
+      await expect(response.json()).resolves.toStrictEqual(result)
+      expect(response.status).toBe(200)
+      expect(response.headers.get("content-type")).toContain("application/json")
     })
 
     it("requires at least one source", async () => {
@@ -206,9 +206,9 @@ describe("json body", () => {
 
       const response = await app.inject().post(PATH).body(body)
 
-      expect(response.json()).toMatchSnapshot()
-      expect(response.statusCode).toBe(400)
-      expect(response.headers["content-type"]).toContain("application/json")
+      await expect(response.json()).resolves.toMatchSnapshot()
+      expect(response.status).toBe(400)
+      expect(response.headers.get("content-type")).toContain("application/json")
     })
   })
 })

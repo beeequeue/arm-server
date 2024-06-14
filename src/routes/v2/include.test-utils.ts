@@ -30,9 +30,9 @@ export const testIncludeQueryParam = (
         include: source,
       })
 
-      expect(response.json()).toStrictEqual(arrayify({ [source]: 1337 }))
-      expect(response.statusCode).toBe(200)
-      expect(response.headers["content-type"]).toContain("application/json")
+      await expect(response.json()).resolves.toStrictEqual(arrayify({ [source]: 1337 }))
+      expect(response.status).toBe(200)
+      expect(response.headers.get("content-type")).toContain("application/json")
     })
 
     test("multiple sources (anilist,thetvdb)", async () => {
@@ -47,9 +47,9 @@ export const testIncludeQueryParam = (
           include: [Source.AniList, Source.TheTVDB].join(","),
         })
 
-      expect(response.json()).toStrictEqual(arrayify({ thetvdb: 1337, anilist: 1337 }))
-      expect(response.statusCode).toBe(200)
-      expect(response.headers["content-type"]).toContain("application/json")
+      await expect(response.json()).resolves.toStrictEqual(arrayify({ thetvdb: 1337, anilist: 1337 }))
+      expect(response.status).toBe(200)
+      expect(response.headers.get("content-type")).toContain("application/json")
     })
 
     test("all the sources", async () => {
@@ -64,7 +64,7 @@ export const testIncludeQueryParam = (
           include: Object.values(Source).join(","),
         })
 
-      expect(response.json()).toStrictEqual(
+      await expect(response.json()).resolves.toStrictEqual(
         arrayify({
           anidb: null,
           anilist: 1337,
@@ -79,8 +79,8 @@ export const testIncludeQueryParam = (
           myanimelist: null,
         }),
       )
-      expect(response.statusCode).toBe(200)
-      expect(response.headers["content-type"]).toContain("application/json")
+      expect(response.status).toBe(200)
+      expect(response.headers.get("content-type")).toContain("application/json")
     })
   })
 }

@@ -53,9 +53,9 @@ describe("query params", () => {
       id: relations[0].thetvdb!.toString(),
     })
 
-    expect(response.json()).toStrictEqual(relations)
-    expect(response.statusCode).toBe(200)
-    expect(response.headers["content-type"]).toContain("application/json")
+    await expect(response.json()).resolves.toStrictEqual(relations)
+    expect(response.status).toBe(200)
+    expect(response.headers.get("content-type")).toContain("application/json")
   })
 
   it("returns empty array when id doesn't exist", async () => {
@@ -64,9 +64,9 @@ describe("query params", () => {
       id: (404).toString(),
     })
 
-    expect(response.json()).toStrictEqual([])
-    expect(response.statusCode).toBe(200)
-    expect(response.headers["content-type"]).toContain("application/json")
+    await expect(response.json()).resolves.toStrictEqual([])
+    expect(response.status).toBe(200)
+    expect(response.headers.get("content-type")).toContain("application/json")
   })
 
   it("can return a partial response", async () => {
@@ -90,9 +90,9 @@ describe("query params", () => {
       id: relation.thetvdb!.toString(),
     })
 
-    expect(response.json()).toStrictEqual([relation])
-    expect(response.statusCode).toBe(200)
-    expect(response.headers["content-type"]).toContain("application/json")
+    await expect(response.json()).resolves.toStrictEqual([relation])
+    expect(response.status).toBe(200)
+    expect(response.headers.get("content-type")).toContain("application/json")
   })
 })
 

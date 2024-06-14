@@ -1,4 +1,3 @@
-import Ajv from "ajv"
 import type { JsonValue } from "type-fest"
 import { describe, expect, it } from "vitest"
 
@@ -40,17 +39,14 @@ describe("schema", () => {
     ...mapToSingularArrayInput(badCases),
   ] satisfies Cases
 
-  const ajv = new Ajv()
-  const validate = ajv.compile(bodyInputSchema)
 
   it.each(inputs)("%o = %s", (input, expected) => {
-    validate(input)
+    const result = bodyInputSchema.safeParse(input)
 
-    const { errors } = validate
     if (expected) {
-      expect(errors).toBeNull()
+      expect(result.error?.errors).not.toBeDefined()
     } else {
-      expect(errors?.length).toBeGreaterThanOrEqual(1)
+      expect(result.error?.errors.length ?? 0).toBeGreaterThanOrEqual(1)
     }
   })
 })

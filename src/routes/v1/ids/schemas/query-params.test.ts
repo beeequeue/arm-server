@@ -1,5 +1,3 @@
-import type { Schema } from "ajv"
-import Ajv from "ajv"
 import type { JsonValue } from "type-fest"
 import { describe, expect, it } from "vitest"
 
@@ -29,17 +27,13 @@ const badCases: Cases = [
 describe("schema", () => {
   const inputs: Cases = [...okCases, ...badCases]
 
-  const ajv = new Ajv()
-  const validate = ajv.compile(queryInputSchema as Schema)
-
   it.each(inputs)("%o = %s", (input, expected) => {
-    validate(input)
+    const result = queryInputSchema.safeParse(input)
 
-    const { errors } = validate
     if (expected) {
-      expect(errors).toBeNull()
+      expect(result.error?.errors).not.toBeDefined()
     } else {
-      expect(errors?.length).toBeGreaterThanOrEqual(1)
+      expect(result.error?.errors.length ?? 0).toBeGreaterThanOrEqual(1)
     }
   })
 })
