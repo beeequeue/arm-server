@@ -5,7 +5,7 @@ import { createApp } from "../../../app.js"
 import { type Relation, Source, knex } from "../../../db.js"
 import { testIncludeQueryParam } from "../include.test-utils.js"
 
-let id = 0
+let id = 1
 const createRelations = async <N extends number>(
   amount: N,
 ): Promise<N extends 1 ? Relation : Relation[]> => {

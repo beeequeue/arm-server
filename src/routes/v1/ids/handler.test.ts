@@ -4,7 +4,7 @@ import { afterAll, afterEach, describe, expect, it } from "vitest"
 import { createApp } from "../../../app.js"
 import { type Relation, Source, knex } from "../../../db.js"
 
-let id = 0
+let id = 1
 const createRelations = async <N extends number>(
   amount: N,
 ): Promise<N extends 1 ? Relation : Relation[]> => {
