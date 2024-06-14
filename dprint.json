@@ -6,7 +6,9 @@
   "typescript": {
     "semiColons": "asi",
     "quoteProps": "asNeeded",
-    "arrowFunction.useParentheses": "force"
+    "arrowFunction.useParentheses": "force",
+    "module.sortImportDeclarations": "maintain",
+    "importDeclaration.sortNamedImports": "maintain"
   },
   "excludes": [
     "**/node_modules",

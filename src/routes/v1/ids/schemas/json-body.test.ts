@@ -39,7 +39,6 @@ describe("schema", () => {
     ...mapToSingularArrayInput(badCases),
   ] satisfies Cases
 
-
   it.each(inputs)("%o = %s", (input, expected) => {
     const result = bodyInputSchema.safeParse(input)
 
