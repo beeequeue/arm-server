@@ -1,8 +1,9 @@
+import { testClient } from "hono/testing"
 import { afterAll, beforeEach, describe, expect, it } from "vitest"
 
-import { testIncludeQueryParam } from "../include.test-utils"
-import { buildApp } from "@/app"
-import { type Relation, Source, knex } from "@/db"
+import { createApp } from "../../../app.js"
+import { type Relation, knex } from "../../../db.js"
+import { testIncludeQueryParam } from "../include.test-utils.js"
 
 let id = 0
 const createRelations = async <N extends number>(
@@ -32,15 +33,14 @@ const createRelations = async <N extends number>(
   return relations as never
 }
 
-const PATH = "/api/v2/thetvdb"
-const app = await buildApp()
+const app = createApp()
 
 beforeEach(async () => {
   await knex.delete().from("relations")
 })
 
 afterAll(async () => {
-  await Promise.all([app.close(), knex.destroy()])
+  await knex.destroy()
 })
 
 describe("query params", () => {
@@ -48,9 +48,10 @@ describe("query params", () => {
     await createRelations(4, 1336)
     const relations = await createRelations(3, 1337)
 
-    const response = await app.inject().get(PATH).query({
-      source: Source.TheTVDB,
-      id: relations[0].thetvdb!.toString(),
+    const response = await testClient(app).api.v2.thetvdb.$get({
+      query: {
+        id: relations[0].thetvdb!.toString(),
+      },
     })
 
     await expect(response.json()).resolves.toStrictEqual(relations)
@@ -59,9 +60,10 @@ describe("query params", () => {
   })
 
   it("returns empty array when id doesn't exist", async () => {
-    const response = await app.inject().get(PATH).query({
-      source: Source.TheTVDB,
-      id: (404).toString(),
+    const response = await testClient(app).api.v2.thetvdb.$get({
+      query: {
+        id: (404).toString(),
+      },
     })
 
     await expect(response.json()).resolves.toStrictEqual([])
@@ -85,9 +87,10 @@ describe("query params", () => {
     }
     await knex.insert(relation).into("relations")
 
-    const response = await app.inject().get(PATH).query({
-      source: Source.TheTVDB,
-      id: relation.thetvdb!.toString(),
+    const response = await testClient(app).api.v2.thetvdb.$get({
+      query: {
+        id: relation.thetvdb!.toString(),
+      },
     })
 
     await expect(response.json()).resolves.toStrictEqual([relation])
@@ -96,4 +99,4 @@ describe("query params", () => {
   })
 })
 
-testIncludeQueryParam(app, PATH, true)
+testIncludeQueryParam(app, "/api/v2/thetvdb", true)

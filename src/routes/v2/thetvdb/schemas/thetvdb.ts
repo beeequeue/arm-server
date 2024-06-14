@@ -1,15 +1,12 @@
-import type { JSONSchema7 } from "json-schema"
+import { z } from "zod"
 
-import { numberIdSchema } from "@/shared-schemas"
+import { numberIdSchema } from "../../../../shared-schemas.js"
+import { includeSchema } from "../../include.js"
 
-export type TheTVDBQuery = {
-  id: number
-}
-
-export const thetvdbInputSchema = {
-  type: "object",
-  properties: {
+export const thetvdbInputSchema = z
+  .object({
     id: numberIdSchema,
-  },
-  required: ["id"],
-} satisfies JSONSchema7
+  })
+  .and(includeSchema)
+
+export type TheTVDBQuery = z.infer<typeof thetvdbInputSchema>

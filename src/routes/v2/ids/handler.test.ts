@@ -32,7 +32,6 @@ const createRelations = async <N extends number>(
   return relations as never
 }
 
-const PATH = "/api/v2/ids"
 const app = createApp()
 
 afterEach(() => knex.delete().from("relations"))
@@ -236,4 +235,4 @@ describe("json body", () => {
   })
 })
 
-testIncludeQueryParam(app, PATH)
+testIncludeQueryParam(app, "/api/v2/ids")
