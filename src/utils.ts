@@ -21,7 +21,7 @@ export const zHook = <T extends z.ZodType<any, z.ZodTypeDef, any>>(result: TypeO
   const flat = (result.error as ZodError).flatten()
   const messages = [
     ...flat.formErrors,
-    ...Object.entries(flat.fieldErrors).map(([key, value]) => `${key}: ${value}`),
+    ...Object.entries(flat.fieldErrors).map(([key, value]) => `${key}: ${value?.join(", ") ?? "error"}`),
   ]
 
   c.status(400)
