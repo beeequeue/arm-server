@@ -35,6 +35,13 @@ export const createApp = () => {
     .use("*", sentry({ dsn: process.env.SENTRY_DSN! }))
     .use("*", cors({ origin: (origin) => origin }))
     .use("*", secureHeaders())
+    .notFound((c) => {
+      c.status(404)
+      return c.json({
+        error: "Not Found",
+        statusCode: 404,
+      })
+    })
     .onError((error, c) => {
       /* c8 ignore next 4 */
       if (error instanceof HTTPException) {
