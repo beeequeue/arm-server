@@ -60,6 +60,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "2.21.1",
+    "@biomejs/biome": "1.8.1",
     "@types/json-schema": "7.0.15",
     "@types/node": "20.14.2",
     "@vitest/coverage-v8": "1.6.0",
