@@ -48,6 +48,8 @@ export const createApp = () => {
         return createErrorJson(c, error)
       }
 
+      logger.error(error, "unhandled error")
+
       const badImpl = new HTTPException(500, { cause: error })
       return createErrorJson(c, badImpl)
     })
