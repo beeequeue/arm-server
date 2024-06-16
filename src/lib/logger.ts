@@ -1,26 +1,16 @@
-import { FastifyRequest } from "fastify"
-import Pino from "pino"
-import Pretty from "pino-pretty"
+import { pino } from "pino"
+import PinoPretty from "pino-pretty"
 
-import { config } from "@/config"
+import { config } from "../config.js"
 
 const isProd = config.NODE_ENV === "production"
 
-const stream = !isProd ? Pretty({ colorize: true }) : undefined
+const stream = !isProd ? PinoPretty.default({ colorize: true }) : undefined
 
-export const logger = Pino(
+export const logger = pino(
   {
     level: config.LOG_LEVEL,
-    redact: ["req.headers.authorization", "req.headers.cookie"],
-    serializers: {
-      req: ({ method, url, params, routerPath, headers }: FastifyRequest) => ({
-        method,
-        url,
-        params,
-        routerPath,
-        headers,
-      }),
-    },
+    redact: ["headers.authorization", "headers.cookie", "*.token"],
   },
-  stream!,
+  stream,
 )

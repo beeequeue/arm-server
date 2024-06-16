@@ -1,11 +1,11 @@
-import { afterAll, beforeEach, describe, expect, test } from "vitest"
+import { testClient } from "hono/testing"
+import { afterAll, beforeEach, describe, expect, it } from "vitest"
 
-import { buildApp } from "@/app"
-import { knex, Relation, Source } from "@/db"
+import { createApp } from "../../../app.js"
+import { type Relation, knex } from "../../../db.js"
+import { testIncludeQueryParam } from "../include.test-utils.js"
 
-import { testIncludeQueryParam } from "../include.test-utils"
-
-let id = 0
+let id = 1
 const createRelations = async <N extends number>(
   amount: N,
   thetvdbId?: number,
@@ -33,44 +33,45 @@ const createRelations = async <N extends number>(
   return relations as never
 }
 
-const PATH = "/api/v2/thetvdb"
-const app = await buildApp()
+const app = createApp()
 
 beforeEach(async () => {
   await knex.delete().from("relations")
 })
 
 afterAll(async () => {
-  await Promise.all([app.close(), knex.destroy()])
+  await knex.destroy()
 })
 
 describe("query params", () => {
-  test("fetches relations correctly", async () => {
+  it("fetches relations correctly", async () => {
     await createRelations(4, 1336)
     const relations = await createRelations(3, 1337)
 
-    const response = await app.inject().get(PATH).query({
-      source: Source.TheTVDB,
-      id: relations[0].thetvdb!.toString(),
+    const response = await testClient(app).api.v2.thetvdb.$get({
+      query: {
+        id: relations[0].thetvdb!.toString(),
+      },
     })
 
-    expect(response.json()).toStrictEqual(relations)
-    expect(response.statusCode).toBe(200)
-    expect(response.headers["content-type"]).toContain("application/json")
+    await expect(response.json()).resolves.toStrictEqual(relations)
+    expect(response.status).toBe(200)
+    expect(response.headers.get("content-type")).toContain("application/json")
   })
 
-  test("returns empty array when id doesn't exist", async () => {
-    const response = await app.inject().get(PATH).query({
-      source: Source.TheTVDB,
-      id: (404).toString(),
+  it("returns empty array when id doesn't exist", async () => {
+    const response = await testClient(app).api.v2.thetvdb.$get({
+      query: {
+        id: (404).toString(),
+      },
     })
 
-    expect(response.json()).toStrictEqual([])
-    expect(response.statusCode).toBe(200)
-    expect(response.headers["content-type"]).toContain("application/json")
+    await expect(response.json()).resolves.toStrictEqual([])
+    expect(response.status).toBe(200)
+    expect(response.headers.get("content-type")).toContain("application/json")
   })
 
-  test("can return a partial response", async () => {
+  it("can return a partial response", async () => {
     const relation: Relation = {
       anidb: 1337,
       anilist: 1337,
@@ -86,15 +87,16 @@ describe("query params", () => {
     }
     await knex.insert(relation).into("relations")
 
-    const response = await app.inject().get(PATH).query({
-      source: Source.TheTVDB,
-      id: relation.thetvdb!.toString(),
+    const response = await testClient(app).api.v2.thetvdb.$get({
+      query: {
+        id: relation.thetvdb!.toString(),
+      },
     })
 
-    expect(response.json()).toStrictEqual([relation])
-    expect(response.statusCode).toBe(200)
-    expect(response.headers["content-type"]).toContain("application/json")
+    await expect(response.json()).resolves.toStrictEqual([relation])
+    expect(response.status).toBe(200)
+    expect(response.headers.get("content-type")).toContain("application/json")
   })
 })
 
-testIncludeQueryParam(app, PATH, true)
+testIncludeQueryParam(app, "/api/v2/thetvdb", true)

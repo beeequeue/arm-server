@@ -1,11 +1,10 @@
 import { $fetch } from "ofetch/node"
-import { groupBy } from "remeda"
+import { groupBy } from "rambda"
 import { afterAll, afterEach, expect, it, vi } from "vitest"
 
-import { knex, Relation } from "@/db"
-import { AnimeListsSchema, formatEntry, removeDuplicates, updateRelations } from "@/update"
+import { type Relation, knex } from "./db.js"
+import { type AnimeListsSchema, formatEntry, removeDuplicates, updateRelations } from "./update.js"
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const fetch: (url: string) => Promise<{ json: () => Promise<any[]> }>
 
 vi.mock("ofetch/node")
@@ -78,11 +77,11 @@ it("handles duplicates", async () => {
     .then((r) => r.json())
     .then((e) => e.map(formatEntry))
 
-  const groups = groupBy(removeDuplicates(entries), (e) => e.imdb!)
+  const groups = groupBy((e) => e.imdb!, removeDuplicates(entries))
   expect(
     Object.fromEntries(
       Object.entries(groups)
-        .filter(([id, g]) => id !== "undefined" && g.length > 1)
+        .filter(([id, g]) => id !== "undefined" && id !== "null" && g.length > 1)
         .map(([id, g]) => [id, g.length]),
     ),
   ).toStrictEqual({})

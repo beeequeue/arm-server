@@ -1,6 +1,4 @@
-import type { Knex } from "knex"
-
-export async function up(knex: Knex): Promise<void> {
+export async function up(knex) {
   await knex.schema.alterTable("relations", (table) => {
     table.text("anime-planet").unique()
     table.integer("anisearch").unique()
@@ -12,7 +10,7 @@ export async function up(knex: Knex): Promise<void> {
   })
 }
 
-export async function down(knex: Knex): Promise<void> {
+export async function down(knex) {
   await knex.schema.alterTable("relations", (table) => {
     table.dropColumns(
       "anime-planet",

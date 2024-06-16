@@ -1,35 +1,26 @@
-import { FastifyPluginAsync } from "fastify"
+import { Hono } from "hono"
 
-import { knex, Relation, Source } from "@/db"
-import { makeNullable } from "@/shared-schemas"
-import { cacheReply, CacheTimes, mergeSchemas } from "@/utils"
+import { zValidator } from "@hono/zod-validator"
+import { buildSelectFromInclude } from "../include.js"
 
-import { responseArraySchema } from "../ids/schemas/response"
-import { buildSelectFromInclude, IncludeQuery, includeSchema } from "../include"
+import { Source, knex } from "../../../db.js"
+import { CacheTimes, cacheReply, zHook } from "../../../utils.js"
+import { thetvdbInputSchema } from "./schemas/thetvdb.js"
 
-import { thetvdbInputSchema, TheTVDBQuery } from "./schemas/thetvdb"
-
-// eslint-disable-next-line @typescript-eslint/require-await
-export const thetvdbPlugin: FastifyPluginAsync = async (fastify) => {
-  fastify.get<{ Querystring: TheTVDBQuery & IncludeQuery }>(
+export const thetvdbRoutes = new Hono()
+  .get(
     "/thetvdb",
-    {
-      schema: {
-        querystring: mergeSchemas(thetvdbInputSchema, includeSchema),
-        response: {
-          200: makeNullable(responseArraySchema),
-        },
-      },
-    },
-    async (request, reply): Promise<Relation[] | null> => {
+    zValidator("query", thetvdbInputSchema, zHook),
+    async (c) => {
+      const query = c.req.query()
+
       const data = await knex
-        .select(buildSelectFromInclude(request))
-        .where({ [Source.TheTVDB]: request.query.id })
+        .select(buildSelectFromInclude(query.include))
+        .where({ [Source.TheTVDB]: query.id })
         .from("relations")
 
-      cacheReply(reply, CacheTimes.SIX_HOURS)
+      cacheReply(c.res, CacheTimes.SIX_HOURS)
 
-      return data
+      return c.json(data)
     },
   )
-}

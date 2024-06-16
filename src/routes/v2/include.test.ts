@@ -1,56 +1,58 @@
-import Fastify from "fastify"
-import { afterAll, beforeEach, describe, expect, test, vi } from "vitest"
+import type { Context } from "hono"
+import { Hono } from "hono"
+import { afterAll, beforeEach, describe, expect, it, vi } from "vitest"
 
-import { knex, Source } from "@/db"
+import { zValidator } from "@hono/zod-validator"
+import { testClient } from "hono/testing"
+import { Source, knex } from "../../db.js"
+import { includeSchema } from "./include.js"
 
-import { includeSchema } from "./include"
-
-const app = Fastify()
-const handlerFn = vi.fn(() => ({ message: "ok" }))
-app.get("/test", { schema: { querystring: includeSchema } }, handlerFn)
+const handlerFn = vi.fn((c: Context) => c.json({ message: "ok" }))
+const app = new Hono()
+  .get("/test", zValidator("query", includeSchema), handlerFn)
 
 beforeEach(async () => {
   await knex.delete().from("relations")
 })
 
 afterAll(async () => {
-  await Promise.all([knex.destroy(), app.close()])
+  await knex.destroy()
 })
 
 describe("schema", () => {
-  test("single source (anilist)", async () => {
-    const response = await app.inject().get("/test").query({
-      include: Source.AniList,
+  it("single source (anilist)", async () => {
+    const response = await testClient(app).test.$get({
+      query: {
+        include: Source.AniList,
+      },
     })
 
-    expect(response.json()).toStrictEqual({ message: "ok" })
-    expect(response.statusCode).toBe(200)
-    expect(response.headers["content-type"]).toContain("application/json")
+    await expect(response.json()).resolves.toStrictEqual({ message: "ok" })
+    expect(response.status).toBe(200)
+    expect(response.headers.get("content-type")).toContain("application/json")
   })
 
-  test("multiple sources (anilist,thetvdb)", async () => {
-    const response = await app
-      .inject()
-      .get("/test")
-      .query({
+  it("multiple sources (anilist,thetvdb)", async () => {
+    const response = await testClient(app).test.$get({
+      query: {
         include: [Source.AniList, Source.TheTVDB].join(","),
-      })
+      },
+    })
 
-    expect(response.json()).toStrictEqual({ message: "ok" })
-    expect(response.statusCode).toBe(200)
-    expect(response.headers["content-type"]).toContain("application/json")
+    await expect(response.json()).resolves.toStrictEqual({ message: "ok" })
+    expect(response.status).toBe(200)
+    expect(response.headers.get("content-type")).toContain("application/json")
   })
 
-  test("all the sources", async () => {
-    const response = await app
-      .inject()
-      .get("/test")
-      .query({
+  it("all the sources", async () => {
+    const response = await testClient(app).test.$get({
+      query: {
         include: Object.values(Source).join(","),
-      })
+      },
+    })
 
-    expect(response.json()).toStrictEqual({ message: "ok" })
-    expect(response.statusCode).toBe(200)
-    expect(response.headers["content-type"]).toContain("application/json")
+    await expect(response.json()).resolves.toStrictEqual({ message: "ok" })
+    expect(response.status).toBe(200)
+    expect(response.headers.get("content-type")).toContain("application/json")
   })
 })

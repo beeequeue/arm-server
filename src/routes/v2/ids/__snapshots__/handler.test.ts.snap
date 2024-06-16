@@ -4,16 +4,7 @@ exports[`json body > array input > requires at least one source 1`] = `
 {
   "code": "FST_ERR_VALIDATION",
   "error": "Bad Request",
-  "message": "body must be object, body/0 must NOT have fewer than 1 properties, body must match exactly one schema in oneOf",
-  "statusCode": 400,
-}
-`;
-
-exports[`json body > object input > GET fails with json body 1`] = `
-{
-  "code": "FST_ERR_VALIDATION",
-  "error": "Bad Request",
-  "message": "querystring must have required property 'source', querystring must have required property 'source', querystring must have required property 'source', querystring must match exactly one schema in oneOf",
+  "message": "0: At least one ID must be provided",
   "statusCode": 400,
 }
 `;
@@ -22,7 +13,16 @@ exports[`json body > object input > errors correctly on an empty object 1`] = `
 {
   "code": "FST_ERR_VALIDATION",
   "error": "Bad Request",
-  "message": "body must NOT have fewer than 1 properties, body must be array, body must match exactly one schema in oneOf",
+  "message": "At least one ID must be provided",
+  "statusCode": 400,
+}
+`;
+
+exports[`json body > object input > gET fails with json body 1`] = `
+{
+  "code": "FST_ERR_VALIDATION",
+  "error": "Bad Request",
+  "message": "Invalid input",
   "statusCode": 400,
 }
 `;

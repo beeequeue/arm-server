@@ -1,13 +1,6 @@
 import Knex from "knex"
 
-import knexfile from "../knexfile"
-
-declare module "knex/types/tables" {
-  /* eslint-disable @typescript-eslint/consistent-type-definitions */
-  interface Tables {
-    relations: Relation
-  }
-}
+import knexfile from "../knexfile.js"
 
 export const knex = Knex(knexfile)
 
@@ -38,3 +31,11 @@ export type Relation = {
   [Source.TheTVDB]?: number
   [Source.MAL]?: number
 }
+
+export type OldRelation = Pick<
+  Relation,
+  | Source.AniDB
+  | Source.AniList
+  | Source.MAL
+  | Source.Kitsu
+>

@@ -1,39 +1,24 @@
-import { JSONSchema7 } from "json-schema"
+import { z } from "zod"
 
-import { Source } from "@/db"
-import { imdbSourceSchema, numberIdSourceSchema, stringIdSourceSchema } from "@/routes/v2/ids/schemas/common"
-import { imdbIdSchema, numberIdSchema, stringIdSchema } from "@/shared-schemas"
+import { imdbIdSchema, numberIdSchema, stringIdSchema } from "../../../../shared-schemas.js"
+import { includeSchema } from "../../include.js"
+import { imdbSourceSchema, numberIdSourceSchema, stringIdSourceSchema } from "./common.js"
 
-export type QueryParamQuery = {
-  source: Source
-  id: number | string
-}
+export const queryInputSchema = z
+  .union([
+    z.object({
+      source: numberIdSourceSchema,
+      id: numberIdSchema,
+    }),
+    z.object({
+      source: stringIdSourceSchema,
+      id: stringIdSchema,
+    }),
+    z.object({
+      source: imdbSourceSchema,
+      id: imdbIdSchema,
+    }),
+  ])
+  .and(includeSchema)
 
-export const queryInputSchema: JSONSchema7 = {
-  oneOf: [
-    {
-      type: "object",
-      properties: {
-        source: numberIdSourceSchema,
-        id: numberIdSchema,
-      },
-      required: ["source", "id"],
-    },
-    {
-      type: "object",
-      properties: {
-        source: stringIdSourceSchema,
-        id: stringIdSchema,
-      },
-      required: ["source", "id"],
-    },
-    {
-      type: "object",
-      properties: {
-        source: imdbSourceSchema,
-        id: imdbIdSchema,
-      },
-      required: ["source", "id"],
-    },
-  ],
-}
+export type QueryParamQuery = z.infer<typeof queryInputSchema>

@@ -1,35 +1,9 @@
-import { FastifyReply, FastifyRequest } from "fastify"
-import { JSONSchema7 } from "json-schema"
+import { z } from "zod"
+import { numberIdSchema, oldSourceSchema } from "../../../../shared-schemas.js"
 
-import { knex, Source } from "@/db"
-import { numberIdSchema, oldSourceSchema } from "@/shared-schemas"
-import { cacheReply, CacheTimes } from "@/utils"
+export const queryInputSchema = z.object({
+  source: oldSourceSchema,
+  id: numberIdSchema,
+}).refine((data) => Object.keys(data).length > 0, "At least one source is required.")
 
-export type QueryParamQuery = {
-  source: Source
-  id: number
-}
-
-export const queryInputSchema: JSONSchema7 = {
-  type: "object",
-  properties: {
-    source: oldSourceSchema,
-    id: numberIdSchema,
-  },
-  required: ["source", "id"],
-}
-
-export const handleQueryParams = async (
-  request: FastifyRequest<{ Querystring: QueryParamQuery }>,
-  reply: FastifyReply,
-) => {
-  const data = await knex
-    .select(["anidb", "anilist", "myanimelist", "kitsu"])
-    .where({ [request.query.source]: request.query.id })
-    .from("relations")
-    .first()
-
-  cacheReply(reply, CacheTimes.SIX_HOURS)
-
-  return data
-}
+export type QueryParamQuery = z.infer<typeof queryInputSchema>

@@ -1,21 +1,10 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
-import { IncomingMessage, ServerResponse } from "http"
-
-import { FastifyInstance } from "fastify"
-import { RawServerDefault } from "fastify/types/utils"
-import { Logger } from "pino"
 import { describe, expect, test } from "vitest"
 
-import { knex, Source } from "@/db"
+import type { Hono } from "hono"
+import { Source, knex } from "../../db.js"
 
 export const testIncludeQueryParam = (
-  app: FastifyInstance<
-    RawServerDefault,
-    IncomingMessage,
-    ServerResponse<IncomingMessage>,
-    Logger
-  >,
+  app: Hono,
   path: string,
   thetvdb = false,
 ) => {
@@ -26,47 +15,44 @@ export const testIncludeQueryParam = (
     test("single source (anilist)", async () => {
       await knex.insert({ thetvdb: 1337, anilist: 1337 }).into("relations")
 
-      const response = await app.inject().get(path).query({
+      const query = new URLSearchParams({
         source,
         id: (1337).toString(),
         include: source,
       })
+      const response = await app.fetch(new Request(`http://localhost${path}?${query.toString()}`))
 
-      expect(response.json()).toStrictEqual(arrayify({ [source]: 1337 }))
-      expect(response.statusCode).toBe(200)
-      expect(response.headers["content-type"]).toContain("application/json")
+      await expect(response.json()).resolves.toStrictEqual(arrayify({ [source]: 1337 }))
+      expect(response.status).toBe(200)
+      expect(response.headers.get("content-type")).toContain("application/json")
     })
 
     test("multiple sources (anilist,thetvdb)", async () => {
       await knex.insert({ thetvdb: 1337, anilist: 1337 }).into("relations")
 
-      const response = await app
-        .inject()
-        .get(path)
-        .query({
-          source,
-          id: (1337).toString(),
-          include: [Source.AniList, Source.TheTVDB].join(","),
-        })
+      const query = new URLSearchParams({
+        source,
+        id: (1337).toString(),
+        include: [Source.AniList, Source.TheTVDB].join(","),
+      })
+      const response = await app.fetch(new Request(`http://localhost${path}?${query.toString()}`))
 
-      expect(response.json()).toStrictEqual(arrayify({ thetvdb: 1337, anilist: 1337 }))
-      expect(response.statusCode).toBe(200)
-      expect(response.headers["content-type"]).toContain("application/json")
+      await expect(response.json()).resolves.toStrictEqual(arrayify({ thetvdb: 1337, anilist: 1337 }))
+      expect(response.status).toBe(200)
+      expect(response.headers.get("content-type")).toContain("application/json")
     })
 
     test("all the sources", async () => {
       await knex.insert({ thetvdb: 1337, anilist: 1337 }).into("relations")
 
-      const response = await app
-        .inject()
-        .get(path)
-        .query({
-          source,
-          id: (1337).toString(),
-          include: Object.values(Source).join(","),
-        })
+      const query = new URLSearchParams({
+        source,
+        id: (1337).toString(),
+        include: Object.values(Source).join(","),
+      })
+      const response = await app.fetch(new Request(`http://localhost${path}?${query.toString()}`))
 
-      expect(response.json()).toStrictEqual(
+      await expect(response.json()).resolves.toStrictEqual(
         arrayify({
           anidb: null,
           anilist: 1337,
@@ -81,8 +67,8 @@ export const testIncludeQueryParam = (
           myanimelist: null,
         }),
       )
-      expect(response.statusCode).toBe(200)
-      expect(response.headers["content-type"]).toContain("application/json")
+      expect(response.status).toBe(200)
+      expect(response.headers.get("content-type")).toContain("application/json")
     })
   })
 }

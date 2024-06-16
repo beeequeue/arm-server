@@ -1,31 +1,23 @@
-import { FastifyRequest } from "fastify"
-import { JSONSchema7 } from "json-schema"
+import { z } from "zod"
+import { Source } from "../../db.js"
 
-import { Source } from "@/db"
+export const includeSchema = z.object({
+  include: z.string()
+    .regex(/^[\-a-z,]+$/, { message: "Invalid `include` query" })
+    .min(1)
+    .max(100)
+    .optional(),
+})
 
-export type IncludeQuery = { include?: string }
-
-export const includeSchema = {
-  type: "object",
-  properties: {
-    include: {
-      type: "string",
-      pattern: "^[\\w,-]+$",
-      minLength: 1,
-      maxLength: 100,
-    },
-  },
-} satisfies JSONSchema7
+export type IncludeQuery = z.infer<typeof includeSchema>
 
 const sources = Object.values(Source)
-export const buildSelectFromInclude = ({
-  query,
-}: FastifyRequest<{ Querystring: IncludeQuery }>) => {
-  if (query.include == null) {
+export const buildSelectFromInclude = (include: string | null | undefined) => {
+  if (include == null) {
     return "*"
   }
 
-  return query.include
+  return include
     .split(",")
     .filter((inclusion) => sources.includes(inclusion as Source))
 }

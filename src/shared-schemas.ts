@@ -1,30 +1,9 @@
-import { JSONSchema7 } from "json-schema"
+import { z } from "zod"
 
-const nullSchema = { type: "null" } satisfies JSONSchema7
-export const makeNullable = <Input extends JSONSchema7>(...input: Input[]) => ({
-  oneOf: [nullSchema, ...input],
-})
+export const oldSourceSchema = z.enum(["anilist", "anidb", "myanimelist", "kitsu"], { message: "Invalid source" })
 
-export const oldSourceSchema = {
-  type: "string",
-  enum: ["anilist", "anidb", "myanimelist", "kitsu"],
-} satisfies JSONSchema7
+export const numberIdSchema = z.coerce.number({ message: "Invalid ID" }).int().min(1).max(50_000_000).positive()
 
-export const numberIdSchema = {
-  type: "integer",
-  minimum: 0,
-  maximum: 50_000_000,
-} satisfies JSONSchema7
+export const stringIdSchema = z.string({ message: "Invalid ID" }).min(1).max(150)
 
-export const stringIdSchema = {
-  type: "string",
-  minLength: 1,
-  maxLength: 150,
-} satisfies JSONSchema7
-
-export const imdbIdSchema = {
-  type: "string",
-  pattern: "tt\\d+",
-  minLength: 1,
-  maxLength: 50,
-} satisfies JSONSchema7
+export const imdbIdSchema = z.string({ message: "Invalid IMDB ID" }).startsWith("tt").min(3).max(50)

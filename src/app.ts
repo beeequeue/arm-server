@@ -1,66 +1,65 @@
-import Fastify from "fastify"
-import { customAlphabet, urlAlphabet } from "nanoid"
+import process from "node:process"
 
-import Cors from "@fastify/cors"
-import Helmet from "@fastify/helmet"
+import { sentry } from "@hono/sentry"
+import { Hono } from "hono"
+import { cors } from "hono/cors"
+import { HTTPException } from "hono/http-exception"
+import { secureHeaders } from "hono/secure-headers"
 
-import { config } from "@/config"
-import { docsPlugin } from "@/docs"
-import { logger } from "@/lib/logger"
-import { sendErrorToSentry } from "@/lib/sentry"
-import { apiPlugin } from "@/routes/v1/ids/handler"
-import { v2Plugin } from "@/routes/v2/ids/handler"
-import { thetvdbPlugin } from "@/routes/v2/thetvdb/handler"
-import { cacheReply, CacheTimes } from "@/utils"
+import pkgJson from "../package.json" assert { type: "json" }
 
-import pkgJson from "../package.json"
+import { docsRoutes } from "./docs.js"
+import { logger } from "./lib/logger.js"
+import { v1Routes } from "./routes/v1/ids/handler.js"
+import { v2Routes } from "./routes/v2/ids/handler.js"
+import { thetvdbRoutes } from "./routes/v2/thetvdb/handler.js"
+import { CacheTimes, cacheReply, createErrorJson } from "./utils.js"
 
-const PROD = config.NODE_ENV === "production"
+export const createApp = () => {
+  const app = new Hono()
+    .use("*", async (c, next) => {
+      const start = Date.now()
+      logger.info({
+        method: c.req.method,
+        path: c.req.path,
+        headers: c.req.header(),
+      }, "req")
 
-const nanoid = customAlphabet(urlAlphabet, 16)
+      await next()
 
-export const buildApp = async () => {
-  const App = Fastify({
-    ignoreTrailingSlash: true,
-    onProtoPoisoning: "remove",
-    onConstructorPoisoning: "remove",
-    trustProxy: PROD,
-    genReqId: () => nanoid(),
-    disableRequestLogging: process.env.NODE_ENV === "test",
-    logger,
-  })
+      logger.info({
+        status: c.res.status,
+        ms: Date.now() - start,
+      }, "res")
+    })
+    .use("*", sentry({ dsn: process.env.SENTRY_DSN! }))
+    .use("*", cors({ origin: (origin) => origin }))
+    .use("*", secureHeaders())
+    .notFound((c) => createErrorJson(c, new HTTPException(404)))
+    .onError((error, c) => {
+      /* c8 ignore next 4 */
+      if (error instanceof HTTPException) {
+        const res = error.getResponse()
 
-  await App.register(Cors, {
-    origin: true,
-  })
+        if (c.req.method === "GET") {
+          cacheReply(res, CacheTimes.WEEK)
+        }
 
-  await App.register(Helmet, {
-    hsts: false,
-    contentSecurityPolicy: false,
-  })
-
-  App.addHook("onError", (request, reply, error, next) => {
-    /* c8 ignore next 4 */
-    if (error.validation != null) {
-      if (request.method === "GET") {
-        cacheReply(reply, CacheTimes.WEEK)
+        return createErrorJson(c, error)
       }
-    } else {
-      sendErrorToSentry(error, request)
-    }
 
-    next()
-  })
+      const badImpl = new HTTPException(500, { cause: error })
+      return createErrorJson(c, badImpl)
+    })
+    .route("/api", v1Routes)
+    .route("/api/v2", v2Routes)
+    .route("/api/v2", thetvdbRoutes)
+    .route("/docs", docsRoutes)
+    .get("/", (c) => {
+      cacheReply(c.res, CacheTimes.WEEK * 4)
 
-  await App.register(apiPlugin, { prefix: "/api" })
-  await App.register(v2Plugin, { prefix: "/api/v2" })
-  await App.register(thetvdbPlugin, { prefix: "/api/v2" })
-  await App.register(docsPlugin)
+      return c.redirect(pkgJson.homepage, 301)
+    })
 
-  App.get("/", async (_, reply) => {
-    cacheReply(reply, CacheTimes.WEEK * 2)
-    void reply.redirect(301, pkgJson.homepage)
-  })
-
-  return App
+  return app
 }

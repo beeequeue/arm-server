@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/naming-convention */
+import process from "node:process"
 
-import zod from "zod"
+import { z as zod } from "zod"
 
 export enum Environment {
   Development = "development",
@@ -20,13 +20,11 @@ const schema = zod.object({
 const result = schema.safeParse(process.env)
 
 if (!result.success) {
-  // eslint-disable-next-line no-console
   console.error(
     "❌ Invalid environment variables:",
     JSON.stringify(result.error.format(), null, 4),
   )
 
-  // eslint-disable-next-line n/no-process-exit,unicorn/no-process-exit
   process.exit(1)
 }
 
