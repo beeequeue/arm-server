@@ -13,7 +13,7 @@ import { logger } from "./lib/logger.js"
 import { v1Routes } from "./routes/v1/ids/handler.js"
 import { v2Routes } from "./routes/v2/ids/handler.js"
 import { thetvdbRoutes } from "./routes/v2/thetvdb/handler.js"
-import { CacheTimes, cacheReply } from "./utils.js"
+import { CacheTimes, cacheReply, createErrorJson } from "./utils.js"
 
 export const createApp = () => {
   const app = new Hono()
@@ -35,13 +35,7 @@ export const createApp = () => {
     .use("*", sentry({ dsn: process.env.SENTRY_DSN! }))
     .use("*", cors({ origin: (origin) => origin }))
     .use("*", secureHeaders())
-    .notFound((c) => {
-      c.status(404)
-      return c.json({
-        error: "Not Found",
-        statusCode: 404,
-      })
-    })
+    .notFound((c) => createErrorJson(c, new HTTPException(404)))
     .onError((error, c) => {
       /* c8 ignore next 4 */
       if (error instanceof HTTPException) {
@@ -51,19 +45,11 @@ export const createApp = () => {
           cacheReply(res, CacheTimes.WEEK)
         }
 
-        c.status(error.status)
-        return c.json({
-          statusCode: error.status,
-          error: error.message,
-        })
+        return createErrorJson(c, error)
       }
 
-      const badImpl = new HTTPException(500, { message: "Internal Server Error", cause: error })
-      c.status(badImpl.status)
-      return c.json({
-        statusCode: badImpl.status,
-        error: badImpl.message,
-      })
+      const badImpl = new HTTPException(500, { cause: error })
+      return createErrorJson(c, badImpl)
     })
     .route("/api", v1Routes)
     .route("/api/v2", v2Routes)
