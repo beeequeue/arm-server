@@ -12,19 +12,19 @@ let docsHtml: string | null = null
 export const docsRoutes = new Hono()
 
 docsRoutes.get("/", async (c) => {
-  if (docsHtml != null) {
-    cacheReply(c.res, CacheTimes.DAY)
+	if (docsHtml != null) {
+		cacheReply(c.res, CacheTimes.DAY)
 
-    return c.html(docsHtml)
-  }
+		return c.html(docsHtml)
+	}
 
-  docsHtml = existsSync(filePath) ? await readFile(filePath, "utf8") : null
+	docsHtml = existsSync(filePath) ? await readFile(filePath, "utf8") : null
 
-  if (docsHtml == null) {
-    throw new Error("docs.html not found")
-  } else {
-    cacheReply(c.res, CacheTimes.DAY)
+	if (docsHtml == null) {
+		throw new Error("docs.html not found")
+	} else {
+		cacheReply(c.res, CacheTimes.DAY)
 
-    return c.html(docsHtml)
-  }
+		return c.html(docsHtml)
+	}
 })

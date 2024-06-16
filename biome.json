@@ -3,7 +3,7 @@
 	"formatter": {
 		"lineEnding": "lf",
 		"indentStyle": "tab",
-		"lineWidth": 85,
+		"lineWidth": 90,
 		"formatWithErrors": true
 	},
 	"javascript": {
