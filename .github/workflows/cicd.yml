@@ -13,10 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: BeeeQueue/setup-node@corepack
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-          corepack: true
+
+      - run: corepack enable
 
       - name: find pnpm cache path
         id: cache
@@ -50,10 +51,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: BeeeQueue/setup-node@corepack
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-          corepack: true
+
+      - run: corepack enable
 
       - name: find pnpm cache path
         id: cache
@@ -77,10 +79,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: BeeeQueue/setup-node@corepack
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-          corepack: true
+
+      - run: corepack enable
 
       - name: find pnpm cache path
         id: cache
