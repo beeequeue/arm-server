@@ -4,8 +4,7 @@
  * @return {Promise<void>}
  */
 export async function up(knex) {
-  await knex.raw("PRAGMA journal_mode=WAL;")
+	await knex.raw("PRAGMA journal_mode=WAL;")
 }
 
-export async function down() {
-}
+export async function down() {}

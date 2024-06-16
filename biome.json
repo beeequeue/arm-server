@@ -1,0 +1,24 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.8.0/schema.json",
+	"formatter": {
+		"lineEnding": "lf",
+		"indentStyle": "tab",
+		"lineWidth": 90,
+		"formatWithErrors": true
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double",
+			"semicolons": "asNeeded"
+		}
+	},
+	"linter": {
+		"enabled": false
+	},
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"defaultBranch": "main",
+		"useIgnoreFile": true
+	}
+}

@@ -34,7 +34,15 @@ jobs:
 
       - run: pnpm lint --format compact
 
-      - uses: dprint/check@v2.2
+  fmt:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: biomejs/setup-biome@v2
+
+      - run: biome check
 
   typecheck:
     runs-on: ubuntu-latest

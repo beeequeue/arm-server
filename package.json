@@ -1,84 +1,80 @@
 {
-  "name": "arm-server",
-  "type": "module",
-  "author": "BeeeQueue <adam@haglund.dev>",
-  "version": "1.0.0",
-  "private": true,
-  "license": "AGPL-3.0-only",
-  "homepage": "https://arm.haglund.dev/docs",
-  "packageManager": "pnpm@9.3.0",
-  "engines": {
-    "node": ">=20"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "pnpm --silent lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,ts,json}": [
-      "dprint fmt"
-    ],
-    "Dockerfile": [
-      "dprint fmt"
-    ]
-  },
-  "scripts": {
-    "dev": "onchange --initial --kill 'src/**' pnpm-lock.yaml -- pnpm --silent start",
-    "docs": "redoc-cli build docs/openapi.yaml",
-    "docs:dev": "onchange --initial --kill docs/openapi.yaml -- pnpm --silent docs",
-    "docker:build": "docker build . --tag arm-server",
-    "docker:start": "pnpm --silent docker:build; pnpm --silent docker:run",
-    "docker:run": "docker run -it --rm --name arm -p 3000:3000 arm-server",
-    "fetch-data": "tsx bin/update.ts --exit",
-    "lint": "eslint src",
-    "migrate": "knex migrate:latest --knexfile knexfile.js",
-    "migrate:create": "knex migrate:make --knexfile knexfile.js -x ts",
-    "start": "pnpm --silent run migrate && tsx src/index.ts",
-    "test": "NODE_ENV=test pnpm --silent run migrate && vitest",
-    "typecheck": "tsc --noEmit",
-    "prepare": "is-ci || simple-git-hooks"
-  },
-  "dependencies": {
-    "@hono/node-server": "1.11.2",
-    "@hono/sentry": "1.1.0",
-    "@hono/zod-validator": "0.2.2",
-    "@sentry/node": "8.9.2",
-    "@tsconfig/node20": "20.1.4",
-    "@tsconfig/strictest": "2.0.5",
-    "better-sqlite3": "11.0.0",
-    "hono": "4.4.5",
-    "is-ci": "3.0.1",
-    "knex": "3.0.1",
-    "ofetch": "1.3.4",
-    "pino": "9.2.0",
-    "pino-pretty": "11.2.1",
-    "rambda": "9.2.0",
-    "sucrase": "3.35.0",
-    "tsx": "4.15.4",
-    "type-fest": "4.20.0",
-    "typescript": "5.4.5",
-    "zod": "3.23.8"
-  },
-  "devDependencies": {
-    "@antfu/eslint-config": "2.21.1",
-    "@types/json-schema": "7.0.15",
-    "@types/node": "20.14.2",
-    "@vitest/coverage-v8": "1.6.0",
-    "ajv": "8.12.0",
-    "dotenv": "16.4.5",
-    "eslint": "8.57.0",
-    "lint-staged": "15.2.7",
-    "onchange": "7.1.0",
-    "redoc-cli": "0.13.21",
-    "simple-git-hooks": "2.11.1",
-    "tsconfig-paths": "4.2.0",
-    "vitest": "1.6.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "assert": "npm:@nolyfill/assert@latest",
-      "hasown": "npm:@nolyfill/hasown@latest",
-      "isarray": "npm:@nolyfill/isarray@latest",
-      "side-channel": "npm:@nolyfill/side-channel@latest"
-    }
-  }
+	"name": "arm-server",
+	"type": "module",
+	"author": "BeeeQueue <adam@haglund.dev>",
+	"version": "1.0.0",
+	"private": true,
+	"license": "AGPL-3.0-only",
+	"homepage": "https://arm.haglund.dev/docs",
+	"packageManager": "pnpm@9.3.0",
+	"engines": {
+		"node": ">=20"
+	},
+	"simple-git-hooks": {
+		"pre-commit": "pnpm --silent lint-staged"
+	},
+	"lint-staged": {
+		"*.{js,ts,json}": ["biome check --fix"]
+	},
+	"scripts": {
+		"dev": "onchange --initial --kill 'src/**' pnpm-lock.yaml -- pnpm --silent start",
+		"docs": "redoc-cli build docs/openapi.yaml",
+		"docs:dev": "onchange --initial --kill docs/openapi.yaml -- pnpm --silent docs",
+		"docker:build": "docker build . --tag arm-server",
+		"docker:start": "pnpm --silent docker:build; pnpm --silent docker:run",
+		"docker:run": "docker run -it --rm --name arm -p 3000:3000 arm-server",
+		"fetch-data": "tsx bin/update.ts --exit",
+		"lint": "eslint src",
+		"migrate": "knex migrate:latest --knexfile knexfile.js",
+		"migrate:create": "knex migrate:make --knexfile knexfile.js -x ts",
+		"start": "pnpm --silent run migrate && tsx src/index.ts",
+		"test": "NODE_ENV=test pnpm --silent run migrate && vitest",
+		"typecheck": "tsc --noEmit",
+		"prepare": "is-ci || simple-git-hooks"
+	},
+	"dependencies": {
+		"@hono/node-server": "1.11.2",
+		"@hono/sentry": "1.1.0",
+		"@hono/zod-validator": "0.2.2",
+		"@sentry/node": "8.9.2",
+		"@tsconfig/node20": "20.1.4",
+		"@tsconfig/strictest": "2.0.5",
+		"better-sqlite3": "11.0.0",
+		"hono": "4.4.5",
+		"is-ci": "3.0.1",
+		"knex": "3.0.1",
+		"ofetch": "1.3.4",
+		"pino": "9.2.0",
+		"pino-pretty": "11.2.1",
+		"rambda": "9.2.0",
+		"sucrase": "3.35.0",
+		"tsx": "4.15.4",
+		"type-fest": "4.20.0",
+		"typescript": "5.4.5",
+		"zod": "3.23.8"
+	},
+	"devDependencies": {
+		"@antfu/eslint-config": "2.21.1",
+		"@biomejs/biome": "1.8.1",
+		"@types/json-schema": "7.0.15",
+		"@types/node": "20.14.2",
+		"@vitest/coverage-v8": "1.6.0",
+		"ajv": "8.12.0",
+		"dotenv": "16.4.5",
+		"eslint": "8.57.0",
+		"lint-staged": "15.2.7",
+		"onchange": "7.1.0",
+		"redoc-cli": "0.13.21",
+		"simple-git-hooks": "2.11.1",
+		"tsconfig-paths": "4.2.0",
+		"vitest": "1.6.0"
+	},
+	"pnpm": {
+		"overrides": {
+			"assert": "npm:@nolyfill/assert@latest",
+			"hasown": "npm:@nolyfill/hasown@latest",
+			"isarray": "npm:@nolyfill/isarray@latest",
+			"side-channel": "npm:@nolyfill/side-channel@latest"
+		}
+	}
 }

@@ -10,10 +10,10 @@ const { NODE_ENV, PORT } = config
 const runUpdateScript = () => updateRelations().catch(captureException)
 
 if (NODE_ENV === "production") {
-  void runUpdateScript()
+	void runUpdateScript()
 
-  // eslint-disable-next-line ts/no-misused-promises
-  setInterval(runUpdateScript, 1000 * 60 * 60 * 24)
+	// eslint-disable-next-line ts/no-misused-promises
+	setInterval(runUpdateScript, 1000 * 60 * 60 * 24)
 }
 
 const app = createApp()
