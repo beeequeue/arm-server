@@ -20,7 +20,6 @@ export const singularItemInputSchema = z
 		kitsu: numberIdSchema,
 		livechart: numberIdSchema,
 		"notify-moe": stringIdSchema,
-		themoviedb: numberIdSchema,
 		myanimelist: numberIdSchema,
 	})
 	.partial()

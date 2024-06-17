@@ -7,7 +7,6 @@ export const numberIdSourceSchema = z.enum([
 	"anisearch",
 	"kitsu",
 	"livechart",
-	"themoviedb",
 	"myanimelist",
 ])
 
