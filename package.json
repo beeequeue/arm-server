@@ -18,7 +18,7 @@
 	},
 	"scripts": {
 		"dev": "onchange --initial --kill 'src/**' pnpm-lock.yaml -- pnpm --silent start",
-		"docs": "pnpx --package=@redocly/cli redocly build-docs docs/openapi.yaml",
+		"docs": "pnpm --package=@redocly/cli dlx redocly build-docs docs/openapi.yaml",
 		"docs:dev": "onchange --initial --kill docs/openapi.yaml -- pnpm --silent docs",
 		"docker:build": "docker build . --tag arm-server",
 		"docker:start": "pnpm --silent docker:build; pnpm --silent docker:run",
