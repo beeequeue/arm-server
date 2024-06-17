@@ -28,7 +28,7 @@ ENV CI=1
 # Install dependencies
 RUN pnpm install --frozen-lockfile
 
-RUN pnpm --silent run docs
+RUN pnpm run docs
 
 FROM node:20-alpine
 
