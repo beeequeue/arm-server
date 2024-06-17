@@ -306,7 +306,6 @@ paths:
               - anidb
               - anime-planet
               - anisearch
-              - imdb
               - kitsu
               - livechart
               - notify-moe
@@ -387,13 +386,6 @@ paths:
                         - type: integer
                           minimum: 0
                           maximum: 50000000
-                    imdb:
-                      oneOf:
-                        - type: 'null'
-                        - type: string
-                          pattern: tt\d+
-                          minLength: 1
-                          maxLength: 50
                     kitsu:
                       oneOf:
                         - type: 'null'
@@ -450,13 +442,6 @@ paths:
                           - type: integer
                             minimum: 0
                             maximum: 50000000
-                      imdb:
-                        oneOf:
-                          - type: 'null'
-                          - type: string
-                            pattern: tt\d+
-                            minLength: 1
-                            maxLength: 50
                       kitsu:
                         oneOf:
                           - type: 'null'
