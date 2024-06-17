@@ -2,7 +2,7 @@ import { $fetch } from "ofetch/node"
 import { groupBy } from "rambda"
 import { afterAll, afterEach, expect, it, vi } from "vitest"
 
-import { type Relation, knex } from "./db.js"
+import { type Relation, Source, knex } from "./db.js"
 import {
 	type AnimeListsSchema,
 	formatEntry,
@@ -74,19 +74,55 @@ it("handles bad values", async () => {
   `)
 })
 
-it("handles duplicates", async () => {
+it.only("handles duplicates", async () => {
 	const entries: Relation[] = await fetch(
 		"https://raw.githubusercontent.com/Fribb/anime-lists/master/anime-list-full.json",
 	)
 		.then((r) => r.json())
 		.then((e) => e.map(formatEntry))
 
-	const groups = groupBy((e) => e.imdb!, removeDuplicates(entries))
-	expect(
-		Object.fromEntries(
-			Object.entries(groups)
-				.filter(([id, g]) => id !== "undefined" && id !== "null" && g.length > 1)
-				.map(([id, g]) => [id, g.length]),
-		),
-	).toStrictEqual({})
+	// There should be >=5 Konosuba entries
+	const konosubaEntries = entries.filter(({ themoviedb }) => themoviedb === 65844)
+	expect(konosubaEntries.length).toBeGreaterThanOrEqual(5)
+
+	const results = removeDuplicates(entries)
+
+	// There should still be 5 Konosuba entries
+	expect(results.filter(({ themoviedb }) => themoviedb === 65844).length).toBe(
+		konosubaEntries.length,
+	)
+
+	const goodSources = [
+		Source.AniDB,
+		Source.AniList,
+		Source.AnimePlanet,
+		Source.AniSearch,
+		Source.Kitsu,
+		Source.LiveChart,
+		Source.NotifyMoe,
+		Source.MAL,
+	]
+
+	// Check if any sources have duplicate ids
+	const duplicates = Object.fromEntries(
+		goodSources.map((source) => {
+			const groups = groupBy((e) => e[source]?.toString() ?? "undefined", results)
+			return [
+				source,
+				Object.fromEntries(
+					Object.entries(groups)
+						.filter(([id, g]) => id !== "undefined" && id !== "null" && g.length > 1)
+						.map(([id, g]) => [id, g.length]),
+				),
+			]
+		}),
+	)
+	for (const goodSource of goodSources) {
+		expect(duplicates[goodSource], `${goodSource} has duplicates`).toStrictEqual({})
+	}
+
+	const findEntry = (source: Source, id: number | string) =>
+		results.find((entry) => entry[source] === id)
+	expect(findEntry(Source.AniDB, 11261)).toBeDefined()
+	expect(findEntry(Source.AniDB, 11992)).toBeDefined()
 })

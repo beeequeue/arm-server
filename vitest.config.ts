@@ -5,7 +5,7 @@ export default defineConfig(async ({ command }) => ({
 		reporters: ["verbose"],
 		pool: "forks",
 		poolOptions: {
-			forks: { minForks: 1, maxForks: 1 },
+			forks: { singleFork: true, minForks: 1, maxForks: 1 },
 		},
 
 		env: {
