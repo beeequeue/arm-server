@@ -27,11 +27,11 @@ tags:
     description: |
       `v2` adds more Sources thanks to [Fribb/anime-lists](https://github.com/Fribb/anime-lists).
       
-      Unfortunately TheTVDB and TheMovieDB use one entry per **show** instead of **season** meaning their IDs become one-to-many mappings.
+      Unfortunately IMDB, TheMovieDB, and TheTVDB use one entry per **show** instead of **season** meaning their IDs become one-to-many mappings.
 
       This means it cannot be queried for in `/api/v2/ids` since it's impossible for the API to look the same in that case.
 
-      Instead I added `/api/v2/thetvdb` and `/api/v2/themoviedb` if you _really_ want to query by their IDs.
+      Instead I added `/api/v2/imdb`, `/api/v2/themoviedb`, and `/api/v2/thetvdb` if you want to query by their IDs.
   - name: v1
 
 $defs:
@@ -492,10 +492,41 @@ paths:
         '400':
           $ref: '#/$defs/400'
 
-  /api/v2/thetvdb:
+  /api/v2/imdb:
     get:
-      operationId: v2-thetvdb
-      summary: Fetch IDs by TheTVDB ID
+      operationId: v2-imdb
+      summary: Fetch IDs by IMDB ID
+      description: ' '
+      security: [{}]
+      tags:
+        - v2
+
+      parameters:
+        - name: id
+          in: query
+          required: true
+          example: tt5370118
+          schema:
+            type: integer
+            minimum: 1
+        - $ref: "#/$defs/include_param"
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/$defs/nullable_relation'
+        '400':
+          $ref: '#/$defs/400'
+
+  /api/v2/themoviedb:
+    get:
+      operationId: v2-themoviedb
+      summary: Fetch IDs by TheMovieDB ID
       description: ' '
       security: [{}]
       tags:
@@ -523,10 +554,10 @@ paths:
         '400':
           $ref: '#/$defs/400'
 
-  /api/v2/themoviedb:
+  /api/v2/thetvdb:
     get:
-      operationId: v2-themoviedb
-      summary: Fetch IDs by TheMovieDB ID
+      operationId: v2-thetvdb
+      summary: Fetch IDs by TheTVDB ID
       description: ' '
       security: [{}]
       tags:

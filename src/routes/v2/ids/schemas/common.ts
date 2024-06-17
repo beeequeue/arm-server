@@ -11,4 +11,3 @@ export const numberIdSourceSchema = z.enum([
 ])
 
 export const stringIdSourceSchema = z.enum(["anime-planet", "notify-moe"])
-export const imdbSourceSchema = z.enum(["imdb"])

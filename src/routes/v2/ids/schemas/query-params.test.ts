@@ -14,7 +14,6 @@ const okCases = [
 	[{ source: Source.Kitsu, id: 1337 }, true],
 	[{ source: Source.Kitsu, id: 133_700 }, true],
 	[{ source: Source.AnimePlanet, id: "1337" }, true],
-	[{ source: Source.IMDB, id: "tt1337" }, true],
 ] satisfies Cases<QueryParamQuery>
 
 const badCases: Cases = [
@@ -24,7 +23,7 @@ const badCases: Cases = [
 	[{ source: Source.AniList, id: null }, false],
 	[{ source: Source.AniList, id: -1234 }, false],
 	[{ source: Source.AniList, id: 50_000_001 }, false],
-	[{ source: Source.IMDB, id: "1337" }, false],
+	[{ source: Source.IMDB, id: "tt1337" }, false],
 	[{ source: Source.TheTVDB, id: 1337 }, false],
 ]
 

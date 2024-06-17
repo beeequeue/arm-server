@@ -1,11 +1,7 @@
 import { z } from "zod"
 
 import type { Relation } from "../../../../db.js"
-import {
-	imdbIdSchema,
-	numberIdSchema,
-	stringIdSchema,
-} from "../../../../shared-schemas.js"
+import { numberIdSchema, stringIdSchema } from "../../../../shared-schemas.js"
 
 // Does not include `thetvdb` due to the one-to-many issue
 type BodyItem = Omit<Relation, "thetvdb">
@@ -16,7 +12,6 @@ export const singularItemInputSchema = z
 		anilist: numberIdSchema,
 		"anime-planet": stringIdSchema,
 		anisearch: numberIdSchema,
-		imdb: imdbIdSchema,
 		kitsu: numberIdSchema,
 		livechart: numberIdSchema,
 		"notify-moe": stringIdSchema,
