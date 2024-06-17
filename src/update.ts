@@ -16,7 +16,7 @@ export type AnimeListsSchema = Array<{
 	anilist_id?: number
 	"anime-planet_id"?: string
 	anisearch_id?: number
-	imdb_id?: `tt${string}`
+	imdb_id?: `tt${string}` | ""
 	kitsu_id?: number
 	livechart_id?: number
 	mal_id?: number
@@ -48,7 +48,7 @@ const fetchDatabase = async (): Promise<AnimeListsSchema | null> => {
 	return response
 }
 
-const badValues = ["unknown", "tv special"] as const
+const badValues = ["", "unknown", "tv special"] as const
 
 const handleBadValues = <T extends string | number | undefined>(
 	value: T | "unknown",
