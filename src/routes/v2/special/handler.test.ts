@@ -44,61 +44,61 @@ afterAll(async () => {
 })
 
 describe("imdb", () => {
-  it("fetches relations correctly", async () => {
-    await createRelations(4, 1336)
-    const relations = await createRelations(3, 1337)
+	it("fetches relations correctly", async () => {
+		await createRelations(4, 1336)
+		const relations = await createRelations(3, 1337)
 
-    const response = await testClient(app).api.v2.imdb.$get({
-      query: {
-        id: relations[0].imdb!,
-      },
-    })
+		const response = await testClient(app).api.v2.imdb.$get({
+			query: {
+				id: relations[0].imdb!,
+			},
+		})
 
-    await expect(response.json()).resolves.toStrictEqual(relations)
-    expect(response.status).toBe(200)
-    expect(response.headers.get("content-type")).toContain("application/json")
-  })
+		await expect(response.json()).resolves.toStrictEqual(relations)
+		expect(response.status).toBe(200)
+		expect(response.headers.get("content-type")).toContain("application/json")
+	})
 
-  it("returns empty array when id doesn't exist", async () => {
-    const response = await testClient(app).api.v2.imdb.$get({
-      query: {
-        id: "tt404",
-      },
-    })
+	it("returns empty array when id doesn't exist", async () => {
+		const response = await testClient(app).api.v2.imdb.$get({
+			query: {
+				id: "tt404",
+			},
+		})
 
-    await expect(response.json()).resolves.toStrictEqual([])
-    expect(response.status).toBe(200)
-    expect(response.headers.get("content-type")).toContain("application/json")
-  })
+		await expect(response.json()).resolves.toStrictEqual([])
+		expect(response.status).toBe(200)
+		expect(response.headers.get("content-type")).toContain("application/json")
+	})
 
-  it("can return a partial response", async () => {
-    const relation: Relation = {
-      anidb: 1337,
-      anilist: 1337,
-      "anime-planet": null!,
-      anisearch: null!,
-      imdb: "tt1337",
-      kitsu: null!,
-      livechart: null!,
-      "notify-moe": null!,
-      themoviedb: null!,
-      thetvdb: null!,
-      myanimelist: null!,
-    }
-    await knex.insert(relation).into("relations")
+	it("can return a partial response", async () => {
+		const relation: Relation = {
+			anidb: 1337,
+			anilist: 1337,
+			"anime-planet": null!,
+			anisearch: null!,
+			imdb: "tt1337",
+			kitsu: null!,
+			livechart: null!,
+			"notify-moe": null!,
+			themoviedb: null!,
+			thetvdb: null!,
+			myanimelist: null!,
+		}
+		await knex.insert(relation).into("relations")
 
-    const response = await testClient(app).api.v2.imdb.$get({
-      query: {
-        id: relation.imdb!,
-      },
-    })
+		const response = await testClient(app).api.v2.imdb.$get({
+			query: {
+				id: relation.imdb!,
+			},
+		})
 
-    await expect(response.json()).resolves.toStrictEqual([relation])
-    expect(response.status).toBe(200)
-    expect(response.headers.get("content-type")).toContain("application/json")
-  })
+		await expect(response.json()).resolves.toStrictEqual([relation])
+		expect(response.status).toBe(200)
+		expect(response.headers.get("content-type")).toContain("application/json")
+	})
 
-  testIncludeQueryParam(app, "/api/v2/imdb", Source.IMDB)
+	testIncludeQueryParam(app, "/api/v2/imdb", Source.IMDB)
 })
 
 describe("thetvdb", () => {
@@ -156,7 +156,7 @@ describe("thetvdb", () => {
 		expect(response.headers.get("content-type")).toContain("application/json")
 	})
 
-  testIncludeQueryParam(app, "/api/v2/thetvdb", Source.TheTVDB)
+	testIncludeQueryParam(app, "/api/v2/thetvdb", Source.TheTVDB)
 })
 
 describe("themoviedb", () => {
@@ -197,7 +197,7 @@ describe("themoviedb", () => {
 			kitsu: null!,
 			livechart: null!,
 			"notify-moe": null!,
-      themoviedb: 1337,
+			themoviedb: 1337,
 			thetvdb: null!,
 			myanimelist: null!,
 		}
@@ -214,5 +214,5 @@ describe("themoviedb", () => {
 		expect(response.headers.get("content-type")).toContain("application/json")
 	})
 
-  testIncludeQueryParam(app, "/api/v2/themoviedb", Source.TheMovieDB)
+	testIncludeQueryParam(app, "/api/v2/themoviedb", Source.TheMovieDB)
 })

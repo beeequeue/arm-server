@@ -74,7 +74,7 @@ it("handles bad values", async () => {
   `)
 })
 
-it.only("handles duplicates", async () => {
+it("handles duplicates", async () => {
 	const entries: Relation[] = await fetch(
 		"https://raw.githubusercontent.com/Fribb/anime-lists/master/anime-list-full.json",
 	)

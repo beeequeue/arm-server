@@ -83,8 +83,8 @@ export const removeDuplicates = (entries: Relation[]): Relation[] => {
 				source === Source.TheMovieDB ||
 				source === Source.IMDB
 			) {
-        continue
-      }
+				continue
+			}
 
 			if (existing.get(source)!.has(id)) return false
 

@@ -10,7 +10,7 @@ export const testIncludeQueryParam = (
 ) => {
 	const arrayify = <T>(data: T) => (source !== Source.AniList ? [data] : data)
 	const prefixify = <S extends Source, T extends string | number>(source: S, input: T) =>
-		source === "imdb" ? `tt${input}` as const : input
+		source === "imdb" ? (`tt${input}` as const) : input
 
 	describe("?include", () => {
 		test("single source", async () => {
