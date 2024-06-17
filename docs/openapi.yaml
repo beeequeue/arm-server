@@ -3,6 +3,9 @@ openapi: 3.1.0
 info:
   version: 2.1.0
   title: API Docs - arm-server
+  license:
+    name: GNU Affero General Public License v3.0 only
+    identifier: AGPL-3.0-only
   contact:
     name: BeeeQueue
     url: https://github.com/BeeeQueue/arm-server
@@ -24,11 +27,11 @@ tags:
     description: |
       `v2` adds more Sources thanks to [Fribb/anime-lists](https://github.com/Fribb/anime-lists).
       
-      Unfortunately TheTVDB uses one entry per **show** instead of **season** meaning its IDs become one-to-many mappings.
-      
-      This meant it cannot be queried for in `/api/v2/ids` since it's impossible for the API to look the same in that case.
-      
-      Instead I added `/api/v2/thetvdb` if you _really_ want to query by their IDs.
+      Unfortunately TheTVDB and TheMovieDB use one entry per **show** instead of **season** meaning their IDs become one-to-many mappings.
+
+      This means it cannot be queried for in `/api/v2/ids` since it's impossible for the API to look the same in that case.
+
+      Instead I added `/api/v2/thetvdb` and `/api/v2/themoviedb` if you _really_ want to query by their IDs.
   - name: v1
 
 $defs:
@@ -57,7 +60,7 @@ $defs:
               example: Bad request
             message:
               type: string
-              example: body/1/anilist must be >= 0
+              example: "1: Number must be greater than or equal to 1, Number must be greater than 0"
 
   relation:
     type: object
@@ -211,7 +214,7 @@ paths:
     get:
       operationId: getIds
       summary: Fetch IDs via query parameters
-
+      security: [{}]
       tags:
         - v1
 
@@ -254,6 +257,7 @@ paths:
         If using array queries, the resulting array will map to the corresponding input!
         
         e.g. `body[1]` will be the result of `query[1]`.
+      security: [{}]
       tags:
         - v1
 
@@ -286,6 +290,7 @@ paths:
       operationId: v2-getIds
       summary: Fetch IDs via query parameters
       description: ' '
+      security: [{}]
       tags:
         - v2
 
@@ -304,7 +309,6 @@ paths:
               - imdb
               - kitsu
               - livechart
-              - themoviedb
               - notify-moe
               - myanimelist
         - name: id
@@ -338,6 +342,7 @@ paths:
         If using array queries, the resulting array will map to the corresponding input!
         
         e.g. `body[1]` will be the result of `query[1]`.
+      security: [{}]
       tags:
         - v2
 
@@ -407,12 +412,6 @@ paths:
                         - type: string
                           minLength: 1
                           maxLength: 50
-                    themoviedb:
-                      oneOf:
-                        - type: 'null'
-                        - type: integer
-                          minimum: 0
-                          maximum: 50000000
                     myanimelist:
                       oneOf:
                         - type: 'null'
@@ -476,12 +475,6 @@ paths:
                           - type: string
                             minLength: 1
                             maxLength: 50
-                      themoviedb:
-                        oneOf:
-                          - type: 'null'
-                          - type: integer
-                            minimum: 0
-                            maximum: 50000000
                       myanimelist:
                         oneOf:
                           - type: 'null'
@@ -504,6 +497,38 @@ paths:
       operationId: v2-thetvdb
       summary: Fetch IDs by TheTVDB ID
       description: ' '
+      security: [{}]
+      tags:
+        - v2
+
+      parameters:
+        - name: id
+          in: query
+          required: true
+          example: 1337
+          schema:
+            type: integer
+            minimum: 1
+        - $ref: "#/$defs/include_param"
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/$defs/nullable_relation'
+        '400':
+          $ref: '#/$defs/400'
+
+  /api/v2/themoviedb:
+    get:
+      operationId: v2-themoviedb
+      summary: Fetch IDs by TheMovieDB ID
+      description: ' '
+      security: [{}]
       tags:
         - v2
 

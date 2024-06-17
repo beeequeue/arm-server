@@ -18,7 +18,7 @@
 	},
 	"scripts": {
 		"dev": "onchange --initial --kill 'src/**' pnpm-lock.yaml -- pnpm --silent start",
-		"docs": "redoc-cli build docs/openapi.yaml",
+		"docs": "pnpx @redocly/cli build-docs docs/openapi.yaml",
 		"docs:dev": "onchange --initial --kill docs/openapi.yaml -- pnpm --silent docs",
 		"docker:build": "docker build . --tag arm-server",
 		"docker:start": "pnpm --silent docker:build; pnpm --silent docker:run",
@@ -63,17 +63,13 @@
 		"eslint": "8.57.0",
 		"lint-staged": "15.2.7",
 		"onchange": "7.1.0",
-		"redoc-cli": "0.13.21",
 		"simple-git-hooks": "2.11.1",
 		"tsconfig-paths": "4.2.0",
 		"vitest": "1.6.0"
 	},
 	"pnpm": {
 		"overrides": {
-			"assert": "npm:@nolyfill/assert@latest",
-			"hasown": "npm:@nolyfill/hasown@latest",
-			"isarray": "npm:@nolyfill/isarray@latest",
-			"side-channel": "npm:@nolyfill/side-channel@latest"
+			"hasown": "npm:@nolyfill/hasown@latest"
 		}
 	}
 }
