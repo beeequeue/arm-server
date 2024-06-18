@@ -16,7 +16,7 @@ export type AnimeListsSchema = Array<{
 	anilist_id?: number
 	"anime-planet_id"?: string
 	anisearch_id?: number
-	imdb_id?: `tt${string}`
+	imdb_id?: `tt${string}` | ""
 	kitsu_id?: number
 	livechart_id?: number
 	mal_id?: number
@@ -48,10 +48,10 @@ const fetchDatabase = async (): Promise<AnimeListsSchema | null> => {
 	return response
 }
 
-const badValues = ["unknown", "tv special"] as const
+const badValues = ["", "unknown", "tv special"] as const
 
 const handleBadValues = <T extends string | number | undefined>(
-	value: T | "unknown",
+	value: T | (typeof badValues)[number],
 ): T | undefined => {
 	if (
 		typeof value === "string" &&
@@ -63,24 +63,38 @@ const handleBadValues = <T extends string | number | undefined>(
 	return value as T
 }
 
+// Removes duplicate source-id pairs from the list, except for thetvdb and themoviedb ids
 export const removeDuplicates = (entries: Relation[]): Relation[] => {
 	const sources = (Object.values(Source) as Source[]).filter(
-		(source) => source !== Source.TheTVDB,
+		(source) =>
+			source !== Source.TheTVDB && source !== Source.TheMovieDB && source !== Source.IMDB,
 	)
 	const existing = new Map<Source, Set<unknown>>(sources.map((name) => [name, new Set()]))
 
-	return entries.filter((entry) => {
-		for (const source of sources) {
-			if (entry[source] == null) continue
+	const goodEntries = entries.filter((entry) => {
+		for (const source of Object.keys(entry) as (keyof typeof entry)[]) {
+			const id = entry[source]
 
-			const set = existing.get(source)!
-			if (set.has(entry[source])) return false
+			// Ignore nulls
+			if (id == null) continue
+			// Ignore sources with one-to-many relations
+			if (
+				source === Source.TheTVDB ||
+				source === Source.TheMovieDB ||
+				source === Source.IMDB
+			) {
+				continue
+			}
 
-			set.add(entry[source])
+			if (existing.get(source)!.has(id)) return false
+
+			existing.get(source)!.add(id)
 		}
 
 		return true
 	})
+
+	return goodEntries
 }
 
 export const formatEntry = (entry: AnimeListsSchema[number]): Relation => ({

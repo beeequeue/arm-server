@@ -7,9 +7,7 @@ export const numberIdSourceSchema = z.enum([
 	"anisearch",
 	"kitsu",
 	"livechart",
-	"themoviedb",
 	"myanimelist",
 ])
 
 export const stringIdSourceSchema = z.enum(["anime-planet", "notify-moe"])
-export const imdbSourceSchema = z.enum(["imdb"])

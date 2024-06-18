@@ -3,74 +3,90 @@ import { describe, expect, test } from "vitest"
 import type { Hono } from "hono"
 import { Source, knex } from "../../db.js"
 
-export const testIncludeQueryParam = (app: Hono, path: string, thetvdb = false) => {
-	const source = thetvdb ? Source.TheTVDB : Source.AniList
-	const arrayify = <T>(data: T) => (thetvdb ? [data] : data)
+export const testIncludeQueryParam = (
+	app: Hono,
+	path: string,
+	source = Source.AniList,
+) => {
+	const arrayify = <T>(data: T) => (source !== Source.AniList ? [data] : data)
+	const prefixify = <S extends Source, T extends string | number>(source: S, input: T) =>
+		source === "imdb" ? (`tt${input}` as const) : input
 
 	describe("?include", () => {
-		test("single source (anilist)", async () => {
-			await knex.insert({ thetvdb: 1337, anilist: 1337 }).into("relations")
+		test("single source", async () => {
+			await knex
+				.insert({ anilist: 1337, thetvdb: 1337, themoviedb: 1337, imdb: "tt1337" })
+				.into("relations")
 
 			const query = new URLSearchParams({
 				source,
-				id: (1337).toString(),
+				id: prefixify(source, "1337"),
 				include: source,
 			})
 			const response = await app.fetch(
 				new Request(`http://localhost${path}?${query.toString()}`),
 			)
 
-			await expect(response.json()).resolves.toStrictEqual(arrayify({ [source]: 1337 }))
+			await expect(response.json()).resolves.toStrictEqual(
+				arrayify({ [source]: prefixify(source, 1337) }),
+			)
 			expect(response.status).toBe(200)
 			expect(response.headers.get("content-type")).toContain("application/json")
 		})
 
-		test("multiple sources (anilist,thetvdb)", async () => {
-			await knex.insert({ thetvdb: 1337, anilist: 1337 }).into("relations")
+		test("multiple sources (anilist,thetvdb,themoviedb)", async () => {
+			await knex
+				.insert({ anilist: 1337, thetvdb: 1337, themoviedb: 1337, imdb: "tt1337" })
+				.into("relations")
 
 			const query = new URLSearchParams({
 				source,
-				id: (1337).toString(),
-				include: [Source.AniList, Source.TheTVDB].join(","),
+				id: prefixify(source, "1337"),
+				include: [Source.AniList, Source.TheTVDB, Source.TheMovieDB, Source.IMDB].join(
+					",",
+				),
 			})
 			const response = await app.fetch(
 				new Request(`http://localhost${path}?${query.toString()}`),
 			)
 
 			await expect(response.json()).resolves.toStrictEqual(
-				arrayify({ thetvdb: 1337, anilist: 1337 }),
+				arrayify({ anilist: 1337, thetvdb: 1337, themoviedb: 1337, imdb: "tt1337" }),
 			)
 			expect(response.status).toBe(200)
 			expect(response.headers.get("content-type")).toContain("application/json")
 		})
 
 		test("all the sources", async () => {
-			await knex.insert({ thetvdb: 1337, anilist: 1337 }).into("relations")
+			await knex
+				.insert({ anilist: 1337, [source]: prefixify(source, 1337) })
+				.into("relations")
 
 			const query = new URLSearchParams({
 				source,
-				id: (1337).toString(),
+				id: prefixify(source, "1337"),
 				include: Object.values(Source).join(","),
 			})
 			const response = await app.fetch(
 				new Request(`http://localhost${path}?${query.toString()}`),
 			)
 
-			await expect(response.json()).resolves.toStrictEqual(
-				arrayify({
-					anidb: null,
-					anilist: 1337,
-					"anime-planet": null,
-					anisearch: null,
-					imdb: null,
-					kitsu: null,
-					livechart: null,
-					"notify-moe": null,
-					themoviedb: null,
-					thetvdb: 1337,
-					myanimelist: null,
-				}),
-			)
+			const expectedResult: Record<Source, number | null> = {
+				anidb: null,
+				anilist: 1337,
+				"anime-planet": null,
+				anisearch: null,
+				imdb: null,
+				kitsu: null,
+				livechart: null,
+				"notify-moe": null,
+				themoviedb: null,
+				thetvdb: null,
+				myanimelist: null,
+			}
+			expectedResult[source] = prefixify(source, 1337) as never
+
+			await expect(response.json()).resolves.toStrictEqual(arrayify(expectedResult))
 			expect(response.status).toBe(200)
 			expect(response.headers.get("content-type")).toContain("application/json")
 		})

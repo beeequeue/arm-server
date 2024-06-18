@@ -12,7 +12,7 @@ import { docsRoutes } from "./docs.js"
 import { logger } from "./lib/logger.js"
 import { v1Routes } from "./routes/v1/ids/handler.js"
 import { v2Routes } from "./routes/v2/ids/handler.js"
-import { thetvdbRoutes } from "./routes/v2/thetvdb/handler.js"
+import { specialRoutes } from "./routes/v2/special/handler.js"
 import { CacheTimes, cacheReply, createErrorJson } from "./utils.js"
 
 export const createApp = () => {
@@ -61,7 +61,7 @@ export const createApp = () => {
 		})
 		.route("/api", v1Routes)
 		.route("/api/v2", v2Routes)
-		.route("/api/v2", thetvdbRoutes)
+		.route("/api/v2", specialRoutes)
 		.route("/docs", docsRoutes)
 		.get("/", (c) => {
 			cacheReply(c.res, CacheTimes.WEEK * 4)

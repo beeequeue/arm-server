@@ -1,12 +1,8 @@
 import { z } from "zod"
 
-import {
-	imdbIdSchema,
-	numberIdSchema,
-	stringIdSchema,
-} from "../../../../shared-schemas.js"
+import { numberIdSchema, stringIdSchema } from "../../../../shared-schemas.js"
 import { includeSchema } from "../../include.js"
-import { imdbSourceSchema, numberIdSourceSchema, stringIdSourceSchema } from "./common.js"
+import { numberIdSourceSchema, stringIdSourceSchema } from "./common.js"
 
 export const queryInputSchema = z
 	.union([
@@ -17,10 +13,6 @@ export const queryInputSchema = z
 		z.object({
 			source: stringIdSourceSchema,
 			id: stringIdSchema,
-		}),
-		z.object({
-			source: imdbSourceSchema,
-			id: imdbIdSchema,
 		}),
 	])
 	.and(includeSchema)
