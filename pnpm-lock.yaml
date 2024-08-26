@@ -16,10 +16,10 @@ importers:
         version: 1.12.0
       '@hono/sentry':
         specifier: 1.2.0
-        version: 1.2.0(hono@4.4.13)
+        version: 1.2.0(hono@4.5.8)
       '@hono/zod-validator':
         specifier: 0.2.2
-        version: 0.2.2(hono@4.4.13)(zod@3.23.8)
+        version: 0.2.2(hono@4.5.8)(zod@3.23.8)
       '@sentry/node':
         specifier: 8.17.0
         version: 8.17.0
@@ -33,8 +33,8 @@ importers:
         specifier: 11.1.2
         version: 11.1.2
       hono:
-        specifier: 4.4.13
-        version: 4.4.13
+        specifier: 4.5.8
+        version: 4.5.8
       is-ci:
         specifier: 3.0.1
         version: 3.0.1
@@ -1713,8 +1713,8 @@ packages:
   help-me@5.0.0:
     resolution: {integrity: sha512-7xgomUX6ADmcYzFik0HzAxh/73YlKR9bmFzf51CZwR+b6YtzU2m0u49hQCqV6SvlqIqsaxovfwdvbnsw3b/zpg==}
 
-  hono@4.4.13:
-    resolution: {integrity: sha512-c6qqenclmQ6wpXzqiElMa2jt423PVCmgBreDfC5s2lPPpGk7d0lOymd8QTzFZyYC5mSSs6imiTMPip+gLwuW/g==}
+  hono@4.5.8:
+    resolution: {integrity: sha512-pqpSlcdqGkpTTRpLYU1PnCz52gVr0zVR9H5GzMyJWuKQLLEBQxh96q45QizJ2PPX8NATtz2mu31/PKW/Jt+90Q==}
     engines: {node: '>=16.0.0'}
 
   hosted-git-info@2.8.9:
@@ -3137,14 +3137,14 @@ snapshots:
 
   '@hono/node-server@1.12.0': {}
 
-  '@hono/sentry@1.2.0(hono@4.4.13)':
+  '@hono/sentry@1.2.0(hono@4.5.8)':
     dependencies:
-      hono: 4.4.13
+      hono: 4.5.8
       toucan-js: 4.0.0
 
-  '@hono/zod-validator@0.2.2(hono@4.4.13)(zod@3.23.8)':
+  '@hono/zod-validator@0.2.2(hono@4.5.8)(zod@3.23.8)':
     dependencies:
-      hono: 4.4.13
+      hono: 4.5.8
       zod: 3.23.8
 
   '@humanwhocodes/config-array@0.11.14':
@@ -4609,7 +4609,7 @@ snapshots:
 
   help-me@5.0.0: {}
 
-  hono@4.4.13: {}
+  hono@4.5.8: {}
 
   hosted-git-info@2.8.9: {}
 
