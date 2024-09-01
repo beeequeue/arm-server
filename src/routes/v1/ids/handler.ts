@@ -41,7 +41,6 @@ export const v1Routes = new Hono()
 		relations = await knex
 			.select(["anidb", "anilist", "myanimelist", "kitsu"])
 			.where(function () {
-				// eslint-disable-next-line ts/no-floating-promises
 				for (const item of input) this.orWhere(item)
 			})
 			.from("relations")

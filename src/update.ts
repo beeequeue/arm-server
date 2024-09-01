@@ -134,7 +134,7 @@ export const updateRelations = async () => {
 	logger.info({ remaining: goodEntries.length }, `Removed duplicates.`)
 
 	logger.info("Updating database...")
-	await knex.transaction((trx) =>
+	await knex.transaction(async (trx) =>
 		knex
 			.delete()
 			.from("relations")

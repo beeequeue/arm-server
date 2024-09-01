@@ -78,7 +78,7 @@ it("handles duplicates", async () => {
 	const entries: Relation[] = await fetch(
 		"https://raw.githubusercontent.com/Fribb/anime-lists/master/anime-list-full.json",
 	)
-		.then((r) => r.json())
+		.then(async (r) => r.json())
 		.then((e) => e.map(formatEntry))
 
 	// There should be >=5 Konosuba entries
