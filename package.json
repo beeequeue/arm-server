@@ -64,7 +64,7 @@
 		"@vitest/coverage-v8": "2.0.5",
 		"dotenv": "16.4.5",
 		"eslint": "9.9.1",
-		"lint-staged": "15.2.9",
+		"lint-staged": "15.2.10",
 		"onchange": "7.1.0",
 		"simple-git-hooks": "2.11.1",
 		"tsconfig-paths": "4.2.0",
