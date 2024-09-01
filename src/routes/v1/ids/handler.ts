@@ -12,25 +12,25 @@ export const v1Routes = new Hono()
 	.get("/ids", zValidator("query", queryInputSchema, zHook), async (c) => {
 		const query = c.req.query()
 
-		const row = await knex
+		const row = (await knex
 			.select(["anidb", "anilist", "myanimelist", "kitsu"])
 			.where({ [query.source]: query.id })
 			.from("relations")
-			.first()
+			.first()) as Relation | undefined
 
 		cacheReply(c.res, CacheTimes.SIX_HOURS)
 
 		return c.json((row as OldRelation) ?? null)
 	})
 	.post("/ids", zValidator("json", bodyInputSchema, zHook), async (c) => {
-		const input = await c.req.json()
+		const input = await c.req.json<typeof bodyInputSchema._type>()
 
 		if (!Array.isArray(input)) {
-			const relation = await knex
+			const relation = (await knex
 				.select(["anidb", "anilist", "myanimelist", "kitsu"])
 				.where(input)
 				.from("relations")
-				.first()
+				.first()) as Relation | undefined
 
 			return c.json(relation ?? null)
 		}
@@ -41,7 +41,6 @@ export const v1Routes = new Hono()
 		relations = await knex
 			.select(["anidb", "anilist", "myanimelist", "kitsu"])
 			.where(function () {
-				// eslint-disable-next-line ts/no-floating-promises
 				for (const item of input) this.orWhere(item)
 			})
 			.from("relations")

@@ -18,6 +18,7 @@ export type AnimeListsSchema = Array<{
 	anisearch_id?: number
 	imdb_id?: `tt${string}` | ""
 	kitsu_id?: number
+	null_id?: number // bug with data where `kitsu` became `null`
 	livechart_id?: number
 	mal_id?: number
 	"notify.moe_id"?: string
@@ -55,7 +56,7 @@ const handleBadValues = <T extends string | number | undefined>(
 ): T | undefined => {
 	if (
 		typeof value === "string" &&
-		(badValues.includes(value as any) || value.includes(","))
+		(badValues.includes(value as never) || value.includes(","))
 	) {
 		return undefined
 	}
@@ -103,7 +104,7 @@ export const formatEntry = (entry: AnimeListsSchema[number]): Relation => ({
 	"anime-planet": handleBadValues(entry["anime-planet_id"]),
 	anisearch: handleBadValues(entry.anisearch_id),
 	imdb: handleBadValues(entry.imdb_id),
-	kitsu: handleBadValues(entry.kitsu_id),
+	kitsu: handleBadValues(entry.kitsu_id ?? entry.null_id),
 	livechart: handleBadValues(entry.livechart_id),
 	myanimelist: handleBadValues(entry.mal_id),
 	"notify-moe": handleBadValues(entry["notify.moe_id"]),
@@ -134,7 +135,7 @@ export const updateRelations = async () => {
 	logger.info({ remaining: goodEntries.length }, `Removed duplicates.`)
 
 	logger.info("Updating database...")
-	await knex.transaction((trx) =>
+	await knex.transaction(async (trx) =>
 		knex
 			.delete()
 			.from("relations")

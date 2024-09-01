@@ -7,7 +7,7 @@ import { updateRelations } from "./update.js"
 
 const { NODE_ENV, PORT } = config
 
-const runUpdateScript = () => updateRelations().catch(captureException)
+const runUpdateScript = async () => updateRelations().catch(captureException)
 
 if (NODE_ENV === "production") {
 	void runUpdateScript()
@@ -18,4 +18,6 @@ if (NODE_ENV === "production") {
 
 const app = createApp()
 
-serve({ fetch: app.fetch, hostname: "0.0.0.0", port: PORT })
+serve({ fetch: app.fetch, hostname: "0.0.0.0", port: PORT }, () => {
+	console.log(`Server running on ${PORT}`)
+})

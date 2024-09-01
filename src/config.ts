@@ -13,7 +13,7 @@ const schema = zod.object({
 	PORT: zod.preprocess(Number, zod.number().int()).default(3000),
 	LOG_LEVEL: zod
 		.enum(["fatal", "error", "warn", "info", "debug", "trace"])
-		.default("info"),
+		.default(process.env.NODE_ENV === "development" ? "debug" : "info"),
 	USER_AGENT: zod.string().default("arm-server"),
 })
 
