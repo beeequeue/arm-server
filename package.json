@@ -6,7 +6,7 @@
 	"private": true,
 	"license": "AGPL-3.0-only",
 	"homepage": "https://arm.haglund.dev/docs",
-	"packageManager": "pnpm@9.5.0",
+	"packageManager": "pnpm@9.9.0",
 	"engines": {
 		"node": ">=20"
 	},
@@ -32,6 +32,9 @@
 		"typecheck": "tsc --noEmit",
 		"prepare": "is-ci || simple-git-hooks"
 	},
+	"resolutions": {
+		"esbuild": "0.23.1"
+	},
 	"dependencies": {
 		"@hono/node-server": "1.12.0",
 		"@hono/sentry": "1.2.0",
@@ -48,20 +51,20 @@
 		"pino-pretty": "11.2.1",
 		"rambda": "9.2.1",
 		"sucrase": "3.35.0",
-		"tsx": "4.16.2",
-		"type-fest": "4.21.0",
-		"typescript": "5.5.3",
+		"tsx": "4.19.0",
+		"type-fest": "4.26.0",
+		"typescript": "5.5.4",
 		"zod": "3.23.8"
 	},
 	"devDependencies": {
-		"@antfu/eslint-config": "2.21.1",
+		"@antfu/eslint-config": "3.0.0",
 		"@biomejs/biome": "1.8.3",
 		"@types/json-schema": "7.0.15",
-		"@types/node": "20.16.1",
+		"@types/node": "22.5.1",
 		"@vitest/coverage-v8": "2.0.5",
 		"dotenv": "16.4.5",
-		"eslint": "8.57.0",
-		"lint-staged": "15.2.7",
+		"eslint": "9.9.1",
+		"lint-staged": "15.2.9",
 		"onchange": "7.1.0",
 		"simple-git-hooks": "2.11.1",
 		"tsconfig-paths": "4.2.0",
@@ -69,7 +72,7 @@
 	},
 	"pnpm": {
 		"overrides": {
-			"hasown": "npm:@nolyfill/hasown@latest"
+			"is-core-module": "npm:@nolyfill/is-core-module@^1"
 		}
 	}
 }
