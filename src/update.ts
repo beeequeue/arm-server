@@ -55,7 +55,7 @@ const handleBadValues = <T extends string | number | undefined>(
 ): T | undefined => {
 	if (
 		typeof value === "string" &&
-		(badValues.includes(value as any) || value.includes(","))
+		(badValues.includes(value as never) || value.includes(","))
 	) {
 		return undefined
 	}

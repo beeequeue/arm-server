@@ -10,11 +10,11 @@ import { queryInputSchema } from "./schemas/query-params.js"
 export const v2Routes = new Hono()
 	.get("/ids", zValidator("query", queryInputSchema, zHook), async (c) => {
 		const query = c.req.query()
-		const data = await knex
+		const data = (await knex
 			.select(buildSelectFromInclude(query.include))
 			.where({ [query.source]: query.id })
 			.from("relations")
-			.first()
+			.first()) as Relation | undefined
 
 		cacheReply(c.res, CacheTimes.SIX_HOURS)
 
@@ -25,13 +25,17 @@ export const v2Routes = new Hono()
 		zValidator("json", bodyInputSchema, zHook),
 		zValidator("query", includeSchema, zHook),
 		async (c) => {
-			const input = await c.req.json()
+			const input = await c.req.json<typeof bodyInputSchema._type>()
 			const query = c.req.query()
 
 			const select = buildSelectFromInclude(query.include)
 
 			if (!Array.isArray(input)) {
-				const relation = await knex.select(select).where(input).from("relations").first()
+				const relation = (await knex
+					.select(select)
+					.where(input)
+					.from("relations")
+					.first()) as Relation | undefined
 
 				return c.json(relation ?? null)
 			}

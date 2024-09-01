@@ -2,8 +2,6 @@ import Knex from "knex"
 
 import knexfile from "../knexfile.js"
 
-export const knex = Knex(knexfile)
-
 export enum Source {
 	AniDB = "anidb",
 	AniList = "anilist",
@@ -36,3 +34,5 @@ export type OldRelation = Pick<
 	Relation,
 	Source.AniDB | Source.AniList | Source.MAL | Source.Kitsu
 >
+
+export const knex = Knex(knexfile)
