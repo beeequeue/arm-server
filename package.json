@@ -72,7 +72,7 @@
 	},
 	"pnpm": {
 		"overrides": {
-			"is-core-module": "npm:@nolyfill/is-core-module@^1"
+			"is-core-module": "npm:@nolyfill/is-core-module@1.0.39"
 		}
 	}
 }
