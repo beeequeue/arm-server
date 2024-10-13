@@ -2,7 +2,7 @@ import { testClient } from "hono/testing"
 import { afterAll, afterEach, describe, expect, it } from "vitest"
 
 import { createApp } from "../../../app.js"
-import { type Relation, Source, knex } from "../../../db.js"
+import { knex, type Relation, Source } from "../../../db.js"
 
 let id = 1
 const createRelations = async <N extends number>(

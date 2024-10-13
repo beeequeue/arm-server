@@ -4,7 +4,7 @@ import path from "node:path"
 
 import { Hono } from "hono"
 
-import { CacheTimes, cacheReply } from "./utils.js"
+import { cacheReply, CacheTimes } from "./utils.js"
 
 const filePath = path.resolve(import.meta.dirname, "../redoc-static.html")
 let docsHtml: string | null = null

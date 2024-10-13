@@ -1,9 +1,8 @@
+import { zValidator } from "@hono/zod-validator"
 import { Hono } from "hono"
 
-import { zValidator } from "@hono/zod-validator"
-
-import { type OldRelation, type Relation, type Source, knex } from "../../../db.js"
-import { CacheTimes, cacheReply, zHook } from "../../../utils.js"
+import { knex, type OldRelation, type Relation, type Source } from "../../../db.js"
+import { cacheReply, CacheTimes, zHook } from "../../../utils.js"
 
 import { bodyInputSchema } from "./schemas/json-body.js"
 import { queryInputSchema } from "./schemas/query-params.js"
