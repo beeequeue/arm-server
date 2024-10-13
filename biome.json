@@ -6,6 +6,9 @@
 		"lineWidth": 90,
 		"formatWithErrors": true
 	},
+	"organizeImports": {
+		"enabled": false
+	},
 	"javascript": {
 		"formatter": {
 			"quoteStyle": "double",
