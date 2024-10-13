@@ -1,7 +1,7 @@
+import type { Hono } from "hono"
 import { describe, expect, test } from "vitest"
 
-import type { Hono } from "hono"
-import { Source, knex } from "../../db.js"
+import { knex, Source } from "../../db.js"
 
 export const testIncludeQueryParam = (
 	app: Hono,

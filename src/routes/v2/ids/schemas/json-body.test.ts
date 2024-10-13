@@ -2,6 +2,7 @@ import type { JsonValue } from "type-fest"
 import { describe, expect, it } from "vitest"
 
 import type { Relation } from "../../../../db.js"
+
 import { bodyInputSchema } from "./json-body.js"
 
 type Case<V> = [V, boolean]

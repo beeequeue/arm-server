@@ -13,7 +13,7 @@ import { logger } from "./lib/logger.js"
 import { v1Routes } from "./routes/v1/ids/handler.js"
 import { v2Routes } from "./routes/v2/ids/handler.js"
 import { specialRoutes } from "./routes/v2/special/handler.js"
-import { CacheTimes, cacheReply, createErrorJson } from "./utils.js"
+import { cacheReply, CacheTimes, createErrorJson } from "./utils.js"
 
 export const createApp = () => {
 	const app = new Hono()

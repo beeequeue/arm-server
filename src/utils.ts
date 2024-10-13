@@ -2,7 +2,7 @@ import type { Context } from "hono"
 import type { HTTPException } from "hono/http-exception"
 import type { StatusCode } from "hono/utils/http-status"
 import type { JSONSchema7 } from "json-schema"
-import type { TypeOf, ZodError, z } from "zod"
+import type { TypeOf, z, ZodError } from "zod"
 
 export const mergeSchemas = <One extends JSONSchema7, Two extends JSONSchema7>(
 	one: One,

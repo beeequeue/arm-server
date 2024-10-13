@@ -2,7 +2,7 @@ import { $fetch } from "ofetch/node"
 import { groupBy } from "rambda"
 import { afterAll, afterEach, expect, it, vi } from "vitest"
 
-import { type Relation, Source, knex } from "./db.js"
+import { knex, type Relation, Source } from "./db.js"
 import {
 	type AnimeListsSchema,
 	formatEntry,

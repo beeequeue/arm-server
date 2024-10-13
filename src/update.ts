@@ -4,7 +4,7 @@ import { captureException } from "@sentry/node"
 import type { FetchError } from "ofetch/node"
 import { $fetch } from "ofetch/node"
 
-import { type Relation, Source, knex } from "./db.js"
+import { knex, type Relation, Source } from "./db.js"
 import { logger } from "./lib/logger.js"
 import { updateBasedOnManualRules } from "./manual-rules.js"
 
