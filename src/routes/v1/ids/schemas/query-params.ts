@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-import { numberIdSchema, oldSourceSchema } from "../../../../shared-schemas.js"
+import { numberIdSchema, oldSourceSchema } from "../../../../shared-schemas.ts"
 
 export const queryInputSchema = z
 	.object({

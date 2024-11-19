@@ -1,11 +1,11 @@
 import { zValidator } from "@hono/zod-validator"
 import { Hono } from "hono"
 
-import { knex, type OldRelation, type Relation, type Source } from "../../../db.js"
-import { cacheReply, CacheTimes, zHook } from "../../../utils.js"
+import { knex, type OldRelation, type Relation, type Source } from "../../../db.ts"
+import { cacheReply, CacheTimes, zHook } from "../../../utils.ts"
 
-import { bodyInputSchema } from "./schemas/json-body.js"
-import { queryInputSchema } from "./schemas/query-params.js"
+import { bodyInputSchema } from "./schemas/json-body.ts"
+import { queryInputSchema } from "./schemas/query-params.ts"
 
 export const v1Routes = new Hono()
 	.get("/ids", zValidator("query", queryInputSchema, zHook), async (c) => {

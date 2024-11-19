@@ -4,9 +4,9 @@ import { captureException } from "@sentry/node"
 import type { FetchError } from "ofetch/node"
 import { $fetch } from "ofetch/node"
 
-import { knex, type Relation, Source } from "./db.js"
-import { logger } from "./lib/logger.js"
-import { updateBasedOnManualRules } from "./manual-rules.js"
+import { knex, type Relation, Source } from "./db.ts"
+import { logger } from "./lib/logger.ts"
+import { updateBasedOnManualRules } from "./manual-rules.ts"
 
 const isFetchError = <T>(response: T | FetchError): response is FetchError =>
 	(response as FetchError).stack != null

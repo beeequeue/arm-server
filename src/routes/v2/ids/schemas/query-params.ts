@@ -1,9 +1,9 @@
 import { z } from "zod"
 
-import { numberIdSchema, stringIdSchema } from "../../../../shared-schemas.js"
-import { includeSchema } from "../../include.js"
+import { numberIdSchema, stringIdSchema } from "../../../../shared-schemas.ts"
+import { includeSchema } from "../../include.ts"
 
-import { numberIdSourceSchema, stringIdSourceSchema } from "./common.js"
+import { numberIdSourceSchema, stringIdSourceSchema } from "./common.ts"
 
 export const queryInputSchema = z
 	.union([

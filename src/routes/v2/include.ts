@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-import { Source } from "../../db.js"
+import { Source } from "../../db.ts"
 
 export const includeSchema = z.object({
 	include: z

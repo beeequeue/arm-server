@@ -1,9 +1,9 @@
 import { serve } from "@hono/node-server"
 import { captureException } from "@sentry/node"
 
-import { createApp } from "./app.js"
-import { config } from "./config.js"
-import { updateRelations } from "./update.js"
+import { createApp } from "./app.ts"
+import { config } from "./config.ts"
+import { updateRelations } from "./update.ts"
 
 const { NODE_ENV, PORT } = config
 

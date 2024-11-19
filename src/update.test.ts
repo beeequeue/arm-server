@@ -1,13 +1,13 @@
 import { $fetch } from "ofetch/node"
 import { afterAll, afterEach, expect, it, vi } from "vitest"
 
-import { knex, type Relation, Source } from "./db.js"
+import { knex, type Relation, Source } from "./db.ts"
 import {
 	type AnimeListsSchema,
 	formatEntry,
 	removeDuplicates,
 	updateRelations,
-} from "./update.js"
+} from "./update.ts"
 
 declare const fetch: (url: string) => Promise<{ json: () => Promise<any[]> }>
 

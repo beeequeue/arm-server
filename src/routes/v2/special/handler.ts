@@ -1,11 +1,11 @@
 import { zValidator } from "@hono/zod-validator"
 import { Hono } from "hono"
 
-import { knex, Source } from "../../../db.js"
-import { cacheReply, CacheTimes, zHook } from "../../../utils.js"
-import { buildSelectFromInclude } from "../include.js"
+import { knex, Source } from "../../../db.ts"
+import { cacheReply, CacheTimes, zHook } from "../../../utils.ts"
+import { buildSelectFromInclude } from "../include.ts"
 
-import { specialImdbInputSchema, specialInputSchema } from "./schemas/special.js"
+import { specialImdbInputSchema, specialInputSchema } from "./schemas/special.ts"
 
 export const specialRoutes = new Hono()
 	.get("/imdb", zValidator("query", specialImdbInputSchema, zHook), async (c) => {

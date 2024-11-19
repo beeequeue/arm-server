@@ -1,4 +1,4 @@
-import { knex, type Relation } from "./db.js"
+import { knex, type Relation } from "./db.ts"
 
 type Rule = `${keyof Relation}:${number}`
 const rules: Record<Rule, Rule> = {}

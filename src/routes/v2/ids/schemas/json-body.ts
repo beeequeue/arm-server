@@ -1,7 +1,7 @@
 import { z } from "zod"
 
-import type { Relation } from "../../../../db.js"
-import { numberIdSchema, stringIdSchema } from "../../../../shared-schemas.js"
+import type { Relation } from "../../../../db.ts"
+import { numberIdSchema, stringIdSchema } from "../../../../shared-schemas.ts"
 
 // Does not include `thetvdb` due to the one-to-many issue
 type BodyItem = Omit<Relation, "thetvdb">

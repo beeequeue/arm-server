@@ -1,9 +1,9 @@
 import type { JsonValue } from "type-fest"
 import { describe, expect, it } from "vitest"
 
-import { Source } from "../../../../db.js"
+import { Source } from "../../../../db.ts"
 
-import { queryInputSchema } from "./query-params.js"
+import { queryInputSchema } from "./query-params.ts"
 
 type Case = [JsonValue, boolean]
 type Cases = Case[]

@@ -1,9 +1,9 @@
 import type { JsonValue } from "type-fest"
 import { describe, expect, it } from "vitest"
 
-import { Source } from "../../../../db.js"
+import { Source } from "../../../../db.ts"
 
-import { queryInputSchema, type QueryParamQuery } from "./query-params.js"
+import { queryInputSchema, type QueryParamQuery } from "./query-params.ts"
 
 type Case<V> = [V, boolean]
 type Cases<V = JsonValue> = Array<Case<V>>

@@ -8,6 +8,7 @@
 		"moduleResolution": "bundler",
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
+		"allowImportingTsExtensions": true,
 
 		"lib": ["esnext"],
 		"importsNotUsedAsValues": "remove",

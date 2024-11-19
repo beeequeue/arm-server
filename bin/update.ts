@@ -1,3 +1,3 @@
-import { updateRelations } from "../src/update.js"
+import { updateRelations } from "../src/update.ts"
 
 await updateRelations()

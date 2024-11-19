@@ -1,9 +1,9 @@
 import type { JsonValue } from "type-fest"
 import { describe, expect, it } from "vitest"
 
-import type { Relation } from "../../../../db.js"
+import type { Relation } from "../../../../db.ts"
 
-import { bodyInputSchema } from "./json-body.js"
+import { bodyInputSchema } from "./json-body.ts"
 
 type Case<V> = [V, boolean]
 type Cases<V = JsonValue> = Array<Case<V>>

@@ -8,12 +8,12 @@ import { secureHeaders } from "hono/secure-headers"
 
 import pkgJson from "../package.json" assert { type: "json" }
 
-import { docsRoutes } from "./docs.js"
-import { logger } from "./lib/logger.js"
-import { v1Routes } from "./routes/v1/ids/handler.js"
-import { v2Routes } from "./routes/v2/ids/handler.js"
-import { specialRoutes } from "./routes/v2/special/handler.js"
-import { cacheReply, CacheTimes, createErrorJson } from "./utils.js"
+import { docsRoutes } from "./docs.ts"
+import { logger } from "./lib/logger.ts"
+import { v1Routes } from "./routes/v1/ids/handler.ts"
+import { v2Routes } from "./routes/v2/ids/handler.ts"
+import { specialRoutes } from "./routes/v2/special/handler.ts"
+import { cacheReply, CacheTimes, createErrorJson } from "./utils.ts"
 
 export const createApp = () => {
 	const app = new Hono()

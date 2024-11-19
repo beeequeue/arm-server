@@ -1,7 +1,7 @@
 import type { Hono } from "hono"
 import { describe, expect, test } from "vitest"
 
-import { knex, Source } from "../../db.js"
+import { knex, Source } from "../../db.ts"
 
 export const testIncludeQueryParam = (
 	app: Hono,

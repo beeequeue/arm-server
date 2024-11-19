@@ -1,7 +1,7 @@
 import { pino } from "pino"
 import PinoPretty from "pino-pretty"
 
-import { config } from "../config.js"
+import { config } from "../config.ts"
 
 const isProd = config.NODE_ENV === "production"
 
