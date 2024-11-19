@@ -8,7 +8,7 @@
   packageRules: [
     {
       packageNames: ["node"],
-      allowedVersions: "<=20",
+      allowedVersions: "<=22",
       rangeStrategy: "replace",
     },
     {

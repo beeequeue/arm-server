@@ -1,5 +1,4 @@
 import { $fetch } from "ofetch/node"
-import { groupBy } from "rambda"
 import { afterAll, afterEach, expect, it, vi } from "vitest"
 
 import { knex, type Relation, Source } from "./db.js"
@@ -106,13 +105,14 @@ it("handles duplicates", async () => {
 	// Check if any sources have duplicate ids
 	const duplicates = Object.fromEntries(
 		goodSources.map((source) => {
-			const groups = groupBy((e) => e[source]?.toString() ?? "undefined", results)
+			const groups = Object.groupBy(results, (e) => e[source]?.toString() ?? "undefined")
+
 			return [
 				source,
 				Object.fromEntries(
 					Object.entries(groups)
-						.filter(([id, g]) => id !== "undefined" && id !== "null" && g.length > 1)
-						.map(([id, g]) => [id, g.length]),
+						.filter(([id, g]) => id !== "undefined" && id !== "null" && g!.length > 1)
+						.map(([id, g]) => [id, g!.length]),
 				),
 			]
 		}),
