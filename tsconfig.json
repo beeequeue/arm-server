@@ -1,20 +1,22 @@
 {
-	"extends": ["@tsconfig/node20/tsconfig.json", "@tsconfig/strictest/tsconfig.json"],
+	"extends": ["@tsconfig/node22/tsconfig.json", "@tsconfig/strictest/tsconfig.json"],
 	"compilerOptions": {
-		"module": "nodenext",
-		"moduleResolution": "nodenext",
-		"target": "esnext",
-
 		"noEmit": true,
-		"experimentalDecorators": true,
-		"esModuleInterop": true,
-		"allowSyntheticDefaultImports": true,
-		"resolveJsonModule": true,
 		"sourceMap": true,
+
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+
+		"lib": ["esnext"],
 		"importsNotUsedAsValues": "remove",
-		"noUncheckedIndexedAccess": false,
+		"noImplicitReturns": false,
 		"noPropertyAccessFromIndexSignature": false,
+		"noUncheckedIndexedAccess": false,
 		"exactOptionalPropertyTypes": false,
+		"verbatimModuleSyntax": false,
+
 		"types": ["node"]
 	},
 	"include": ["**/*.ts"],

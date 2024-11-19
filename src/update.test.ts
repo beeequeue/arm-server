@@ -1,4 +1,3 @@
-import { groupBy } from "es-toolkit"
 import { $fetch } from "ofetch/node"
 import { afterAll, afterEach, expect, it, vi } from "vitest"
 
@@ -106,13 +105,14 @@ it("handles duplicates", async () => {
 	// Check if any sources have duplicate ids
 	const duplicates = Object.fromEntries(
 		goodSources.map((source) => {
-			const groups = groupBy(results, (e) => e[source]?.toString() ?? "undefined")
+			const groups = Object.groupBy(results, (e) => e[source]?.toString() ?? "undefined")
+
 			return [
 				source,
 				Object.fromEntries(
 					Object.entries(groups)
-						.filter(([id, g]) => id !== "undefined" && id !== "null" && g.length > 1)
-						.map(([id, g]) => [id, g.length]),
+						.filter(([id, g]) => id !== "undefined" && id !== "null" && g!.length > 1)
+						.map(([id, g]) => [id, g!.length]),
 				),
 			]
 		}),

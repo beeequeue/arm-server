@@ -8,7 +8,7 @@
 	"homepage": "https://arm.haglund.dev/docs",
 	"packageManager": "pnpm@9.13.2",
 	"engines": {
-		"node": ">=20"
+		"node": ">=22"
 	},
 	"simple-git-hooks": {
 		"pre-commit": "pnpm --silent lint-staged"
@@ -40,10 +40,9 @@
 		"@hono/sentry": "1.2.0",
 		"@hono/zod-validator": "0.4.1",
 		"@sentry/node": "8.38.0",
-		"@tsconfig/node20": "20.1.4",
+		"@tsconfig/node22": "22.0.0",
 		"@tsconfig/strictest": "2.0.5",
 		"better-sqlite3": "11.5.0",
-		"es-toolkit": "1.27.0",
 		"hono": "4.6.10",
 		"is-ci": "3.0.1",
 		"knex": "3.1.0",

@@ -1,4 +1,4 @@
-FROM node:20-alpine AS runtime_deps
+FROM node:22-alpine AS runtime_deps
 
 RUN corepack enable
 
@@ -13,7 +13,7 @@ ENV NODE_ENV=production
 # Install dependencies
 RUN pnpm install --frozen-lockfile
 
-FROM node:20-alpine AS docs
+FROM node:22-alpine AS docs
 
 RUN corepack enable
 
@@ -30,7 +30,7 @@ RUN pnpm install --frozen-lockfile
 
 RUN pnpm run docs
 
-FROM node:20-alpine
+FROM node:22-alpine
 
 RUN corepack enable
 
