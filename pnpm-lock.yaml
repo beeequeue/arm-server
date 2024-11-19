@@ -33,6 +33,9 @@ importers:
       better-sqlite3:
         specifier: 11.5.0
         version: 11.5.0
+      es-toolkit:
+        specifier: 1.27.0
+        version: 1.27.0
       hono:
         specifier: 4.6.10
         version: 4.6.10
@@ -51,9 +54,6 @@ importers:
       pino-pretty:
         specifier: 13.0.0
         version: 13.0.0
-      rambda:
-        specifier: 9.4.0
-        version: 9.4.0
       sucrase:
         specifier: 3.35.0
         version: 3.35.0
@@ -1451,6 +1451,9 @@ packages:
   es-module-lexer@1.5.4:
     resolution: {integrity: sha512-MVNK56NiMrOwitFB7cqDwq0CQutbw+0BvLshJSse0MUNU+y1FC3bUS/AQg7oUng+/wKrrki7JfmwtVHkVfPLlw==}
 
+  es-toolkit@1.27.0:
+    resolution: {integrity: sha512-ETSFA+ZJArcuSCpzD2TjAy6UHpx4E4uqFsoDg9F/nTLogrLmVVZQ+zNxco5h7cWnA1nNak07IXsLcaSMih+ZPQ==}
+
   esbuild@0.24.0:
     resolution: {integrity: sha512-FuLPevChGDshgSicjisSooU0cemp/sGXR841D5LHMB7mTVOmsEHcAxaH3irL53+8YDIeVNQEySh4DaYU/iuPqQ==}
     engines: {node: '>=18'}
@@ -2485,9 +2488,6 @@ packages:
 
   quick-format-unescaped@4.0.4:
     resolution: {integrity: sha512-tYC1Q1hgyRuHgloV/YXs2w15unPVh8qfu/qCTfhTYamaw7fyhumKa2yGpdSo87vY32rIclj+4fWYQXUMs9EHvg==}
-
-  rambda@9.4.0:
-    resolution: {integrity: sha512-B7y7goUd+g0hNl5ODGUejNNERQL5gD8uANJ5Y5aHly8v0jKesFlwIe7prPfuJxttDpe3otQzHJ4NXMpTmL9ELA==}
 
   rc@1.2.8:
     resolution: {integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==}
@@ -4407,6 +4407,8 @@ snapshots:
 
   es-module-lexer@1.5.4: {}
 
+  es-toolkit@1.27.0: {}
+
   esbuild@0.24.0:
     optionalDependencies:
       '@esbuild/aix-ppc64': 0.24.0
@@ -5683,8 +5685,6 @@ snapshots:
   queue-microtask@1.2.3: {}
 
   quick-format-unescaped@4.0.4: {}
-
-  rambda@9.4.0: {}
 
   rc@1.2.8:
     dependencies:
