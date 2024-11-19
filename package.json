@@ -11,10 +11,10 @@
 		"node": ">=22"
 	},
 	"simple-git-hooks": {
-		"pre-commit": "pnpm --silent lint-staged"
+		"pre-commit": "node_modules/.bin/nano-staged"
 	},
-	"lint-staged": {
-		"*.{js,ts,json}": ["biome check --fix"]
+	"nano-staged": {
+		"*.{js,cjs,mjs,ts,cts,mts,json}": ["biome check --fix"]
 	},
 	"scripts": {
 		"dev": "onchange --initial --kill 'src/**' pnpm-lock.yaml -- pnpm --silent run start",
@@ -63,7 +63,7 @@
 		"@vitest/coverage-v8": "2.1.5",
 		"dotenv": "16.4.5",
 		"eslint": "9.14.0",
-		"lint-staged": "15.2.10",
+		"nano-staged": "0.8.0",
 		"onchange": "7.1.0",
 		"simple-git-hooks": "2.11.1",
 		"tsconfig-paths": "4.2.0",
@@ -71,7 +71,8 @@
 	},
 	"pnpm": {
 		"overrides": {
-			"is-core-module": "npm:@nolyfill/is-core-module@^1"
+			"is-core-module": "npm:@nolyfill/is-core-module@^1",
+			"safe-buffer": "npm:@nolyfill/safe-buffer@^1"
 		}
 	}
 }
