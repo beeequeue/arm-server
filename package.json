@@ -70,8 +70,8 @@
 	},
 	"pnpm": {
 		"overrides": {
-			"is-core-module": "npm:@nolyfill/is-core-module@^1",
-			"safe-buffer": "npm:@nolyfill/safe-buffer@^1"
+			"is-core-module": "npm:@nolyfill/is-core-module@1.0.39",
+			"safe-buffer": "npm:@nolyfill/safe-buffer@1.0.41"
 		}
 	}
 }
