@@ -59,14 +59,14 @@
 		"@biomejs/biome": "1.9.4",
 		"@types/json-schema": "7.0.15",
 		"@types/node": "22.9.3",
-		"@vitest/coverage-v8": "2.1.6",
+		"@vitest/coverage-v8": "2.1.8",
 		"dotenv": "16.4.5",
 		"eslint": "9.14.0",
 		"nano-staged": "0.8.0",
 		"onchange": "7.1.0",
 		"simple-git-hooks": "2.11.1",
 		"tsconfig-paths": "4.2.0",
-		"vitest": "2.1.6"
+		"vitest": "2.1.8"
 	},
 	"pnpm": {
 		"overrides": {
