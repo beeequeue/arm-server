@@ -58,7 +58,7 @@
 		"@antfu/eslint-config": "3.8.0",
 		"@biomejs/biome": "1.9.4",
 		"@types/json-schema": "7.0.15",
-		"@types/node": "22.9.3",
+		"@types/node": "22.10.1",
 		"@vitest/coverage-v8": "2.1.8",
 		"dotenv": "16.4.5",
 		"eslint": "9.14.0",
