@@ -39,7 +39,7 @@
 		"@hono/node-server": "1.13.7",
 		"@hono/sentry": "1.2.0",
 		"@hono/zod-validator": "0.4.1",
-		"@sentry/node": "8.38.0",
+		"@sentry/node": "8.49.0",
 		"@tsconfig/node22": "22.0.0",
 		"@tsconfig/strictest": "2.0.5",
 		"better-sqlite3": "11.5.0",
