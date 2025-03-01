@@ -1,15 +1,16 @@
-import { zValidator } from "@hono/zod-validator"
+import { sValidator } from "@hono/standard-validator"
 import { Hono } from "hono"
+import type { InferOutput } from "valibot"
 
 import { knex, type Relation, type Source } from "../../../db.ts"
-import { cacheReply, CacheTimes, zHook } from "../../../utils.ts"
+import { cacheReply, CacheTimes, validationHook } from "../../../utils.ts"
 import { buildSelectFromInclude, includeSchema } from "../include.ts"
 
 import { bodyInputSchema } from "./schemas/json-body.ts"
 import { queryInputSchema } from "./schemas/query-params.ts"
 
 export const v2Routes = new Hono()
-	.get("/ids", zValidator("query", queryInputSchema, zHook), async (c) => {
+	.get("/ids", sValidator("query", queryInputSchema, validationHook), async (c) => {
 		const query = c.req.query()
 		const data = (await knex
 			.select(buildSelectFromInclude(query.include))
@@ -23,10 +24,10 @@ export const v2Routes = new Hono()
 	})
 	.post(
 		"/ids",
-		zValidator("json", bodyInputSchema, zHook),
-		zValidator("query", includeSchema, zHook),
+		sValidator("json", bodyInputSchema, validationHook),
+		sValidator("query", includeSchema, validationHook),
 		async (c) => {
-			const input = await c.req.json<typeof bodyInputSchema._type>()
+			const input = await c.req.json<InferOutput<typeof bodyInputSchema>>()
 			const query = c.req.query()
 
 			const select = buildSelectFromInclude(query.include)

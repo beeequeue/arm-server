@@ -1,14 +1,15 @@
-import { zValidator } from "@hono/zod-validator"
+import { sValidator } from "@hono/standard-validator"
 import { Hono } from "hono"
+import type { InferOutput } from "valibot"
 
 import { knex, type OldRelation, type Relation, type Source } from "../../../db.ts"
-import { cacheReply, CacheTimes, zHook } from "../../../utils.ts"
+import { cacheReply, CacheTimes, validationHook } from "../../../utils.ts"
 
 import { bodyInputSchema } from "./schemas/json-body.ts"
 import { queryInputSchema } from "./schemas/query-params.ts"
 
 export const v1Routes = new Hono()
-	.get("/ids", zValidator("query", queryInputSchema, zHook), async (c) => {
+	.get("/ids", sValidator("query", queryInputSchema, validationHook), async (c) => {
 		const query = c.req.query()
 
 		const row = (await knex
@@ -21,8 +22,8 @@ export const v1Routes = new Hono()
 
 		return c.json((row as OldRelation) ?? null)
 	})
-	.post("/ids", zValidator("json", bodyInputSchema, zHook), async (c) => {
-		const input = await c.req.json<typeof bodyInputSchema._type>()
+	.post("/ids", sValidator("json", bodyInputSchema, validationHook), async (c) => {
+		const input = await c.req.json<InferOutput<typeof bodyInputSchema>>()
 
 		if (!Array.isArray(input)) {
 			const relation = (await knex

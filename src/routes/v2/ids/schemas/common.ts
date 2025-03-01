@@ -1,7 +1,7 @@
-import { z } from "zod"
+import * as v from "valibot"
 
 // Does not include `thetvdb` due to the one-to-many issue
-export const numberIdSourceSchema = z.enum([
+export const numberIdSourceSchema = v.picklist([
 	"anilist",
 	"anidb",
 	"anisearch",
@@ -10,4 +10,4 @@ export const numberIdSourceSchema = z.enum([
 	"myanimelist",
 ])
 
-export const stringIdSourceSchema = z.enum(["anime-planet", "notify-moe"])
+export const stringIdSourceSchema = v.picklist(["anime-planet", "notify-moe"])

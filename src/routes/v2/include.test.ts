@@ -1,15 +1,20 @@
-import { zValidator } from "@hono/zod-validator"
+import { sValidator } from "@hono/standard-validator"
 import type { Context } from "hono"
 import { Hono } from "hono"
 import { testClient } from "hono/testing"
 import { afterAll, beforeEach, describe, expect, it, vi } from "vitest"
 
 import { knex, Source } from "../../db.ts"
+import { validationHook } from "../../utils.ts"
 
 import { includeSchema } from "./include.ts"
 
 const handlerFn = vi.fn((c: Context) => c.json({ message: "ok" }))
-const app = new Hono().get("/test", zValidator("query", includeSchema), handlerFn)
+const app = new Hono().get(
+	"/test",
+	sValidator("query", includeSchema, validationHook),
+	handlerFn,
+)
 
 beforeEach(async () => {
 	await knex.delete().from("relations")

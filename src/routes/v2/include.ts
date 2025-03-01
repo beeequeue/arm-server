@@ -1,17 +1,19 @@
-import { z } from "zod"
+import * as v from "valibot"
 
 import { Source } from "../../db.ts"
 
-export const includeSchema = z.object({
-	include: z
-		.string()
-		.regex(/^[\-a-z,]+$/, { message: "Invalid `include` query" })
-		.min(1)
-		.max(100)
-		.optional(),
+export const includeSchema = v.object({
+	include: v.optional(
+		v.pipe(
+			v.string(),
+			v.regex(/^[\-a-z,]+$/, "Invalid `include` query"),
+			v.minLength(1),
+			v.maxLength(100),
+		),
+	),
 })
 
-export type IncludeQuery = z.infer<typeof includeSchema>
+export type IncludeQuery = v.InferOutput<typeof includeSchema>
 
 const sources = Object.values(Source)
 export const buildSelectFromInclude = (include: string | null | undefined) => {

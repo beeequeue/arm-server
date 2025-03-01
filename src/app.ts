@@ -15,8 +15,9 @@ import { v2Routes } from "./routes/v2/ids/handler.ts"
 import { specialRoutes } from "./routes/v2/special/handler.ts"
 import { cacheReply, CacheTimes, createErrorJson } from "./utils.ts"
 
-export const createApp = () => {
-	const app = new Hono()
+export const createApp = () =>
+	new Hono()
+
 		.use("*", async (c, next) => {
 			const start = Date.now()
 			logger.info(
@@ -38,10 +39,13 @@ export const createApp = () => {
 				"res",
 			)
 		})
+
 		.use("*", sentry({ dsn: process.env.SENTRY_DSN! }))
 		.use("*", cors({ origin: (origin) => origin }))
 		.use("*", secureHeaders())
+
 		.notFound((c) => createErrorJson(c, new HTTPException(404)))
+
 		.onError((error, c) => {
 			/* c8 ignore next 4 */
 			if (error instanceof HTTPException) {
@@ -59,15 +63,14 @@ export const createApp = () => {
 			const badImpl = new HTTPException(500, { cause: error })
 			return createErrorJson(c, badImpl)
 		})
+
 		.route("/api", v1Routes)
 		.route("/api/v2", v2Routes)
 		.route("/api/v2", specialRoutes)
 		.route("/docs", docsRoutes)
+
 		.get("/", (c) => {
 			cacheReply(c.res, CacheTimes.WEEK * 4)
 
 			return c.redirect(pkgJson.homepage, 301)
 		})
-
-	return app
-}

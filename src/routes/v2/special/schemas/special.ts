@@ -1,10 +1,16 @@
-import { z } from "zod"
+import * as v from "valibot"
 
 import { imdbIdSchema, numberIdSchema } from "../../../../shared-schemas.ts"
 import { includeSchema } from "../../include.ts"
 
-export const specialInputSchema = z.object({ id: numberIdSchema }).and(includeSchema)
+export const specialInputSchema = v.intersect([
+	v.object({ id: numberIdSchema }),
+	includeSchema,
+])
 
-export const specialImdbInputSchema = z.object({ id: imdbIdSchema }).and(includeSchema)
+export const specialImdbInputSchema = v.intersect([
+	v.object({ id: imdbIdSchema }),
+	includeSchema,
+])
 
-export type SpecialQuery = z.infer<typeof specialInputSchema>
+export type SpecialQuery = v.InferOutput<typeof specialInputSchema>
