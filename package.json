@@ -6,7 +6,7 @@
 	"private": true,
 	"license": "AGPL-3.0-only",
 	"homepage": "https://arm.haglund.dev/docs",
-	"packageManager": "pnpm@9.13.2",
+	"packageManager": "pnpm@10.5.2",
 	"engines": {
 		"node": ">=22"
 	},
@@ -36,29 +36,29 @@
 		"esbuild": "0.24.0"
 	},
 	"dependencies": {
-		"@hono/node-server": "1.13.7",
+		"@hono/node-server": "1.13.8",
 		"@hono/sentry": "1.2.0",
-		"@hono/zod-validator": "0.4.1",
+		"@hono/zod-validator": "0.4.3",
 		"@sentry/node": "8.38.0",
 		"@tsconfig/node22": "22.0.0",
 		"@tsconfig/strictest": "2.0.5",
 		"better-sqlite3": "11.5.0",
-		"hono": "4.6.10",
+		"hono": "4.7.2",
 		"is-ci": "3.0.1",
 		"knex": "3.1.0",
 		"ofetch": "1.4.1",
 		"pino": "9.5.0",
 		"pino-pretty": "13.0.0",
 		"sucrase": "3.35.0",
-		"type-fest": "4.27.0",
-		"typescript": "5.6.3",
-		"zod": "3.23.8"
+		"type-fest": "4.35.0",
+		"typescript": "5.8.2",
+		"zod": "3.24.2"
 	},
 	"devDependencies": {
 		"@antfu/eslint-config": "3.8.0",
 		"@biomejs/biome": "1.9.4",
 		"@types/json-schema": "7.0.15",
-		"@types/node": "22.10.10",
+		"@types/node": "22.13.7",
 		"@vitest/coverage-v8": "2.1.8",
 		"dotenv": "16.4.5",
 		"eslint": "9.14.0",
