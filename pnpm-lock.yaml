@@ -42,14 +42,14 @@ importers:
         specifier: 2.0.5
         version: 2.0.5
       better-sqlite3:
-        specifier: 11.5.0
-        version: 11.5.0
+        specifier: 11.8.1
+        version: 11.8.1
       hono:
         specifier: 4.7.2
         version: 4.7.2
       knex:
         specifier: 3.1.0
-        version: 3.1.0(better-sqlite3@11.5.0)
+        version: 3.1.0(better-sqlite3@11.8.1)
       ofetch:
         specifier: 1.4.1
         version: 1.4.1
@@ -1095,8 +1095,8 @@ packages:
   base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
 
-  better-sqlite3@11.5.0:
-    resolution: {integrity: sha512-e/6eggfOutzoK0JWiU36jsisdWoHOfN9iWiW/SieKvb7SAa6aGNmBM/UKyp+/wWSXpLlWNN8tCPwoDNPhzUvuQ==}
+  better-sqlite3@11.8.1:
+    resolution: {integrity: sha512-9BxNaBkblMjhJW8sMRZxnxVTRgbRmssZW0Oxc1MPBTfiR+WW21e2Mk4qu8CzrcZb1LwPCnFsfDEzq+SNcBU8eg==}
 
   binary-extensions@2.3.0:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
@@ -1901,8 +1901,8 @@ packages:
   package-json-from-dist@1.0.1:
     resolution: {integrity: sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==}
 
-  package-manager-detector@0.2.10:
-    resolution: {integrity: sha512-1wlNZK7HW+UE3eGCcMv3hDaYokhspuIeH6enXSnCL1eEZSVDsy/dYwo/4CczhUsrKLA1SSXB+qce8Glw5DEVtw==}
+  package-manager-detector@0.2.11:
+    resolution: {integrity: sha512-BEnLolu+yuz22S56CU1SUKq3XC3PkwD5wv4ikR4MfGvnRVcmzXR9DwSlW2fEamyTPyXHomBJRzgapeuBvRNzJQ==}
 
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
@@ -2027,8 +2027,8 @@ packages:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
 
-  quansync@0.2.6:
-    resolution: {integrity: sha512-u3TuxVTuJtkTxKGk5oZ7K2/o+l0/cC6J8SOyaaSnrnroqvcVy7xBxtvBUyd+Xa8cGoCr87XmQj4NR6W+zbqH8w==}
+  quansync@0.2.7:
+    resolution: {integrity: sha512-KZDFlN9/Si3CgKHZsIfLBsrjWKFjqu9KA0zDGJEQoQzPm5HWNDEFc2mkLeYUBBOwEJtxNBSMaNLE/GlvArIEfQ==}
 
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
@@ -2553,7 +2553,7 @@ snapshots:
 
   '@antfu/install-pkg@1.0.0':
     dependencies:
-      package-manager-detector: 0.2.10
+      package-manager-detector: 0.2.11
       tinyexec: 0.3.2
 
   '@babel/code-frame@7.26.2':
@@ -3473,7 +3473,7 @@ snapshots:
 
   base64-js@1.5.1: {}
 
-  better-sqlite3@11.5.0:
+  better-sqlite3@11.8.1:
     dependencies:
       bindings: 1.5.0
       prebuild-install: 7.1.3
@@ -4122,7 +4122,7 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  knex@3.1.0(better-sqlite3@11.5.0):
+  knex@3.1.0(better-sqlite3@11.8.1):
     dependencies:
       colorette: 2.0.19
       commander: 10.0.1
@@ -4139,7 +4139,7 @@ snapshots:
       tarn: 3.0.2
       tildify: 2.0.0
     optionalDependencies:
-      better-sqlite3: 11.5.0
+      better-sqlite3: 11.8.1
     transitivePeerDependencies:
       - supports-color
 
@@ -4154,7 +4154,7 @@ snapshots:
     dependencies:
       mlly: 1.7.4
       pkg-types: 1.3.1
-      quansync: 0.2.6
+      quansync: 0.2.7
 
   locate-path@6.0.0:
     dependencies:
@@ -4301,9 +4301,9 @@ snapshots:
 
   package-json-from-dist@1.0.1: {}
 
-  package-manager-detector@0.2.10:
+  package-manager-detector@0.2.11:
     dependencies:
-      quansync: 0.2.6
+      quansync: 0.2.7
 
   parent-module@1.0.1:
     dependencies:
@@ -4443,7 +4443,7 @@ snapshots:
 
   punycode@2.3.1: {}
 
-  quansync@0.2.6: {}
+  quansync@0.2.7: {}
 
   queue-microtask@1.2.3: {}
 

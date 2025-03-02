@@ -41,7 +41,7 @@
 		"@sentry/node": "9.3.0",
 		"@tsconfig/node22": "22.0.0",
 		"@tsconfig/strictest": "2.0.5",
-		"better-sqlite3": "11.5.0",
+		"better-sqlite3": "11.8.1",
 		"hono": "4.7.2",
 		"knex": "3.1.0",
 		"ofetch": "1.4.1",
@@ -68,7 +68,6 @@
 		"vitest": "3.0.7"
 	},
 	"pnpm": {
-		"onlyBuiltDependencies": ["better-sqlite3"],
 		"overrides": {
 			"@eslint/markdown": "-",
 			"@stylistic/eslint-plugin": "-",
@@ -82,6 +81,8 @@
 			"yaml-eslint-parser": "-",
 			"is-core-module": "npm:@nolyfill/is-core-module@^1",
 			"safe-buffer": "npm:@nolyfill/safe-buffer@^1"
-		}
+		},
+		"onlyBuiltDependencies": ["better-sqlite3"],
+		"ignoredBuiltDependencies": ["@biomejs/biome", "esbuild", "simple-git-hooks"]
 	}
 }
