@@ -1,43 +1,49 @@
-FROM node:22-alpine AS runtime_deps
-
-RUN corepack enable
+FROM node:22-alpine as base
 
 WORKDIR /app
 
-COPY package.json .
-COPY pnpm-lock.yaml .
-COPY .npmrc .
+ENV PNPM_HOME=/pnpm
+ENV CI=1
+# Use production in case any dependencies use it in any way
+ENV NODE_ENV=production
+
+# Enable node compile cache
+ENV NODE_COMPILE_CACHE=/node-cc
+RUN mkdir -p $NODE_COMPILE_CACHE
+
+FROM base as base_deps
 
 ENV CI=1
-ENV NODE_ENV=production
-# Install dependencies
-RUN pnpm install --frozen-lockfile
 
-FROM node:22-alpine AS docs
+COPY .npmrc package.json pnpm-lock.yaml ./
 
 RUN corepack enable
+RUN corepack prepare --activate
 
-WORKDIR /app
+FROM base_deps as runtime_deps
 
-COPY package.json .
-COPY pnpm-lock.yaml .
-COPY .npmrc .
+# Install dependencies
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
+    pnpm install --frozen-lockfile --production
+
+FROM base_deps AS docs
+
 COPY docs/openapi.yaml docs/openapi.yaml
 
-ENV CI=1
 # Install dependencies
-RUN pnpm install --frozen-lockfile --ignore-scripts
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
+    pnpm install --frozen-lockfile
 
-RUN pnpm run docs
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
+    pnpm run docs
 
-FROM node:22-alpine
+FROM base
 
-RUN corepack enable
+COPY .npmrc knexfile.js package.json pnpm-lock.yaml ./
+COPY src/ src/
+COPY migrations/ migrations/
 
-WORKDIR /app
-
-COPY . .
-COPY --from=runtime_deps /app/node_modules node_modules
+COPY --from=runtime_deps /app/node_modules/ node_modules/
 COPY --from=docs /app/redoc-static.html .
 
 # Run with...
@@ -45,7 +51,5 @@ COPY --from=docs /app/redoc-static.html .
 ENV NODE_OPTIONS="--enable-source-maps"
 # Warnings disabled, we know what we're doing and they're annoying
 ENV NODE_NO_WARNINGS=1
-# Use production in case any dependencies use it in any way
-ENV NODE_ENV=production
 
-CMD ["pnpm", "--silent", "start"]
+CMD ["node", "--run", "start"]
