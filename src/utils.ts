@@ -133,9 +133,10 @@ export const validationHook = <Data>(
 
 	const issuesByPath = {} as Record<string, string[]>
 	for (const { path, message } of result.error) {
-		const issuePath = path!
-			.map((p) => (typeof p === "object" ? p.key.toString() : p.toString()))
-			.join(".")
+		const issuePath =
+			path
+				?.map((p) => (typeof p === "object" ? p.key.toString() : p.toString()))
+				.join(".") ?? "$"
 
 		issuesByPath[issuePath] ??= []
 		issuesByPath[issuePath].push(message)

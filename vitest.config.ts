@@ -3,7 +3,8 @@ import { defineConfig } from "vitest/config"
 export default defineConfig(async ({ command }) => ({
 	test: {
 		reporters: ["verbose"],
-		pool: "forks",
+
+		setupFiles: ["./vitest.setup.ts"],
 		poolOptions: {
 			forks: { singleFork: true, minForks: 1, maxForks: 1 },
 		},
