@@ -1,12 +1,13 @@
-import { z } from "zod"
+import * as v from "valibot"
 
 import { numberIdSchema, oldSourceSchema } from "../../../../shared-schemas.ts"
 
-export const queryInputSchema = z
-	.object({
+export const queryInputSchema = v.pipe(
+	v.object({
 		source: oldSourceSchema,
 		id: numberIdSchema,
-	})
-	.refine((data) => Object.keys(data).length > 0, "At least one source is required.")
+	}),
+	v.check((data) => Object.keys(data).length > 0, "At least one source is required."),
+)
 
-export type QueryParamQuery = z.infer<typeof queryInputSchema>
+export type QueryParamQuery = v.InferOutput<typeof queryInputSchema>

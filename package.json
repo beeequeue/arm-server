@@ -6,7 +6,7 @@
 	"private": true,
 	"license": "AGPL-3.0-only",
 	"homepage": "https://arm.haglund.dev/docs",
-	"packageManager": "pnpm@9.13.2",
+	"packageManager": "pnpm@10.5.2",
 	"engines": {
 		"node": ">=22"
 	},
@@ -17,7 +17,7 @@
 		"*.{js,cjs,mjs,ts,cts,mts,json}": ["biome check --fix"]
 	},
 	"scripts": {
-		"dev": "onchange --initial --kill 'src/**' pnpm-lock.yaml -- pnpm --silent run start",
+		"dev": "node --experimental-strip-types --experimental-transform-types --watch src/index.ts",
 		"docs": "pnpm --package=@redocly/cli dlx redocly build-docs docs/openapi.yaml",
 		"docs:dev": "onchange --initial --kill docs/openapi.yaml -- pnpm --silent run docs",
 		"docker:build": "docker build . --tag arm-server",
@@ -25,53 +25,64 @@
 		"docker:run": "docker run -it --rm --name arm -p 3000:3000 arm-server",
 		"fetch-data": "node --experimental-strip-types --experimental-transform-types bin/update.ts --exit",
 		"lint": "eslint src",
-		"migrate": "knex migrate:latest --knexfile knexfile.js",
 		"migrate:create": "knex migrate:make --knexfile knexfile.js -x ts",
-		"start": "pnpm --silent run migrate && node --experimental-strip-types --experimental-transform-types src/index.ts",
-		"test": "NODE_ENV=test pnpm --silent run migrate && vitest",
+		"start": "node --experimental-strip-types --experimental-transform-types src/index.ts",
+		"test": "vitest",
 		"typecheck": "tsc --noEmit",
 		"prepare": "is-ci || simple-git-hooks"
 	},
 	"resolutions": {
-		"esbuild": "0.24.0"
+		"esbuild": "0.25.0"
 	},
 	"dependencies": {
-		"@hono/node-server": "1.13.7",
+		"@hono/node-server": "1.13.8",
 		"@hono/sentry": "1.2.0",
-		"@hono/zod-validator": "0.4.1",
-		"@sentry/node": "8.38.0",
-		"@tsconfig/node22": "22.0.0",
-		"@tsconfig/strictest": "2.0.5",
-		"better-sqlite3": "11.5.0",
-		"hono": "4.6.10",
-		"is-ci": "3.0.1",
+		"@hono/standard-validator": "0.1.2",
+		"@sentry/node": "9.3.0",
+		"better-sqlite3": "11.8.1",
+		"hono": "4.7.2",
+		"is-ci": "4.1.0",
 		"knex": "3.1.0",
 		"ofetch": "1.4.1",
-		"pino": "9.5.0",
-		"pino-pretty": "13.0.0",
-		"sucrase": "3.35.0",
-		"type-fest": "4.27.0",
-		"typescript": "5.6.3",
-		"zod": "3.23.8"
+		"pino": "9.6.0",
+		"valibot": "1.0.0-rc.3"
 	},
 	"devDependencies": {
-		"@antfu/eslint-config": "3.8.0",
+		"@antfu/eslint-config": "4.3.0",
 		"@biomejs/biome": "1.9.4",
+		"@standard-schema/spec": "1.0.0",
+		"@tsconfig/node22": "22.0.0",
+		"@tsconfig/strictest": "2.0.5",
 		"@types/json-schema": "7.0.15",
-		"@types/node": "22.10.10",
-		"@vitest/coverage-v8": "2.1.8",
-		"dotenv": "16.4.5",
-		"eslint": "9.14.0",
+		"@types/node": "22.13.8",
+		"@vitest/coverage-v8": "3.0.7",
+		"dotenv": "16.4.7",
+		"eslint": "9.21.0",
 		"nano-staged": "0.8.0",
 		"onchange": "7.1.0",
+		"pino-pretty": "13.0.0",
 		"simple-git-hooks": "2.11.1",
 		"tsconfig-paths": "4.2.0",
-		"vitest": "2.1.8"
+		"type-fest": "4.36.0",
+		"typescript": "5.8.2",
+		"vitest": "3.0.7"
 	},
 	"pnpm": {
 		"overrides": {
+			"@eslint/markdown": "-",
+			"@stylistic/eslint-plugin": "-",
+			"eslint-plugin-jsonc": "-",
+			"eslint-plugin-toml": "-",
+			"eslint-plugin-vue": "-",
+			"eslint-processor-vue-blocks": "-",
+			"eslint-plugin-yml": "-",
+			"jsonc-eslint-parser": "-",
+			"toml-eslint-parser": "-",
+			"yaml-eslint-parser": "-",
 			"is-core-module": "npm:@nolyfill/is-core-module@^1",
 			"safe-buffer": "npm:@nolyfill/safe-buffer@^1"
-		}
+		},
+		"onlyBuiltDependencies": ["better-sqlite3"],
+		"ignoredBuiltDependencies": ["@biomejs/biome", "esbuild", "simple-git-hooks"]
 	}
 }

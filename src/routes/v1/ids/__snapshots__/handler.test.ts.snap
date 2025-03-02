@@ -3,8 +3,13 @@
 exports[`json body > array input > requires at least one source 1`] = `
 {
   "code": "FST_ERR_VALIDATION",
+  "details": {
+    "0": [
+      "At least one source is required.",
+    ],
+  },
   "error": "Bad Request",
-  "message": "0: At least one source is required.",
+  "message": "Validation error",
   "statusCode": 400,
 }
 `;
@@ -12,8 +17,13 @@ exports[`json body > array input > requires at least one source 1`] = `
 exports[`json body > object input > errors correctly on an empty object 1`] = `
 {
   "code": "FST_ERR_VALIDATION",
+  "details": {
+    "$": [
+      "At least one source is required.",
+    ],
+  },
   "error": "Bad Request",
-  "message": "At least one source is required.",
+  "message": "Validation error",
   "statusCode": 400,
 }
 `;
@@ -21,8 +31,16 @@ exports[`json body > object input > errors correctly on an empty object 1`] = `
 exports[`json body > object input > gET fails with json body 1`] = `
 {
   "code": "FST_ERR_VALIDATION",
+  "details": {
+    "id": [
+      "Invalid key: Expected "id" but received undefined",
+    ],
+    "source": [
+      "Invalid key: Expected "source" but received undefined",
+    ],
+  },
   "error": "Bad Request",
-  "message": "source: Invalid source, id: Invalid ID",
+  "message": "Validation error",
   "statusCode": 400,
 }
 `;

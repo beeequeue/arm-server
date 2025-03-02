@@ -1,6 +1,6 @@
 import process from "node:process"
 
-import { z as zod } from "zod"
+import * as v from "valibot"
 
 export enum Environment {
 	Development = "development",
@@ -8,24 +8,25 @@ export enum Environment {
 	Production = "production",
 }
 
-const schema = zod.object({
-	NODE_ENV: zod.nativeEnum(Environment).default(Environment.Development),
-	PORT: zod.preprocess(Number, zod.number().int()).default(3000),
-	LOG_LEVEL: zod
-		.enum(["fatal", "error", "warn", "info", "debug", "trace"])
-		.default(process.env.NODE_ENV === "development" ? "debug" : "info"),
-	USER_AGENT: zod.string().default("arm-server"),
+const schema = v.object({
+	NODE_ENV: v.optional(v.enum(Environment), Environment.Development),
+	PORT: v.optional(v.pipe(v.string(), v.transform(Number), v.integer()), "3000"),
+	LOG_LEVEL: v.optional(
+		v.picklist(["fatal", "error", "warn", "info", "debug", "trace"]),
+		process.env.NODE_ENV === "development" ? "debug" : "info",
+	),
+	USER_AGENT: v.optional(v.string(), "arm-server"),
 })
 
-const result = schema.safeParse(process.env)
+const result = v.safeParse(schema, process.env)
 
 if (!result.success) {
 	console.error(
 		"❌ Invalid environment variables:",
-		JSON.stringify(result.error.format(), null, 4),
+		JSON.stringify(result.issues, null, 4),
 	)
 
 	process.exit(1)
 }
 
-export const config = result.data
+export const config = result.output

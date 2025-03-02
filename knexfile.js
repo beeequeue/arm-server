@@ -1,3 +1,7 @@
+import { mkdirSync } from "node:fs"
+
+mkdirSync("./sqlite", { recursive: true })
+
 /** @type5 {import("knex").Knex.Config} */
 export default {
 	client: "better-sqlite3",

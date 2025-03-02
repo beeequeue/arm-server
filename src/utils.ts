@@ -1,7 +1,7 @@
+import type { StandardSchemaV1 } from "@standard-schema/spec"
 import type { Context } from "hono"
 import type { HTTPException } from "hono/http-exception"
 import type { StatusCode } from "hono/utils/http-status"
-import type { TypeOf, z, ZodError } from "zod"
 
 type ErrorJson = {
 	code?: string
@@ -11,6 +11,7 @@ type ErrorJson = {
 }
 
 const getErrorText = (code: StatusCode) => {
+	// eslint-disable-next-line ts/switch-exhaustiveness-check
 	switch (code) {
 		case 400:
 			return "Bad Request"
@@ -95,15 +96,23 @@ const getErrorText = (code: StatusCode) => {
 
 export const createErrorJson = (
 	c: Context,
-	input: Pick<HTTPException, "status" | "message"> & { code?: string },
+	input: Pick<HTTPException, "status" | "message"> & {
+		code?: string
+		details?: Record<string, string[]>
+	},
 ) => {
 	const status: StatusCode = input.status
-	const body: Omit<ErrorJson, "error" | "statusCode"> = {
+	const body: Omit<ErrorJson, "error" | "statusCode"> & {
+		details?: Record<string, string[]>
+	} = {
 		message: input.message ?? "An error occurred.",
 	}
 
 	if (input.code != null) {
 		body.code = input.code
+	}
+	if (input.details != null) {
+		body.details = input.details
 	}
 
 	c.status(status)
@@ -114,24 +123,30 @@ export const createErrorJson = (
 	})
 }
 
-export const zHook = <T extends z.ZodType<any, z.ZodTypeDef, any>>(
-	result: TypeOf<T>,
+export const validationHook = <Data>(
+	result:
+		| { success: true; data: Data }
+		| { success: false; error: ReadonlyArray<StandardSchemaV1.Issue>; data: Data },
 	c: Context,
 ) => {
-	if (result.success === true) return
+	if (result.success) return
 
-	const flat = (result.error as ZodError).flatten()
-	const messages = [
-		...flat.formErrors,
-		...Object.entries(flat.fieldErrors).map(
-			([key, value]) => `${key}: ${value?.join(", ") ?? "error"}`,
-		),
-	]
+	const issuesByPath = {} as Record<string, string[]>
+	for (const { path, message } of result.error) {
+		const issuePath =
+			path
+				?.map((p) => (typeof p === "object" ? p.key.toString() : p.toString()))
+				.join(".") ?? "$"
+
+		issuesByPath[issuePath] ??= []
+		issuesByPath[issuePath].push(message)
+	}
 
 	return createErrorJson(c, {
 		status: 400,
-		message: messages.join(", "),
+		message: "Validation error",
 		code: "FST_ERR_VALIDATION",
+		details: issuesByPath,
 	})
 }
 

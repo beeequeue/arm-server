@@ -1,4 +1,5 @@
 import type { JsonValue } from "type-fest"
+import { safeParse } from "valibot"
 import { describe, expect, it } from "vitest"
 
 import type { Relation } from "../../../../db.ts"
@@ -42,12 +43,12 @@ describe("schema", () => {
 	] satisfies Cases
 
 	it.each(inputs)("%o = %s", (input, expected) => {
-		const result = bodyInputSchema.safeParse(input)
+		const result = safeParse(bodyInputSchema, input)
 
 		if (expected) {
-			expect(result.error?.errors).not.toBeDefined()
+			expect(result.issues?.[0]).not.toBeDefined()
 		} else {
-			expect(result.error?.errors.length ?? 0).toBeGreaterThanOrEqual(1)
+			expect(result.issues?.length ?? 0).toBeGreaterThanOrEqual(1)
 		}
 	})
 })
