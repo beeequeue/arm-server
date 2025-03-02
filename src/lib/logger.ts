@@ -1,11 +1,10 @@
 import { pino } from "pino"
-import PinoPretty from "pino-pretty"
 
 import { config } from "../config.ts"
 
 const isProd = config.NODE_ENV === "production"
 
-const stream = !isProd ? PinoPretty({ colorize: true }) : undefined
+const stream = !isProd ? (await import("pino-pretty")).PinoPretty() : undefined
 
 export const logger = pino(
 	{
