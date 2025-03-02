@@ -47,9 +47,6 @@ importers:
       hono:
         specifier: 4.7.2
         version: 4.7.2
-      is-ci:
-        specifier: 4.1.0
-        version: 4.1.0
       knex:
         specifier: 3.1.0
         version: 3.1.0(better-sqlite3@11.5.0)
@@ -1635,10 +1632,6 @@ packages:
   is-builtin-module@4.0.0:
     resolution: {integrity: sha512-rWP3AMAalQSesXO8gleROyL2iKU73SX5Er66losQn9rWOWL4Gef0a/xOEOVqjWGMuR2vHG3FJ8UUmT700O8oFg==}
     engines: {node: '>=18.20'}
-
-  is-ci@4.1.0:
-    resolution: {integrity: sha512-Ab9bQDQ11lWootZUI5qxgN2ZXwxNI5hTwnsvOc1wyxQ7zQ8OkEDw79mI0+9jI3x432NfwbVRru+3noJfXF6lSQ==}
-    hasBin: true
 
   is-extglob@2.1.1:
     resolution: {integrity: sha512-SbKbANkN603Vi4jEZv49LeVJMn4yGwsbzZworEoyEiutsN3nJYdbO36zfhGJ6QEDpOZIFkDtnq5JRxmvl3jsoQ==}
@@ -4063,10 +4056,6 @@ snapshots:
   is-builtin-module@4.0.0:
     dependencies:
       builtin-modules: 4.0.0
-
-  is-ci@4.1.0:
-    dependencies:
-      ci-info: 4.1.0
 
   is-extglob@2.1.1: {}
 

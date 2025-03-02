@@ -26,7 +26,7 @@ COPY docs/openapi.yaml docs/openapi.yaml
 
 ENV CI=1
 # Install dependencies
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --ignore-scripts
 
 RUN pnpm run docs
 
