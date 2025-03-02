@@ -3,9 +3,12 @@ import { captureException } from "@sentry/node"
 
 import { createApp } from "./app.ts"
 import { config } from "./config.ts"
+import { knex } from "./db.ts"
 import { updateRelations } from "./update.ts"
 
 const { NODE_ENV, PORT } = config
+
+await knex.migrate.latest()
 
 const runUpdateScript = async () => updateRelations().catch(captureException)
 

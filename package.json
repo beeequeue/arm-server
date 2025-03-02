@@ -26,7 +26,7 @@
 		"fetch-data": "node --experimental-strip-types --experimental-transform-types bin/update.ts --exit",
 		"lint": "eslint src",
 		"migrate:create": "knex migrate:make --knexfile knexfile.js -x ts",
-		"start": "pnpm --silent run migrate && node --experimental-strip-types --experimental-transform-types src/index.ts",
+		"start": "node --experimental-strip-types --experimental-transform-types src/index.ts",
 		"test": "vitest",
 		"typecheck": "tsc --noEmit",
 		"prepare": "simple-git-hooks"
