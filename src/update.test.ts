@@ -1,5 +1,5 @@
-import { $fetch } from "ofetch/node"
-import { afterAll, afterEach, expect, it, vi } from "vitest"
+import { FetchMocker, MockServer } from "mentoss"
+import { afterAll, afterEach, beforeEach, expect, it, vi } from "vitest"
 
 import { knex, type Relation, Source } from "./db.ts"
 import {
@@ -9,29 +9,36 @@ import {
 	updateRelations,
 } from "./update.ts"
 
-declare const fetch: (url: string) => Promise<{ json: () => Promise<any[]> }>
+// create a new server with the given base URL
+const server = new MockServer("https://raw.githubusercontent.com")
+const mocker = new FetchMocker({ servers: [server] })
 
-vi.mock("ofetch/node")
+beforeEach(() => {
+	mocker.mockGlobal()
+})
 
 afterEach(async () => {
+	mocker.clearAll()
 	vi.resetAllMocks()
 	await knex.delete().from("relations")
 })
 
 afterAll(async () => {
+	mocker.unmockGlobal()
 	await Promise.all([knex.destroy()])
 })
 
-const mockedFetch = vi.mocked($fetch)
-
 it("handles bad values", async () => {
-	mockedFetch.mockResolvedValue([
-		{ anidb_id: 1337, themoviedb_id: "unknown" },
-		{ anidb_id: 1338, thetvdb_id: "unknown" as never },
-		{ anidb_id: 1339, imdb_id: "tt1337,tt1338,tt1339" },
-		{ anidb_id: 1340, themoviedb_id: "unknown" },
-		{ anidb_id: 1341, themoviedb_id: 1341 },
-	] satisfies AnimeListsSchema)
+	server.get("/Fribb/anime-lists/master/anime-list-full.json", {
+		status: 200,
+		body: [
+			{ anidb_id: 1337, themoviedb_id: "unknown" },
+			{ anidb_id: 1338, thetvdb_id: "unknown" as never },
+			{ anidb_id: 1339, imdb_id: "tt1337,tt1338,tt1339" },
+			{ anidb_id: 1340, themoviedb_id: "unknown" },
+			{ anidb_id: 1341, themoviedb_id: 1341 },
+		] satisfies AnimeListsSchema,
+	})
 
 	await updateRelations()
 
@@ -74,11 +81,13 @@ it("handles bad values", async () => {
 })
 
 it("handles duplicates", async () => {
+	mocker.unmockGlobal()
+
 	const entries: Relation[] = await fetch(
 		"https://raw.githubusercontent.com/Fribb/anime-lists/master/anime-list-full.json",
 	)
 		.then(async (r) => r.json())
-		.then((e) => e.map(formatEntry))
+		.then((e) => (e as any[]).map(formatEntry))
 
 	// There should be >=5 Konosuba entries
 	const konosubaEntries = entries.filter(({ themoviedb }) => themoviedb === 65844)
