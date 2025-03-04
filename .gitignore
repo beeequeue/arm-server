@@ -1,6 +1,7 @@
 .idea/
 .env
 coverage/
+dist/
 sqlite/
 redoc-static.html
 
