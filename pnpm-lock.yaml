@@ -16,8 +16,8 @@ overrides:
   jsonc-eslint-parser: '-'
   toml-eslint-parser: '-'
   yaml-eslint-parser: '-'
-  is-core-module: npm:@nolyfill/is-core-module@^1
-  safe-buffer: npm:@nolyfill/safe-buffer@^1
+  is-core-module: npm:@nolyfill/is-core-module@1.0.39
+  safe-buffer: npm:@nolyfill/safe-buffer@1.0.44
 
 importers:
 
@@ -546,8 +546,8 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
-  '@nolyfill/safe-buffer@1.0.41':
-    resolution: {integrity: sha512-QUutoN6a0Rf49n6kYVSppQpfraXfrtrUaxTU/GhcxIhz+3GHp+SrBVnTKE3ASB7AzgZJ7XrxhaBgwrF+hSmeKg==}
+  '@nolyfill/safe-buffer@1.0.44':
+    resolution: {integrity: sha512-SqlKXtlhNTDMeZKey9jnnuPhi8YTl1lJuEcY9zbm5i4Pqe79UJJ8IJ9oiD6DhgI8KjYc+HtLzpQJNRdNYqb/hw==}
     engines: {node: '>=12.4.0'}
 
   '@opentelemetry/api-logs@0.57.2':
@@ -2818,7 +2818,7 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@nolyfill/safe-buffer@1.0.41': {}
+  '@nolyfill/safe-buffer@1.0.44': {}
 
   '@opentelemetry/api-logs@0.57.2':
     dependencies:
@@ -4612,7 +4612,7 @@ snapshots:
 
   string_decoder@1.3.0:
     dependencies:
-      safe-buffer: '@nolyfill/safe-buffer@1.0.41'
+      safe-buffer: '@nolyfill/safe-buffer@1.0.44'
 
   strip-ansi@6.0.1:
     dependencies:
@@ -4723,7 +4723,7 @@ snapshots:
 
   tunnel-agent@0.6.0:
     dependencies:
-      safe-buffer: '@nolyfill/safe-buffer@1.0.41'
+      safe-buffer: '@nolyfill/safe-buffer@1.0.44'
 
   type-check@0.4.0:
     dependencies:
