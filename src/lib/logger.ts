@@ -2,9 +2,10 @@ import { pino } from "pino"
 
 import { config } from "../config.ts"
 
-const isProd = config.NODE_ENV === "production"
-
-const stream = !isProd ? (await import("pino-pretty")).PinoPretty() : undefined
+const stream =
+	process.env.NODE_ENV !== "production"
+		? (await import("pino-pretty")).PinoPretty()
+		: undefined
 
 export const logger = pino(
 	{

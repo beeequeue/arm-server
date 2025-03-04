@@ -6,8 +6,6 @@ import { cors } from "hono/cors"
 import { HTTPException } from "hono/http-exception"
 import { secureHeaders } from "hono/secure-headers"
 
-import pkgJson from "../package.json" assert { type: "json" }
-
 import { docsRoutes } from "./docs.ts"
 import { logger } from "./lib/logger.ts"
 import { v1Routes } from "./routes/v1/ids/handler.ts"
@@ -72,5 +70,5 @@ export const createApp = () =>
 		.get("/", (c) => {
 			cacheReply(c.res, CacheTimes.WEEK * 4)
 
-			return c.redirect(pkgJson.homepage, 301)
+			return c.redirect(process.env.HOMEPAGE!, 301)
 		})
