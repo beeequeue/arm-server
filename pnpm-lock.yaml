@@ -82,6 +82,9 @@ importers:
       knex:
         specifier: 3.1.0
         version: 3.1.0(patch_hash=db01a09d7d8f6a60609e1e3ea48a97742c28d90d3be6cf2cb3e330ee5a8d9082)(better-sqlite3@11.8.1)
+      mentoss:
+        specifier: 0.7.1
+        version: 0.7.1
       nano-staged:
         specifier: 0.8.0
         version: 0.8.0
@@ -1825,6 +1828,10 @@ packages:
     resolution: {integrity: sha512-hXdUTZYIVOt1Ex//jAQi+wTZZpUpwBj/0QsOzqegb3rGMMeJiSEu5xLHnYfBrRV4RH2+OCSOO95Is/7x1WJ4bw==}
     engines: {node: '>=10'}
 
+  mentoss@0.7.1:
+    resolution: {integrity: sha512-sKGcyuENfPJE8y2ZxRmTmQBIhEk8o1X6ljyBocpzvgb0gDDehPmS0+Lmuh7XKcufdPB4LWYu/K8lDNkAzdQi6g==}
+    engines: {node: '>=18.18'}
+
   merge2@1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
@@ -2483,6 +2490,9 @@ packages:
 
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
+
+  urlpattern-polyfill@10.0.0:
+    resolution: {integrity: sha512-H/A06tKD7sS1O1X2SshBVeA5FLycRpjqiBeqGKmBwBDBy28EnRjORxTNe269KSSr5un5qyWi1iL61wLxpd+ZOg==}
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
@@ -4323,6 +4333,10 @@ snapshots:
     dependencies:
       semver: 7.7.1
 
+  mentoss@0.7.1:
+    dependencies:
+      urlpattern-polyfill: 10.0.0
+
   merge2@1.4.1: {}
 
   micromatch@4.0.8:
@@ -4990,6 +5004,8 @@ snapshots:
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
+
+  urlpattern-polyfill@10.0.0: {}
 
   util-deprecate@1.0.2: {}
 
