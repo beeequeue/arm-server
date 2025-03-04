@@ -17,6 +17,7 @@
 		"*.{js,cjs,mjs,ts,cts,mts,json}": ["biome check --fix"]
 	},
 	"scripts": {
+		"build": "tsup",
 		"dev": "node --experimental-strip-types --experimental-transform-types --watch src/index.ts",
 		"docs": "pnpm --package=@redocly/cli dlx redocly build-docs docs/openapi.yaml",
 		"docs:dev": "onchange --initial --kill docs/openapi.yaml -- pnpm --silent run docs",
