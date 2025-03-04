@@ -1,15 +1,18 @@
 import process from "node:process"
 
 import { captureException } from "@sentry/node"
-import type { FetchError } from "ofetch/node"
-import { $fetch } from "ofetch/node"
+import xior, { type XiorError } from "xior"
+import errorRetryPlugin from "xior/plugins/error-retry"
 
 import { knex, type Relation, Source } from "./db.ts"
 import { logger } from "./lib/logger.ts"
 import { updateBasedOnManualRules } from "./manual-rules.ts"
 
-const isFetchError = <T>(response: T | FetchError): response is FetchError =>
-	(response as FetchError).stack != null
+const http = xior.create({ responseType: "json" })
+http.plugins.use(errorRetryPlugin({ retryTimes: 5 }))
+
+const isXiorError = <T>(response: T | XiorError): response is XiorError =>
+	"stack" in (response as XiorError)
 
 export type AnimeListsSchema = Array<{
 	anidb_id?: number
@@ -26,15 +29,13 @@ export type AnimeListsSchema = Array<{
 }>
 
 const fetchDatabase = async (): Promise<AnimeListsSchema | null> => {
-	const response = await $fetch<AnimeListsSchema>(
-		"https://raw.githubusercontent.com/Fribb/anime-lists/master/anime-list-full.json",
-		{
-			responseType: "json",
-			retry: 5,
-		},
-	).catch((error: FetchError) => error)
+	const response = await http
+		.get<AnimeListsSchema>(
+			"https://raw.githubusercontent.com/Fribb/anime-lists/master/anime-list-full.json",
+		)
+		.catch((error: XiorError) => error)
 
-	if (isFetchError(response)) {
+	if (isXiorError(response)) {
 		const error = new Error("Could not fetch updated database!!", {
 			cause: response,
 		})
@@ -45,7 +46,7 @@ const fetchDatabase = async (): Promise<AnimeListsSchema | null> => {
 		return null
 	}
 
-	return response
+	return response.data
 }
 
 const badValues = ["", "unknown", "tv special"] as const

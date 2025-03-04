@@ -12,5 +12,9 @@ export default {
 	useNullAsDefault: true,
 	connection: {
 		filename: `./sqlite/${process.env.NODE_ENV ?? "development"}.sqlite3`,
+		options: {
+			nativeBinding:
+				process.env.NODE_ENV === "production" ? "./dist/better_sqlite3.node" : undefined,
+		},
 	},
 }
