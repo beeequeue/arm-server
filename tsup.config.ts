@@ -1,3 +1,4 @@
+import { cpSync } from "node:fs"
 import process from "node:process"
 
 import { defineConfig } from "tsup"
@@ -19,13 +20,30 @@ export default defineConfig({
 		TEST: false as unknown as string,
 	},
 
+	shims: true,
 	target: "node22",
 	format: ["esm"],
-	banner: { js: "const require = createRequire(import.meta.url);" },
+	banner: {
+		js: "import {createRequire} from 'module';const require=createRequire(import.meta.url);",
+	},
 	esbuildOptions: (options) => {
 		options.supported = {
 			// For better performance: https://github.com/evanw/esbuild/issues/951
 			"object-rest-spread": false,
 		}
 	},
+	esbuildPlugins: [
+		{
+			name: "better-sqlite3-copy",
+			setup({ onEnd }) {
+				onEnd(() => {
+					cpSync(
+						"node_modules/better-sqlite3/build/Release/better_sqlite3.node",
+						"dist/better_sqlite3.node",
+						{ recursive: true },
+					)
+				})
+			},
+		},
+	],
 })
