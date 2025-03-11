@@ -1,7 +1,8 @@
 import { cpSync } from "node:fs"
-import process from "node:process"
 
 import { defineConfig } from "tsup"
+
+import pkgJson from "./package.json" with { type: "json" }
 
 export default defineConfig({
 	entry: ["src/index.ts"],
@@ -18,6 +19,7 @@ export default defineConfig({
 		DEV: (process.env.NODE_ENV === "development") as unknown as string,
 		PROD: (process.env.NODE_ENV === "production") as unknown as string,
 		TEST: false as unknown as string,
+		HOMEPAGE: JSON.stringify(pkgJson.homepage),
 	},
 
 	shims: true,

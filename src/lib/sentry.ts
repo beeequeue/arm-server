@@ -1,6 +1,4 @@
 /* c8 ignore start */
-import process from "node:process"
-
 import { init } from "@sentry/node"
 
 const { NODE_ENV, SENTRY_DSN, RENDER_GIT_COMMIT } = process.env

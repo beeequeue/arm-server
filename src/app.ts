@@ -1,5 +1,3 @@
-import process from "node:process"
-
 import { sentry } from "@hono/sentry"
 import { Hono } from "hono"
 import { cors } from "hono/cors"

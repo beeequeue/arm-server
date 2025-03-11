@@ -1,5 +1,3 @@
-import process from "node:process"
-
 import { captureException } from "@sentry/node"
 import xior, { type XiorError } from "xior"
 import errorRetryPlugin from "xior/plugins/error-retry"

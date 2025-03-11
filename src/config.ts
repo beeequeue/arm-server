@@ -1,5 +1,3 @@
-import process from "node:process"
-
 import * as v from "valibot"
 
 export enum Environment {
