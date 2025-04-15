@@ -1,4 +1,3 @@
-import { captureException } from "@sentry/node"
 import xior, { type XiorError } from "xior"
 import errorRetryPlugin from "xior/plugins/error-retry"
 
@@ -39,7 +38,6 @@ const fetchDatabase = async (): Promise<AnimeListsSchema | null> => {
 		})
 
 		console.error(error)
-		captureException(error)
 
 		return null
 	}

@@ -1,4 +1,3 @@
-import { sentry } from "@hono/sentry"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { HTTPException } from "hono/http-exception"
@@ -36,7 +35,6 @@ export const createApp = () =>
 			)
 		})
 
-		.use("*", sentry({ dsn: process.env.SENTRY_DSN! }))
 		.use("*", cors({ origin: (origin) => origin }))
 		.use("*", secureHeaders())
 

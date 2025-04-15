@@ -1,5 +1,4 @@
 import { serve } from "@hono/node-server"
-import { captureException } from "@sentry/node"
 
 import { createApp } from "./app.ts"
 import { config } from "./config.ts"
@@ -10,7 +9,7 @@ const { NODE_ENV, PORT } = config
 
 await knex.migrate.latest()
 
-const runUpdateScript = async () => updateRelations().catch(captureException)
+const runUpdateScript = async () => updateRelations()
 
 if (NODE_ENV === "production") {
 	void runUpdateScript()
