@@ -48,7 +48,7 @@
 		"@vitest/coverage-v8": "3.1.2",
 		"better-sqlite3": "11.9.1",
 		"dotenv": "16.5.0",
-		"eslint": "9.25.1",
+		"eslint": "9.26.0",
 		"hono": "4.7.6",
 		"is-ci": "4.1.0",
 		"knex": "3.1.0",
