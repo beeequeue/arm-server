@@ -62,26 +62,5 @@
 		"valibot": "1.1.0",
 		"vitest": "3.2.3",
 		"xior": "0.7.8"
-	},
-	"pnpm": {
-		"overrides": {
-			"@eslint/markdown": "-",
-			"@stylistic/eslint-plugin": "-",
-			"eslint-plugin-jsonc": "-",
-			"eslint-plugin-toml": "-",
-			"eslint-plugin-vue": "-",
-			"eslint-plugin-yml": "-",
-			"eslint-processor-vue-blocks": "-",
-			"jsonc-eslint-parser": "-",
-			"toml-eslint-parser": "-",
-			"yaml-eslint-parser": "-",
-			"is-core-module": "npm:@nolyfill/is-core-module@^1",
-			"safe-buffer": "npm:@nolyfill/safe-buffer@^1"
-		},
-		"onlyBuiltDependencies": ["better-sqlite3"],
-		"ignoredBuiltDependencies": ["@biomejs/biome", "esbuild", "simple-git-hooks"],
-		"patchedDependencies": {
-			"knex": "patches/knex.patch"
-		}
 	}
 }

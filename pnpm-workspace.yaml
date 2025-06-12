@@ -1,0 +1,24 @@
+packages: []
+
+ignoredBuiltDependencies: ["@biomejs/biome", esbuild, simple-git-hooks]
+onlyBuiltDependencies: [better-sqlite3]
+
+overrides:
+  "@antfu/eslint-config>@eslint/markdown": "-"
+  "@antfu/eslint-config>@stylistic/eslint-plugin": "-"
+  "@antfu/eslint-config>eslint-plugin-jsonc": "-"
+  "@antfu/eslint-config>eslint-plugin-toml": "-"
+  "@antfu/eslint-config>eslint-plugin-vue": "-"
+  "@antfu/eslint-config>eslint-processor-vue-blocks": "-"
+  "@antfu/eslint-config>jsonc-eslint-parser": "-"
+  "@antfu/eslint-config>toml-eslint-parser": "-"
+  "@antfu/eslint-config>vitest": "-"
+  eslint-plugin-pnpm>jsonc-eslint-parser: "-"
+  is-core-module: npm:@nolyfill/is-core-module@^1
+  safe-buffer: npm:@nolyfill/safe-buffer@^1
+patchedDependencies:
+  knex: patches/knex.patch
+
+registry: https://npm.h.haglund.dev
+savePrefix: ""
+shellEmulator: true

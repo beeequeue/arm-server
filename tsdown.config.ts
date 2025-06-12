@@ -33,7 +33,6 @@ export default defineConfig({
 				cpSync(
 					"node_modules/better-sqlite3/build/Release/better_sqlite3.node",
 					"dist/better_sqlite3.node",
-					{ recursive: true },
 				)
 			},
 		},
