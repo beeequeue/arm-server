@@ -1,7 +1,7 @@
 import xior, { type XiorError } from "xior"
 import errorRetryPlugin from "xior/plugins/error-retry"
 
-import { knex, type Relation, Source } from "./db.ts"
+import { db, type Relation, Source } from "./db.ts"
 import { logger } from "./lib/logger.ts"
 import { updateBasedOnManualRules } from "./manual-rules.ts"
 
@@ -131,15 +131,19 @@ export const updateRelations = async () => {
 	logger.info({ remaining: goodEntries.length }, `Removed duplicates.`)
 
 	logger.info("Updating database...")
-	await knex.transaction(async (trx) =>
-		knex
-			.delete()
-			.from("relations")
-			.transacting(trx)
-			.then(async () => {
-				await knex.batchInsert("relations", goodEntries, 100).transacting(trx)
-			}),
-	)
+	await db.transaction().execute(async (trx) => {
+		// Delete all existing relations
+		await trx.deleteFrom("relations").execute()
+
+		// Insert new relations in chunks of 100
+		const chunkSize = 100
+		for (let i = 0; i < goodEntries.length; i += chunkSize) {
+			const chunk = goodEntries.slice(i, i + chunkSize)
+			for (const entry of chunk) {
+				await trx.insertInto("relations").values(entry).execute()
+			}
+		}
+	})
 	logger.info("Updated database.")
 
 	logger.info("Executing manual rules...")
@@ -148,6 +152,6 @@ export const updateRelations = async () => {
 	logger.info("Done.")
 
 	if (process.argv.includes("--exit")) {
-		await knex.destroy()
+		await db.destroy()
 	}
 }

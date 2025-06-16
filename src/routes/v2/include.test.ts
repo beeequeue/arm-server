@@ -4,7 +4,7 @@ import { Hono } from "hono"
 import { testClient } from "hono/testing"
 import { afterAll, beforeEach, describe, expect, it, vi } from "vitest"
 
-import { knex, Source } from "../../db.ts"
+import { db, Source } from "../../db.ts"
 import { validationHook } from "../../utils.ts"
 
 import { includeSchema } from "./include.ts"
@@ -17,11 +17,11 @@ const app = new Hono().get(
 )
 
 beforeEach(async () => {
-	await knex.delete().from("relations")
+	await db.deleteFrom("relations").execute()
 })
 
 afterAll(async () => {
-	await knex.destroy()
+	await db.destroy()
 })
 
 describe("schema", () => {

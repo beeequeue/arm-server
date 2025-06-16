@@ -14,10 +14,6 @@ overrides:
   "@antfu/eslint-config>toml-eslint-parser": "-"
   "@antfu/eslint-config>vitest": "-"
   eslint-plugin-pnpm>jsonc-eslint-parser: "-"
-  is-core-module: npm:@nolyfill/is-core-module@^1
-  safe-buffer: npm:@nolyfill/safe-buffer@^1
-patchedDependencies:
-  knex: patches/knex.patch
 
 registry: https://npm.h.haglund.dev
 savePrefix: ""

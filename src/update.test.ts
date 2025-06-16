@@ -1,7 +1,7 @@
 import { FetchMocker, MockServer } from "mentoss"
 import { afterAll, afterEach, beforeEach, expect, it, vi } from "vitest"
 
-import { knex, type Relation, Source } from "./db.ts"
+import { db, type Relation, Source } from "./db.ts"
 import {
 	type AnimeListsSchema,
 	formatEntry,
@@ -20,12 +20,12 @@ beforeEach(() => {
 afterEach(async () => {
 	mocker.clearAll()
 	vi.resetAllMocks()
-	await knex.delete().from("relations")
+	await db.deleteFrom("relations").execute()
 })
 
 afterAll(async () => {
 	mocker.unmockGlobal()
-	await Promise.all([knex.destroy()])
+	await db.destroy()
 })
 
 it("handles bad values", async () => {
@@ -43,7 +43,14 @@ it("handles bad values", async () => {
 	await updateRelations()
 
 	await expect(
-		knex.from("relations").select(["anidb", "imdb", "themoviedb", "thetvdb"]),
+		db
+			.selectFrom("relations")
+			.select([
+				"relations.anidb",
+				"relations.imdb",
+				"relations.themoviedb",
+				"relations.thetvdb",
+			]),
 	).resolves.toMatchInlineSnapshot(`
     [
       {

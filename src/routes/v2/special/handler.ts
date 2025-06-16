@@ -1,7 +1,7 @@
 import { sValidator } from "@hono/standard-validator"
 import { Hono } from "hono"
 
-import { knex, Source } from "../../../db.ts"
+import { db, Source } from "../../../db.ts"
 import { cacheReply, CacheTimes, validationHook } from "../../../utils.ts"
 import { buildSelectFromInclude } from "../include.ts"
 
@@ -13,11 +13,13 @@ export const specialRoutes = new Hono()
 		sValidator("query", specialImdbInputSchema, validationHook),
 		async (c) => {
 			const query = c.req.query()
+			const selectFields = buildSelectFromInclude(query.include)
 
-			const data = await knex
-				.select(buildSelectFromInclude(query.include))
-				.where({ [Source.IMDB]: query.id })
-				.from("relations")
+			const data = await db
+				.selectFrom("relations")
+				.select(selectFields)
+				.where(Source.IMDB, "=", query.id)
+				.execute()
 
 			cacheReply(c.res, CacheTimes.SIX_HOURS)
 
@@ -29,11 +31,13 @@ export const specialRoutes = new Hono()
 		sValidator("query", specialInputSchema, validationHook),
 		async (c) => {
 			const query = c.req.query()
+			const selectFields = buildSelectFromInclude(query.include)
 
-			const data = await knex
-				.select(buildSelectFromInclude(query.include))
-				.where({ [Source.TheMovieDB]: query.id })
-				.from("relations")
+			const data = await db
+				.selectFrom("relations")
+				.select(selectFields)
+				.where(Source.TheMovieDB, "=", query.id)
+				.execute()
 
 			cacheReply(c.res, CacheTimes.SIX_HOURS)
 
@@ -42,11 +46,13 @@ export const specialRoutes = new Hono()
 	)
 	.get("/thetvdb", sValidator("query", specialInputSchema, validationHook), async (c) => {
 		const query = c.req.query()
+		const selectFields = buildSelectFromInclude(query.include)
 
-		const data = await knex
-			.select(buildSelectFromInclude(query.include))
-			.where({ [Source.TheTVDB]: query.id })
-			.from("relations")
+		const data = await db
+			.selectFrom("relations")
+			.select(selectFields)
+			.where(Source.TheTVDB, "=", query.id)
+			.execute()
 
 		cacheReply(c.res, CacheTimes.SIX_HOURS)
 
