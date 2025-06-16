@@ -1,7 +1,7 @@
 import type { Hono } from "hono"
 import { describe, expect, test } from "vitest"
 
-import { knex, Source } from "../../db.ts"
+import { db, Source } from "../../db.ts"
 
 export const testIncludeQueryParam = (
 	app: Hono,
@@ -14,9 +14,10 @@ export const testIncludeQueryParam = (
 
 	describe("?include", () => {
 		test("single source", async () => {
-			await knex
-				.insert({ anilist: 1337, thetvdb: 1337, themoviedb: 1337, imdb: "tt1337" })
-				.into("relations")
+			await db
+				.insertInto("relations")
+				.values({ anilist: 1337, thetvdb: 1337, themoviedb: 1337, imdb: "tt1337" })
+				.execute()
 
 			const query = new URLSearchParams({
 				source,
@@ -35,9 +36,10 @@ export const testIncludeQueryParam = (
 		})
 
 		test("multiple sources (anilist,thetvdb,themoviedb)", async () => {
-			await knex
-				.insert({ anilist: 1337, thetvdb: 1337, themoviedb: 1337, imdb: "tt1337" })
-				.into("relations")
+			await db
+				.insertInto("relations")
+				.values({ anilist: 1337, thetvdb: 1337, themoviedb: 1337, imdb: "tt1337" })
+				.execute()
 
 			const query = new URLSearchParams({
 				source,
@@ -58,9 +60,10 @@ export const testIncludeQueryParam = (
 		})
 
 		test("all the sources", async () => {
-			await knex
-				.insert({ anilist: 1337, [source]: prefixify(source, 1337) })
-				.into("relations")
+			await db
+				.insertInto("relations")
+				.values({ anilist: 1337, [source]: prefixify(source, 1337) })
+				.execute()
 
 			const query = new URLSearchParams({
 				source,

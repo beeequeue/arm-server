@@ -27,7 +27,7 @@ RUN pnpm rebuild --pending
 
 FROM base_deps as build
 
-COPY knexfile.js tsconfig.json tsdown.config.ts ./
+COPY tsconfig.json tsdown.config.ts ./
 COPY src/ src/
 
 RUN node --run build
@@ -40,9 +40,8 @@ RUN node --run docs
 
 FROM base
 
-COPY knexfile.js package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml ./
 COPY src/ src/
-COPY migrations/ migrations/
 
 COPY --from=build /app/dist dist/
 COPY --from=docs /app/redoc-static.html .

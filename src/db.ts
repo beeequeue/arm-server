@@ -1,6 +1,10 @@
-import Knex from "knex"
+import { mkdirSync } from "node:fs"
 
-import knexfile from "../knexfile.js"
+import { createDatabase } from "db0"
+import sqlite from "db0/connectors/node-sqlite"
+import { Kysely } from "kysely"
+
+import { Db0SqliteDialect } from "./db/db0-dialect.ts"
 
 export enum Source {
 	AniDB = "anidb",
@@ -35,4 +39,18 @@ export type OldRelation = Pick<
 	Source.AniDB | Source.AniList | Source.MAL | Source.Kitsu
 >
 
-export const knex = Knex(knexfile)
+// Define database schema for Kysely
+export interface Database {
+	relations: Relation
+}
+
+// Ensure SQLite directory exists
+mkdirSync("./sqlite", { recursive: true })
+
+const db0 = createDatabase(
+	sqlite({ path: `./sqlite/${process.env.NODE_ENV ?? "development"}.sqlite3` }),
+)
+// Create Kysely instance
+export const db = new Kysely<Database>({
+	dialect: new Db0SqliteDialect(db0),
+})
