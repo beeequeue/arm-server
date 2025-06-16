@@ -1,7 +1,7 @@
 packages: []
 
 ignoredBuiltDependencies: ["@biomejs/biome", esbuild, simple-git-hooks]
-onlyBuiltDependencies: [better-sqlite3]
+onlyBuiltDependencies: []
 
 overrides:
   "@antfu/eslint-config>@eslint/markdown": "-"
