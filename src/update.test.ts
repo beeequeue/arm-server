@@ -1,7 +1,7 @@
 import { FetchMocker, MockServer } from "mentoss"
 import { afterAll, afterEach, beforeEach, expect, it, vi } from "vitest"
 
-import { db, type Relation, Source } from "./db.ts"
+import { db, type Relation, Source, type SourceValue } from "./db.ts"
 import {
 	type AnimeListsSchema,
 	formatEntry,
@@ -137,7 +137,7 @@ it("handles duplicates", async () => {
 		expect(duplicates[goodSource], `${goodSource} has duplicates`).toStrictEqual({})
 	}
 
-	const findEntry = (source: Source, id: number | string) =>
+	const findEntry = (source: SourceValue, id: number | string) =>
 		results.find((entry) => entry[source] === id)
 	expect(findEntry(Source.AniDB, 11261)).toBeDefined()
 	expect(findEntry(Source.AniDB, 11992)).toBeDefined()
