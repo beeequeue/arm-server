@@ -2,7 +2,8 @@ import { sValidator } from "@hono/standard-validator"
 import { Hono } from "hono"
 import type { InferOutput } from "valibot"
 
-import { db, type OldRelation, type Relation, type Source } from "../../../db.ts"
+import { db } from "../../../db.ts"
+import type { OldRelation, Relation, SourceValue } from "../../../db.ts"
 import { cacheReply, CacheTimes, validationHook } from "../../../utils.ts"
 
 import { bodyInputSchema } from "./schemas/json-body.ts"
@@ -67,7 +68,7 @@ export const v1Routes = new Hono()
 
 		// Map them against the input, so we get results like [{item}, null, {item}]
 		relations = input.map((item) => {
-			const realItem = Object.entries(item)[0] as [Source, number]
+			const realItem = Object.entries(item)[0] as [SourceValue, number]
 
 			return relations.find((relation) => relation![realItem[0]] === realItem[1]) ?? null
 		})

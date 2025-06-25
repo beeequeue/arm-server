@@ -6,19 +6,20 @@ import { Kysely } from "kysely"
 
 import { Db0SqliteDialect } from "./db/db0-dialect.ts"
 
-export enum Source {
-	AniDB = "anidb",
-	AniList = "anilist",
-	AnimePlanet = "anime-planet",
-	AniSearch = "anisearch",
-	IMDB = "imdb",
-	Kitsu = "kitsu",
-	LiveChart = "livechart",
-	NotifyMoe = "notify-moe",
-	TheMovieDB = "themoviedb",
-	TheTVDB = "thetvdb",
-	MAL = "myanimelist",
-}
+export const Source = {
+	AniDB: "anidb",
+	AniList: "anilist",
+	AnimePlanet: "anime-planet",
+	AniSearch: "anisearch",
+	IMDB: "imdb",
+	Kitsu: "kitsu",
+	LiveChart: "livechart",
+	NotifyMoe: "notify-moe",
+	TheMovieDB: "themoviedb",
+	TheTVDB: "thetvdb",
+	MAL: "myanimelist",
+} as const
+export type SourceValue = (typeof Source)[keyof typeof Source]
 
 export type Relation = {
 	[Source.AniDB]?: number
@@ -34,10 +35,7 @@ export type Relation = {
 	[Source.MAL]?: number
 }
 
-export type OldRelation = Pick<
-	Relation,
-	Source.AniDB | Source.AniList | Source.MAL | Source.Kitsu
->
+export type OldRelation = Pick<Relation, "anidb" | "anilist" | "myanimelist" | "kitsu">
 
 // Define database schema for Kysely
 export interface Database {

@@ -18,15 +18,15 @@
 	},
 	"scripts": {
 		"build": "tsdown",
-		"dev": "node --experimental-transform-types --watch src/index.ts",
+		"dev": "node --watch src/index.ts",
 		"docs": "pnpm --package=@redocly/cli dlx redocly build-docs docs/openapi.yaml",
 		"docs:dev": "onchange --initial --kill docs/openapi.yaml -- pnpm --silent run docs",
 		"docker:build": "docker build . --tag arm-server",
 		"docker:start": "pnpm --silent docker:build; pnpm --silent docker:run",
 		"docker:run": "docker run -it --rm --name arm -p 3000:3000 arm-server",
-		"fetch-data": "node --experimental-transform-types bin/update.ts --exit",
+		"fetch-data": "node bin/update.ts --exit",
 		"lint": "eslint src",
-		"start": "node --experimental-transform-types src/index.ts",
+		"start": "node src/index.ts",
 		"test": "vitest",
 		"typecheck": "tsc --noEmit",
 		"prepare": "is-ci || simple-git-hooks"
