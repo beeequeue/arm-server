@@ -14,7 +14,9 @@
 		"pre-commit": "node_modules/.bin/nano-staged"
 	},
 	"nano-staged": {
-		"*.{js,cjs,mjs,ts,cts,mts,json}": ["biome check --fix"]
+		"*.{js,cjs,mjs,ts,cts,mts,json}": [
+			"biome check --fix"
+		]
 	},
 	"scripts": {
 		"build": "tsdown",
@@ -33,7 +35,7 @@
 	},
 	"devDependencies": {
 		"@antfu/eslint-config": "4.16.1",
-		"@biomejs/biome": "1.9.4",
+		"@biomejs/biome": "2.0.5",
 		"@hono/node-server": "1.14.4",
 		"@hono/standard-validator": "0.1.2",
 		"@standard-schema/spec": "1.0.0",
