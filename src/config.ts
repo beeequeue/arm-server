@@ -1,13 +1,13 @@
 import * as v from "valibot"
 
-export enum Environment {
-	Development = "development",
-	Test = "test",
-	Production = "production",
-}
+export const Environment = {
+	Dev: "development",
+	Test: "test",
+	Prod: "production",
+} as const
 
 const schema = v.object({
-	NODE_ENV: v.optional(v.enum(Environment), Environment.Development),
+	NODE_ENV: v.optional(v.enum(Environment), Environment.Dev),
 	PORT: v.optional(v.pipe(v.string(), v.transform(Number), v.integer()), "3000"),
 	LOG_LEVEL: v.optional(
 		v.picklist(["fatal", "error", "warn", "info", "debug", "trace"]),

@@ -1,5 +1,3 @@
-/* eslint-disable ts/consistent-type-imports */
-
 import type { Connector, Database, Primitive } from "db0"
 import {
 	type CompiledQuery,
