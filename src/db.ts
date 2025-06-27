@@ -43,10 +43,10 @@ export interface Database {
 }
 
 // Ensure SQLite directory exists
-mkdirSync("./sqlite", { recursive: true })
+mkdirSync("./dir", { recursive: true })
 
 const db0 = createDatabase(
-	sqlite({ path: `./sqlite/${process.env.NODE_ENV ?? "development"}.sqlite3` }),
+	sqlite({ path: `./db/${process.env.NODE_ENV ?? "development"}.sqlite3` }),
 )
 // Create Kysely instance
 export const db = new Kysely<Database>({
