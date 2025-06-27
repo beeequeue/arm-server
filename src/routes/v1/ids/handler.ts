@@ -1,6 +1,5 @@
 import { sValidator } from "@hono/standard-validator"
 import { Hono } from "hono"
-import type { InferOutput } from "valibot"
 
 import { db } from "../../../db.ts"
 import type { OldRelation, Relation, SourceValue } from "../../../db.ts"
@@ -19,7 +18,7 @@ const V1_FIELDS = [
 
 export const v1Routes = new Hono()
 	.get("/ids", sValidator("query", queryInputSchema, validationHook), async (c) => {
-		const query = c.req.query()
+		const query = c.req.valid("query")
 
 		const row = await db
 			.selectFrom("relations")
@@ -32,7 +31,7 @@ export const v1Routes = new Hono()
 		return c.json((row as OldRelation) ?? null)
 	})
 	.post("/ids", sValidator("json", bodyInputSchema, validationHook), async (c) => {
-		const input = await c.req.json<InferOutput<typeof bodyInputSchema>>()
+		const input = c.req.valid("json")
 
 		if (!Array.isArray(input)) {
 			// Single item query

@@ -1,6 +1,5 @@
 import { sValidator } from "@hono/standard-validator"
 import { Hono } from "hono"
-import type { InferOutput } from "valibot"
 
 import { db, type Relation, type SourceValue } from "../../../db.ts"
 import { cacheReply, CacheTimes, validationHook } from "../../../utils.ts"
@@ -11,7 +10,7 @@ import { queryInputSchema } from "./schemas/query-params.ts"
 
 export const v2Routes = new Hono()
 	.get("/ids", sValidator("query", queryInputSchema, validationHook), async (c) => {
-		const query = c.req.query()
+		const query = c.req.valid("query")
 		const selectFields = buildSelectFromInclude(query.include)
 
 		const data = await db
@@ -29,8 +28,8 @@ export const v2Routes = new Hono()
 		sValidator("json", bodyInputSchema, validationHook),
 		sValidator("query", includeSchema, validationHook),
 		async (c) => {
-			const input = await c.req.json<InferOutput<typeof bodyInputSchema>>()
-			const query = c.req.query()
+			const input = c.req.valid("json")
+			const query = c.req.valid("query")
 
 			const selectFields = buildSelectFromInclude(query.include)
 

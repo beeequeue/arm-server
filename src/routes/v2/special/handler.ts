@@ -12,7 +12,7 @@ export const specialRoutes = new Hono()
 		"/imdb",
 		sValidator("query", specialImdbInputSchema, validationHook),
 		async (c) => {
-			const query = c.req.query()
+			const query = c.req.valid("query")
 			const selectFields = buildSelectFromInclude(query.include)
 
 			const data = await db
@@ -30,7 +30,7 @@ export const specialRoutes = new Hono()
 		"/themoviedb",
 		sValidator("query", specialInputSchema, validationHook),
 		async (c) => {
-			const query = c.req.query()
+			const query = c.req.valid("query")
 			const selectFields = buildSelectFromInclude(query.include)
 
 			const data = await db
@@ -45,7 +45,7 @@ export const specialRoutes = new Hono()
 		},
 	)
 	.get("/thetvdb", sValidator("query", specialInputSchema, validationHook), async (c) => {
-		const query = c.req.query()
+		const query = c.req.valid("query")
 		const selectFields = buildSelectFromInclude(query.include)
 
 		const data = await db
