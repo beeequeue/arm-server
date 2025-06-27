@@ -16,7 +16,6 @@ FROM base as base_deps
 ENV CI=1
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-COPY patches/ patches/
 
 RUN corepack enable
 RUN corepack prepare --activate
