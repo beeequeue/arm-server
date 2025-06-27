@@ -1,20 +1,25 @@
-import Knex from "knex"
+import { mkdirSync } from "node:fs"
 
-import knexfile from "../knexfile.js"
+import { createDatabase } from "db0"
+import sqlite from "db0/connectors/node-sqlite"
+import { Kysely } from "kysely"
 
-export enum Source {
-	AniDB = "anidb",
-	AniList = "anilist",
-	AnimePlanet = "anime-planet",
-	AniSearch = "anisearch",
-	IMDB = "imdb",
-	Kitsu = "kitsu",
-	LiveChart = "livechart",
-	NotifyMoe = "notify-moe",
-	TheMovieDB = "themoviedb",
-	TheTVDB = "thetvdb",
-	MAL = "myanimelist",
-}
+import { Db0SqliteDialect } from "./db/db0-dialect.ts"
+
+export const Source = {
+	AniDB: "anidb",
+	AniList: "anilist",
+	AnimePlanet: "anime-planet",
+	AniSearch: "anisearch",
+	IMDB: "imdb",
+	Kitsu: "kitsu",
+	LiveChart: "livechart",
+	NotifyMoe: "notify-moe",
+	TheMovieDB: "themoviedb",
+	TheTVDB: "thetvdb",
+	MAL: "myanimelist",
+} as const
+export type SourceValue = (typeof Source)[keyof typeof Source]
 
 export type Relation = {
 	[Source.AniDB]?: number
@@ -30,9 +35,20 @@ export type Relation = {
 	[Source.MAL]?: number
 }
 
-export type OldRelation = Pick<
-	Relation,
-	Source.AniDB | Source.AniList | Source.MAL | Source.Kitsu
->
+export type OldRelation = Pick<Relation, "anidb" | "anilist" | "myanimelist" | "kitsu">
 
-export const knex = Knex(knexfile)
+// Define database schema for Kysely
+export interface Database {
+	relations: Relation
+}
+
+// Ensure SQLite directory exists
+mkdirSync("./sqlite", { recursive: true })
+
+const db0 = createDatabase(
+	sqlite({ path: `./sqlite/${process.env.NODE_ENV ?? "development"}.sqlite3` }),
+)
+// Create Kysely instance
+export const db = new Kysely<Database>({
+	dialect: new Db0SqliteDialect(db0),
+})

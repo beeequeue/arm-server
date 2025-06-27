@@ -1,6 +1,6 @@
 import * as v from "valibot"
 
-import { Source } from "../../db.ts"
+import { db, Source, type SourceValue } from "../../db.ts"
 
 export const includeSchema = v.object({
 	include: v.optional(
@@ -16,10 +16,14 @@ export const includeSchema = v.object({
 export type IncludeQuery = v.InferOutput<typeof includeSchema>
 
 const sources = Object.values(Source)
+const selectAll = sources.map((column) => db.dynamic.ref<SourceValue>(column))
 export const buildSelectFromInclude = (include: string | null | undefined) => {
 	if (include == null) {
-		return "*"
+		return selectAll
 	}
 
-	return include.split(",").filter((inclusion) => sources.includes(inclusion as Source))
+	return include
+		.split(",")
+		.filter((inclusion) => sources.includes(inclusion as SourceValue))
+		.map((column) => db.dynamic.ref<SourceValue>(column))
 }

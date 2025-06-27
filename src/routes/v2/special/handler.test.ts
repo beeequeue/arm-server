@@ -2,7 +2,7 @@ import { testClient } from "hono/testing"
 import { afterAll, beforeEach, describe, expect, it } from "vitest"
 
 import { createApp } from "../../../app.ts"
-import { knex, type Relation, Source } from "../../../db.ts"
+import { db, type Relation, Source } from "../../../db.ts"
 import { testIncludeQueryParam } from "../include.test-utils.ts"
 
 let id = 1
@@ -24,7 +24,7 @@ const createRelations = async <N extends number>(
 		myanimelist: id++,
 	}))
 
-	await knex.insert(relations).into("relations")
+	await db.insertInto("relations").values(relations).execute()
 
 	if (amount === 1) {
 		return relations[0] as never
@@ -36,11 +36,11 @@ const createRelations = async <N extends number>(
 const app = createApp()
 
 beforeEach(async () => {
-	await knex.delete().from("relations")
+	await db.deleteFrom("relations").execute()
 })
 
 afterAll(async () => {
-	await knex.destroy()
+	await db.destroy()
 })
 
 describe("imdb", () => {
@@ -85,7 +85,7 @@ describe("imdb", () => {
 			thetvdb: null!,
 			myanimelist: null!,
 		}
-		await knex.insert(relation).into("relations")
+		await db.insertInto("relations").values(relation).execute()
 
 		const response = await testClient(app).api.v2.imdb.$get({
 			query: {
@@ -143,7 +143,7 @@ describe("thetvdb", () => {
 			thetvdb: 1337,
 			myanimelist: null!,
 		}
-		await knex.insert(relation).into("relations")
+		await db.insertInto("relations").values(relation).execute()
 
 		const response = await testClient(app).api.v2.thetvdb.$get({
 			query: {
@@ -201,7 +201,7 @@ describe("themoviedb", () => {
 			thetvdb: null!,
 			myanimelist: null!,
 		}
-		await knex.insert(relation).into("relations")
+		await db.insertInto("relations").values(relation).execute()
 
 		const response = await testClient(app).api.v2.themoviedb.$get({
 			query: {

@@ -2,7 +2,7 @@ import { testClient } from "hono/testing"
 import { afterAll, afterEach, describe, expect, it } from "vitest"
 
 import { createApp } from "../../../app.ts"
-import { knex, type Relation, Source } from "../../../db.ts"
+import { db, type Relation, Source } from "../../../db.ts"
 
 let id = 1
 const createRelations = async <N extends number>(
@@ -15,7 +15,7 @@ const createRelations = async <N extends number>(
 		myanimelist: id++,
 	}))
 
-	await knex.insert(relations).into("relations")
+	await db.insertInto("relations").values(relations).execute()
 
 	if (amount === 1) {
 		return relations[0] as never
@@ -26,10 +26,10 @@ const createRelations = async <N extends number>(
 
 const app = createApp()
 
-afterEach(() => knex.delete().from("relations"))
+afterEach(async () => db.deleteFrom("relations").execute())
 
 afterAll(async () => {
-	await knex.destroy()
+	await db.destroy()
 })
 
 describe("query params", () => {
@@ -69,7 +69,7 @@ describe("query params", () => {
 			myanimelist: null!,
 			kitsu: null!,
 		}
-		await knex.insert(relation).into("relations")
+		await db.insertInto("relations").values(relation).execute()
 
 		const response = await testClient(app).api.ids.$get({
 			query: {
@@ -146,7 +146,7 @@ describe("json body", () => {
 				myanimelist: null as never,
 				kitsu: null as never,
 			}
-			await knex.insert(relation).into("relations")
+			await db.insertInto("relations").values(relation).execute()
 
 			const response = await testClient(app).api.ids.$post({
 				json: { anilist: 1337 },

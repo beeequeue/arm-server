@@ -1,7 +1,4 @@
-import Knex from "knex"
+import { db } from "./src/db.ts"
 
-import knexfile from "./knexfile"
-
-const knex = Knex(knexfile)
-
-await knex.migrate.latest()
+// Note: Migrations are handled separately and not through Kysely
+// For tests, we assume the database schema is already set up

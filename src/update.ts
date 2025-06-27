@@ -1,7 +1,7 @@
 import xior, { type XiorError } from "xior"
 import errorRetryPlugin from "xior/plugins/error-retry"
 
-import { knex, type Relation, Source } from "./db.ts"
+import { db, type Relation, Source, type SourceValue } from "./db.ts"
 import { logger } from "./lib/logger.ts"
 import { updateBasedOnManualRules } from "./manual-rules.ts"
 
@@ -62,11 +62,13 @@ const handleBadValues = <T extends string | number | undefined>(
 
 // Removes duplicate source-id pairs from the list, except for thetvdb and themoviedb ids
 export const removeDuplicates = (entries: Relation[]): Relation[] => {
-	const sources = (Object.values(Source) as Source[]).filter(
+	const sources = (Object.values(Source) as SourceValue[]).filter(
 		(source) =>
 			source !== Source.TheTVDB && source !== Source.TheMovieDB && source !== Source.IMDB,
 	)
-	const existing = new Map<Source, Set<unknown>>(sources.map((name) => [name, new Set()]))
+	const existing = new Map<SourceValue, Set<unknown>>(
+		sources.map((name) => [name, new Set()]),
+	)
 
 	const goodEntries = entries.filter((entry) => {
 		for (const source of Object.keys(entry) as (keyof typeof entry)[]) {
@@ -131,15 +133,19 @@ export const updateRelations = async () => {
 	logger.info({ remaining: goodEntries.length }, `Removed duplicates.`)
 
 	logger.info("Updating database...")
-	await knex.transaction(async (trx) =>
-		knex
-			.delete()
-			.from("relations")
-			.transacting(trx)
-			.then(async () => {
-				await knex.batchInsert("relations", goodEntries, 100).transacting(trx)
-			}),
-	)
+	await db.transaction().execute(async (trx) => {
+		// Delete all existing relations
+		await trx.deleteFrom("relations").execute()
+
+		// Insert new relations in chunks of 100
+		const chunkSize = 100
+		for (let i = 0; i < goodEntries.length; i += chunkSize) {
+			const chunk = goodEntries.slice(i, i + chunkSize)
+			for (const entry of chunk) {
+				await trx.insertInto("relations").values(entry).execute()
+			}
+		}
+	})
 	logger.info("Updated database.")
 
 	logger.info("Executing manual rules...")
@@ -148,6 +154,6 @@ export const updateRelations = async () => {
 	logger.info("Done.")
 
 	if (process.argv.includes("--exit")) {
-		await knex.destroy()
+		await db.destroy()
 	}
 }
