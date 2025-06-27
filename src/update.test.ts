@@ -50,7 +50,8 @@ it("handles bad values", async () => {
 				"relations.imdb",
 				"relations.themoviedb",
 				"relations.thetvdb",
-			]),
+			])
+			.execute(),
 	).resolves.toMatchInlineSnapshot(`
     [
       {

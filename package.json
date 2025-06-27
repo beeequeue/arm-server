@@ -50,6 +50,7 @@
 		"hono": "4.8.3",
 		"is-ci": "4.1.0",
 		"kysely": "0.28.2",
+		"kysely-db0": "0.0.1-beta.1",
 		"mentoss": "0.11.0",
 		"nano-staged": "0.8.0",
 		"onchange": "7.1.0",

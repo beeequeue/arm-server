@@ -3,8 +3,7 @@ import { mkdirSync } from "node:fs"
 import { createDatabase } from "db0"
 import sqlite from "db0/connectors/node-sqlite"
 import { Kysely } from "kysely"
-
-import { Db0SqliteDialect } from "./db/db0-dialect.ts"
+import { Db0SqliteDialect } from "kysely-db0"
 
 export const Source = {
 	AniDB: "anidb",

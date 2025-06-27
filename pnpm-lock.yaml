@@ -68,6 +68,9 @@ importers:
       kysely:
         specifier: 0.28.2
         version: 0.28.2
+      kysely-db0:
+        specifier: 0.0.1-beta.1
+        version: 0.0.1-beta.1(db0@0.3.2(better-sqlite3@11.10.0))(kysely@0.28.2)
       mentoss:
         specifier: 0.11.0
         version: 0.11.0
@@ -1589,6 +1592,13 @@ packages:
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
+
+  kysely-db0@0.0.1-beta.1:
+    resolution: {integrity: sha512-Uzxoe/0oxIUfd2D+tVC5VIdowWTdqxPJSpJnskqDbr6WtdJAjK8BBfHlMOKTw8gztlovRrI23I4f72mk7wSMTg==}
+    engines: {node: '>=20.19'}
+    peerDependencies:
+      db0: ^0.3.2
+      kysely: ^0.28.2
 
   kysely@0.28.2:
     resolution: {integrity: sha512-4YAVLoF0Sf0UTqlhgQMFU9iQECdah7n+13ANkiuVfRvlK+uI0Etbgd7bVP36dKlG+NXWbhGua8vnGt+sdhvT7A==}
@@ -3681,6 +3691,11 @@ snapshots:
   keyv@4.5.4:
     dependencies:
       json-buffer: 3.0.1
+
+  kysely-db0@0.0.1-beta.1(db0@0.3.2(better-sqlite3@11.10.0))(kysely@0.28.2):
+    dependencies:
+      db0: 0.3.2(better-sqlite3@11.10.0)
+      kysely: 0.28.2
 
   kysely@0.28.2: {}
 
