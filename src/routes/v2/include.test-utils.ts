@@ -1,16 +1,18 @@
 import type { Hono } from "hono"
 import { describe, expect, test } from "vitest"
 
-import { db, Source } from "../../db.ts"
+import { db, Source, type SourceValue } from "../../db.ts"
 
 export const testIncludeQueryParam = (
 	app: Hono,
 	path: string,
-	source = Source.AniList,
+	source: SourceValue = Source.AniList,
 ) => {
 	const arrayify = <T>(data: T) => (source !== Source.AniList ? [data] : data)
-	const prefixify = <S extends Source, T extends string | number>(source: S, input: T) =>
-		source === "imdb" ? (`tt${input}` as const) : input
+	const prefixify = <S extends SourceValue, T extends string | number>(
+		source: S,
+		input: T,
+	) => (source === "imdb" ? (`tt${input}` as const) : input)
 
 	describe("?include", () => {
 		test("single source", async () => {
@@ -74,7 +76,7 @@ export const testIncludeQueryParam = (
 				new Request(`http://localhost${path}?${query.toString()}`),
 			)
 
-			const expectedResult: Record<Source, number | null> = {
+			const expectedResult: Record<SourceValue, number | null> = {
 				anidb: null,
 				anilist: 1337,
 				"anime-planet": null,
