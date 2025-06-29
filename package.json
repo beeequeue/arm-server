@@ -35,7 +35,7 @@
 	},
 	"devDependencies": {
 		"@antfu/eslint-config": "4.16.1",
-		"@biomejs/biome": "2.0.5",
+		"@biomejs/biome": "2.0.6",
 		"@hono/node-server": "1.14.4",
 		"@hono/standard-validator": "0.1.2",
 		"@standard-schema/spec": "1.0.0",
