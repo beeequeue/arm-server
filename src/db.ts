@@ -1,9 +1,12 @@
 import { mkdirSync } from "node:fs"
+import path from "node:path"
 
 import { createDatabase } from "db0"
 import sqlite from "db0/connectors/node-sqlite"
-import { Kysely } from "kysely"
+import { Kysely, Migrator } from "kysely"
 import { Db0SqliteDialect } from "kysely-db0"
+
+import { ActuallyWorkingMigrationProvider } from "./db/file-provider.ts"
 
 export const Source = {
 	AniDB: "anidb",
@@ -51,3 +54,12 @@ const db0 = createDatabase(
 export const db = new Kysely<Database>({
 	dialect: new Db0SqliteDialect(db0),
 })
+
+const migrator = new Migrator({
+	db,
+	provider: new ActuallyWorkingMigrationProvider(
+		path.resolve(import.meta.dirname, "../db/migrations"),
+	),
+})
+
+await migrator.migrateToLatest()

@@ -28,7 +28,7 @@
 		"docker:run": "docker run -it --rm --name arm -p 3000:3000 arm-server",
 		"fetch-data": "node bin/update.ts --exit",
 		"lint": "eslint src",
-		"start": "node src/index.ts",
+		"start": "node dist/index.mjs",
 		"test": "vitest",
 		"typecheck": "tsc --noEmit",
 		"prepare": "is-ci || simple-git-hooks"
