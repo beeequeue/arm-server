@@ -31,7 +31,7 @@
 		"start": "node dist/index.mjs",
 		"test": "vitest",
 		"typecheck": "tsc --noEmit",
-		"prepare": "is-ci || simple-git-hooks"
+		"prepare": "simple-git-hooks"
 	},
 	"devDependencies": {
 		"@antfu/eslint-config": "4.16.1",
@@ -48,7 +48,6 @@
 		"dotenv": "16.5.0",
 		"eslint": "9.30.0",
 		"hono": "4.8.3",
-		"is-ci": "4.1.0",
 		"kysely": "0.28.2",
 		"kysely-db0": "0.0.1-beta.1",
 		"mentoss": "0.11.0",
