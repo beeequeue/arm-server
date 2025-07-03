@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - run: pnpm lint
+      - run: node --run lint
 
   fmt:
     runs-on: ubuntu-latest
@@ -73,7 +73,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - run: pnpm typecheck
+      - run: node --run typecheck
 
   test:
     runs-on: ubuntu-latest
@@ -101,7 +101,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - run: pnpm test
+      - run: node --run test
         env:
           NODE_ENV: test
 
