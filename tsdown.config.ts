@@ -3,7 +3,7 @@ import { defineConfig } from "tsdown"
 import pkgJson from "./package.json" with { type: "json" }
 
 export default defineConfig({
-	entry: ["src/index.ts"],
+	entry: ["src/index.ts", "src/migrations/*.ts"],
 	outDir: "dist",
 
 	sourcemap: true,

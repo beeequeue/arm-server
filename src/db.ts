@@ -1,5 +1,4 @@
 import { mkdirSync } from "node:fs"
-import path from "node:path"
 
 import { createDatabase } from "db0"
 import sqlite from "db0/connectors/node-sqlite"
@@ -57,9 +56,7 @@ export const db = new Kysely<Database>({
 
 const migrator = new Migrator({
 	db,
-	provider: new ActuallyWorkingMigrationProvider(
-		path.resolve(import.meta.dirname, "../db/migrations"),
-	),
+	provider: new ActuallyWorkingMigrationProvider("dist/migrations"),
 })
 
 await migrator.migrateToLatest()
