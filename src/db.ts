@@ -54,9 +54,9 @@ export const db = new Kysely<Database>({
 	dialect: new Db0SqliteDialect(db0),
 })
 
-const migrator = new Migrator({
+export const migrator = new Migrator({
 	db,
-	provider: new ActuallyWorkingMigrationProvider("dist/migrations"),
+	provider: new ActuallyWorkingMigrationProvider(
+		process.env.NODE_ENV !== "test" ? "dist/migrations" : "src/migrations",
+	),
 })
-
-await migrator.migrateToLatest()
