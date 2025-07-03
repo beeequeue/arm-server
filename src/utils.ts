@@ -150,14 +150,14 @@ export const validationHook = <Data>(
 	})
 }
 
-export enum CacheTimes {
-	HOUR = 3600,
-	SIX_HOURS = 21_600,
-	DAY = 86_400,
-	WEEK = 1_209_600,
-}
+export const CacheTimes = {
+	HOUR: 3600,
+	SIX_HOURS: 21_600,
+	DAY: 86_400,
+	WEEK: 1_209_600,
+} as const
 
-export const cacheReply = (response: Response, value: CacheTimes | number | string) => {
+export const cacheReply = (response: Response, value: number | string) => {
 	response.headers.set("Cache-Control", `public, max-age=${value.toString()}`)
 
 	return response

@@ -1,4 +1,4 @@
-FROM node:22-alpine as base
+FROM node:24-alpine as base
 
 WORKDIR /app
 
@@ -15,35 +15,31 @@ FROM base as base_deps
 
 ENV CI=1
 
-COPY .npmrc package.json pnpm-lock.yaml ./
-COPY patches/ patches/
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 RUN corepack enable
 RUN corepack prepare --activate
 
 # Install dependencies
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
-    pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --ignore-scripts
 
 FROM base_deps as build
 
-COPY knexfile.js tsconfig.json tsup.config.ts ./
+COPY tsconfig.json tsdown.config.ts ./
 COPY src/ src/
 
-RUN pnpm run build
+RUN node --run build
 
 FROM base_deps AS docs
 
 COPY docs/openapi.yaml docs/openapi.yaml
 
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
-    pnpm run docs
+RUN node --run docs
 
 FROM base
 
-COPY .npmrc knexfile.js package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml ./
 COPY src/ src/
-COPY migrations/ migrations/
 
 COPY --from=build /app/dist dist/
 COPY --from=docs /app/redoc-static.html .
@@ -54,4 +50,4 @@ ENV NODE_OPTIONS="--enable-source-maps"
 # Warnings disabled, we know what we're doing and they're annoying
 ENV NODE_NO_WARNINGS=1
 
-CMD ["node", "dist/index.js"]
+CMD ["node", "--run", "start"]

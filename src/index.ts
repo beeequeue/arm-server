@@ -2,12 +2,12 @@ import { serve } from "@hono/node-server"
 
 import { createApp } from "./app.ts"
 import { config } from "./config.ts"
-import { knex } from "./db.ts"
+import { migrator } from "./db.ts"
 import { updateRelations } from "./update.ts"
 
 const { NODE_ENV, PORT } = config
 
-await knex.migrate.latest()
+// Note: Migrations are handled separately and not through Kysely
 
 const runUpdateScript = async () => updateRelations()
 
@@ -19,6 +19,8 @@ if (NODE_ENV === "production") {
 }
 
 const app = createApp()
+
+await migrator.migrateToLatest()
 
 serve({ fetch: app.fetch, hostname: "0.0.0.0", port: PORT }, () => {
 	console.log(`Server running on ${PORT}`)

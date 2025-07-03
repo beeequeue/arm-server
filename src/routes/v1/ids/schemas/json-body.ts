@@ -1,6 +1,6 @@
 import * as v from "valibot"
 
-import type { Source } from "../../../../db.ts"
+import type { SourceValue } from "../../../../db.ts"
 import { numberIdSchema, oldSourceSchema } from "../../../../shared-schemas.ts"
 
 export const singularItemInputSchema = v.pipe(
@@ -16,7 +16,7 @@ const arrayInputSchema = v.pipe(
 export const bodyInputSchema = v.union([singularItemInputSchema, arrayInputSchema])
 
 type BodyItem = {
-	[key in Source]?: number
+	[key in SourceValue]?: number
 }
 
 export type BodyQuery = BodyItem | BodyItem[]

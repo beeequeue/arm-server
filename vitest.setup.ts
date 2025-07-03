@@ -1,7 +1,3 @@
-import Knex from "knex"
+import { migrator } from "./src/db.ts"
 
-import knexfile from "./knexfile"
-
-const knex = Knex(knexfile)
-
-await knex.migrate.latest()
+await migrator.migrateToLatest()

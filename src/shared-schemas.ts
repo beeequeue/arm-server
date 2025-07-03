@@ -24,4 +24,5 @@ export const imdbIdSchema = v.pipe(
 	v.startsWith("tt"),
 	v.minLength(3),
 	v.maxLength(50),
+	v.transform((input): `tt${string}` => input as `tt${string}`),
 )
