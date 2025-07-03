@@ -1,31 +1,4 @@
 {
-  extends: ["config:js-app", "helpers:disableTypesNodeMajor", "schedule:earlyMondays", "group:allNonMajor"],
-  prConcurrentLimit: 5,
-  branchConcurrentLimit: 5,
-  labels: ["dependencies"],
-  baseBranches: ["master"],
-  automerge: false,
-  packageRules: [
-    {
-      packageNames: ["node"],
-      allowedVersions: "<=24",
-      rangeStrategy: "replace",
-    },
-    {
-      groupName: "linters",
-      matchPackagePatterns: ["lint"],
-      automerge: true,
-    },
-    {
-      groupName: "testing packages",
-      matchPackagePatterns: ["jest", "test", "vitest"],
-      automerge: true,
-    },
-    {
-      groupName: "`@types` package patches",
-      matchPackagePrefixes: ["@types/"],
-      patch: true,
-      automerge: true,
-    },
-  ],
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: ["github>BeeeQueue/renovate-config:js-lib.json"],
 }
