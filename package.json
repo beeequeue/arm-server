@@ -37,7 +37,7 @@
 		"@antfu/eslint-config": "4.16.2",
 		"@biomejs/biome": "2.0.6",
 		"@hono/node-server": "1.15.0",
-		"@hono/standard-validator": "0.1.2",
+		"@hono/standard-validator": "0.1.4",
 		"@standard-schema/spec": "1.0.0",
 		"@tsconfig/node24": "24.0.1",
 		"@tsconfig/strictest": "2.0.5",
