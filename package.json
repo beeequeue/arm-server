@@ -47,7 +47,7 @@
 		"db0": "0.3.2",
 		"eslint": "9.30.1",
 		"hono": "4.8.3",
-		"kysely": "0.28.2",
+		"kysely": "0.28.4",
 		"kysely-db0": "0.0.1-beta.1",
 		"mentoss": "0.11.0",
 		"nano-staged": "0.8.0",
