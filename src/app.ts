@@ -14,7 +14,7 @@ export const createApp = () =>
 	new Hono()
 
 		.use("*", async (c, next) => {
-			const start = Date.now()
+			const start = performance.now()
 			logger.info(
 				{
 					method: c.req.method,
@@ -29,7 +29,7 @@ export const createApp = () =>
 			logger.info(
 				{
 					status: c.res.status,
-					ms: Date.now() - start,
+					ms: performance.now() - start,
 				},
 				"res",
 			)
