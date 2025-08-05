@@ -3,7 +3,7 @@ import { mkdirSync } from "node:fs"
 import { createDatabase } from "db0"
 import sqlite from "db0/connectors/node-sqlite"
 import { Kysely, Migrator } from "kysely"
-import { Db0SqliteDialect } from "kysely-db0"
+import { Db0SqliteDialect } from "kysely-db0/sqlite"
 
 import { ActuallyWorkingMigrationProvider } from "./db/file-provider.ts"
 
