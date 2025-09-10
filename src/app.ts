@@ -41,7 +41,7 @@ export const createApp = () =>
 			logger.info(
 				{
 					status: event.res.status,
-					ms: performance.now() - start,
+					ms: Math.round((performance.now() - start + Number.EPSILON) * 10000) / 10000,
 				},
 				"res",
 			)
