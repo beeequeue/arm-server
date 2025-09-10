@@ -1,4 +1,3 @@
-import { testClient } from "hono/testing"
 import { afterAll, beforeEach, describe, expect, it } from "vitest"
 
 import { createApp } from "../../../app.ts"
@@ -48,11 +47,7 @@ describe("imdb", () => {
 		await createRelations(4, 1336)
 		const relations = await createRelations(3, 1337)
 
-		const response = await testClient(app).api.v2.imdb.$get({
-			query: {
-				id: relations[0].imdb!,
-			},
-		})
+		const response = await app.request(`/api/v2/imdb?id=${relations[0].imdb!}`)
 
 		await expect(response.json()).resolves.toStrictEqual(relations)
 		expect(response.status).toBe(200)
@@ -60,11 +55,7 @@ describe("imdb", () => {
 	})
 
 	it("returns empty array when id doesn't exist", async () => {
-		const response = await testClient(app).api.v2.imdb.$get({
-			query: {
-				id: "tt404",
-			},
-		})
+		const response = await app.request("/api/v2/imdb?id=tt404")
 
 		await expect(response.json()).resolves.toStrictEqual([])
 		expect(response.status).toBe(200)
@@ -87,11 +78,7 @@ describe("imdb", () => {
 		}
 		await db.insertInto("relations").values(relation).execute()
 
-		const response = await testClient(app).api.v2.imdb.$get({
-			query: {
-				id: relation.imdb!,
-			},
-		})
+		const response = await app.request(`/api/v2/imdb?id=${relation.imdb!}`)
 
 		await expect(response.json()).resolves.toStrictEqual([relation])
 		expect(response.status).toBe(200)
@@ -106,11 +93,9 @@ describe("thetvdb", () => {
 		await createRelations(4, 1336)
 		const relations = await createRelations(3, 1337)
 
-		const response = await testClient(app).api.v2.thetvdb.$get({
-			query: {
-				id: relations[0].thetvdb!.toString(),
-			},
-		})
+		const response = await app.request(
+			`/api/v2/thetvdb?id=${relations[0].thetvdb!.toString()}`,
+		)
 
 		await expect(response.json()).resolves.toStrictEqual(relations)
 		expect(response.status).toBe(200)
@@ -118,11 +103,7 @@ describe("thetvdb", () => {
 	})
 
 	it("returns empty array when id doesn't exist", async () => {
-		const response = await testClient(app).api.v2.thetvdb.$get({
-			query: {
-				id: (404).toString(),
-			},
-		})
+		const response = await app.request("/api/v2/thetvdb?id=404")
 
 		await expect(response.json()).resolves.toStrictEqual([])
 		expect(response.status).toBe(200)
@@ -145,11 +126,9 @@ describe("thetvdb", () => {
 		}
 		await db.insertInto("relations").values(relation).execute()
 
-		const response = await testClient(app).api.v2.thetvdb.$get({
-			query: {
-				id: relation.thetvdb!.toString(),
-			},
-		})
+		const response = await app.request(
+			`/api/v2/thetvdb?id=${relation.thetvdb!.toString()}`,
+		)
 
 		await expect(response.json()).resolves.toStrictEqual([relation])
 		expect(response.status).toBe(200)
@@ -164,11 +143,9 @@ describe("themoviedb", () => {
 		await createRelations(4, 1336)
 		const relations = await createRelations(3, 1337)
 
-		const response = await testClient(app).api.v2.themoviedb.$get({
-			query: {
-				id: relations[0].themoviedb!.toString(),
-			},
-		})
+		const response = await app.request(
+			`/api/v2/themoviedb?id=${relations[0].themoviedb!.toString()}`,
+		)
 
 		await expect(response.json()).resolves.toStrictEqual(relations)
 		expect(response.status).toBe(200)
@@ -176,11 +153,7 @@ describe("themoviedb", () => {
 	})
 
 	it("returns empty array when id doesn't exist", async () => {
-		const response = await testClient(app).api.v2.themoviedb.$get({
-			query: {
-				id: (404).toString(),
-			},
-		})
+		const response = await app.request(`/api/v2/themoviedb?id=${(404).toString()}`)
 
 		await expect(response.json()).resolves.toStrictEqual([])
 		expect(response.status).toBe(200)
@@ -203,11 +176,9 @@ describe("themoviedb", () => {
 		}
 		await db.insertInto("relations").values(relation).execute()
 
-		const response = await testClient(app).api.v2.themoviedb.$get({
-			query: {
-				id: relation.themoviedb!.toString(),
-			},
-		})
+		const response = await app.request(
+			`/api/v2/themoviedb?id=${relation.themoviedb!.toString()}`,
+		)
 
 		await expect(response.json()).resolves.toStrictEqual([relation])
 		expect(response.status).toBe(200)

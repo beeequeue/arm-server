@@ -1,25 +1,37 @@
-import { Hono } from "hono"
-import { cors } from "hono/cors"
-import { HTTPException } from "hono/http-exception"
-import { secureHeaders } from "hono/secure-headers"
+import { H3, handleCacheHeaders, handleCors, redirect } from "h3"
 
 import { docsRoutes } from "./docs.ts"
 import { logger } from "./lib/logger.ts"
 import { v1Routes } from "./routes/v1/ids/handler.ts"
 import { v2Routes } from "./routes/v2/ids/handler.ts"
 import { specialRoutes } from "./routes/v2/special/handler.ts"
-import { cacheReply, CacheTimes, createErrorJson } from "./utils.ts"
+import { CacheTimes, createErrorJson } from "./utils.ts"
 
 export const createApp = () =>
-	new Hono()
+	new H3({
+		onError: (error, event) => {
+			/* c8 ignore next 4 */
+			if (!error.unhandled) {
+				if (event.req.method === "GET") {
+					handleCacheHeaders(event, { maxAge: CacheTimes.WEEK })
+				}
 
-		.use("*", async (c, next) => {
+				return createErrorJson(event, error)
+			}
+
+			logger.error(error, "unhandled error")
+
+			return createErrorJson(event, error)
+		},
+	})
+
+		.use(async (event, next) => {
 			const start = performance.now()
 			logger.info(
 				{
-					method: c.req.method,
-					path: c.req.path,
-					headers: c.req.header(),
+					method: event.req.method,
+					path: event.url.pathname,
+					headers: event.req.headers,
 				},
 				"req",
 			)
@@ -28,43 +40,48 @@ export const createApp = () =>
 
 			logger.info(
 				{
-					status: c.res.status,
+					status: event.res.status,
 					ms: performance.now() - start,
 				},
 				"res",
 			)
 		})
 
-		.use("*", cors({ origin: (origin) => origin }))
-		.use("*", secureHeaders())
+		.use(async (event, next) => {
+			const response = handleCors(event, {
+				origin: () => true,
+				methods: "*",
+				preflight: { statusCode: 204 },
+			})
+			if (response !== false) return response
 
-		.notFound((c) => createErrorJson(c, new HTTPException(404)))
+			return next()
+		})
 
-		.onError((error, c) => {
-			/* c8 ignore next 4 */
-			if (error instanceof HTTPException) {
-				const res = error.getResponse()
+		.mount("/api", v1Routes)
+		.mount("/api/v2", v2Routes)
+		.mount("/api/v2", specialRoutes)
+		.mount("/docs", docsRoutes)
 
-				if (c.req.method === "GET") {
-					cacheReply(res, CacheTimes.WEEK)
+		.get("/", (event) => {
+			handleCacheHeaders(event, { maxAge: CacheTimes.WEEK * 4 })
+
+			return redirect(event, process.env.HOMEPAGE!, 301)
+		})
+
+		// This makes sure we return "null" instead of an empty response when trying to return a null body
+		.use(
+			async (event, next) => {
+				const body = await next()
+
+				if (body === null) {
+					event.res.headers.set("Content-Type", "application/json")
+					return "null"
 				}
-
-				return createErrorJson(c, error)
-			}
-
-			logger.error(error, "unhandled error")
-
-			const badImpl = new HTTPException(500, { cause: error })
-			return createErrorJson(c, badImpl)
-		})
-
-		.route("/api", v1Routes)
-		.route("/api/v2", v2Routes)
-		.route("/api/v2", specialRoutes)
-		.route("/docs", docsRoutes)
-
-		.get("/", (c) => {
-			cacheReply(c.res, CacheTimes.WEEK * 4)
-
-			return c.redirect(process.env.HOMEPAGE!, 301)
-		})
+			},
+			{
+				match: (e) =>
+					(e.req.method === "GET" || e.req.method === "POST") &&
+					e.url.pathname.startsWith("/api"),
+			},
+		)

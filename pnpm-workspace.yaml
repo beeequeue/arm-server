@@ -15,6 +15,5 @@ overrides:
   "@antfu/eslint-config>vitest": "-"
   eslint-plugin-pnpm>jsonc-eslint-parser: "-"
 
-registry: https://npm.h.haglund.dev
 savePrefix: ""
 shellEmulator: true

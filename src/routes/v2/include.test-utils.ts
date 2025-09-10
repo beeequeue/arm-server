@@ -1,10 +1,10 @@
-import type { Hono } from "hono"
+import type { H3 } from "h3"
 import { describe, expect, test } from "vitest"
 
 import { db, Source, type SourceValue } from "../../db.ts"
 
 export const testIncludeQueryParam = (
-	app: Hono,
+	app: H3,
 	path: string,
 	source: SourceValue = Source.AniList,
 ) => {

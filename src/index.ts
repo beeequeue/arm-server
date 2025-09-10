@@ -1,4 +1,4 @@
-import { serve } from "@hono/node-server"
+import { serve } from "h3"
 
 import { createApp } from "./app.ts"
 import { config } from "./config.ts"
@@ -22,6 +22,4 @@ const app = createApp()
 
 await migrator.migrateToLatest()
 
-serve({ fetch: app.fetch, hostname: "0.0.0.0", port: PORT }, () => {
-	console.log(`Server running on ${PORT}`)
-})
+serve(app, { hostname: "0.0.0.0", port: PORT })

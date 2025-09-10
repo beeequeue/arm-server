@@ -1,7 +1,5 @@
-import type { StandardSchemaV1 } from "@standard-schema/spec"
-import type { Context } from "hono"
-import type { HTTPException } from "hono/http-exception"
-import type { StatusCode } from "hono/utils/http-status"
+import type { H3Event, HTTPError } from "h3"
+import { type FlatErrors, flatten, type ValiError } from "valibot"
 
 type ErrorJson = {
 	code?: string
@@ -10,8 +8,7 @@ type ErrorJson = {
 	message?: string
 }
 
-const getErrorText = (code: StatusCode) => {
-	// eslint-disable-next-line ts/switch-exhaustiveness-check
+const getErrorText = (code: number) => {
 	switch (code) {
 		case 400:
 			return "Bad Request"
@@ -94,60 +91,26 @@ const getErrorText = (code: StatusCode) => {
 	}
 }
 
-export const createErrorJson = (
-	c: Context,
-	input: Pick<HTTPException, "status" | "message"> & {
-		code?: string
-		details?: Record<string, string[]>
-	},
-) => {
-	const status: StatusCode = input.status
+export const createErrorJson = (event: H3Event, input: HTTPError) => {
 	const body: Omit<ErrorJson, "error" | "statusCode"> & {
-		details?: Record<string, string[]>
+		code?: "FST_ERR_VALIDATION"
+		details?: FlatErrors<never>
 	} = {
 		message: input.message ?? "An error occurred.",
 	}
 
-	if (input.code != null) {
-		body.code = input.code
-	}
-	if (input.details != null) {
-		body.details = input.details
+	if (input.status === 400 && "issues" in (input.data as ValiError<never>)) {
+		body.code = "FST_ERR_VALIDATION"
+		body.message = "Validation error"
+		body.details = flatten((input.data as ValiError<never>).issues)
 	}
 
-	c.status(status)
-	return c.json({
+	event.res.status = input.status
+	return {
 		...body,
-		statusCode: status,
-		error: getErrorText(status),
-	})
-}
-
-export const validationHook = <Data>(
-	result:
-		| { success: true; data: Data }
-		| { success: false; error: ReadonlyArray<StandardSchemaV1.Issue>; data: Data },
-	c: Context,
-) => {
-	if (result.success) return
-
-	const issuesByPath = {} as Record<string, string[]>
-	for (const { path, message } of result.error) {
-		const issuePath =
-			path
-				?.map((p) => (typeof p === "object" ? p.key.toString() : p.toString()))
-				.join(".") ?? "$"
-
-		issuesByPath[issuePath] ??= []
-		issuesByPath[issuePath].push(message)
+		statusCode: input.status,
+		error: getErrorText(input.status),
 	}
-
-	return createErrorJson(c, {
-		status: 400,
-		message: "Validation error",
-		code: "FST_ERR_VALIDATION",
-		details: issuesByPath,
-	})
 }
 
 export const CacheTimes = {
@@ -156,9 +119,3 @@ export const CacheTimes = {
 	DAY: 86_400,
 	WEEK: 1_209_600,
 } as const
-
-export const cacheReply = (response: Response, value: number | string) => {
-	response.headers.set("Cache-Control", `public, max-age=${value.toString()}`)
-
-	return response
-}
