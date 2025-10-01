@@ -30,8 +30,8 @@ importers:
         specifier: 1.18.1
         version: 1.18.1(hono@4.8.12)
       '@hono/standard-validator':
-        specifier: 0.1.4
-        version: 0.1.4(@standard-schema/spec@1.0.0)(hono@4.8.12)
+        specifier: 0.1.5
+        version: 0.1.5(@standard-schema/spec@1.0.0)(hono@4.8.12)
       '@standard-schema/spec':
         specifier: 1.0.0
         version: 1.0.0
@@ -484,8 +484,8 @@ packages:
     peerDependencies:
       hono: ^4
 
-  '@hono/standard-validator@0.1.4':
-    resolution: {integrity: sha512-NPxSO9/Z1FFaJ34/0WJA0JoFRrVrJOG5P/i+PBJu7jCw9v0u8WmGiJu0zv+bTk1pjplBjjczAd59x2X50spRmQ==}
+  '@hono/standard-validator@0.1.5':
+    resolution: {integrity: sha512-EIyZPPwkyLn6XKwFj5NBEWHXhXbgmnVh2ceIFo5GO7gKI9WmzTjPDKnppQB0KrqKeAkq3kpoW4SIbu5X1dgx3w==}
     peerDependencies:
       '@standard-schema/spec': 1.0.0
       hono: '>=3.9.0'
@@ -2474,7 +2474,7 @@ snapshots:
     dependencies:
       hono: 4.8.12
 
-  '@hono/standard-validator@0.1.4(@standard-schema/spec@1.0.0)(hono@4.8.12)':
+  '@hono/standard-validator@0.1.5(@standard-schema/spec@1.0.0)(hono@4.8.12)':
     dependencies:
       '@standard-schema/spec': 1.0.0
       hono: 4.8.12
