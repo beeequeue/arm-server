@@ -43,7 +43,7 @@
 		"@tsconfig/strictest": "2.0.5",
 		"@types/json-schema": "7.0.15",
 		"@types/node": "24.2.0",
-		"@vitest/coverage-v8": "4.0.0-beta.6",
+		"@vitest/coverage-v8": "4.0.0-beta.17",
 		"db0": "0.3.2",
 		"eslint": "9.32.0",
 		"hono": "4.8.12",
@@ -59,7 +59,7 @@
 		"type-fest": "4.41.0",
 		"typescript": "5.9.2",
 		"valibot": "1.1.0",
-		"vitest": "4.0.0-beta.6",
+		"vitest": "4.0.0-beta.17",
 		"xior": "0.7.8"
 	}
 }
