@@ -55,11 +55,11 @@ importers:
         specifier: 2.0.0-rc.1
         version: 2.0.0-rc.1
       kysely:
-        specifier: 0.28.4
-        version: 0.28.4
+        specifier: 0.28.7
+        version: 0.28.7
       kysely-db0:
         specifier: 0.1.0-beta.0
-        version: 0.1.0-beta.0(db0@0.3.2(better-sqlite3@11.10.0))(kysely@0.28.4)
+        version: 0.1.0-beta.0(db0@0.3.2(better-sqlite3@11.10.0))(kysely@0.28.7)
       mentoss:
         specifier: 0.11.0
         version: 0.11.0
@@ -1480,8 +1480,8 @@ packages:
       db0: ^0.3.2
       kysely: ^0.28.2
 
-  kysely@0.28.4:
-    resolution: {integrity: sha512-pfQj8/Bo3KSzC1HIZB5MeeYRWcDmx1ZZv8H25LsyeygqXE+gfsbUAgPT1GSYZFctB1cdOVlv+OifuCls2mQSnw==}
+  kysely@0.28.7:
+    resolution: {integrity: sha512-u/cAuTL4DRIiO2/g4vNGRgklEKNIj5Q3CG7RoUB5DV5SfEC2hMvPxKi0GWPmnzwL2ryIeud2VTcEEmqzTzEPNw==}
     engines: {node: '>=20.0.0'}
 
   levn@0.4.1:
@@ -3494,12 +3494,12 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  kysely-db0@0.1.0-beta.0(db0@0.3.2(better-sqlite3@11.10.0))(kysely@0.28.4):
+  kysely-db0@0.1.0-beta.0(db0@0.3.2(better-sqlite3@11.10.0))(kysely@0.28.7):
     dependencies:
       db0: 0.3.2(better-sqlite3@11.10.0)
-      kysely: 0.28.4
+      kysely: 0.28.7
 
-  kysely@0.28.4: {}
+  kysely@0.28.7: {}
 
   levn@0.4.1:
     dependencies:
