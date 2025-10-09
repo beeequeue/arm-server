@@ -38,8 +38,8 @@ RUN node --run docs
 
 FROM base
 
-COPY package.json pnpm-lock.yaml ./
 COPY src/ src/
+COPY package.json pnpm-workspace.yaml ./
 
 COPY --from=build /app/dist dist/
 COPY --from=docs /app/redoc-static.html .

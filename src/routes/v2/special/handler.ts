@@ -1,51 +1,42 @@
-import { sValidator } from "@hono/standard-validator"
-import { Hono } from "hono"
+import { getValidatedQuery, H3, handleCacheHeaders } from "h3"
 
 import { db, Source } from "../../../db.ts"
-import { cacheReply, CacheTimes, validationHook } from "../../../utils.ts"
+import { CacheTimes } from "../../../utils.ts"
 import { buildSelectFromInclude } from "../include.ts"
 
 import { specialImdbInputSchema, specialInputSchema } from "./schemas/special.ts"
 
-export const specialRoutes = new Hono()
-	.get(
-		"/imdb",
-		sValidator("query", specialImdbInputSchema, validationHook),
-		async (c) => {
-			const query = c.req.valid("query")
-			const selectFields = buildSelectFromInclude(query.include)
+export const specialRoutes = new H3()
+	.get("/imdb", async (event) => {
+		const query = await getValidatedQuery(event, specialImdbInputSchema)
+		const selectFields = buildSelectFromInclude(query.include)
 
-			const data = await db
-				.selectFrom("relations")
-				.select(selectFields)
-				.where(Source.IMDB, "=", query.id)
-				.execute()
+		const data = await db
+			.selectFrom("relations")
+			.select(selectFields)
+			.where(Source.IMDB, "=", query.id)
+			.execute()
 
-			cacheReply(c.res, CacheTimes.SIX_HOURS)
+		handleCacheHeaders(event, { maxAge: CacheTimes.SIX_HOURS })
 
-			return c.json(data)
-		},
-	)
-	.get(
-		"/themoviedb",
-		sValidator("query", specialInputSchema, validationHook),
-		async (c) => {
-			const query = c.req.valid("query")
-			const selectFields = buildSelectFromInclude(query.include)
+		return data
+	})
+	.get("/themoviedb", async (event) => {
+		const query = await getValidatedQuery(event, specialInputSchema)
+		const selectFields = buildSelectFromInclude(query.include)
 
-			const data = await db
-				.selectFrom("relations")
-				.select(selectFields)
-				.where(Source.TheMovieDB, "=", query.id)
-				.execute()
+		const data = await db
+			.selectFrom("relations")
+			.select(selectFields)
+			.where(Source.TheMovieDB, "=", query.id)
+			.execute()
 
-			cacheReply(c.res, CacheTimes.SIX_HOURS)
+		handleCacheHeaders(event, { maxAge: CacheTimes.SIX_HOURS })
 
-			return c.json(data)
-		},
-	)
-	.get("/thetvdb", sValidator("query", specialInputSchema, validationHook), async (c) => {
-		const query = c.req.valid("query")
+		return data
+	})
+	.get("/thetvdb", async (event) => {
+		const query = await getValidatedQuery(event, specialInputSchema)
 		const selectFields = buildSelectFromInclude(query.include)
 
 		const data = await db
@@ -54,7 +45,7 @@ export const specialRoutes = new Hono()
 			.where(Source.TheTVDB, "=", query.id)
 			.execute()
 
-		cacheReply(c.res, CacheTimes.SIX_HOURS)
+		handleCacheHeaders(event, { maxAge: CacheTimes.SIX_HOURS })
 
-		return c.json(data)
+		return data
 	})

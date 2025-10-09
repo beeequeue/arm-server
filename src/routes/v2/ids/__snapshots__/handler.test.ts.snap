@@ -4,9 +4,11 @@ exports[`json body > array input > requires at least one source 1`] = `
 {
   "code": "FST_ERR_VALIDATION",
   "details": {
-    "0": [
-      "At least one ID must be provided",
-    ],
+    "nested": {
+      "0": [
+        "At least one ID must be provided",
+      ],
+    },
   },
   "error": "Bad Request",
   "message": "Validation error",
@@ -18,7 +20,7 @@ exports[`json body > object input > errors correctly on an empty object 1`] = `
 {
   "code": "FST_ERR_VALIDATION",
   "details": {
-    "$": [
+    "root": [
       "At least one ID must be provided",
     ],
   },

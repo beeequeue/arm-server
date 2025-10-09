@@ -1,9 +1,8 @@
-import { sValidator } from "@hono/standard-validator"
-import { Hono } from "hono"
+import { getValidatedQuery, H3, handleCacheHeaders, readValidatedBody } from "h3"
 
 import { db } from "../../../db.ts"
 import type { OldRelation, Relation, SourceValue } from "../../../db.ts"
-import { cacheReply, CacheTimes, validationHook } from "../../../utils.ts"
+import { CacheTimes } from "../../../utils.ts"
 
 import { bodyInputSchema } from "./schemas/json-body.ts"
 import { queryInputSchema } from "./schemas/query-params.ts"
@@ -16,9 +15,9 @@ const V1_FIELDS = [
 	"relations.kitsu",
 ] as const
 
-export const v1Routes = new Hono()
-	.get("/ids", sValidator("query", queryInputSchema, validationHook), async (c) => {
-		const query = c.req.valid("query")
+export const v1Routes = new H3()
+	.get("/ids", async (event) => {
+		const query = await getValidatedQuery(event, queryInputSchema)
 
 		const row = await db
 			.selectFrom("relations")
@@ -26,12 +25,12 @@ export const v1Routes = new Hono()
 			.where(query.source as keyof Relation, "=", query.id)
 			.executeTakeFirst()
 
-		cacheReply(c.res, CacheTimes.SIX_HOURS)
+		handleCacheHeaders(event, { maxAge: CacheTimes.SIX_HOURS })
 
-		return c.json((row as OldRelation) ?? null)
+		return (row as OldRelation) ?? null
 	})
-	.post("/ids", sValidator("json", bodyInputSchema, validationHook), async (c) => {
-		const input = c.req.valid("json")
+	.post("/ids", async (event) => {
+		const input = await readValidatedBody(event, bodyInputSchema)
 
 		if (!Array.isArray(input)) {
 			// Single item query
@@ -43,7 +42,7 @@ export const v1Routes = new Hono()
 				.where(key as keyof Relation, "=", value)
 				.executeTakeFirst()
 
-			return c.json(relation ?? null)
+			return relation ?? null
 		}
 
 		let relations: Array<Relation | null> = []
@@ -72,5 +71,5 @@ export const v1Routes = new Hono()
 			return relations.find((relation) => relation![realItem[0]] === realItem[1]) ?? null
 		})
 
-		return c.json(relations)
+		return relations
 	})

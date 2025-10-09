@@ -28,34 +28,19 @@ export default antfu({
 	jsonc: false,
 	jsx: false,
 	toml: false,
-	test: { overrides: { "test/no-import-node-test": "off" } },
 	typescript: {
 		tsconfigPath: "tsconfig.json",
-		ignoresTypeAware: ["copy.ts", "*.config.*"],
-
-		overridesTypeAware: {
-			"ts/no-floating-promises": [
-				"error",
-				{
-					allowForKnownSafeCalls: [
-						{ from: "package", package: "node:test", name: ["describe", "it", "test"] },
-					],
-				},
-			],
-		},
 
 		overrides: {
 			"no-console": "off",
 			"antfu/no-top-level-await": "off",
 			"import/consistent-type-specifier-style": ["error", "prefer-top-level"],
-			"node/prefer-global/process": "off",
-			"ts/consistent-type-definitions": "off",
 			"ts/consistent-type-imports": [
 				"error",
 				{ fixStyle: "inline-type-imports", disallowTypeAnnotations: false },
 			],
-			"ts/no-unsafe-argument": "off",
-			"ts/no-unsafe-assignment": "off",
+			"node/prefer-global/process": "off",
+			"ts/consistent-type-definitions": "off",
 			"ts/no-use-before-define": "off",
 			"unused-imports/no-unused-vars": "off",
 
