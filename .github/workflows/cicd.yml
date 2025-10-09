@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 24
 
@@ -23,7 +23,7 @@ jobs:
         id: cache
         run: echo "path=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v4
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ${{ steps.cache.outputs.path }}
           key: v1-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -41,7 +41,7 @@ jobs:
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
-      - uses: biomejs/setup-biome@v2
+      - uses: biomejs/setup-biome@454fa0d884737805f48d7dc236c1761a0ac3cc13 # v2
         with:
           version: latest
 
@@ -53,7 +53,7 @@ jobs:
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 24
 
@@ -63,7 +63,7 @@ jobs:
         id: cache
         run: echo "path=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v4
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ${{ steps.cache.outputs.path }}
           key: v1-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -81,7 +81,7 @@ jobs:
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 24
 
@@ -91,7 +91,7 @@ jobs:
         id: cache
         run: echo "path=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v4
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ${{ steps.cache.outputs.path }}
           key: v1-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -115,7 +115,7 @@ jobs:
     steps:
       - name: Docker meta
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@c1e51972afc2121e065aed6d45c65596fe445f3f # v5
         with:
           images: |
             ghcr.io/${{ github.repository }}
@@ -124,18 +124,18 @@ jobs:
             type=raw,value=latest
 
       - name: Set up depot
-        uses: depot/setup-action@v1
+        uses: depot/setup-action@b0b1ea4f69e92ebf5dea3f8713a1b0c37b2126a5 # v1
 
       - name: Login to GHCR
         if: github.ref == 'refs/heads/master'
-        uses: docker/login-action@v3
+        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and maybe Push Docker image
-        uses: depot/build-push-action@v1
+        uses: depot/build-push-action@9785b135c3c76c33db102e45be96a25ab55cd507 # v1
         with:
           project: ks849krng9
           push: ${{ github.ref == 'refs/heads/master' }}
