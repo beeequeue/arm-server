@@ -6,7 +6,7 @@
 	"private": true,
 	"license": "AGPL-3.0-only",
 	"homepage": "https://arm.haglund.dev/docs",
-	"packageManager": "pnpm@10.15.1",
+	"packageManager": "pnpm@10.18.1",
 	"engines": {
 		"node": "^24"
 	},
