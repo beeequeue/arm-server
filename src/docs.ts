@@ -15,7 +15,7 @@ docsRoutes.get("/", async (event) => {
 	if (docsHtml != null) {
 		handleCacheHeaders(event, { maxAge: CacheTimes.DAY })
 
-		return html(event, docsHtml)
+		return html(docsHtml)
 	}
 
 	docsHtml = existsSync(filePath) ? await readFile(filePath, "utf8") : null
@@ -25,6 +25,6 @@ docsRoutes.get("/", async (event) => {
 	} else {
 		handleCacheHeaders(event, { maxAge: CacheTimes.DAY })
 
-		return html(event, docsHtml)
+		return html(docsHtml)
 	}
 })

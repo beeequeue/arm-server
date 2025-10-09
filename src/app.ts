@@ -66,7 +66,7 @@ export const createApp = () =>
 		.get("/", (event) => {
 			handleCacheHeaders(event, { maxAge: CacheTimes.WEEK * 4 })
 
-			return redirect(event, process.env.HOMEPAGE!, 301)
+			return redirect(process.env.HOMEPAGE!, 301)
 		})
 
 		// This makes sure we return "null" instead of an empty response when trying to return a null body

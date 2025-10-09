@@ -30,7 +30,7 @@
 		"lint": "eslint src",
 		"start": "node dist/index.mjs",
 		"test": "vitest",
-		"typecheck": "tsc --noEmit",
+		"typecheck": "tsgo",
 		"prepare": "simple-git-hooks"
 	},
 	"devDependencies": {
@@ -40,6 +40,7 @@
 		"@tsconfig/strictest": "2.0.5",
 		"@types/json-schema": "7.0.15",
 		"@types/node": "24.2.0",
+		"@typescript/native-preview": "7.0.0-dev.20251009.1",
 		"@vitest/coverage-v8": "4.0.0-beta.17",
 		"db0": "0.3.2",
 		"eslint": "9.32.0",
@@ -53,7 +54,6 @@
 		"pino-pretty": "13.1.1",
 		"simple-git-hooks": "2.13.1",
 		"tsdown": "0.15.6",
-		"typescript": "5.9.2",
 		"valibot": "1.1.0",
 		"vitest": "4.0.0-beta.17",
 		"xior": "0.7.8"

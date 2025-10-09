@@ -7,16 +7,13 @@
 		"module": "esnext",
 		"moduleResolution": "bundler",
 		"resolveJsonModule": true,
-		"esModuleInterop": true,
 		"allowImportingTsExtensions": true,
 
 		"lib": ["esnext"],
-		"importsNotUsedAsValues": "remove",
 		"noImplicitReturns": false,
 		"noPropertyAccessFromIndexSignature": false,
 		"noUncheckedIndexedAccess": false,
 		"exactOptionalPropertyTypes": false,
-		"verbatimModuleSyntax": false,
 
 		"types": ["node"]
 	},

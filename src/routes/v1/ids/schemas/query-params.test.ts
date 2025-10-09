@@ -1,8 +1,8 @@
-import type { JsonValue } from "type-fest"
 import { safeParse } from "valibot"
 import { describe, expect, it } from "vitest"
 
 import { Source } from "../../../../db.ts"
+import type { JsonValue } from "../../../../types.ts"
 
 import { queryInputSchema } from "./query-params.ts"
 
