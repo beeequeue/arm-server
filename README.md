@@ -1,6 +1,6 @@
 # arm-server
 
-[![](https://img.shields.io/github/actions/workflow/status/BeeeQueue/arm-server/cicd.yml?branch=master)](https://github.com/BeeeQueue/arm-server/actions?query=branch%3Amaster+workflow%3ACI)
+[![](https://img.shields.io/github/actions/workflow/status/BeeeQueue/arm-server/cicd.yml?branch=main)](https://github.com/BeeeQueue/arm-server/actions?query=branch%3Amain+workflow%3ACI)
 [![](https://uptime.h.haglund.dev/api/badge/2/uptime/168?label=Uptime%207d)](https://uptime.h.haglund.dev/status/arm-server)
 
 This app uses data from [`Fribb/anime-lists`](https://github.com/Fribb/anime-lists) - fetching
@@ -30,7 +30,7 @@ a [manual rule request](https://github.com/BeeeQueue/arm-server/issues/new?templ
 
 ## Self-hosting
 
-Docker images are built and provided for each commit on master!
+Docker images are built and provided for each commit on main!
 
 The minimum configuration needed can be found in the following command:
 
