@@ -34,7 +34,7 @@
 		"prepare": "simple-git-hooks"
 	},
 	"devDependencies": {
-		"@antfu/eslint-config": "5.1.0",
+		"@antfu/eslint-config": "5.4.1",
 		"@biomejs/biome": "2.1.3",
 		"@tsconfig/node24": "24.0.1",
 		"@tsconfig/strictest": "2.0.5",
@@ -43,7 +43,7 @@
 		"@typescript/native-preview": "7.0.0-dev.20251009.1",
 		"@vitest/coverage-v8": "4.0.0-beta.17",
 		"db0": "0.3.2",
-		"eslint": "9.32.0",
+		"eslint": "9.37.0",
 		"h3": "2.0.0-rc.1",
 		"kysely": "0.28.4",
 		"kysely-db0": "0.1.0-beta.0",
