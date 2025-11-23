@@ -2,17 +2,19 @@ import { defineConfig } from "tsdown"
 
 import pkgJson from "./package.json" with { type: "json" }
 
+const isProd = process.env.NODE_ENV === "production"
+
 export default defineConfig({
 	entry: ["src/index.ts", "src/migrations/*.ts"],
 	outDir: "dist",
 
-	sourcemap: true,
-	minify: true,
+	sourcemap: isProd,
+	minify: isProd ? true : "dce-only",
 
 	env: {
 		NODE_ENV: process.env.NODE_ENV ?? "production",
 		DEV: process.env.NODE_ENV === "development",
-		PROD: process.env.NODE_ENV === "production",
+		PROD: isProd,
 		TEST: false,
 		HOMEPAGE: pkgJson.homepage,
 	},
