@@ -6,9 +6,6 @@ export default defineConfig(async ({ command }) => ({
 
 		setupFiles: ["./vitest.setup.ts"],
 
-		maxWorkers: 1,
-		isolate: true,
-
 		env: {
 			NODE_ENV: "test",
 		},

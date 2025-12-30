@@ -60,8 +60,8 @@ importers:
         specifier: 0.28.9
         version: 0.28.9
       kysely-db0:
-        specifier: 0.1.0-beta.0
-        version: 0.1.0-beta.0(db0@0.3.4)(kysely@0.28.9)
+        specifier: 0.1.0-beta.1
+        version: 0.1.0-beta.1(db0@0.3.4)(kysely@0.28.9)
       mentoss:
         specifier: 0.12.0
         version: 0.12.0
@@ -1239,12 +1239,12 @@ packages:
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
 
-  kysely-db0@0.1.0-beta.0:
-    resolution: {integrity: sha512-q6/RLhd8HiSamDTKjCnSZiRPkZ36OmKaWQyvedYYlRjxXH1wuKxNPYBRNN/MMY/kAWnIWswfr55VyojvGZjsGA==}
-    engines: {node: '>=20.19'}
+  kysely-db0@0.1.0-beta.1:
+    resolution: {integrity: sha512-9wxSmcfP4Y8EY52hUgXWBw7JDG6wm8VP0vlBue1LYLnA9iq//BgUOV3ZQHstMVXKa0tFqAzZfXVduWkX1V6G9w==}
+    engines: {node: '>=22'}
     peerDependencies:
-      db0: ^0.3.2
-      kysely: ^0.28.2
+      db0: ^0.3.4
+      kysely: ^0.28.9
 
   kysely@0.28.9:
     resolution: {integrity: sha512-3BeXMoiOhpOwu62CiVpO6lxfq4eS6KMYfQdMsN/2kUCRNuF2YiEr7u0HLHaQU+O4Xu8YXE3bHVkwaQ85i72EuA==}
@@ -2998,7 +2998,7 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  kysely-db0@0.1.0-beta.0(db0@0.3.4)(kysely@0.28.9):
+  kysely-db0@0.1.0-beta.1(db0@0.3.4)(kysely@0.28.9):
     dependencies:
       db0: 0.3.4
       kysely: 0.28.9

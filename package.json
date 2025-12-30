@@ -46,7 +46,7 @@
 		"eslint": "9.39.2",
 		"h3": "2.0.1-rc.6",
 		"kysely": "0.28.9",
-		"kysely-db0": "0.1.0-beta.0",
+		"kysely-db0": "0.1.0-beta.1",
 		"mentoss": "0.12.0",
 		"nano-staged": "0.8.0",
 		"onchange": "7.1.0",
