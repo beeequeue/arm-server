@@ -1,4 +1,4 @@
-FROM node:25-alpine as base
+FROM node:25-alpine AS base
 
 WORKDIR /app
 
@@ -11,20 +11,22 @@ ENV NODE_ENV=production
 ENV NODE_COMPILE_CACHE=/node-cc
 RUN mkdir -p $NODE_COMPILE_CACHE
 
-FROM base as base_deps
+FROM base AS base_deps
 
 ENV CI=1
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
-RUN npm i -g corepack@latest
+RUN npm i -g npm@latest
+RUN npm i -g --force corepack@latest
 RUN corepack enable
 RUN corepack prepare --activate
 
 # Install dependencies
-RUN pnpm install --frozen-lockfile --ignore-scripts
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
+    pnpm install --frozen-lockfile --ignore-scripts
 
-FROM base_deps as build
+FROM base_deps AS build
 
 COPY tsconfig.json tsdown.config.ts ./
 COPY src/ src/
