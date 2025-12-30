@@ -23,7 +23,7 @@ RUN corepack enable
 RUN corepack prepare --activate
 
 # Install dependencies
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
+RUN --mount=type=cache,id=s/c47f3895-fff0-42c4-b1f7-cee7f61e6613-pnpm,target=/pnpm/store \
     pnpm install --frozen-lockfile --ignore-scripts
 
 FROM base_deps AS build
