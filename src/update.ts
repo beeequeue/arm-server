@@ -1,7 +1,7 @@
 import xior, { type XiorError } from "xior"
 import errorRetryPlugin from "xior/plugins/error-retry"
 
-import { db, type Relation, Source, type SourceValue } from "./db.ts"
+import { db, type Relation, Source, type SourceValue } from "./db/db.ts"
 import { logger } from "./lib/logger.ts"
 import { updateBasedOnManualRules } from "./manual-rules.ts"
 

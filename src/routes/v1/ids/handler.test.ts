@@ -1,7 +1,7 @@
 import { afterAll, afterEach, describe, expect, it } from "vitest"
 
 import { createApp } from "../../../app.ts"
-import { db, type Relation, Source } from "../../../db.ts"
+import { db, type Relation, Source } from "../../../db/db.ts"
 
 let id = 1
 const createRelations = async <N extends number>(

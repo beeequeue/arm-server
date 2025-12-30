@@ -1,7 +1,7 @@
 import { getValidatedQuery, H3, handleCacheHeaders, readValidatedBody } from "h3"
 
-import { db } from "../../../db.ts"
-import type { OldRelation, Relation, SourceValue } from "../../../db.ts"
+import { db } from "../../../db/db.ts"
+import type { OldRelation, Relation, SourceValue } from "../../../db/db.ts"
 import { CacheTimes } from "../../../utils.ts"
 
 import { bodyInputSchema } from "./schemas/json-body.ts"

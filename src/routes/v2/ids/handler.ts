@@ -1,6 +1,6 @@
 import { getValidatedQuery, H3, handleCacheHeaders, readValidatedBody } from "h3"
 
-import { db, type Relation, type SourceValue } from "../../../db.ts"
+import { db, type Relation, type SourceValue } from "../../../db/db.ts"
 import { CacheTimes } from "../../../utils.ts"
 import { buildSelectFromInclude, includeSchema } from "../include.ts"
 

@@ -1,7 +1,7 @@
 import { afterAll, beforeEach, describe, expect, it } from "vitest"
 
 import { createApp } from "../../../app.ts"
-import { db, type Relation, Source } from "../../../db.ts"
+import { db, type Relation, Source } from "../../../db/db.ts"
 import { testIncludeQueryParam } from "../include.test-utils.ts"
 
 let id = 1

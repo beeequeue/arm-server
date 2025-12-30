@@ -1,4 +1,4 @@
-import { db, type Relation } from "./db.ts"
+import { db, type Relation } from "./db/db.ts"
 
 type Rule = `${keyof Relation}:${number}`
 const rules: Record<Rule, Rule> = {}

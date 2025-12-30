@@ -1,7 +1,7 @@
 import { getValidatedQuery, H3, type H3EventContext } from "h3"
 import { afterAll, beforeEach, describe, expect, it, vi } from "vitest"
 
-import { db, Source } from "../../db.ts"
+import { db, Source } from "../../db/db.ts"
 
 import { includeSchema } from "./include.ts"
 

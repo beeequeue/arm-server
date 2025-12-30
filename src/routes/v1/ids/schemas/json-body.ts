@@ -1,6 +1,6 @@
 import * as v from "valibot"
 
-import type { SourceValue } from "../../../../db.ts"
+import type { SourceValue } from "../../../../db/db.ts"
 import { numberIdSchema, oldSourceSchema } from "../../../../shared-schemas.ts"
 
 export const singularItemInputSchema = v.pipe(

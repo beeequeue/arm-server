@@ -1,7 +1,7 @@
 import { safeParse } from "valibot"
 import { describe, expect, it } from "vitest"
 
-import type { Relation } from "../../../../db.ts"
+import type { Relation } from "../../../../db/db.ts"
 import type { JsonValue } from "../../../../types.ts"
 
 import { bodyInputSchema } from "./json-body.ts"
