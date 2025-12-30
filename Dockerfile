@@ -17,6 +17,7 @@ ENV CI=1
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
+RUN npm i -g corepack@latest
 RUN corepack enable
 RUN corepack prepare --activate
 
