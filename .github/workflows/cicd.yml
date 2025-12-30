@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
@@ -40,7 +40,7 @@ jobs:
       - run: node --run lint
 
   fmt:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
@@ -52,7 +52,7 @@ jobs:
       - run: biome check
 
   typecheck:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
@@ -81,7 +81,7 @@ jobs:
       - run: node --run typecheck
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
@@ -112,7 +112,7 @@ jobs:
           NODE_ENV: test
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     permissions:
       contents: read
       packages: write
@@ -149,7 +149,7 @@ jobs:
   deploy:
     if: github.ref == 'refs/heads/main'
     needs: [lint, test, typecheck, build]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     environment:
       name: prod
       url: https://arm.haglund.dev/api
