@@ -37,7 +37,8 @@ FROM base_deps AS docs
 
 COPY docs/openapi.yaml docs/openapi.yaml
 
-RUN node --run docs
+RUN --mount=type=cache,id=s/c47f3895-fff0-42c4-b1f7-cee7f61e6613-pnpm,target=/pnpm/store \
+    node --run docs
 
 FROM base
 
