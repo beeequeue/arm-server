@@ -1,6 +1,6 @@
 import { getValidatedQuery, H3, handleCacheHeaders } from "h3"
 
-import { db, Source } from "../../../db.ts"
+import { db, Source } from "../../../db/db.ts"
 import { CacheTimes } from "../../../utils.ts"
 import { buildSelectFromInclude } from "../include.ts"
 

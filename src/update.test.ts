@@ -1,7 +1,7 @@
 import { FetchMocker, MockServer } from "mentoss"
 import { afterAll, afterEach, beforeEach, expect, it, vi } from "vitest"
 
-import { db, type Relation, Source, type SourceValue } from "./db.ts"
+import { db, type Relation, Source, type SourceValue } from "./db/db.ts"
 import {
 	type AnimeListsSchema,
 	formatEntry,

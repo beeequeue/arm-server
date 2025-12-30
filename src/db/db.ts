@@ -5,7 +5,7 @@ import sqlite from "db0/connectors/node-sqlite"
 import { Kysely, Migrator } from "kysely"
 import { Db0SqliteDialect } from "kysely-db0/sqlite"
 
-import { ActuallyWorkingMigrationProvider } from "./db/file-provider.ts"
+import { ActuallyWorkingMigrationProvider } from "./file-provider.ts"
 
 export const Source = {
 	AniDB: "anidb",

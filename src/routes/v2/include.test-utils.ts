@@ -1,7 +1,7 @@
 import type { H3 } from "h3"
 import { describe, expect, test } from "vitest"
 
-import { db, Source, type SourceValue } from "../../db.ts"
+import { db, Source, type SourceValue } from "../../db/db.ts"
 
 export const testIncludeQueryParam = (
 	app: H3,

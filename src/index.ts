@@ -2,7 +2,7 @@ import { serve } from "h3"
 
 import { createApp } from "./app.ts"
 import { config } from "./config.ts"
-import { migrator } from "./db.ts"
+import { migrator } from "./db/db.ts"
 import { updateRelations } from "./update.ts"
 
 const { NODE_ENV, PORT } = config

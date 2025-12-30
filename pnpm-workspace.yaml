@@ -1,6 +1,9 @@
 packages: []
 
 ignoredBuiltDependencies: ["@biomejs/biome", esbuild, simple-git-hooks]
+
+minimumReleaseAge: 0
+
 onlyBuiltDependencies: []
 
 overrides:
@@ -15,6 +18,7 @@ overrides:
   "@antfu/eslint-config>vitest": "-"
   "better-sqlite3": "-"
   eslint-plugin-pnpm>jsonc-eslint-parser: "-"
+  rolldown: 1.0.0-beta.57
   vite: npm:rolldown-vite@latest
 
 savePrefix: ""

@@ -5,9 +5,9 @@ export default defineConfig(async ({ command }) => ({
 		reporters: ["verbose"],
 
 		setupFiles: ["./vitest.setup.ts"],
-		poolOptions: {
-			forks: { singleFork: true, minForks: 1, maxForks: 1 },
-		},
+
+		maxWorkers: 1,
+		isolate: true,
 
 		env: {
 			NODE_ENV: "test",

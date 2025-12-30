@@ -1,3 +1,3 @@
-import { migrator } from "./src/db.ts"
+import { migrator } from "./src/db/db.ts"
 
 await migrator.migrateToLatest()

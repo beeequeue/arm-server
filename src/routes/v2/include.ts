@@ -1,6 +1,6 @@
 import * as v from "valibot"
 
-import { db, Source, type SourceValue } from "../../db.ts"
+import { db, Source, type SourceValue } from "../../db/db.ts"
 
 export const includeSchema = v.object({
 	include: v.optional(

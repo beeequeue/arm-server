@@ -1,6 +1,6 @@
 import * as v from "valibot"
 
-import type { Relation } from "../../../../db.ts"
+import type { Relation } from "../../../../db/db.ts"
 import { numberIdSchema, stringIdSchema } from "../../../../shared-schemas.ts"
 
 // Does not include `thetvdb` due to the one-to-many issue
