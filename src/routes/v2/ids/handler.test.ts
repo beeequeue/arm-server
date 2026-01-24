@@ -16,10 +16,15 @@ const createRelations = async <N extends number>(
 		imdb: `tt${id++}`,
 		kitsu: id++,
 		livechart: id++,
-		"notify-moe": `${id++}`,
+		animenewsnetwork: id++,
 		themoviedb: id++,
+		"themoviedb-season": id++,
 		thetvdb: id++,
+		"thetvdb-season": id++,
 		myanimelist: id++,
+		simkl: id++,
+		animecountdown: id++,
+		media: `${id++}`,
 	}))
 
 	// Insert each relation
@@ -80,10 +85,15 @@ describe("query params", () => {
 			imdb: null!,
 			kitsu: null!,
 			livechart: null!,
-			"notify-moe": null!,
+			animenewsnetwork: null!,
 			themoviedb: null!,
+			"themoviedb-season": null!,
 			thetvdb: null!,
+			"thetvdb-season": null!,
 			myanimelist: null!,
+			simkl: null!,
+			animecountdown: null!,
+			media: null!,
 		}
 		await db.insertInto("relations").values(relation).execute()
 
@@ -165,10 +175,15 @@ describe("json body", () => {
 				imdb: null!,
 				kitsu: null!,
 				livechart: null!,
-				"notify-moe": null!,
+				animenewsnetwork: null!,
 				themoviedb: null!,
+				"themoviedb-season": null!,
 				thetvdb: null!,
+				"thetvdb-season": null!,
 				myanimelist: null!,
+				simkl: null!,
+				animecountdown: null!,
+				media: null!,
 			}
 			await db.insertInto("relations").values(relation).execute()
 

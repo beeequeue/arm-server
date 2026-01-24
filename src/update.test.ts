@@ -29,11 +29,11 @@ afterAll(async () => {
 })
 
 it("handles bad values", async () => {
-	server.get("/Fribb/anime-lists/master/anime-list-full.json", {
+	server.get("/Fribb/anime-lists/master/anime-list-mini.json", {
 		status: 200,
 		body: [
 			{ anidb_id: 1337, themoviedb_id: "unknown" },
-			{ anidb_id: 1338, thetvdb_id: "unknown" as never },
+			{ anidb_id: 1338, tvdb_id: "unknown" as never },
 			{ anidb_id: 1339, imdb_id: "tt1337,tt1338,tt1339" },
 			{ anidb_id: 1340, themoviedb_id: "unknown" },
 			{ anidb_id: 1341, themoviedb_id: 1341 },
@@ -92,7 +92,7 @@ it("handles duplicates", async () => {
 	mocker.unmockGlobal()
 
 	const entries: Relation[] = await fetch(
-		"https://raw.githubusercontent.com/Fribb/anime-lists/master/anime-list-full.json",
+		"https://raw.githubusercontent.com/Fribb/anime-lists/master/anime-list-mini.json",
 	)
 		.then(async (r) => r.json())
 		.then((e) => (e as any[]).map(formatEntry))
@@ -115,7 +115,7 @@ it("handles duplicates", async () => {
 		Source.AniSearch,
 		Source.Kitsu,
 		Source.LiveChart,
-		Source.NotifyMoe,
+		Source.AnimeNewsNetwork,
 		Source.MAL,
 	]
 

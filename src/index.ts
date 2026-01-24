@@ -1,7 +1,7 @@
 import { serve } from "h3"
 
 import { createApp } from "./app.ts"
-import { config } from "./config.ts"
+import { config, Environment } from "./config.ts"
 import { migrator } from "./db/db.ts"
 import { updateRelations } from "./update.ts"
 
@@ -11,7 +11,7 @@ const { NODE_ENV, PORT } = config
 
 const runUpdateScript = async () => updateRelations()
 
-if (NODE_ENV === "production") {
+if (NODE_ENV === Environment.Prod) {
 	void runUpdateScript()
 
 	// eslint-disable-next-line ts/no-misused-promises
