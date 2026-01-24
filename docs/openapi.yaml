@@ -115,13 +115,13 @@ $defs:
             minimum: 0
             maximum: 50000000
             example: 1337
-      notify-moe:
+      animenewsnetwork:
         oneOf:
           - type: 'null'
-          - type: string
-            minLength: 1
-            maxLength: 50
-            example: "-cQb5Fmmg"
+          - type: integer
+            minimum: 0
+            maximum: 50000000
+            example: 1337
       themoviedb:
         oneOf:
           - type: 'null'
@@ -129,6 +129,13 @@ $defs:
             minimum: 0
             maximum: 50000000
             example: 1337
+      themoviedb-season:
+        oneOf:
+          - type: 'null'
+          - type: integer
+            minimum: 0
+            maximum: 50000000
+            example: 1
       thetvdb:
         oneOf:
           - type: 'null'
@@ -136,6 +143,13 @@ $defs:
             minimum: 0
             maximum: 50000000
             example: 1337
+      thetvdb-season:
+        oneOf:
+          - type: 'null'
+          - type: integer
+            minimum: 0
+            maximum: 50000000
+            example: 1
       myanimelist:
         oneOf:
           - type: 'null'
@@ -143,6 +157,27 @@ $defs:
             minimum: 0
             maximum: 50000000
             example: 1337
+      simkl:
+        oneOf:
+          - type: 'null'
+          - type: integer
+            minimum: 0
+            maximum: 50000000
+            example: 1337
+      animecountdown:
+        oneOf:
+          - type: 'null'
+          - type: integer
+            minimum: 0
+            maximum: 50000000
+            example: 1337
+      media:
+        oneOf:
+          - type: 'null'
+          - type: string
+            minLength: 0
+            maxLength: 10
+            example: TV
 
   nullable_relation:
     oneOf:
@@ -153,15 +188,19 @@ $defs:
     example:
       anidb: 1337
       anilist: 1337
-      anime-planet: spriggan
+      anime-planet: dororon-enma-kun
       anisearch: null
       imdb: tt0164917
       kitsu: null
       livechart: null
-      notify-moe: "-cQb5Fmmg"
       themoviedb: null
+      themoviedb-season: 1
       thetvdb: null
+      thetvdb-season: 1
       myanimelist: null
+      animecountdown: null
+      animenewsnetwork: null
+      media: TV
     oneOf:
       - $ref: '#/$defs/nullable_relation'
       - type: array
@@ -305,10 +344,11 @@ paths:
               - anilist
               - anidb
               - anime-planet
+              - animecountdown
+              - animenewsnetwork
               - anisearch
               - kitsu
               - livechart
-              - notify-moe
               - myanimelist
         - name: id
           in: query
@@ -356,7 +396,6 @@ paths:
               example:
                 - anilist: 1337
                 - anidb: 1337
-                - notify-moe: -cQb5Fmmg
               oneOf:
                 - type: object
                   minProperties: 1
@@ -398,13 +437,19 @@ paths:
                         - type: integer
                           minimum: 0
                           maximum: 50000000
-                    notify-moe:
+                    myanimelist:
                       oneOf:
                         - type: 'null'
-                        - type: string
-                          minLength: 1
-                          maxLength: 50
-                    myanimelist:
+                        - type: integer
+                          minimum: 0
+                          maximum: 50000000
+                    animenewsnetwork:
+                      oneOf:
+                        - type: 'null'
+                        - type: integer
+                          minimum: 0
+                          maximum: 50000000
+                    animecountdown:
                       oneOf:
                         - type: 'null'
                         - type: integer
@@ -454,13 +499,19 @@ paths:
                           - type: integer
                             minimum: 0
                             maximum: 50000000
-                      notify-moe:
+                      myanimelist:
                         oneOf:
                           - type: 'null'
-                          - type: string
-                            minLength: 1
-                            maxLength: 50
-                      myanimelist:
+                          - type: integer
+                            minimum: 0
+                            maximum: 50000000
+                      animenewsnetwork:
+                        oneOf:
+                          - type: 'null'
+                          - type: integer
+                            minimum: 0
+                            maximum: 50000000
+                      animecountdown:
                         oneOf:
                           - type: 'null'
                           - type: integer
