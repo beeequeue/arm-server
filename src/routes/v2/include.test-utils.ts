@@ -74,10 +74,16 @@ export const testIncludeQueryParam = (
 				imdb: null,
 				kitsu: null,
 				livechart: null,
+				animenewsnetwork: null,
 				"notify-moe": null,
 				themoviedb: null,
+				"themoviedb-season": null,
 				thetvdb: null,
+				"thetvdb-season": null,
 				myanimelist: null,
+				simkl: null,
+				animecountdown: null,
+				media: null,
 			}
 			expectedResult[source] = prefixify(source, 1337) as never
 

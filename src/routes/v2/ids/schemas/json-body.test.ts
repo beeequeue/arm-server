@@ -22,8 +22,10 @@ const okCases = [
 			anisearch: 1337,
 			kitsu: 1337,
 			livechart: 1337,
+			animenewsnetwork: 1337,
 			"notify-moe": "1337",
 			myanimelist: 1337,
+			animecountdown: 1337,
 		},
 		true,
 	],
@@ -47,6 +49,7 @@ const badCases = [
 	[{ imdb: 1337 }, false],
 	[{ themoviedb: 1337 }, false],
 	[{ thetvdb: 1337 }, false],
+	[{ simkl: 1337 }, false],
 ] satisfies Cases
 
 const mapToSingularArrayInput = (cases: Cases): Cases =>

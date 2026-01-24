@@ -15,12 +15,27 @@ export const Source = {
 	IMDB: "imdb",
 	Kitsu: "kitsu",
 	LiveChart: "livechart",
+	AnimeNewsNetwork: "animenewsnetwork",
 	NotifyMoe: "notify-moe",
 	TheMovieDB: "themoviedb",
+	TheMovieDBSeason: "themoviedb-season",
 	TheTVDB: "thetvdb",
+	TheTVDBSeason: "thetvdb-season",
 	MAL: "myanimelist",
+	Simkl: "simkl",
+	AnimeCountdown: "animecountdown",
+	MediaType: "media",
 } as const
 export type SourceValue = (typeof Source)[keyof typeof Source]
+export const NonUniqueFields = [
+	Source.IMDB,
+	Source.TheMovieDB,
+	Source.TheMovieDBSeason,
+	Source.TheTVDB,
+	Source.TheTVDBSeason,
+	Source.Simkl,
+	Source.MediaType,
+]
 
 export type Relation = {
 	[Source.AniDB]?: number
@@ -30,10 +45,16 @@ export type Relation = {
 	[Source.IMDB]?: `tt${string}`
 	[Source.Kitsu]?: number
 	[Source.LiveChart]?: number
+	[Source.AnimeNewsNetwork]?: number
 	[Source.NotifyMoe]?: string
 	[Source.TheMovieDB]?: number
 	[Source.TheTVDB]?: number
 	[Source.MAL]?: number
+	[Source.TheTVDBSeason]?: number
+	[Source.TheMovieDBSeason]?: number
+	[Source.Simkl]?: number
+	[Source.AnimeCountdown]?: number
+	[Source.MediaType]?: string
 }
 
 export type OldRelation = Pick<Relation, "anidb" | "anilist" | "myanimelist" | "kitsu">
