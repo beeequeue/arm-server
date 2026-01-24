@@ -8,7 +8,7 @@ export const includeSchema = v.object({
 			v.string(),
 			v.regex(/^[\-a-z,]+$/, "Invalid `include` query"),
 			v.minLength(1),
-			v.maxLength(100),
+			v.maxLength(200),
 		),
 	),
 })
