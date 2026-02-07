@@ -5,6 +5,7 @@ import pkgJson from "./package.json" with { type: "json" }
 export default defineConfig({
 	entry: ["src/index.ts", "src/migrations/*.ts"],
 	outDir: "dist",
+	inlineOnly: false,
 
 	env: {
 		NODE_ENV: process.env.NODE_ENV ?? "production",
