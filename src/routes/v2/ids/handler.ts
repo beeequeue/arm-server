@@ -12,6 +12,8 @@ export const v2Routes = new H3()
 		const query = await getValidatedQuery(event, queryInputSchema)
 		const selectFields = buildSelectFromInclude(query.include)
 
+		event.context.logger.set({ query })
+
 		const data = await db
 			.selectFrom("relations")
 			.select(selectFields)
@@ -25,6 +27,8 @@ export const v2Routes = new H3()
 	.post("/ids", async (event) => {
 		const input = await readValidatedBody(event, bodyInputSchema)
 		const query = await getValidatedQuery(event, includeSchema)
+
+		event.context.logger.set({ query })
 
 		const selectFields = buildSelectFromInclude(query.include)
 

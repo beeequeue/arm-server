@@ -19,6 +19,8 @@ export const v1Routes = new H3()
 	.get("/ids", async (event) => {
 		const query = await getValidatedQuery(event, queryInputSchema)
 
+		event.context.logger.set({ query })
+
 		const row = await db
 			.selectFrom("relations")
 			.select(V1_FIELDS)

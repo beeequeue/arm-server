@@ -1,8 +1,8 @@
+import { log } from "evlog"
 import xior, { type XiorError } from "xior"
 import errorRetryPlugin from "xior/plugins/error-retry"
 
 import { db, type Relation, Source, type SourceValue } from "./db/db.ts"
-import { logger } from "./lib/logger.ts"
 import { updateBasedOnManualRules } from "./manual-rules.ts"
 
 const http = xior.create({ responseType: "json" })
@@ -111,28 +111,28 @@ export const formatEntry = (entry: AnimeListsSchema[number]): Relation => ({
 })
 
 export const updateRelations = async () => {
-	logger.debug(`Using ${process.env.NODE_ENV!} database configuration...`)
+	log.debug("update", `Using ${process.env.NODE_ENV!} database configuration...`)
 
-	logger.info("Fetching updated Database...")
+	log.info("update", "Fetching updated Database...")
 	const data = await fetchDatabase()
-	logger.info("Fetched updated Database.")
+	log.info("update", "Fetched updated Database.")
 
 	if (data == null) {
-		logger.error("got no data")
+		log.error("update", "got no data")
 		return
 	}
 
-	logger.info("Formatting entries...")
+	log.info("update", "Formatting entries...")
 	const formattedEntries = data
 		.map(formatEntry)
 		.filter((entry) => Object.values(entry).some((value) => value != null))
-	logger.info({ remaining: formattedEntries.length }, `Formatted entries.`)
+	log.info("update", `Formatted entries. ${formattedEntries.length} remain.`)
 
-	logger.info(`Removing duplicates.`)
+	log.info("update", `Removing duplicates.`)
 	const goodEntries = removeDuplicates(formattedEntries)
-	logger.info({ remaining: goodEntries.length }, `Removed duplicates.`)
+	log.info("update", `Removed duplicates. ${goodEntries.length} remain.`)
 
-	logger.info("Updating database...")
+	log.info("update", "Updating database...")
 	await db.transaction().execute(async (trx) => {
 		// Delete all existing relations
 		await trx.deleteFrom("relations").execute()
@@ -146,12 +146,12 @@ export const updateRelations = async () => {
 			}
 		}
 	})
-	logger.info("Updated database.")
+	log.info("update", "Updated database.")
 
-	logger.info("Executing manual rules...")
+	log.info("update", "Executing manual rules...")
 	await updateBasedOnManualRules()
 
-	logger.info("Done.")
+	log.info("update", "Done.")
 
 	if (process.argv.includes("--exit")) {
 		await db.destroy()

@@ -13,6 +13,7 @@ overrides:
   "@antfu/eslint-config>jsonc-eslint-parser": "-"
   "@antfu/eslint-config>toml-eslint-parser": "-"
   "@antfu/eslint-config>vitest": "-"
+  "@nuxt/kit": "-"
   "better-sqlite3": "-"
   eslint-plugin-pnpm>jsonc-eslint-parser: "-"
   rolldown: 1.0.0-rc.3

@@ -1,7 +1,7 @@
 import { H3, handleCacheHeaders, handleCors, redirect } from "h3"
 
 import { docsRoutes } from "./docs.ts"
-import { logger } from "./lib/logger.ts"
+import { evlog } from "./plugins/evlog.ts"
 import { v1Routes } from "./routes/v1/ids/handler.ts"
 import { v2Routes } from "./routes/v2/ids/handler.ts"
 import { specialRoutes } from "./routes/v2/special/handler.ts"
@@ -19,33 +19,11 @@ export const createApp = () =>
 				return createErrorJson(event, error)
 			}
 
-			logger.error(error, "unhandled error")
-
 			return createErrorJson(event, error)
 		},
 	})
 
-		.use(async (event, next) => {
-			const start = performance.now()
-			logger.info(
-				{
-					method: event.req.method,
-					path: event.url.pathname,
-					headers: event.req.headers,
-				},
-				"req",
-			)
-
-			await next()
-
-			logger.info(
-				{
-					status: event.res.status,
-					ms: Math.round((performance.now() - start + Number.EPSILON) * 10000) / 10000,
-				},
-				"res",
-			)
-		})
+		.register(evlog({}))
 
 		.use(async (event, next) => {
 			const response = handleCors(event, {

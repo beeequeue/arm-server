@@ -11,6 +11,8 @@ export const specialRoutes = new H3()
 		const query = await getValidatedQuery(event, specialImdbInputSchema)
 		const selectFields = buildSelectFromInclude(query.include)
 
+		event.context.logger.set({ query })
+
 		const data = await db
 			.selectFrom("relations")
 			.select(selectFields)
@@ -25,6 +27,8 @@ export const specialRoutes = new H3()
 		const query = await getValidatedQuery(event, specialInputSchema)
 		const selectFields = buildSelectFromInclude(query.include)
 
+		event.context.logger.set({ query })
+
 		const data = await db
 			.selectFrom("relations")
 			.select(selectFields)
@@ -38,6 +42,8 @@ export const specialRoutes = new H3()
 	.get("/thetvdb", async (event) => {
 		const query = await getValidatedQuery(event, specialInputSchema)
 		const selectFields = buildSelectFromInclude(query.include)
+
+		event.context.logger.set({ query })
 
 		const data = await db
 			.selectFrom("relations")
