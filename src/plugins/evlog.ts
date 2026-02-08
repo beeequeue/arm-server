@@ -16,7 +16,9 @@ export const evlog = definePlugin<LoggerConfig>((app, options) => {
 		event.context.logger = createRequestLogger({
 			method: event.req.method,
 			path: event.url.pathname,
-			requestId: event.req.headers.get("x-request-id") ?? crypto.randomUUID(),
+		})
+		event.context.logger.set({
+			userAgent: event.req.headers.get("user-agent"),
 		})
 
 		await next()
