@@ -33,7 +33,7 @@ it("handles bad values", async () => {
 		status: 200,
 		body: [
 			{ anidb_id: 1337, themoviedb_id: "unknown" },
-			{ anidb_id: 1338, thetvdb_id: "unknown" as never },
+			{ anidb_id: 1338, tvdb_id: "unknown" as never },
 			{ anidb_id: 1339, imdb_id: "tt1337,tt1338,tt1339" },
 			{ anidb_id: 1340, themoviedb_id: "unknown" },
 			{ anidb_id: 1341, themoviedb_id: 1341 },

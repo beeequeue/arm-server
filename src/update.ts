@@ -22,7 +22,7 @@ export type AnimeListsSchema = Array<{
 	mal_id?: number
 	"notify.moe_id"?: string
 	themoviedb_id?: number | "unknown"
-	thetvdb_id?: number
+	tvdb_id?: number
 }>
 
 const fetchDatabase = async (): Promise<AnimeListsSchema | null> => {
@@ -107,7 +107,7 @@ export const formatEntry = (entry: AnimeListsSchema[number]): Relation => ({
 	myanimelist: handleBadValues(entry.mal_id),
 	"notify-moe": handleBadValues(entry["notify.moe_id"]),
 	themoviedb: handleBadValues(entry.themoviedb_id),
-	thetvdb: handleBadValues(entry.thetvdb_id),
+	thetvdb: handleBadValues(entry.tvdb_id),
 })
 
 export const updateRelations = async () => {
