@@ -93,9 +93,7 @@ describe("thetvdb", () => {
 		await createRelations(4, 1336)
 		const relations = await createRelations(3, 1337)
 
-		const response = await app.request(
-			`/api/v2/thetvdb?id=${relations[0].thetvdb!.toString()}`,
-		)
+		const response = await app.request(`/api/v2/thetvdb?id=${relations[0].thetvdb!.toString()}`)
 
 		await expect(response.json()).resolves.toStrictEqual(relations)
 		expect(response.status).toBe(200)
@@ -126,9 +124,7 @@ describe("thetvdb", () => {
 		}
 		await db.insertInto("relations").values(relation).execute()
 
-		const response = await app.request(
-			`/api/v2/thetvdb?id=${relation.thetvdb!.toString()}`,
-		)
+		const response = await app.request(`/api/v2/thetvdb?id=${relation.thetvdb!.toString()}`)
 
 		await expect(response.json()).resolves.toStrictEqual([relation])
 		expect(response.status).toBe(200)
@@ -176,9 +172,7 @@ describe("themoviedb", () => {
 		}
 		await db.insertInto("relations").values(relation).execute()
 
-		const response = await app.request(
-			`/api/v2/themoviedb?id=${relation.themoviedb!.toString()}`,
-		)
+		const response = await app.request(`/api/v2/themoviedb?id=${relation.themoviedb!.toString()}`)
 
 		await expect(response.json()).resolves.toStrictEqual([relation])
 		expect(response.status).toBe(200)

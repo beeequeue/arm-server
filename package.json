@@ -14,8 +14,8 @@
 		"pre-commit": "node_modules/.bin/nano-staged"
 	},
 	"nano-staged": {
-		"*.{js,cjs,mjs,ts,cts,mts,json}": [
-			"biome check --fix"
+		"*.{js,cjs,mjs,ts,cts,mts,json,json5,yaml}": [
+			"oxfmt --no-error-on-unmatched-pattern"
 		]
 	},
 	"scripts": {
@@ -27,6 +27,7 @@
 		"docker:run": "docker run -it --rm --name arm -p 3000:3000 arm-server",
 		"fetch-data": "node bin/update.ts --exit",
 		"lint": "eslint src",
+		"lint:fmt": "oxfmt --check",
 		"start": "node dist/index.mjs",
 		"test": "vitest",
 		"typecheck": "tsgo",
@@ -34,7 +35,6 @@
 	},
 	"devDependencies": {
 		"@antfu/eslint-config": "7.3.0",
-		"@biomejs/biome": "2.3.10",
 		"@e18e/eslint-plugin": "0.1.4",
 		"@tsconfig/node24": "24.0.4",
 		"@tsconfig/strictest": "2.0.8",
@@ -50,6 +50,7 @@
 		"kysely-db0": "0.1.0-beta.1",
 		"mentoss": "0.13.0",
 		"nano-staged": "0.9.0",
+		"oxfmt": "0.28.0",
 		"simple-git-hooks": "2.13.1",
 		"tsdown": "0.20.3",
 		"valibot": "1.2.0",

@@ -9,10 +9,8 @@ export const testIncludeQueryParam = (
 	source: SourceValue = Source.AniList,
 ) => {
 	const arrayify = <T>(data: T) => (source !== Source.AniList ? [data] : data)
-	const prefixify = <S extends SourceValue, T extends string | number>(
-		source: S,
-		input: T,
-	) => (source === "imdb" ? (`tt${input}` as const) : input)
+	const prefixify = <S extends SourceValue, T extends string | number>(source: S, input: T) =>
+		source === "imdb" ? (`tt${input}` as const) : input
 
 	describe("?include", () => {
 		test("single source", async () => {
@@ -26,9 +24,7 @@ export const testIncludeQueryParam = (
 				id: prefixify(source, "1337"),
 				include: source,
 			})
-			const response = await app.fetch(
-				new Request(`http://localhost${path}?${query.toString()}`),
-			)
+			const response = await app.fetch(new Request(`http://localhost${path}?${query.toString()}`))
 
 			await expect(response.json()).resolves.toStrictEqual(
 				arrayify({ [source]: prefixify(source, 1337) }),
@@ -46,13 +42,9 @@ export const testIncludeQueryParam = (
 			const query = new URLSearchParams({
 				source,
 				id: prefixify(source, "1337"),
-				include: [Source.AniList, Source.TheTVDB, Source.TheMovieDB, Source.IMDB].join(
-					",",
-				),
+				include: [Source.AniList, Source.TheTVDB, Source.TheMovieDB, Source.IMDB].join(","),
 			})
-			const response = await app.fetch(
-				new Request(`http://localhost${path}?${query.toString()}`),
-			)
+			const response = await app.fetch(new Request(`http://localhost${path}?${query.toString()}`))
 
 			await expect(response.json()).resolves.toStrictEqual(
 				arrayify({ anilist: 1337, thetvdb: 1337, themoviedb: 1337, imdb: "tt1337" }),
@@ -72,9 +64,7 @@ export const testIncludeQueryParam = (
 				id: prefixify(source, "1337"),
 				include: Object.values(Source).join(","),
 			})
-			const response = await app.fetch(
-				new Request(`http://localhost${path}?${query.toString()}`),
-			)
+			const response = await app.fetch(new Request(`http://localhost${path}?${query.toString()}`))
 
 			const expectedResult: Record<SourceValue, number | null> = {
 				anidb: null,

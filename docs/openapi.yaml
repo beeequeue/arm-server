@@ -11,7 +11,7 @@ info:
     url: https://github.com/BeeeQueue/arm-server
   description: |
     A service for mapping Anime IDs.
-    
+
     **Important:**
 
     Every endpoint returns `null` and not `404` when it does not find any match based on a query.
@@ -26,7 +26,7 @@ tags:
   - name: v2
     description: |
       `v2` adds more Sources thanks to [Fribb/anime-lists](https://github.com/Fribb/anime-lists).
-      
+
       Unfortunately IMDB, TheMovieDB, and TheTVDB use one entry per **show** instead of **season** meaning their IDs become one-to-many mappings.
 
       This means it cannot be queried for in `/api/v2/ids` since it's impossible for the API to look the same in that case.
@@ -44,7 +44,7 @@ $defs:
     schema:
       type: string
 
-  '400':
+  "400":
     description: Invalid request
     content:
       application/json:
@@ -67,35 +67,35 @@ $defs:
     properties:
       anidb:
         oneOf:
-          - type: 'null'
+          - type: "null"
           - type: integer
             minimum: 0
             maximum: 50000000
             example: 1337
       anilist:
         oneOf:
-          - type: 'null'
+          - type: "null"
           - type: integer
             minimum: 0
             maximum: 50000000
             example: 1337
       anime-planet:
         oneOf:
-          - type: 'null'
+          - type: "null"
           - type: string
             minLength: 1
             maxLength: 50
             example: dororon-enma-kun
       anisearch:
         oneOf:
-          - type: 'null'
+          - type: "null"
           - type: integer
             minimum: 0
             maximum: 50000000
             example: 1337
       imdb:
         oneOf:
-          - type: 'null'
+          - type: "null"
           - type: string
             pattern: tt\d+
             minLength: 1
@@ -103,42 +103,42 @@ $defs:
             example: tt0164917
       kitsu:
         oneOf:
-          - type: 'null'
+          - type: "null"
           - type: integer
             minimum: 0
             maximum: 50000000
             example: 1337
       livechart:
         oneOf:
-          - type: 'null'
+          - type: "null"
           - type: integer
             minimum: 0
             maximum: 50000000
             example: 1337
       notify-moe:
         oneOf:
-          - type: 'null'
+          - type: "null"
           - type: string
             minLength: 1
             maxLength: 50
             example: "-cQb5Fmmg"
       themoviedb:
         oneOf:
-          - type: 'null'
+          - type: "null"
           - type: integer
             minimum: 0
             maximum: 50000000
             example: 1337
       thetvdb:
         oneOf:
-          - type: 'null'
+          - type: "null"
           - type: integer
             minimum: 0
             maximum: 50000000
             example: 1337
       myanimelist:
         oneOf:
-          - type: 'null'
+          - type: "null"
           - type: integer
             minimum: 0
             maximum: 50000000
@@ -146,8 +146,8 @@ $defs:
 
   nullable_relation:
     oneOf:
-      - $ref: '#/$defs/relation'
-      - type: 'null'
+      - $ref: "#/$defs/relation"
+      - type: "null"
 
   response:
     example:
@@ -163,39 +163,39 @@ $defs:
       thetvdb: null
       myanimelist: null
     oneOf:
-      - $ref: '#/$defs/nullable_relation'
+      - $ref: "#/$defs/nullable_relation"
       - type: array
         items:
-          $ref: '#/$defs/nullable_relation'
+          $ref: "#/$defs/nullable_relation"
 
   v1_relation:
     type: object
     properties:
       anidb:
         oneOf:
-          - type: 'null'
+          - type: "null"
           - type: integer
             example: 1337
       anilist:
         oneOf:
-          - type: 'null'
+          - type: "null"
           - type: integer
             example: 1337
       myanimelist:
         oneOf:
-          - type: 'null'
+          - type: "null"
           - type: integer
             example: 1337
       kitsu:
         oneOf:
-          - type: 'null'
+          - type: "null"
           - type: integer
             example: 1337
 
   nullable_v1_relation:
     oneOf:
-      - $ref: '#/$defs/v1_relation'
-      - type: 'null'
+      - $ref: "#/$defs/v1_relation"
+      - type: "null"
 
   v1_response:
     example:
@@ -204,10 +204,10 @@ $defs:
       kitsu: null
       myanimelist: null
     oneOf:
-      - $ref: '#/$defs/nullable_v1_relation'
+      - $ref: "#/$defs/nullable_v1_relation"
       - type: array
         items:
-          $ref: '#/$defs/nullable_v1_relation'
+          $ref: "#/$defs/nullable_v1_relation"
 
 paths:
   /api/ids:
@@ -239,23 +239,23 @@ paths:
             minimum: 1
 
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/$defs/v1_response'
-        '400':
-          $ref: '#/$defs/400'
+                $ref: "#/$defs/v1_response"
+        "400":
+          $ref: "#/$defs/400"
 
     post:
       operationId: postIds
       summary: Fetch IDs via a JSON body
       description: |
         The JSON body can either be an object containing the query, or an array containing multiple queries.
-        
+
         If using array queries, the resulting array will map to the corresponding input!
-        
+
         e.g. `body[1]` will be the result of `query[1]`.
       security: [{}]
       tags:
@@ -270,26 +270,26 @@ paths:
                 - anilist: 1337
                 - anidb: 1337
               oneOf:
-                - $ref: '#/$defs/v1_relation'
+                - $ref: "#/$defs/v1_relation"
                 - type: array
                   items:
-                    $ref: '#/$defs/v1_relation'
+                    $ref: "#/$defs/v1_relation"
 
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/$defs/v1_response'
-        '400':
-          $ref: '#/$defs/400'
+                $ref: "#/$defs/v1_response"
+        "400":
+          $ref: "#/$defs/400"
 
   /api/v2/ids:
     get:
       operationId: v2-getIds
       summary: Fetch IDs via query parameters
-      description: ' '
+      description: " "
       security: [{}]
       tags:
         - v2
@@ -323,23 +323,23 @@ paths:
         - $ref: "#/$defs/include_param"
 
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/$defs/response'
-        '400':
-          $ref: '#/$defs/400'
+                $ref: "#/$defs/response"
+        "400":
+          $ref: "#/$defs/400"
 
     post:
       operationId: v2-postIds
       summary: Fetch IDs via a JSON body
       description: |
         The JSON body can either be an object containing the query, or an array containing multiple queries.
-        
+
         If using array queries, the resulting array will map to the corresponding input!
-        
+
         e.g. `body[1]` will be the result of `query[1]`.
       security: [{}]
       tags:
@@ -364,49 +364,49 @@ paths:
                   properties:
                     anidb:
                       oneOf:
-                        - type: 'null'
+                        - type: "null"
                         - type: integer
                           minimum: 0
                           maximum: 50000000
                     anilist:
                       oneOf:
-                        - type: 'null'
+                        - type: "null"
                         - type: integer
                           minimum: 0
                           maximum: 50000000
                     anime-planet:
                       oneOf:
-                        - type: 'null'
+                        - type: "null"
                         - type: string
                           minLength: 1
                           maxLength: 50
                     anisearch:
                       oneOf:
-                        - type: 'null'
+                        - type: "null"
                         - type: integer
                           minimum: 0
                           maximum: 50000000
                     kitsu:
                       oneOf:
-                        - type: 'null'
+                        - type: "null"
                         - type: integer
                           minimum: 0
                           maximum: 50000000
                     livechart:
                       oneOf:
-                        - type: 'null'
+                        - type: "null"
                         - type: integer
                           minimum: 0
                           maximum: 50000000
                     notify-moe:
                       oneOf:
-                        - type: 'null'
+                        - type: "null"
                         - type: string
                           minLength: 1
                           maxLength: 50
                     myanimelist:
                       oneOf:
-                        - type: 'null'
+                        - type: "null"
                         - type: integer
                           minimum: 0
                           maximum: 50000000
@@ -420,68 +420,68 @@ paths:
                     properties:
                       anidb:
                         oneOf:
-                          - type: 'null'
+                          - type: "null"
                           - type: integer
                             minimum: 0
                             maximum: 50000000
                       anilist:
                         oneOf:
-                          - type: 'null'
+                          - type: "null"
                           - type: integer
                             minimum: 0
                             maximum: 50000000
                       anime-planet:
                         oneOf:
-                          - type: 'null'
+                          - type: "null"
                           - type: string
                             minLength: 1
                             maxLength: 50
                       anisearch:
                         oneOf:
-                          - type: 'null'
+                          - type: "null"
                           - type: integer
                             minimum: 0
                             maximum: 50000000
                       kitsu:
                         oneOf:
-                          - type: 'null'
+                          - type: "null"
                           - type: integer
                             minimum: 0
                             maximum: 50000000
                       livechart:
                         oneOf:
-                          - type: 'null'
+                          - type: "null"
                           - type: integer
                             minimum: 0
                             maximum: 50000000
                       notify-moe:
                         oneOf:
-                          - type: 'null'
+                          - type: "null"
                           - type: string
                             minLength: 1
                             maxLength: 50
                       myanimelist:
                         oneOf:
-                          - type: 'null'
+                          - type: "null"
                           - type: integer
                             minimum: 0
                             maximum: 50000000
 
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/$defs/response'
-        '400':
-          $ref: '#/$defs/400'
+                $ref: "#/$defs/response"
+        "400":
+          $ref: "#/$defs/400"
 
   /api/v2/imdb:
     get:
       operationId: v2-imdb
       summary: Fetch IDs by IMDB ID
-      description: ' '
+      description: " "
       security: [{}]
       tags:
         - v2
@@ -497,22 +497,22 @@ paths:
         - $ref: "#/$defs/include_param"
 
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/$defs/nullable_relation'
-        '400':
-          $ref: '#/$defs/400'
+                  $ref: "#/$defs/nullable_relation"
+        "400":
+          $ref: "#/$defs/400"
 
   /api/v2/themoviedb:
     get:
       operationId: v2-themoviedb
       summary: Fetch IDs by TheMovieDB ID
-      description: ' '
+      description: " "
       security: [{}]
       tags:
         - v2
@@ -528,22 +528,22 @@ paths:
         - $ref: "#/$defs/include_param"
 
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/$defs/nullable_relation'
-        '400':
-          $ref: '#/$defs/400'
+                  $ref: "#/$defs/nullable_relation"
+        "400":
+          $ref: "#/$defs/400"
 
   /api/v2/thetvdb:
     get:
       operationId: v2-thetvdb
       summary: Fetch IDs by TheTVDB ID
-      description: ' '
+      description: " "
       security: [{}]
       tags:
         - v2
@@ -559,13 +559,13 @@ paths:
         - $ref: "#/$defs/include_param"
 
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/$defs/nullable_relation'
-        '400':
-          $ref: '#/$defs/400'
+                  $ref: "#/$defs/nullable_relation"
+        "400":
+          $ref: "#/$defs/400"

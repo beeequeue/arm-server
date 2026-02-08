@@ -19,10 +19,7 @@ const schema = v.object({
 const result = v.safeParse(schema, process.env)
 
 if (!result.success) {
-	console.error(
-		"❌ Invalid environment variables:",
-		JSON.stringify(result.issues, null, 4),
-	)
+	console.error("❌ Invalid environment variables:", JSON.stringify(result.issues, null, 4))
 
 	process.exit(1)
 }

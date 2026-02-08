@@ -50,10 +50,7 @@ const badValues = ["", "unknown", "tv special"] as const
 const handleBadValues = <T extends string | number | undefined>(
 	value: T | (typeof badValues)[number],
 ): T | undefined => {
-	if (
-		typeof value === "string" &&
-		(badValues.includes(value as never) || value.includes(","))
-	) {
+	if (typeof value === "string" && (badValues.includes(value as never) || value.includes(","))) {
 		return undefined
 	}
 
@@ -63,12 +60,9 @@ const handleBadValues = <T extends string | number | undefined>(
 // Removes duplicate source-id pairs from the list, except for thetvdb and themoviedb ids
 export const removeDuplicates = (entries: Relation[]): Relation[] => {
 	const sources = (Object.values(Source) as SourceValue[]).filter(
-		(source) =>
-			source !== Source.TheTVDB && source !== Source.TheMovieDB && source !== Source.IMDB,
+		(source) => source !== Source.TheTVDB && source !== Source.TheMovieDB && source !== Source.IMDB,
 	)
-	const existing = new Map<SourceValue, Set<unknown>>(
-		sources.map((name) => [name, new Set()]),
-	)
+	const existing = new Map<SourceValue, Set<unknown>>(sources.map((name) => [name, new Set()]))
 
 	const goodEntries = entries.filter((entry) => {
 		for (const source of Object.keys(entry) as (keyof typeof entry)[]) {
@@ -77,11 +71,7 @@ export const removeDuplicates = (entries: Relation[]): Relation[] => {
 			// Ignore nulls
 			if (id == null) continue
 			// Ignore sources with one-to-many relations
-			if (
-				source === Source.TheTVDB ||
-				source === Source.TheMovieDB ||
-				source === Source.IMDB
-			) {
+			if (source === Source.TheTVDB || source === Source.TheMovieDB || source === Source.IMDB) {
 				continue
 			}
 

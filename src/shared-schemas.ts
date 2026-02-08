@@ -13,11 +13,7 @@ export const numberIdSchema = v.pipe(
 	v.maxValue(50_000_000),
 )
 
-export const stringIdSchema = v.pipe(
-	v.string("Invalid ID"),
-	v.minLength(1),
-	v.maxLength(150),
-)
+export const stringIdSchema = v.pipe(v.string("Invalid ID"), v.minLength(1), v.maxLength(150))
 
 export const imdbIdSchema = v.pipe(
 	v.string("Invalid IMDB ID"),

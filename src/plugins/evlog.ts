@@ -1,9 +1,4 @@
-import {
-	createRequestLogger,
-	initLogger,
-	type LoggerConfig,
-	type RequestLogger,
-} from "evlog"
+import { createRequestLogger, initLogger, type LoggerConfig, type RequestLogger } from "evlog"
 import { definePlugin, onError } from "h3"
 
 declare module "h3" {

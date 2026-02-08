@@ -2,12 +2,7 @@ import { FetchMocker, MockServer } from "mentoss"
 import { afterAll, afterEach, beforeEach, expect, it, vi } from "vitest"
 
 import { db, type Relation, Source, type SourceValue } from "./db/db.ts"
-import {
-	type AnimeListsSchema,
-	formatEntry,
-	removeDuplicates,
-	updateRelations,
-} from "./update.ts"
+import { type AnimeListsSchema, formatEntry, removeDuplicates, updateRelations } from "./update.ts"
 
 // create a new server with the given base URL
 const server = new MockServer("https://raw.githubusercontent.com")
@@ -45,12 +40,7 @@ it("handles bad values", async () => {
 	await expect(
 		db
 			.selectFrom("relations")
-			.select([
-				"relations.anidb",
-				"relations.imdb",
-				"relations.themoviedb",
-				"relations.thetvdb",
-			])
+			.select(["relations.anidb", "relations.imdb", "relations.themoviedb", "relations.thetvdb"])
 			.execute(),
 	).resolves.toMatchInlineSnapshot(`
     [

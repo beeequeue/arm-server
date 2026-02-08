@@ -59,7 +59,6 @@ export const createApp = () =>
 			},
 			{
 				match: (e) =>
-					(e.req.method === "GET" || e.req.method === "POST") &&
-					e.url.pathname.startsWith("/api"),
+					(e.req.method === "GET" || e.req.method === "POST") && e.url.pathname.startsWith("/api"),
 			},
 		)

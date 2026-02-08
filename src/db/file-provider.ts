@@ -32,9 +32,7 @@ export class ActuallyWorkingMigrationProvider implements MigrationProvider {
 				fileName.endsWith(".mjs") ||
 				(fileName.endsWith(".mts") && !fileName.endsWith(".d.mts"))
 			) {
-				const filePath = pathToFileURL(
-					path.join(this.#migrationDirPath, fileName),
-				).toString()
+				const filePath = pathToFileURL(path.join(this.#migrationDirPath, fileName)).toString()
 				const migration = (await import(filePath)) as Migration | { default?: Migration }
 				const migrationKey = fileName.substring(0, fileName.lastIndexOf("."))
 

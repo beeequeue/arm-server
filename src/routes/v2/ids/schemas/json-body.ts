@@ -26,10 +26,6 @@ export const singularItemInputSchema = v.pipe(
 
 export type BodyQuery = BodyItem | BodyItem[]
 
-const arrayInputSchema = v.pipe(
-	v.array(singularItemInputSchema),
-	v.minLength(1),
-	v.maxLength(100),
-)
+const arrayInputSchema = v.pipe(v.array(singularItemInputSchema), v.minLength(1), v.maxLength(100))
 
 export const bodyInputSchema = v.union([singularItemInputSchema, arrayInputSchema])
