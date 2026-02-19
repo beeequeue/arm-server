@@ -17,10 +17,16 @@ const createRelations = async <N extends number>(
 		imdb: `tt${specialId ?? id++}`,
 		kitsu: id++,
 		livechart: id++,
+		animenewsnetwork: id++,
 		"notify-moe": `${id++}`,
 		themoviedb: specialId ?? id++,
+		"themoviedb-season": specialId ?? id++,
 		thetvdb: specialId ?? id++,
+		"thetvdb-season": specialId ?? id++,
 		myanimelist: id++,
+		simkl: id++,
+		animecountdown: id++,
+		media: `${specialId ?? id++}`,
 	}))
 
 	await db.insertInto("relations").values(relations).execute()
@@ -71,10 +77,16 @@ describe("imdb", () => {
 			imdb: "tt1337",
 			kitsu: null!,
 			livechart: null!,
+			animenewsnetwork: null!,
 			"notify-moe": null!,
 			themoviedb: null!,
+			"themoviedb-season": null!,
 			thetvdb: null!,
+			"thetvdb-season": null!,
 			myanimelist: null!,
+			simkl: null!,
+			animecountdown: null!,
+			media: null!,
 		}
 		await db.insertInto("relations").values(relation).execute()
 
@@ -117,10 +129,16 @@ describe("thetvdb", () => {
 			imdb: null!,
 			kitsu: null!,
 			livechart: null!,
+			animenewsnetwork: null!,
 			"notify-moe": null!,
 			themoviedb: null!,
+			"themoviedb-season": null!,
 			thetvdb: 1337,
+			"thetvdb-season": 1,
 			myanimelist: null!,
+			simkl: null!,
+			animecountdown: null!,
+			media: null!,
 		}
 		await db.insertInto("relations").values(relation).execute()
 
@@ -165,10 +183,16 @@ describe("themoviedb", () => {
 			imdb: null!,
 			kitsu: null!,
 			livechart: null!,
+			animenewsnetwork: null!,
 			"notify-moe": null!,
 			themoviedb: 1337,
+			"themoviedb-season": 1,
 			thetvdb: null!,
+			"thetvdb-season": null!,
 			myanimelist: null!,
+			simkl: null!,
+			animecountdown: null!,
+			media: null!,
 		}
 		await db.insertInto("relations").values(relation).execute()
 

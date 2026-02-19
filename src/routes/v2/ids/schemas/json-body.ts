@@ -11,6 +11,8 @@ export const singularItemInputSchema = v.pipe(
 			anidb: numberIdSchema,
 			anilist: numberIdSchema,
 			"anime-planet": stringIdSchema,
+			animecountdown: numberIdSchema,
+			animenewsnetwork: numberIdSchema,
 			anisearch: numberIdSchema,
 			kitsu: numberIdSchema,
 			livechart: numberIdSchema,

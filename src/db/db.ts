@@ -1,4 +1,4 @@
-import { mkdirSync } from "node:fs"
+import { existsSync } from "node:fs"
 
 import { createDatabase } from "db0"
 import sqlite from "db0/connectors/node-sqlite"
@@ -15,12 +15,27 @@ export const Source = {
 	IMDB: "imdb",
 	Kitsu: "kitsu",
 	LiveChart: "livechart",
+	AnimeNewsNetwork: "animenewsnetwork",
 	NotifyMoe: "notify-moe",
 	TheMovieDB: "themoviedb",
+	TheMovieDBSeason: "themoviedb-season",
 	TheTVDB: "thetvdb",
+	TheTVDBSeason: "thetvdb-season",
 	MAL: "myanimelist",
+	Simkl: "simkl",
+	AnimeCountdown: "animecountdown",
+	MediaType: "media",
 } as const
 export type SourceValue = (typeof Source)[keyof typeof Source]
+export const NonUniqueFields = [
+	Source.IMDB,
+	Source.TheMovieDB,
+	Source.TheMovieDBSeason,
+	Source.TheTVDB,
+	Source.TheTVDBSeason,
+	Source.Simkl,
+	Source.MediaType,
+]
 
 export type Relation = {
 	[Source.AniDB]?: number
@@ -30,10 +45,16 @@ export type Relation = {
 	[Source.IMDB]?: `tt${string}`
 	[Source.Kitsu]?: number
 	[Source.LiveChart]?: number
+	[Source.AnimeNewsNetwork]?: number
 	[Source.NotifyMoe]?: string
 	[Source.TheMovieDB]?: number
 	[Source.TheTVDB]?: number
 	[Source.MAL]?: number
+	[Source.TheTVDBSeason]?: number
+	[Source.TheMovieDBSeason]?: number
+	[Source.Simkl]?: number
+	[Source.AnimeCountdown]?: number
+	[Source.MediaType]?: string
 }
 
 export type OldRelation = Pick<Relation, "anidb" | "anilist" | "myanimelist" | "kitsu">
@@ -42,9 +63,6 @@ export type OldRelation = Pick<Relation, "anidb" | "anilist" | "myanimelist" | "
 export interface Database {
 	relations: Relation
 }
-
-// Ensure SQLite directory exists
-mkdirSync("./dir", { recursive: true })
 
 const sqliteDb = sqlite(
 	process.env.VITEST_POOL_ID == null
@@ -60,6 +78,6 @@ export const db = new Kysely<Database>({
 export const migrator = new Migrator({
 	db,
 	provider: new ActuallyWorkingMigrationProvider(
-		process.env.NODE_ENV !== "test" ? "dist/migrations" : "src/migrations",
+		existsSync("src/migrations") ? "src/migrations" : "dist/migrations",
 	),
 })

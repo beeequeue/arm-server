@@ -4,6 +4,8 @@ import * as v from "valibot"
 export const numberIdSourceSchema = v.picklist([
 	"anilist",
 	"anidb",
+	"animecountdown",
+	"animenewsnetwork",
 	"anisearch",
 	"kitsu",
 	"livechart",
