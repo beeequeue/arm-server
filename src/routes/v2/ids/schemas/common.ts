@@ -10,4 +10,4 @@ export const numberIdSourceSchema = v.picklist([
 	"myanimelist",
 ])
 
-export const stringIdSourceSchema = v.picklist(["anime-planet", "notify-moe"])
+export const stringIdSourceSchema = v.picklist(["anime-planet"])

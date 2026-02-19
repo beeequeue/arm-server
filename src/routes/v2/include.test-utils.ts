@@ -74,7 +74,6 @@ export const testIncludeQueryParam = (
 				imdb: null,
 				kitsu: null,
 				livechart: null,
-				"notify-moe": null,
 				themoviedb: null,
 				thetvdb: null,
 				myanimelist: null,

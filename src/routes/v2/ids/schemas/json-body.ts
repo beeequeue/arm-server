@@ -14,7 +14,6 @@ export const singularItemInputSchema = v.pipe(
 			anisearch: numberIdSchema,
 			kitsu: numberIdSchema,
 			livechart: numberIdSchema,
-			"notify-moe": stringIdSchema,
 			myanimelist: numberIdSchema,
 		}),
 	),

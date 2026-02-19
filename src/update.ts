@@ -20,7 +20,6 @@ export type AnimeListsSchema = Array<{
 	kitsu_id?: number
 	livechart_id?: number
 	mal_id?: number
-	"notify.moe_id"?: string
 	themoviedb_id?: number | "unknown"
 	tvdb_id?: number
 }>
@@ -95,7 +94,6 @@ export const formatEntry = (entry: AnimeListsSchema[number]): Relation => ({
 	kitsu: handleBadValues(entry.kitsu_id),
 	livechart: handleBadValues(entry.livechart_id),
 	myanimelist: handleBadValues(entry.mal_id),
-	"notify-moe": handleBadValues(entry["notify.moe_id"]),
 	themoviedb: handleBadValues(entry.themoviedb_id),
 	thetvdb: handleBadValues(entry.tvdb_id),
 })
