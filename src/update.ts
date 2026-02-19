@@ -137,18 +137,9 @@ export const updateRelations = async () => {
 	log.info("update", `Removed duplicates. ${goodEntries.length} remain.`)
 
 	if (config.NODE_ENV !== Environment.Prod) {
-		const { error, results } = await migrator.migrateToLatest()
-
-		results?.forEach((it) => {
-			log.info("update", `Migration ${it.direction} "${it.migrationName}" ...`)
-			if (it.status === "Success") {
-				log.info("update", `... was executed successfully`)
-			} else if (it.status === "Error") {
-				log.error("update", `... FAILED!`)
-			}
-		})
-		if (Boolean(error) || "Error" in (results?.map((x) => x.status) || [])) {
-			throw new Error(`failed to run 'migrateToLatest' ${(error as string) || ""}`)
+		const { error } = await migrator.migrateToLatest()
+		if (error != null) {
+			throw new Error("Executing migrations failed.", { cause: error })
 		}
 	}
 

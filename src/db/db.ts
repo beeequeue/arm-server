@@ -1,4 +1,4 @@
-import { mkdirSync } from "node:fs"
+import { existsSync } from "node:fs"
 
 import { createDatabase } from "db0"
 import sqlite from "db0/connectors/node-sqlite"
@@ -64,9 +64,6 @@ export interface Database {
 	relations: Relation
 }
 
-// Ensure SQLite directory exists
-mkdirSync("./dir", { recursive: true })
-
 const sqliteDb = sqlite(
 	process.env.VITEST_POOL_ID == null
 		? { path: `./db/${process.env.NODE_ENV ?? "development"}.sqlite3` }
@@ -81,6 +78,6 @@ export const db = new Kysely<Database>({
 export const migrator = new Migrator({
 	db,
 	provider: new ActuallyWorkingMigrationProvider(
-		process.env.NODE_ENV !== "test" ? "dist/migrations" : "src/migrations",
+		existsSync("src/migrations") ? "src/migrations" : "dist/migrations",
 	),
 })
