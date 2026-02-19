@@ -15,7 +15,6 @@ export const Source = {
 	IMDB: "imdb",
 	Kitsu: "kitsu",
 	LiveChart: "livechart",
-	NotifyMoe: "notify-moe",
 	TheMovieDB: "themoviedb",
 	TheTVDB: "thetvdb",
 	MAL: "myanimelist",
@@ -30,7 +29,6 @@ export type Relation = {
 	[Source.IMDB]?: `tt${string}`
 	[Source.Kitsu]?: number
 	[Source.LiveChart]?: number
-	[Source.NotifyMoe]?: string
 	[Source.TheMovieDB]?: number
 	[Source.TheTVDB]?: number
 	[Source.MAL]?: number
