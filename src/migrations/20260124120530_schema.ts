@@ -1,35 +1,12 @@
-import { type Kysely, sql } from "kysely"
+import type { Kysely } from "kysely"
 
-export async function up(db: Kysely<any>): Promise<void> {
-	await sql`PRAGMA journal_mode=WAL`.execute(db)
-
-	await db.schema.dropTable("relations").ifExists().execute()
-
-	await db.schema
-		.createTable("relations")
-		.ifNotExists()
-
-		// Original columns
-		.addColumn("anidb", "integer", (col) => col.unique())
-		.addColumn("anilist", "integer", (col) => col.unique())
-		.addColumn("myanimelist", "integer", (col) => col.unique())
-		.addColumn("kitsu", "integer", (col) => col.unique())
-
-		// v2 columns
-		.addColumn("anime-planet", "text", (col) => col.unique())
-		.addColumn("anisearch", "integer", (col) => col.unique())
-		.addColumn("imdb", "text")
-		.addColumn("livechart", "integer", (col) => col.unique())
-		.addColumn("notify-moe", "text", (col) => col.unique())
-		.addColumn("themoviedb", "integer")
-		.addColumn("thetvdb", "integer")
-
-		// New Columns
-		.addColumn("themoviedb-season", "integer")
-		.addColumn("thetvdb-season", "integer")
-		.addColumn("animenewsnetwork", "integer", (col) => col.unique())
-		.addColumn("animecountdown", "integer", (col) => col.unique())
-		.addColumn("simkl", "integer")
-		.addColumn("media", "text")
-		.execute()
+export async function up(db: Kysely<unknown>): Promise<void> {
+	await db.schema.alterTable("relations").addColumn("themoviedb-season", "integer").execute()
+	await db.schema.alterTable("relations").addColumn("thetvdb-season", "integer").execute()
+	// unique, but sqlite can't add unique columns to tables
+	await db.schema.alterTable("relations").addColumn("animenewsnetwork", "integer").execute()
+	// unique, but sqlite can't add unique columns to tables
+	await db.schema.alterTable("relations").addColumn("animecountdown", "integer").execute()
+	await db.schema.alterTable("relations").addColumn("simkl", "integer").execute()
+	await db.schema.alterTable("relations").addColumn("media", "text").execute()
 }
