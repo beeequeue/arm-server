@@ -24,7 +24,7 @@ afterAll(async () => {
 })
 
 it("handles bad values", async () => {
-	server.get("/Fribb/anime-lists/master/anime-list-full.json", {
+	server.get("/Fribb/anime-lists/master/anime-list-mini.json", {
 		status: 200,
 		body: [
 			{ anidb_id: 1337, themoviedb_id: "unknown" },
@@ -82,7 +82,7 @@ it("handles duplicates", async () => {
 	mocker.unmockGlobal()
 
 	const entries: Relation[] = await fetch(
-		"https://raw.githubusercontent.com/Fribb/anime-lists/master/anime-list-full.json",
+		"https://raw.githubusercontent.com/Fribb/anime-lists/master/anime-list-mini.json",
 	)
 		.then(async (r) => r.json())
 		.then((e) => (e as any[]).map(formatEntry))

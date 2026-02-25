@@ -28,7 +28,7 @@ export type AnimeListsSchema = Array<{
 const fetchDatabase = async (): Promise<AnimeListsSchema | null> => {
 	const response = await http
 		.get<AnimeListsSchema>(
-			"https://raw.githubusercontent.com/Fribb/anime-lists/master/anime-list-full.json",
+			"https://raw.githubusercontent.com/Fribb/anime-lists/master/anime-list-mini.json",
 		)
 		.catch((error: XiorError) => error)
 
