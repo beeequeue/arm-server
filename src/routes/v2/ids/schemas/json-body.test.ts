@@ -22,7 +22,6 @@ const okCases = [
 			anisearch: 1337,
 			kitsu: 1337,
 			livechart: 1337,
-			"notify-moe": "1337",
 			myanimelist: 1337,
 		},
 		true,

@@ -115,13 +115,6 @@ $defs:
             minimum: 0
             maximum: 50000000
             example: 1337
-      notify-moe:
-        oneOf:
-          - type: "null"
-          - type: string
-            minLength: 1
-            maxLength: 50
-            example: "-cQb5Fmmg"
       themoviedb:
         oneOf:
           - type: "null"
@@ -158,7 +151,6 @@ $defs:
       imdb: tt0164917
       kitsu: null
       livechart: null
-      notify-moe: "-cQb5Fmmg"
       themoviedb: null
       thetvdb: null
       myanimelist: null
@@ -308,7 +300,6 @@ paths:
               - anisearch
               - kitsu
               - livechart
-              - notify-moe
               - myanimelist
         - name: id
           in: query
@@ -356,7 +347,6 @@ paths:
               example:
                 - anilist: 1337
                 - anidb: 1337
-                - notify-moe: -cQb5Fmmg
               oneOf:
                 - type: object
                   minProperties: 1
@@ -398,12 +388,6 @@ paths:
                         - type: integer
                           minimum: 0
                           maximum: 50000000
-                    notify-moe:
-                      oneOf:
-                        - type: "null"
-                        - type: string
-                          minLength: 1
-                          maxLength: 50
                     myanimelist:
                       oneOf:
                         - type: "null"
@@ -454,12 +438,6 @@ paths:
                           - type: integer
                             minimum: 0
                             maximum: 50000000
-                      notify-moe:
-                        oneOf:
-                          - type: "null"
-                          - type: string
-                            minLength: 1
-                            maxLength: 50
                       myanimelist:
                         oneOf:
                           - type: "null"
