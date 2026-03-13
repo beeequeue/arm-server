@@ -15,7 +15,8 @@ export default defineConfig({
 		HOMEPAGE: pkgJson.homepage,
 	},
 
-	minify: "dce-only",
+	minify: true,
+	sourcemap: true,
 	platform: "node",
 	target: ["node25"],
 	format: ["esm"],

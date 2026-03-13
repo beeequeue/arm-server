@@ -45,6 +45,7 @@ FROM base
 COPY src/ src/
 COPY package.json pnpm-workspace.yaml ./
 
+COPY ./src/ src/
 COPY --from=build /app/dist dist/
 COPY --from=docs /app/redoc-static.html .
 
