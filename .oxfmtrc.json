@@ -3,6 +3,11 @@
 	"printWidth": 100,
 	"useTabs": true,
 	"semi": false,
+	"sortImports": {
+		"type": "natural",
+		"internalPattern": ["#/"],
+		"groups": ["builtin", "external", "internal", "parent", "sibling", "index", "unknown"]
+	},
 	"experimentalSortPackageJson": false,
-	"ignorePatterns": ["pnpm-lock.yaml", "*.md"]
+	"ignorePatterns": ["pnpm-lock.yaml", "**/generated/**"]
 }

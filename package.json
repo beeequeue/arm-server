@@ -6,7 +6,7 @@
 	"private": true,
 	"license": "AGPL-3.0-only",
 	"homepage": "https://arm.haglund.dev/docs",
-	"packageManager": "pnpm@10.26.2",
+	"packageManager": "pnpm@10.32.1",
 	"engines": {
 		"node": "^25"
 	},
@@ -34,27 +34,27 @@
 		"prepare": "simple-git-hooks"
 	},
 	"devDependencies": {
-		"@antfu/eslint-config": "7.3.0",
-		"@e18e/eslint-plugin": "0.1.4",
+		"@antfu/eslint-config": "7.7.2",
+		"@e18e/eslint-plugin": "0.2.0",
 		"@tsconfig/node24": "24.0.4",
 		"@tsconfig/strictest": "2.0.8",
 		"@types/json-schema": "7.0.15",
-		"@types/node": "25.2.1",
-		"@typescript/native-preview": "7.0.0-dev.20260207.1",
-		"@vitest/coverage-v8": "4.0.18",
+		"@types/node": "25.5.0",
+		"@typescript/native-preview": "7.0.0-dev.20260313.1",
+		"@vitest/coverage-v8": "4.1.0",
 		"db0": "0.3.4",
-		"eslint": "10.0.0",
-		"evlog": "1.5.0",
+		"eslint": "10.0.3",
+		"evlog": "2.5.0",
 		"h3": "2.0.1-rc.14",
 		"kysely": "0.28.11",
 		"kysely-db0": "0.1.0-beta.1",
 		"mentoss": "0.13.0",
 		"nano-staged": "0.9.0",
-		"oxfmt": "0.28.0",
+		"oxfmt": "0.40.0",
 		"simple-git-hooks": "2.13.1",
-		"tsdown": "0.20.3",
+		"tsdown": "0.21.2",
 		"valibot": "1.2.0",
-		"vitest": "4.0.18",
+		"vitest": "4.1.0",
 		"xior": "0.8.3"
 	}
 }

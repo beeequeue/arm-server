@@ -6,11 +6,10 @@
 This app uses data from [`Fribb/anime-lists`](https://github.com/Fribb/anime-lists) - fetching
 and updating itself every 24 hours.
 
-[`Fribb/anime-lists`](https://github.com/Fribb/anime-lists) is an automatic merged copy of 
+[`Fribb/anime-lists`](https://github.com/Fribb/anime-lists) is an automatic merged copy of
 [`anime-offline-database`](https://github.com/manami-project/anime-offline-database)
 and
 [`Anime-Lists/anime-lists`](https://github.com/Anime-Lists/anime-lists).
-
 
 #### Get notifications on important API changes
 
