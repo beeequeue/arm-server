@@ -28,12 +28,11 @@ export const Source = {
 export type SourceValue = (typeof Source)[keyof typeof Source]
 export const NonUniqueFields = [
 	Source.IMDB,
+	Source.MediaType,
 	Source.TheMovieDB,
 	Source.TheMovieDBSeason,
 	Source.TheTVDB,
 	Source.TheTVDBSeason,
-	Source.Simkl,
-	Source.MediaType,
 ]
 
 export type Relation = {
