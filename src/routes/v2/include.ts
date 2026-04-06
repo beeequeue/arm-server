@@ -10,7 +10,7 @@ export const includeSchema = v.object({
 			v.string(),
 			v.regex(/^[\-a-z,]+$/, "Invalid `include` query"),
 			v.transform((value) => value.split(",")),
-			v.transform((sources) => (sources.length > 1 ? Array.from(new Set(sources)) : sources)),
+			v.transform((sources) => (sources.length > 1 ? [...new Set(sources)] : sources)),
 			v.minLength(1),
 			v.maxLength(allSources.length),
 		),
