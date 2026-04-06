@@ -86,6 +86,20 @@ $defs:
             minLength: 1
             maxLength: 50
             example: dororon-enma-kun
+      animecountdown:
+        oneOf:
+          - type: "null"
+          - type: integer
+            minimum: 0
+            maximum: 50000000
+            example: 1337
+      animenewsnetwork:
+        oneOf:
+          - type: "null"
+          - type: integer
+            minimum: 0
+            maximum: 50000000
+            example: 1337
       anisearch:
         oneOf:
           - type: "null"
@@ -115,7 +129,21 @@ $defs:
             minimum: 0
             maximum: 50000000
             example: 1337
-      animenewsnetwork:
+      media:
+        oneOf:
+          - type: "null"
+          - type: string
+            minLength: 0
+            maxLength: 10
+            example: TV
+      myanimelist:
+        oneOf:
+          - type: "null"
+          - type: integer
+            minimum: 0
+            maximum: 50000000
+            example: 1337
+      simkl:
         oneOf:
           - type: "null"
           - type: integer
@@ -150,34 +178,6 @@ $defs:
             minimum: 0
             maximum: 50000000
             example: 1
-      myanimelist:
-        oneOf:
-          - type: "null"
-          - type: integer
-            minimum: 0
-            maximum: 50000000
-            example: 1337
-      simkl:
-        oneOf:
-          - type: "null"
-          - type: integer
-            minimum: 0
-            maximum: 50000000
-            example: 1337
-      animecountdown:
-        oneOf:
-          - type: "null"
-          - type: integer
-            minimum: 0
-            maximum: 50000000
-            example: 1337
-      media:
-        oneOf:
-          - type: "null"
-          - type: string
-            minLength: 0
-            maxLength: 10
-            example: TV
 
   nullable_relation:
     oneOf:
@@ -189,18 +189,18 @@ $defs:
       anidb: 1337
       anilist: 1337
       anime-planet: dororon-enma-kun
+      animecountdown: null
+      animenewsnetwork: null
       anisearch: null
       imdb: tt0164917
       kitsu: null
       livechart: null
-      themoviedb: null
-      themoviedb-season: 1
-      thetvdb: null
-      thetvdb-season: 1
-      myanimelist: null
-      animecountdown: null
-      animenewsnetwork: null
       media: TV
+      myanimelist: null
+      themoviedb-season: 1
+      themoviedb: null
+      thetvdb-season: 1
+      thetvdb: null
     oneOf:
       - $ref: "#/$defs/nullable_relation"
       - type: array
@@ -341,8 +341,8 @@ paths:
           schema:
             type: string
             enum:
-              - anilist
               - anidb
+              - anilist
               - anime-planet
               - animecountdown
               - animenewsnetwork
@@ -419,12 +419,31 @@ paths:
                         - type: string
                           minLength: 1
                           maxLength: 50
+                    animecountdown:
+                      oneOf:
+                        - type: "null"
+                        - type: integer
+                          minimum: 0
+                          maximum: 50000000
+                    animenewsnetwork:
+                      oneOf:
+                        - type: "null"
+                        - type: integer
+                          minimum: 0
+                          maximum: 50000000
                     anisearch:
                       oneOf:
                         - type: "null"
                         - type: integer
                           minimum: 0
                           maximum: 50000000
+                    imdb:
+                      oneOf:
+                        - type: "null"
+                        - type: string
+                          pattern: tt\d+
+                          minLength: 1
+                          maxLength: 50
                     kitsu:
                       oneOf:
                         - type: "null"
@@ -437,19 +456,43 @@ paths:
                         - type: integer
                           minimum: 0
                           maximum: 50000000
+                    media:
+                      oneOf:
+                        - type: "null"
+                        - type: string
+                          minLength: 0
+                          maxLength: 10
                     myanimelist:
                       oneOf:
                         - type: "null"
                         - type: integer
                           minimum: 0
                           maximum: 50000000
-                    animenewsnetwork:
+                    simkl:
                       oneOf:
                         - type: "null"
-                        - type: string
-                          minLength: 1
-                          maxLength: 50
-                    animecountdown:
+                        - type: integer
+                          minimum: 0
+                          maximum: 50000000
+                    themoviedb:
+                      oneOf:
+                        - type: "null"
+                        - type: integer
+                          minimum: 0
+                          maximum: 50000000
+                    themoviedb-season:
+                      oneOf:
+                        - type: "null"
+                        - type: integer
+                          minimum: 0
+                          maximum: 50000000
+                    thetvdb:
+                      oneOf:
+                        - type: "null"
+                        - type: integer
+                          minimum: 0
+                          maximum: 50000000
+                    thetvdb-season:
                       oneOf:
                         - type: "null"
                         - type: integer
@@ -481,12 +524,31 @@ paths:
                           - type: string
                             minLength: 1
                             maxLength: 50
+                      animecountdown:
+                        oneOf:
+                          - type: "null"
+                          - type: integer
+                            minimum: 0
+                            maximum: 50000000
+                      animenewsnetwork:
+                        oneOf:
+                          - type: "null"
+                          - type: integer
+                            minimum: 0
+                            maximum: 50000000
                       anisearch:
                         oneOf:
                           - type: "null"
                           - type: integer
                             minimum: 0
                             maximum: 50000000
+                      imdb:
+                        oneOf:
+                          - type: "null"
+                          - type: string
+                            pattern: tt\d+
+                            minLength: 1
+                            maxLength: 50
                       kitsu:
                         oneOf:
                           - type: "null"
@@ -499,19 +561,43 @@ paths:
                           - type: integer
                             minimum: 0
                             maximum: 50000000
+                      media:
+                        oneOf:
+                          - type: "null"
+                          - type: string
+                            minLength: 0
+                            maxLength: 10
                       myanimelist:
                         oneOf:
                           - type: "null"
                           - type: integer
                             minimum: 0
                             maximum: 50000000
-                      animenewsnetwork:
+                      simkl:
                         oneOf:
                           - type: "null"
                           - type: integer
                             minimum: 0
                             maximum: 50000000
-                      animecountdown:
+                      themoviedb:
+                        oneOf:
+                          - type: "null"
+                          - type: integer
+                            minimum: 0
+                            maximum: 50000000
+                      themoviedb-season:
+                        oneOf:
+                          - type: "null"
+                          - type: integer
+                            minimum: 0
+                            maximum: 50000000
+                      thetvdb:
+                        oneOf:
+                          - type: "null"
+                          - type: integer
+                            minimum: 0
+                            maximum: 50000000
+                      thetvdb-season:
                         oneOf:
                           - type: "null"
                           - type: integer

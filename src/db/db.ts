@@ -10,20 +10,20 @@ import { ActuallyWorkingMigrationProvider } from "./file-provider.ts"
 export const Source = {
 	AniDB: "anidb",
 	AniList: "anilist",
+	AnimeCountdown: "animecountdown",
+	AnimeNewsNetwork: "animenewsnetwork",
 	AnimePlanet: "anime-planet",
 	AniSearch: "anisearch",
 	IMDB: "imdb",
 	Kitsu: "kitsu",
 	LiveChart: "livechart",
-	AnimeNewsNetwork: "animenewsnetwork",
+	MAL: "myanimelist",
+	MediaType: "media",
+	Simkl: "simkl",
 	TheMovieDB: "themoviedb",
 	TheMovieDBSeason: "themoviedb-season",
 	TheTVDB: "thetvdb",
 	TheTVDBSeason: "thetvdb-season",
-	MAL: "myanimelist",
-	Simkl: "simkl",
-	AnimeCountdown: "animecountdown",
-	MediaType: "media",
 } as const
 export type SourceValue = (typeof Source)[keyof typeof Source]
 export const NonUniqueFields = [

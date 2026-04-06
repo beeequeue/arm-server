@@ -97,19 +97,19 @@ export const formatEntry = (entry: AnimeListsSchema[number]): Relation => ({
 	anidb: handleBadValues(entry.anidb_id),
 	anilist: handleBadValues(entry.anilist_id),
 	"anime-planet": handleBadValues(entry["anime-planet_id"]),
+	animecountdown: handleBadValues(entry.animecountdown_id),
+	animenewsnetwork: handleBadValues(entry.animenewsnetwork_id),
 	anisearch: handleBadValues(entry.anisearch_id),
 	imdb: handleBadValues(entry.imdb_id),
 	kitsu: handleBadValues(entry.kitsu_id),
 	livechart: handleBadValues(entry.livechart_id),
+	media: handleBadValues(entry.type),
 	myanimelist: handleBadValues(entry.mal_id),
-	animenewsnetwork: handleBadValues(entry.animenewsnetwork_id),
-	animecountdown: handleBadValues(entry.animecountdown_id),
+	simkl: handleBadValues(entry.simkl_id),
 	themoviedb: handleBadValues(entry.themoviedb_id),
 	"themoviedb-season": handleBadValues(entry.season?.tmdb),
 	thetvdb: handleBadValues(entry.tvdb_id),
 	"thetvdb-season": handleBadValues(entry.season?.tvdb),
-	simkl: handleBadValues(entry.simkl_id),
-	media: handleBadValues(entry.type),
 })
 
 export const updateRelations = async () => {
