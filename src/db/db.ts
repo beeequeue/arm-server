@@ -33,7 +33,7 @@ export const NonUniqueFields = [
 	Source.TheMovieDBSeason,
 	Source.TheTVDB,
 	Source.TheTVDBSeason,
-]
+] as (keyof Relation)[]
 
 export type Relation = {
 	[Source.AniDB]?: number

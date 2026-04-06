@@ -67,8 +67,8 @@ const handleBadValues = <T extends string | number | undefined>(
 
 // Removes duplicate source-id pairs from the list, except for thetvdb and themoviedb ids
 export const removeDuplicates = (entries: Relation[]): Relation[] => {
-	const sources = (Object.values(Source) as SourceValue[]).filter((source) =>
-		NonUniqueFields.every((field) => field !== source),
+	const sources = (Object.values(Source) as SourceValue[]).filter(
+		(source) => !NonUniqueFields.includes(source),
 	)
 	const existing = new Map<SourceValue, Set<unknown>>(sources.map((name) => [name, new Set()]))
 
@@ -78,9 +78,7 @@ export const removeDuplicates = (entries: Relation[]): Relation[] => {
 
 			// Ignore nulls
 			if (id == null) continue
-			// Ignore sources with one-to-many relations
-			// eslint-disable-next-line unicorn/prefer-includes
-			if (NonUniqueFields.some((field) => field === source)) continue
+			if (NonUniqueFields.includes(source)) continue
 
 			if (existing.get(source)!.has(id)) return false
 
