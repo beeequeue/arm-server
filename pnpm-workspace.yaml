@@ -15,7 +15,7 @@ overrides:
   "@nuxt/kit": "-"
   "better-sqlite3": "-"
   eslint-plugin-pnpm>jsonc-eslint-parser: "-"
-  rolldown: 1.0.0-rc.9
+  rolldown: 1.0.0-rc.18
 
 minimumReleaseAge: 0
 peerDependencyRules:
