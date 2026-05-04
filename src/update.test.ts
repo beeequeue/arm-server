@@ -105,6 +105,7 @@ it("handles duplicates", async () => {
 		Source.AniSearch,
 		Source.Kitsu,
 		Source.LiveChart,
+		Source.AnimeNewsNetwork,
 		Source.MAL,
 	]
 

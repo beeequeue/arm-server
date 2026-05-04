@@ -53,6 +53,26 @@ export const testIncludeQueryParam = (
 			expect(response.headers.get("content-type")).toContain("application/json")
 		})
 
+		test("duplicate sources (anilist,anilist,themoviedb)", async () => {
+			await db
+				.insertInto("relations")
+				.values({ anilist: 1337, thetvdb: 1337, themoviedb: 1337, imdb: "tt1337" })
+				.execute()
+
+			const query = new URLSearchParams({
+				source,
+				id: prefixify(source, "1337"),
+				include: [Source.AniList, Source.AniList, Source.TheMovieDB].join(","),
+			})
+			const response = await app.fetch(new Request(`http://localhost${path}?${query.toString()}`))
+
+			await expect(response.json()).resolves.toStrictEqual(
+				arrayify({ anilist: 1337, themoviedb: 1337 }),
+			)
+			expect(response.status).toBe(200)
+			expect(response.headers.get("content-type")).toContain("application/json")
+		})
+
 		test("all the sources", async () => {
 			await db
 				.insertInto("relations")
@@ -70,13 +90,19 @@ export const testIncludeQueryParam = (
 				anidb: null,
 				anilist: 1337,
 				"anime-planet": null,
+				animecountdown: null,
+				animenewsnetwork: null,
 				anisearch: null,
 				imdb: null,
 				kitsu: null,
 				livechart: null,
-				themoviedb: null,
-				thetvdb: null,
+				media: null,
 				myanimelist: null,
+				simkl: null,
+				themoviedb: null,
+				"themoviedb-season": null,
+				thetvdb: null,
+				"thetvdb-season": null,
 			}
 			expectedResult[source] = prefixify(source, 1337) as never
 

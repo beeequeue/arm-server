@@ -1,6 +1,6 @@
 import { type Kysely, sql } from "kysely"
 
-export async function up(db: Kysely<any>): Promise<void> {
+export async function up(db: Kysely<unknown>): Promise<void> {
 	await sql`PRAGMA journal_mode=WAL`.execute(db)
 
 	await db.schema

@@ -2,7 +2,8 @@ import { log } from "evlog"
 import xior, { type XiorError } from "xior"
 import errorRetryPlugin from "xior/plugins/error-retry"
 
-import { db, type Relation, Source, type SourceValue } from "./db/db.ts"
+import { config, Environment } from "./config.ts"
+import { db, migrator, NonUniqueFields, type Relation, Source, type SourceValue } from "./db/db.ts"
 import { updateBasedOnManualRules } from "./manual-rules.ts"
 
 const http = xior.create({ responseType: "json" })
@@ -12,6 +13,7 @@ const isXiorError = <T>(response: T | XiorError): response is XiorError =>
 	"stack" in (response as XiorError)
 
 export type AnimeListsSchema = Array<{
+	type?: string
 	anidb_id?: number
 	anilist_id?: number
 	"anime-planet_id"?: string
@@ -20,8 +22,15 @@ export type AnimeListsSchema = Array<{
 	kitsu_id?: number
 	livechart_id?: number
 	mal_id?: number
+	animenewsnetwork_id?: number
+	animecountdown_id?: number
+	simkl_id?: number
 	themoviedb_id?: number | "unknown"
 	tvdb_id?: number
+	season?: {
+		tvdb?: number
+		tmdb?: number
+	}
 }>
 
 const fetchDatabase = async (): Promise<AnimeListsSchema | null> => {
@@ -59,7 +68,7 @@ const handleBadValues = <T extends string | number | undefined>(
 // Removes duplicate source-id pairs from the list, except for thetvdb and themoviedb ids
 export const removeDuplicates = (entries: Relation[]): Relation[] => {
 	const sources = (Object.values(Source) as SourceValue[]).filter(
-		(source) => source !== Source.TheTVDB && source !== Source.TheMovieDB && source !== Source.IMDB,
+		(source) => !NonUniqueFields.includes(source),
 	)
 	const existing = new Map<SourceValue, Set<unknown>>(sources.map((name) => [name, new Set()]))
 
@@ -69,10 +78,7 @@ export const removeDuplicates = (entries: Relation[]): Relation[] => {
 
 			// Ignore nulls
 			if (id == null) continue
-			// Ignore sources with one-to-many relations
-			if (source === Source.TheTVDB || source === Source.TheMovieDB || source === Source.IMDB) {
-				continue
-			}
+			if (NonUniqueFields.includes(source)) continue
 
 			if (existing.get(source)!.has(id)) return false
 
@@ -89,13 +95,19 @@ export const formatEntry = (entry: AnimeListsSchema[number]): Relation => ({
 	anidb: handleBadValues(entry.anidb_id),
 	anilist: handleBadValues(entry.anilist_id),
 	"anime-planet": handleBadValues(entry["anime-planet_id"]),
+	animecountdown: handleBadValues(entry.animecountdown_id),
+	animenewsnetwork: handleBadValues(entry.animenewsnetwork_id),
 	anisearch: handleBadValues(entry.anisearch_id),
 	imdb: handleBadValues(entry.imdb_id),
 	kitsu: handleBadValues(entry.kitsu_id),
 	livechart: handleBadValues(entry.livechart_id),
+	media: handleBadValues(entry.type),
 	myanimelist: handleBadValues(entry.mal_id),
+	simkl: handleBadValues(entry.simkl_id),
 	themoviedb: handleBadValues(entry.themoviedb_id),
+	"themoviedb-season": handleBadValues(entry.season?.tmdb),
 	thetvdb: handleBadValues(entry.tvdb_id),
+	"thetvdb-season": handleBadValues(entry.season?.tvdb),
 })
 
 export const updateRelations = async () => {
@@ -119,6 +131,13 @@ export const updateRelations = async () => {
 	log.info("update", `Removing duplicates.`)
 	const goodEntries = removeDuplicates(formattedEntries)
 	log.info("update", `Removed duplicates. ${goodEntries.length} remain.`)
+
+	if (config.NODE_ENV !== Environment.Prod) {
+		const { error } = await migrator.migrateToLatest()
+		if (error != null) {
+			throw new Error("Executing migrations failed.", { cause: error })
+		}
+	}
 
 	log.info("update", "Updating database...")
 	await db.transaction().execute(async (trx) => {
