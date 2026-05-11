@@ -60,11 +60,11 @@ importers:
         specifier: 2.0.1-rc.16
         version: 2.0.1-rc.16
       kysely:
-        specifier: 0.28.11
-        version: 0.28.11
+        specifier: 0.28.17
+        version: 0.28.17
       kysely-db0:
         specifier: 0.1.0-beta.1
-        version: 0.1.0-beta.1(db0@0.3.4)(kysely@0.28.11)
+        version: 0.1.0-beta.1(db0@0.3.4)(kysely@0.28.17)
       mentoss:
         specifier: 0.13.0
         version: 0.13.0
@@ -1312,8 +1312,8 @@ packages:
       db0: ^0.3.4
       kysely: ^0.28.9
 
-  kysely@0.28.11:
-    resolution: {integrity: sha512-zpGIFg0HuoC893rIjYX1BETkVWdDnzTzF5e0kWXJFg5lE0k1/LfNWBejrcnOFu8Q2Rfq/hTDTU7XLUM8QOrpzg==}
+  kysely@0.28.17:
+    resolution: {integrity: sha512-nbD8lB9EB3wNdMhOCdx5Li8DxnLbvKByylRLcJ1h+4SkrowVeECAyZlyiKMThF7xFdRz0jSQ2MoJr+wXux2y0Q==}
     engines: {node: '>=20.0.0'}
 
   levn@0.4.1:
@@ -2956,12 +2956,12 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  kysely-db0@0.1.0-beta.1(db0@0.3.4)(kysely@0.28.11):
+  kysely-db0@0.1.0-beta.1(db0@0.3.4)(kysely@0.28.17):
     dependencies:
       db0: 0.3.4
-      kysely: 0.28.11
+      kysely: 0.28.17
 
-  kysely@0.28.11: {}
+  kysely@0.28.17: {}
 
   levn@0.4.1:
     dependencies:
@@ -3410,10 +3410,10 @@ snapshots:
     dependencies:
       '@oxc-project/runtime': 0.115.0
       lightningcss: 1.32.0
-      picomatch: 4.0.3
+      picomatch: 4.0.4
       postcss: 8.5.8
       rolldown: 1.0.0-rc.18
-      tinyglobby: 0.2.15
+      tinyglobby: 0.2.16
     optionalDependencies:
       '@types/node': 25.5.0
       fsevents: 2.3.3
