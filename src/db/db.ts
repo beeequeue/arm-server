@@ -77,5 +77,5 @@ export const migrator = new Migrator({
 	db,
 	provider: new ActuallyWorkingMigrationProvider(
 		existsSync("src/migrations") ? "src/migrations" : "dist/migrations",
-	) as never,
+	),
 })

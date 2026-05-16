@@ -2,7 +2,7 @@ import { readdirSync } from "node:fs"
 import path from "node:path"
 import { pathToFileURL } from "node:url"
 
-import type { Migration, MigrationProvider } from "kysely"
+import type { Migration, MigrationProvider } from "kysely/migration"
 
 const isMigration = (obj: unknown): obj is Migration =>
 	typeof (obj as { up?: unknown })?.up === "function"

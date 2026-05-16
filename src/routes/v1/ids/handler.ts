@@ -1,7 +1,7 @@
 import { getValidatedQuery, H3, handleCacheHeaders, readValidatedBody } from "h3"
 
 import { db } from "../../../db/db.ts"
-import type { OldRelation, Relation, SourceValue } from "../../../db/db.ts"
+import type { Relation, SourceValue } from "../../../db/db.ts"
 import { CacheTimes } from "../../../utils.ts"
 
 import { bodyInputSchema } from "./schemas/json-body.ts"
@@ -29,7 +29,7 @@ export const v1Routes = new H3()
 
 		handleCacheHeaders(event, { maxAge: CacheTimes.SIX_HOURS })
 
-		return (row as OldRelation) ?? null
+		return row ?? null
 	})
 	.post("/ids", async (event) => {
 		const input = await readValidatedBody(event, bodyInputSchema)

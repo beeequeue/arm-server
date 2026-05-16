@@ -67,7 +67,7 @@ describe("query params", () => {
 	it("returns null when id doesn't exist", async () => {
 		const params = new URLSearchParams({
 			source: Source.Kitsu,
-			id: "404" as never,
+			id: "404",
 		})
 		const response = await app.request(`/api/v2/ids?${params.toString()}`)
 
