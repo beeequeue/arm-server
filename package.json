@@ -42,7 +42,7 @@
 		"@typescript/native-preview": "7.0.0-dev.20260514.1",
 		"@vitest/coverage-v8": "5.0.0-beta.2",
 		"db0": "0.3.4",
-		"eslint": "10.3.0",
+		"eslint": "10.4.0",
 		"evlog": "2.17.0",
 		"h3": "2.0.1-rc.22",
 		"kysely": "0.29.0",
