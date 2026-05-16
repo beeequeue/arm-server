@@ -1,4 +1,4 @@
-FROM node:25-alpine AS base
+FROM node:26-alpine AS base
 
 WORKDIR /app
 
@@ -42,10 +42,8 @@ RUN --mount=type=cache,id=s/c47f3895-fff0-42c4-b1f7-cee7f61e6613-pnpm,target=/pn
 
 FROM base
 
-COPY src/ src/
 COPY package.json pnpm-workspace.yaml ./
 
-COPY ./src/ src/
 COPY --from=build /app/dist dist/
 COPY --from=docs /app/redoc-static.html .
 

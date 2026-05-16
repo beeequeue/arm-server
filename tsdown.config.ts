@@ -5,7 +5,7 @@ import pkgJson from "./package.json" with { type: "json" }
 export default defineConfig({
 	entry: ["src/index.ts", "src/migrations/*.ts"],
 	outDir: "dist",
-	inlineOnly: false,
+	deps: { onlyBundle: false },
 
 	env: {
 		NODE_ENV: process.env.NODE_ENV ?? "production",
@@ -18,7 +18,7 @@ export default defineConfig({
 	minify: true,
 	sourcemap: true,
 	platform: "node",
-	target: ["node25"],
+	target: ["node26"],
 	format: ["esm"],
 	fixedExtension: true,
 })

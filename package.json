@@ -8,7 +8,7 @@
 	"homepage": "https://arm.haglund.dev/docs",
 	"packageManager": "pnpm@11.1.2",
 	"engines": {
-		"node": "^25"
+		"node": "^26"
 	},
 	"simple-git-hooks": {
 		"pre-commit": "node_modules/.bin/nano-staged"
