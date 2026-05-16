@@ -2,8 +2,9 @@ import { existsSync } from "node:fs"
 
 import { createDatabase } from "db0"
 import sqlite from "db0/connectors/node-sqlite"
-import { Kysely, Migrator } from "kysely"
+import { Kysely } from "kysely"
 import { Db0SqliteDialect } from "kysely-db0/sqlite"
+import { Migrator } from "kysely/migration"
 
 import { ActuallyWorkingMigrationProvider } from "./file-provider.ts"
 
@@ -76,5 +77,5 @@ export const migrator = new Migrator({
 	db,
 	provider: new ActuallyWorkingMigrationProvider(
 		existsSync("src/migrations") ? "src/migrations" : "dist/migrations",
-	),
+	) as never,
 })

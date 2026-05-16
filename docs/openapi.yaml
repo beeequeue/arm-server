@@ -40,7 +40,7 @@ $defs:
     in: query
     required: false
     example: anilist,anidb
-    description: "Comma-separated list of sources to return in response objects."
+    description: Comma-separated list of sources to return in response objects.
     schema:
       type: string
 
