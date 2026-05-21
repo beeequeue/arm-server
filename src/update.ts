@@ -25,7 +25,7 @@ export type AnimeListsSchema = Array<{
 	animenewsnetwork_id?: number
 	animecountdown_id?: number
 	simkl_id?: number
-	themoviedb_id?: number | "unknown"
+	themoviedb_id?: number | "unknown" | { tv?: number; movie?: number }
 	tvdb_id?: number
 	season?: {
 		tvdb?: number
@@ -104,7 +104,11 @@ export const formatEntry = (entry: AnimeListsSchema[number]): Relation => ({
 	media: handleBadValues(entry.type),
 	myanimelist: handleBadValues(entry.mal_id),
 	simkl: handleBadValues(entry.simkl_id),
-	themoviedb: handleBadValues(entry.themoviedb_id),
+	themoviedb: handleBadValues(
+		typeof entry.themoviedb_id === "object" && entry.themoviedb_id !== null
+			? (entry.themoviedb_id.tv ?? entry.themoviedb_id.movie)
+			: entry.themoviedb_id,
+	),
 	"themoviedb-season": handleBadValues(entry.season?.tmdb),
 	thetvdb: handleBadValues(entry.tvdb_id),
 	"thetvdb-season": handleBadValues(entry.season?.tvdb),
