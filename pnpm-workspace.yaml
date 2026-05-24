@@ -1,7 +1,7 @@
 allowBuilds:
   simple-git-hooks: false
 
-minimumReleaseAge: 2880
+minimumReleaseAge: 4320
 
 dedupePeers: true
 dedupePeerDependents: true
@@ -15,7 +15,6 @@ overrides:
   "@antfu/eslint-config>eslint-processor-vue-blocks": "-"
   "@antfu/eslint-config>jsonc-eslint-parser": "-"
   "@antfu/eslint-config>toml-eslint-parser": "-"
-  "@antfu/eslint-config>vitest": "-"
   eslint-plugin-pnpm>jsonc-eslint-parser: "-"
 
 savePrefix: ""
