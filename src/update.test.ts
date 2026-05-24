@@ -27,11 +27,10 @@ it("handles bad values", async () => {
 	server.get("/Fribb/anime-lists/master/anime-list-mini.json", {
 		status: 200,
 		body: [
-			{ anidb_id: 1337, themoviedb_id: "unknown" },
+			{ anidb_id: 1337, themoviedb_id: { tv: "unknown" } },
 			{ anidb_id: 1338, tvdb_id: "unknown" as never },
 			{ anidb_id: 1339, imdb_id: "tt1337,tt1338,tt1339" },
-			{ anidb_id: 1340, themoviedb_id: "unknown" },
-			{ anidb_id: 1341, themoviedb_id: 1341 },
+			{ anidb_id: 1341, themoviedb_id: { movie: 1341 } },
 		] satisfies AnimeListsSchema,
 	})
 
@@ -43,39 +42,33 @@ it("handles bad values", async () => {
 			.select(["relations.anidb", "relations.imdb", "relations.themoviedb", "relations.thetvdb"])
 			.execute(),
 	).resolves.toMatchInlineSnapshot(`
-    [
-      {
-        "anidb": 1337,
-        "imdb": null,
-        "themoviedb": null,
-        "thetvdb": null,
-      },
-      {
-        "anidb": 1338,
-        "imdb": null,
-        "themoviedb": null,
-        "thetvdb": null,
-      },
-      {
-        "anidb": 1339,
-        "imdb": null,
-        "themoviedb": null,
-        "thetvdb": null,
-      },
-      {
-        "anidb": 1340,
-        "imdb": null,
-        "themoviedb": null,
-        "thetvdb": null,
-      },
-      {
-        "anidb": 1341,
-        "imdb": null,
-        "themoviedb": 1341,
-        "thetvdb": null,
-      },
-    ]
-  `)
+		[
+		  {
+		    "anidb": 1337,
+		    "imdb": null,
+		    "themoviedb": null,
+		    "thetvdb": null,
+		  },
+		  {
+		    "anidb": 1338,
+		    "imdb": null,
+		    "themoviedb": null,
+		    "thetvdb": null,
+		  },
+		  {
+		    "anidb": 1339,
+		    "imdb": null,
+		    "themoviedb": null,
+		    "thetvdb": null,
+		  },
+		  {
+		    "anidb": 1341,
+		    "imdb": null,
+		    "themoviedb": 1341,
+		    "thetvdb": null,
+		  },
+		]
+	`)
 })
 
 it("handles duplicates", async () => {
