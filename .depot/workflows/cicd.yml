@@ -51,6 +51,7 @@ jobs:
   docker:
     needs: [ci]
     runs-on: depot-ubuntu-24.04
+    environment: ${{ github.ref == 'refs/heads/main' && 'image-registry' || '' }}
     permissions:
       contents: read
       packages: write
@@ -72,8 +73,8 @@ jobs:
         uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4.2.0
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: beeequeue
+          password: ${{ secrets.GH_REGISTRY_TOKEN }}
 
       - name: Build and maybe Push Docker image
         uses: depot/build-push-action@98e78adca7817480b8185f474a400b451d74e287 # v1.18.0
