@@ -22,9 +22,6 @@ jobs:
         with:
           persist-credentials: false
 
-      - run: "echo ${{ github.ref }}"
-      - run: "echo ${{ (github.ref == 'refs/heads/main') && 'image-registry' || '' }}"
-
       - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: 26
@@ -51,14 +48,27 @@ jobs:
           - name: typecheck
             run: node --run typecheck
 
-  docker:
+  docker-build:
+    if: github.ref != 'refs/heads/main'
     needs: [ci]
     runs-on: depot-ubuntu-24.04
-    environment: ${{ (github.ref == 'refs/heads/main') && 'image-registry' || '' }}
     permissions:
       contents: read
-      packages: write
-      id-token: write
+
+    steps:
+      - name: Build and maybe Push Docker image
+        uses: depot/build-push-action@98e78adca7817480b8185f474a400b451d74e287 # v1.18.0
+        with:
+          project: ks849krng9
+          platforms: linux/arm64
+
+  docker-push:
+    if: github.ref == 'refs/heads/main'
+    needs: [ci]
+    runs-on: depot-ubuntu-24.04
+    environment: image-registry
+    permissions:
+      contents: read
 
     steps:
       - name: Docker meta
@@ -72,7 +82,6 @@ jobs:
             type=raw,value=latest
 
       - name: Login to GHCR
-        if: github.ref == 'refs/heads/main'
         uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4.2.0
         with:
           registry: ghcr.io
