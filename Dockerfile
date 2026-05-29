@@ -23,7 +23,7 @@ RUN corepack enable
 RUN corepack prepare --activate
 
 # Install dependencies
-RUN --mount=type=cache,target=/pnpm/store \
+RUN --mount=type=cache,id=s/c47f3895-fff0-42c4-b1f7-cee7f61e6613-pnpm,target=/pnpm/store \
     pnpm install --frozen-lockfile --ignore-scripts
 
 FROM base_deps AS build
@@ -37,7 +37,7 @@ FROM base_deps AS docs
 
 COPY docs/openapi.yaml docs/openapi.yaml
 
-RUN --mount=type=cache,target=/pnpm/store \
+RUN --mount=type=cache,id=s/c47f3895-fff0-42c4-b1f7-cee7f61e6613-pnpm,target=/pnpm/store \
     node --run docs
 
 FROM base
