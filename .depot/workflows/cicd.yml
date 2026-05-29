@@ -49,7 +49,7 @@ jobs:
             run: node --run typecheck
 
   docker-build:
-    if: github.ref != 'refs/heads/main'
+    if: ${{ github.ref != 'refs/heads/main' }}
     needs: [ci]
     runs-on: depot-ubuntu-24.04
     permissions:
@@ -63,7 +63,7 @@ jobs:
           platforms: linux/arm64
 
   docker-push:
-    if: github.ref == 'refs/heads/main'
+    if: ${{ github.ref == 'refs/heads/main' }}
     needs: [ci]
     runs-on: depot-ubuntu-24.04
     environment: image-registry
@@ -93,6 +93,6 @@ jobs:
         with:
           project: ks849krng9
           platforms: linux/amd64,linux/arm64
-          push: ${{ github.ref == 'refs/heads/main' }}
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
