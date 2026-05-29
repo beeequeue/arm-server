@@ -1,0 +1,85 @@
+name: ci&cd
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    runs-on: depot-ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: 26
+      - uses: pnpm/action-setup@0e279bb959325dab635dd2c09392533439d90093 # v6.0.8
+        with:
+          cache: true
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - parallel:
+          - name: build
+            run: node --run build
+          - name: build docs
+            run: node --run docs
+          - name: lint
+            run: node --run lint
+          - name: check formatting
+            run: node --run lint:fmt
+          - name: test
+            env:
+              NODE_ENV: test
+            run: node --run test
+          - name: typecheck
+            run: node --run typecheck
+
+  docker:
+    needs: [ci]
+    runs-on: depot-ubuntu-24.04
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+
+    steps:
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@80c7e94dd9b9319bd5eb7a0e0fe9291e23a2a2e9 # v6.1.0
+        with:
+          images: |
+            ghcr.io/${{ github.repository }}
+          tags: |
+            type=raw,value={{sha}}
+            type=raw,value=latest
+
+      - name: Login to GHCR
+        if: github.ref == 'refs/heads/main'
+        uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4.2.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and maybe Push Docker image
+        uses: depot/build-push-action@98e78adca7817480b8185f474a400b451d74e287 # v1.18.0
+        with:
+          project: ks849krng9
+          platforms: linux/amd64,linux/arm64
+          push: ${{ github.ref == 'refs/heads/main' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
