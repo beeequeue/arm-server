@@ -1,8 +1,6 @@
 allowBuilds:
   simple-git-hooks: false
 
-minimumReleaseAge: 4320
-
 dedupePeers: true
 dedupePeerDependents: true
 
@@ -17,5 +15,11 @@ overrides:
   "@antfu/eslint-config>toml-eslint-parser": "-"
   eslint-plugin-pnpm>jsonc-eslint-parser: "-"
 
+minimumReleaseAge: 4320
+
 savePrefix: ""
 shellEmulator: true
+
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  - tinyexec@1.2.2
