@@ -14,12 +14,13 @@ overrides:
   "@antfu/eslint-config>jsonc-eslint-parser": "-"
   "@antfu/eslint-config>toml-eslint-parser": "-"
   eslint-plugin-pnpm>jsonc-eslint-parser: "-"
+  rolldown: 1.1.0
 
 minimumReleaseAge: 4320
+minimumReleaseAgeExclude:
+  - tinyexec@1.2.4
 
 savePrefix: ""
 shellEmulator: true
 
 trustPolicy: no-downgrade
-trustPolicyExclude:
-  - tinyexec@1.2.2
