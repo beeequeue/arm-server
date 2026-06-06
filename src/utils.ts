@@ -99,7 +99,7 @@ export const createErrorJson = (event: H3Event, input: HTTPError) => {
 		message: input.message ?? "An error occurred.",
 	}
 
-	if (input.status === 400 && "issues" in (input.data as ValiError<never>)) {
+	if (input.status === 400 && "issues" in ((input?.data as ValiError<never>) ?? {})) {
 		body.code = "FST_ERR_VALIDATION"
 		body.message = "Validation error"
 		body.details = flatten((input.data as ValiError<never>).issues)

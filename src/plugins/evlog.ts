@@ -33,7 +33,12 @@ export const evlog = definePlugin<LoggerConfig>((app, options) => {
 
 	app.use(
 		onError((error, event) => {
-			event.context.logger.error(error)
+			event.context.logger.set({ status: error.status })
+
+			if (error.status >= 500) {
+				event.context.logger.error(error)
+			}
+			event.context.logger.emit()
 		}),
 	)
 })
