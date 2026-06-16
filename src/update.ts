@@ -18,14 +18,14 @@ export type AnimeListsSchema = Array<{
 	anilist_id?: number
 	"anime-planet_id"?: string
 	anisearch_id?: number
-	imdb_id?: `tt${string}` | ""
+	imdb_id?: Array<`tt${string}` | "">
 	kitsu_id?: number
 	livechart_id?: number
 	mal_id?: number
 	animenewsnetwork_id?: number
 	animecountdown_id?: number
 	simkl_id?: number
-	themoviedb_id?: { [Key in "tv" | "movie"]?: number | "unknown" }
+	themoviedb_id?: { [Key in "tv" | "movie"]?: Array<number | "unknown"> }
 	tvdb_id?: number
 	season?: {
 		tvdb?: number
@@ -98,13 +98,13 @@ export const formatEntry = (entry: AnimeListsSchema[number]): Relation => ({
 	animecountdown: handleBadValues(entry.animecountdown_id),
 	animenewsnetwork: handleBadValues(entry.animenewsnetwork_id),
 	anisearch: handleBadValues(entry.anisearch_id),
-	imdb: handleBadValues(entry.imdb_id),
+	imdb: handleBadValues(entry.imdb_id?.[0]),
 	kitsu: handleBadValues(entry.kitsu_id),
 	livechart: handleBadValues(entry.livechart_id),
 	media: handleBadValues(entry.type),
 	myanimelist: handleBadValues(entry.mal_id),
 	simkl: handleBadValues(entry.simkl_id),
-	themoviedb: handleBadValues(entry.themoviedb_id?.tv ?? entry.themoviedb_id?.movie),
+	themoviedb: handleBadValues((entry.themoviedb_id?.tv ?? entry.themoviedb_id?.movie)?.[0]),
 	"themoviedb-season": handleBadValues(entry.season?.tmdb),
 	thetvdb: handleBadValues(entry.tvdb_id),
 	"thetvdb-season": handleBadValues(entry.season?.tvdb),
@@ -149,7 +149,13 @@ export const updateRelations = async () => {
 		for (let i = 0; i < goodEntries.length; i += chunkSize) {
 			const chunk = goodEntries.slice(i, i + chunkSize)
 			for (const entry of chunk) {
-				await trx.insertInto("relations").values(entry).execute()
+				try {
+					await trx.insertInto("relations").values(entry).execute()
+				} catch (error) {
+					throw new Error(`Inserting row failed.\n${JSON.stringify(entry, null, 2)}`, {
+						cause: error,
+					})
+				}
 			}
 		}
 	})
