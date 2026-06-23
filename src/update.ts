@@ -12,6 +12,8 @@ http.plugins.use(errorRetryPlugin({ retryTimes: 5 }))
 const isXiorError = <T>(response: T | XiorError): response is XiorError =>
 	"stack" in (response as XiorError)
 
+type MaybeArray<T> = T | T[]
+
 export type AnimeListsSchema = Array<{
 	type?: string
 	anidb_id?: number
@@ -25,7 +27,7 @@ export type AnimeListsSchema = Array<{
 	animenewsnetwork_id?: number
 	animecountdown_id?: number
 	simkl_id?: number
-	themoviedb_id?: { [Key in "tv" | "movie"]?: Array<number | "unknown"> }
+	themoviedb_id?: { [Key in "tv" | "movie"]?: MaybeArray<number | "unknown"> }
 	tvdb_id?: number
 	season?: {
 		tvdb?: number
@@ -91,24 +93,31 @@ export const removeDuplicates = (entries: Relation[]): Relation[] => {
 	return goodEntries
 }
 
-export const formatEntry = (entry: AnimeListsSchema[number]): Relation => ({
-	anidb: handleBadValues(entry.anidb_id),
-	anilist: handleBadValues(entry.anilist_id),
-	"anime-planet": handleBadValues(entry["anime-planet_id"]),
-	animecountdown: handleBadValues(entry.animecountdown_id),
-	animenewsnetwork: handleBadValues(entry.animenewsnetwork_id),
-	anisearch: handleBadValues(entry.anisearch_id),
-	imdb: handleBadValues(entry.imdb_id?.[0]),
-	kitsu: handleBadValues(entry.kitsu_id),
-	livechart: handleBadValues(entry.livechart_id),
-	media: handleBadValues(entry.type),
-	myanimelist: handleBadValues(entry.mal_id),
-	simkl: handleBadValues(entry.simkl_id),
-	themoviedb: handleBadValues((entry.themoviedb_id?.tv ?? entry.themoviedb_id?.movie)?.[0]),
-	"themoviedb-season": handleBadValues(entry.season?.tmdb),
-	thetvdb: handleBadValues(entry.tvdb_id),
-	"thetvdb-season": handleBadValues(entry.season?.tvdb),
-})
+export const formatEntry = (entry: AnimeListsSchema[number]): Relation => {
+	let themoviedb = entry.themoviedb_id?.tv ?? entry.themoviedb_id?.movie
+	if (themoviedb != null && Array.isArray(themoviedb)) {
+		themoviedb = themoviedb[0]
+	}
+
+	return {
+		anidb: handleBadValues(entry.anidb_id),
+		anilist: handleBadValues(entry.anilist_id),
+		"anime-planet": handleBadValues(entry["anime-planet_id"]),
+		animecountdown: handleBadValues(entry.animecountdown_id),
+		animenewsnetwork: handleBadValues(entry.animenewsnetwork_id),
+		anisearch: handleBadValues(entry.anisearch_id),
+		imdb: handleBadValues(entry.imdb_id?.[0]),
+		kitsu: handleBadValues(entry.kitsu_id),
+		livechart: handleBadValues(entry.livechart_id),
+		media: handleBadValues(entry.type),
+		myanimelist: handleBadValues(entry.mal_id),
+		simkl: handleBadValues(entry.simkl_id),
+		themoviedb: handleBadValues(themoviedb),
+		"themoviedb-season": handleBadValues(entry.season?.tmdb),
+		thetvdb: handleBadValues(entry.tvdb_id),
+		"thetvdb-season": handleBadValues(entry.season?.tvdb),
+	}
+}
 
 export const updateRelations = async () => {
 	log.debug("update", `Using ${process.env.NODE_ENV!} database configuration...`)

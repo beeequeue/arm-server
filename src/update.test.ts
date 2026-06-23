@@ -27,9 +27,9 @@ it("handles bad values", async () => {
 	server.get("/Fribb/anime-lists/master/anime-list-mini.json", {
 		status: 200,
 		body: [
-			{ anidb_id: 1337, themoviedb_id: { tv: "unknown" } },
+			{ anidb_id: 1337, themoviedb_id: { tv: ["unknown"] } },
 			{ anidb_id: 1338, tvdb_id: "unknown" as never },
-			{ anidb_id: 1339, imdb_id: "tt1337,tt1338,tt1339" },
+			{ anidb_id: 1339, imdb_id: ["tt1337", "tt1338", "tt1339"] },
 			{ anidb_id: 1341, themoviedb_id: { movie: 1341 } },
 		] satisfies AnimeListsSchema,
 	})
@@ -57,7 +57,7 @@ it("handles bad values", async () => {
 		  },
 		  {
 		    "anidb": 1339,
-		    "imdb": null,
+		    "imdb": "tt1337",
 		    "themoviedb": null,
 		    "thetvdb": null,
 		  },
