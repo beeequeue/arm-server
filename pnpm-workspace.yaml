@@ -14,7 +14,6 @@ overrides:
   "@antfu/eslint-config>jsonc-eslint-parser": "-"
   "@antfu/eslint-config>toml-eslint-parser": "-"
   eslint-plugin-pnpm>jsonc-eslint-parser: "-"
-  rolldown: 1.0.2
 
 minimumReleaseAge: 4320
 
