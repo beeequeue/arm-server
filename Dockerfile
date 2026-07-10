@@ -10,6 +10,7 @@ ENV NODE_ENV=production
 # Enable node compile cache
 ENV NODE_COMPILE_CACHE=/node-cc
 RUN mkdir -p $NODE_COMPILE_CACHE
+ENV NODE_COMPILE_CACHE_PORTABLE=1
 
 FROM base AS base_deps
 
@@ -17,10 +18,7 @@ ENV CI=1
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
-RUN npm i -g npm@latest
-RUN npm i -g --force corepack@latest
-RUN corepack enable
-RUN corepack prepare --activate
+RUN wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
 
 # Install dependencies
 RUN --mount=type=cache,id=s/c47f3895-fff0-42c4-b1f7-cee7f61e6613-pnpm,target=/pnpm/store \
