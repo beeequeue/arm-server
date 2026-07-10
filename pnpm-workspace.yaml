@@ -16,6 +16,8 @@ overrides:
   eslint-plugin-pnpm>jsonc-eslint-parser: "-"
 
 minimumReleaseAge: 4320
+minimumReleaseAgeExclude:
+  - pnpm
 
 savePrefix: ""
 shellEmulator: true
