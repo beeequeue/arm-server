@@ -38,7 +38,7 @@
 		"@tsconfig/node24": "24.0.4",
 		"@tsconfig/strictest": "2.0.8",
 		"@types/json-schema": "7.0.15",
-		"@types/node": "26.1.0",
+		"@types/node": "26.2.0",
 		"@typescript/native-preview": "7.0.0-dev.20260707.2",
 		"@vitest/coverage-v8": "5.0.0-beta.7",
 		"db0": "0.3.4",
