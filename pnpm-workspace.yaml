@@ -21,3 +21,6 @@ savePrefix: ""
 shellEmulator: true
 
 trustPolicy: no-downgrade
+minimumReleaseAgeExclude:
+  # Renovate security update: vitest@5.0.0-rc.2
+  - vitest@5.0.0-rc.2
