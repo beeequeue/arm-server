@@ -42,8 +42,8 @@ importers:
         specifier: 5.0.0-beta.7
         version: 5.0.0-beta.7(vitest@5.0.0-beta.7)
       db0:
-        specifier: 0.3.4
-        version: 0.3.4
+        specifier: 0.4.1
+        version: 0.4.1
       eslint:
         specifier: 10.6.0
         version: 10.6.0
@@ -58,7 +58,7 @@ importers:
         version: 0.29.3
       kysely-db0:
         specifier: 0.1.0-beta.1
-        version: 0.1.0-beta.1(db0@0.3.4)(kysely@0.29.3)
+        version: 0.1.0-beta.1(db0@0.4.1)(kysely@0.29.3)
       mentoss:
         specifier: 0.13.0
         version: 0.13.0
@@ -841,28 +841,8 @@ packages:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
 
-  db0@0.3.4:
-    resolution: {integrity: sha512-RiXXi4WaNzPTHEOu8UPQKMooIbqOEyqA1t7Z6MsdxSCeb8iUC9ko3LcmsLmeUt2SM5bctfArZKkRQggKZz7JNw==}
-    peerDependencies:
-      '@electric-sql/pglite': '*'
-      '@libsql/client': '*'
-      better-sqlite3: '*'
-      drizzle-orm: '*'
-      mysql2: '*'
-      sqlite3: '*'
-    peerDependenciesMeta:
-      '@electric-sql/pglite':
-        optional: true
-      '@libsql/client':
-        optional: true
-      better-sqlite3:
-        optional: true
-      drizzle-orm:
-        optional: true
-      mysql2:
-        optional: true
-      sqlite3:
-        optional: true
+  db0@0.4.1:
+    resolution: {integrity: sha512-6RBY/bSn42UrqATwsiULj2uYFyEykB3XeA/NLIVQeHNXlYV6D4Idxx3/aa6k5Y45Dwzx7sygeLotnqHWSeURYA==}
 
   debug@4.4.3:
     resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
@@ -2534,7 +2514,7 @@ snapshots:
       shebang-command: 2.0.0
       which: 2.0.2
 
-  db0@0.3.4: {}
+  db0@0.4.1: {}
 
   debug@4.4.3:
     dependencies:
@@ -2918,9 +2898,9 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  kysely-db0@0.1.0-beta.1(db0@0.3.4)(kysely@0.29.3):
+  kysely-db0@0.1.0-beta.1(db0@0.4.1)(kysely@0.29.3):
     dependencies:
-      db0: 0.3.4
+      db0: 0.4.1
       kysely: 0.29.3
 
   kysely@0.29.3: {}
