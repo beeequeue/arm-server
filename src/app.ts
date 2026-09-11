@@ -42,6 +42,7 @@ export const createApp = () =>
 		.mount("/docs", docsRoutes)
 
 		.get("/", (event) => {
+			// eslint-disable-next-line ts/no-unsafe-argument
 			handleCacheHeaders(event, { maxAge: CacheTimes.WEEK * 4 })
 
 			return redirect(process.env.HOMEPAGE!, 301)

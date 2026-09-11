@@ -2,8 +2,7 @@ import { existsSync } from "node:fs"
 
 import { createDatabase } from "db0"
 import sqlite from "db0/connectors/node-sqlite"
-import { Kysely } from "kysely"
-import { Db0SqliteDialect } from "kysely-db0/sqlite"
+import { kysely } from "db0/integrations/kysely"
 import { Migrator } from "kysely/migration"
 
 import { ActuallyWorkingMigrationProvider } from "./file-provider.ts"
@@ -69,9 +68,7 @@ const sqliteDb = sqlite(
 )
 const db0 = createDatabase(sqliteDb)
 // Create Kysely instance
-export const db = new Kysely<Database>({
-	dialect: new Db0SqliteDialect(db0),
-})
+export const db = kysely<Database>(db0)
 
 export const migrator = new Migrator({
 	db,

@@ -20,6 +20,7 @@ export const v2Routes = new H3()
 			.where(query.source as keyof Relation, "=", query.id)
 			.executeTakeFirst()
 
+		// eslint-disable-next-line ts/no-unsafe-argument
 		handleCacheHeaders(event, { maxAge: CacheTimes.SIX_HOURS })
 
 		return data ?? null
