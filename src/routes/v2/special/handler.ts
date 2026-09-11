@@ -19,6 +19,7 @@ export const specialRoutes = new H3()
 			.where(Source.IMDB, "=", query.id)
 			.execute()
 
+		// eslint-disable-next-line ts/no-unsafe-argument
 		handleCacheHeaders(event, { maxAge: CacheTimes.SIX_HOURS })
 
 		return data
@@ -35,6 +36,7 @@ export const specialRoutes = new H3()
 			.where(Source.TheMovieDB, "=", query.id)
 			.execute()
 
+		// eslint-disable-next-line ts/no-unsafe-argument
 		handleCacheHeaders(event, { maxAge: CacheTimes.SIX_HOURS })
 
 		return data
@@ -51,6 +53,7 @@ export const specialRoutes = new H3()
 			.where(Source.TheTVDB, "=", query.id)
 			.execute()
 
+		// eslint-disable-next-line ts/no-unsafe-argument
 		handleCacheHeaders(event, { maxAge: CacheTimes.SIX_HOURS })
 
 		return data
