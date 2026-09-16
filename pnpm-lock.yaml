@@ -181,8 +181,8 @@ importers:
         specifier: 5.0.0
         version: 5.0.0(@types/node@26.5.0)(@vitest/coverage-v8@5.0.0)(vite@8.2.2)
       xior:
-        specifier: 0.8.4
-        version: 0.8.4
+        specifier: 0.8.5
+        version: 0.8.5
 
 packages:
 
@@ -1992,8 +1992,8 @@ packages:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
     engines: {node: '>=0.10.0'}
 
-  xior@0.8.4:
-    resolution: {integrity: sha512-aY2tUpDuLSKFfcgHs3HpS1cLy9Di31zBfw7CQvmsLONh4TOIfBg/B+5n3HE+xinJbhDvaCgtG5vmEgSXgz/axQ==}
+  xior@0.8.5:
+    resolution: {integrity: sha512-oAabZs2ZakveaGam4Mq2z1MvyIQKiyXYOc++MUEW5oK/8VftZ1NaxIjhELb4K+QKz2UqdTzstAm1XZnH3pp+Vg==}
 
   yaml-eslint-parser@2.1.0:
     resolution: {integrity: sha512-1zo9KRfp6vIAXBEhWAz09ex3hUwh3T+/6dGbGteHvNseA0Uk4FgQnPES55klZ6cDzSy9FpgKS0D/CoLUvCCj4w==}
@@ -3465,7 +3465,7 @@ snapshots:
 
   word-wrap@1.2.5: {}
 
-  xior@0.8.4:
+  xior@0.8.5:
     dependencies:
       tiny-lru: 11.4.7
 
