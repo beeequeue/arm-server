@@ -148,8 +148,8 @@ importers:
         specifier: 10.10.0
         version: 10.10.0
       evlog:
-        specifier: 2.28.1
-        version: 2.28.1(h3@2.0.1-rc.31)(vite@8.2.2)
+        specifier: 2.29.0
+        version: 2.29.0(h3@2.0.1-rc.31)(vite@8.2.2)
       h3:
         specifier: 2.0.1-rc.31
         version: 2.0.1-rc.31
@@ -1232,27 +1232,27 @@ packages:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
     engines: {node: '>=0.10.0'}
 
-  evlog@2.28.1:
-    resolution: {integrity: sha512-RTci0+FRspM0zqyqHmk60LHb0l9CB+1M5criUFrAMfM3/G1Hd7OBT3STtNA93liY5IdK73ph6iWr2UM2Dqe2Sw==}
+  evlog@2.29.0:
+    resolution: {integrity: sha512-1qk5W3lttyAUz326ptqRbasPyc19u/ECa8UULjtRihUUyKV8W2ihsr4kB2qkxfqaMY4dFNhH9iShrYy93jxt5A==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      '@nestjs/common': '>=11.1.28'
+      '@nestjs/common': '>=11.2.3'
       '@nuxt/kit': ^4.4.2
-      '@orpc/server': '>=1.14.8'
-      '@tanstack/start-client-core': ^1.170.14
+      '@orpc/server': '>=1.15.0'
+      '@tanstack/start-client-core': ^1.170.28
       ai: '>=6.0.168 <8.0.0'
-      elysia: '>=1.4.29'
+      elysia: '>=1.4.30'
       eve: '>=0.30.0'
       express: '>=5.2.1'
-      fastify: '>=5.10.0'
+      fastify: '>=5.12.3'
       h3: ^1.15.11
-      hono: '>=4.12.30'
-      next: '>=16.2.10'
+      hono: '>=4.13.7'
+      next: '>=16.3.4'
       nitro: ^3.0.260311-beta
       nitropack: ^2.13.4
       ofetch: ^1.5.1
-      react: '>=19.2.7'
-      react-router: '>=7.18.1'
+      react: '>=19.2.8'
+      react-router: '>=7.18.3'
       vite: ^7.0.0 || ^8.0.0
     peerDependenciesMeta:
       '@nestjs/common':
@@ -2901,7 +2901,7 @@ snapshots:
 
   esutils@2.0.3: {}
 
-  evlog@2.28.1(h3@2.0.1-rc.31)(vite@8.2.2):
+  evlog@2.29.0(h3@2.0.1-rc.31)(vite@8.2.2):
     optionalDependencies:
       h3: 2.0.1-rc.31
       vite: 8.2.2(@types/node@26.5.0)(yaml@2.9.0)
