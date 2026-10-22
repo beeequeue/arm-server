@@ -1,4 +1,4 @@
-FROM node:26-alpine AS base
+FROM platformatic/node-caged:26-alpine AS base
 
 WORKDIR /app
 
@@ -8,6 +8,7 @@ ENV CI=1
 ENV NODE_ENV=production
 
 # Enable node compile cache
+ENV NODE_COMPILE_CACHE_PORTABLE=1
 ENV NODE_COMPILE_CACHE=/node-cc
 RUN mkdir -p $NODE_COMPILE_CACHE
 
