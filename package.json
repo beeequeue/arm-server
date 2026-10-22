@@ -6,7 +6,7 @@
 	"private": true,
 	"license": "AGPL-3.0-only",
 	"homepage": "https://arm.haglund.dev/docs",
-	"packageManager": "pnpm@12.3.4",
+	"packageManager": "pnpm@12.14.0",
 	"engines": {
 		"node": "^26"
 	},
@@ -38,21 +38,21 @@
 		"@tsconfig/node26": "26.0.1",
 		"@tsconfig/strictest": "2.0.8",
 		"@types/json-schema": "7.0.15",
-		"@types/node": "26.5.0",
-		"@vitest/coverage-v8": "5.0.0",
+		"@types/node": "26.6.5",
+		"@vitest/coverage-v8": "5.0.5",
 		"db0": "0.4.1",
-		"eslint": "10.10.0",
-		"evlog": "2.28.1",
-		"h3": "2.0.1-rc.31",
-		"kysely": "0.29.5",
+		"eslint": "10.13.0",
+		"evlog": "2.33.1",
+		"h3": "2.0.5",
+		"kysely": "0.29.7",
 		"mentoss": "0.13.0",
 		"nano-staged": "1.0.2",
-		"oxfmt": "0.67.0",
+		"oxfmt": "0.73.0",
 		"simple-git-hooks": "2.14.0",
-		"tsdown": "0.23.0",
+		"tsdown": "0.23.1",
 		"typescript": "6.0.3",
-		"valibot": "1.4.2",
-		"vitest": "5.0.0",
-		"xior": "0.8.4"
+		"valibot": "1.5.0",
+		"vitest": "5.0.5",
+		"xior": "0.8.5"
 	}
 }

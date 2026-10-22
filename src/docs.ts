@@ -13,7 +13,6 @@ export const docsRoutes = new H3()
 
 docsRoutes.get("/", async (event) => {
 	if (docsHtml != null) {
-		// eslint-disable-next-line ts/no-unsafe-argument
 		handleCacheHeaders(event, { maxAge: CacheTimes.DAY })
 
 		return html(docsHtml)
@@ -24,7 +23,6 @@ docsRoutes.get("/", async (event) => {
 	if (docsHtml == null) {
 		throw new Error("docs.html not found")
 	} else {
-		// eslint-disable-next-line ts/no-unsafe-argument
 		handleCacheHeaders(event, { maxAge: CacheTimes.DAY })
 
 		return html(docsHtml)

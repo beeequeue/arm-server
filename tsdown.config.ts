@@ -18,7 +18,7 @@ export default defineConfig({
 	minify: true,
 	sourcemap: true,
 	platform: "node",
-	target: ["node26"],
+	// target: ["node26"],
 	format: ["esm"],
 	fixedExtension: true,
 })
