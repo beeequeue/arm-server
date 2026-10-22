@@ -17,6 +17,11 @@ overrides:
   lightningcss: "-"
   postcss: "-"
 
+packageExtensions:
+  db0:
+    peerDependencies:
+      kysely: 0.29.7
+
 minimumReleaseAge: 4320
 
 savePrefix: ""
