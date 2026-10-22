@@ -4,6 +4,7 @@ export default defineConfig(async ({ command }) => ({
 	test: {
 		reporters: ["verbose"],
 
+		experimental: { viteModuleRunner: false },
 		setupFiles: ["./vitest.setup.ts"],
 
 		env: {
