@@ -208,10 +208,10 @@ importers:
         version: 10.13.0
       evlog:
         specifier: 2.33.1
-        version: 2.33.1(h3@2.0.5)(vite@8.2.2)
+        version: 2.33.1(h3@2.0.8)(vite@8.2.2)
       h3:
-        specifier: 2.0.5
-        version: 2.0.5
+        specifier: 2.0.8
+        version: 2.0.8
       kysely:
         specifier: 0.29.7
         version: 0.29.7
@@ -1379,8 +1379,8 @@ packages:
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
-  h3@2.0.5:
-    resolution: {integrity: sha512-AkTYaK8XhWlAAOhzEz8I6FAkhFPMrDYVq/PIV3GvJxtKiFmVyVDAAdGuNGMTHRrI3A6up3s1bND/dDPlQHlx6w==}
+  h3@2.0.8:
+    resolution: {integrity: sha512-ENuKlF9kC6E6PrvY1PUyE0qkrnnPTIt2/v48uyEEfTVfgoiqBCE0uwwf++2XrWwT1gxjQBDLQ8PAsmZVniKvTw==}
     engines: {node: '>=20.19.0'}
     hasBin: true
     peerDependencies:
@@ -2873,9 +2873,9 @@ snapshots:
 
   esutils@2.0.3: {}
 
-  evlog@2.33.1(h3@2.0.5)(vite@8.2.2):
+  evlog@2.33.1(h3@2.0.8)(vite@8.2.2):
     optionalDependencies:
-      h3: 2.0.5
+      h3: 2.0.8
       vite: 8.2.2(@types/node@26.6.5)(yaml@2.9.0)
 
   expect-type@1.4.0: {}
@@ -2946,7 +2946,7 @@ snapshots:
 
   graceful-fs@4.2.11: {}
 
-  h3@2.0.5:
+  h3@2.0.8:
     dependencies:
       rou3: 1.0.0
       srvx: 1.0.6
