@@ -47,7 +47,7 @@
 		"kysely": "0.29.7",
 		"mentoss": "0.13.0",
 		"nano-staged": "1.0.2",
-		"oxfmt": "0.73.0",
+		"oxfmt": "0.74.0",
 		"simple-git-hooks": "2.14.0",
 		"tsdown": "0.23.1",
 		"typescript": "6.0.3",
