@@ -34,7 +34,7 @@
 		"prepare": "simple-git-hooks"
 	},
 	"devDependencies": {
-		"@antfu/eslint-config": "9.5.1",
+		"@antfu/eslint-config": "10.0.0",
 		"@tsconfig/node26": "26.0.1",
 		"@tsconfig/strictest": "2.0.8",
 		"@types/json-schema": "7.0.15",
@@ -50,7 +50,7 @@
 		"oxfmt": "0.73.0",
 		"simple-git-hooks": "2.14.0",
 		"tsdown": "0.23.1",
-		"typescript": "6.0.3",
+		"typescript": "7.0.2",
 		"valibot": "1.5.0",
 		"vitest": "5.0.5",
 		"xior": "0.8.5"
